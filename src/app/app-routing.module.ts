@@ -2,8 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { WelcomeComponent } from './welcome/welcome.component';
-import { LoginDialogComponent } from './core/login-dialog.component';
 import { HomeComponent } from './home/home.component';
+
+import { LoginDialogComponent } from './core/login-dialog.component';
+import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
+import { DeleteDbDialogComponent } from './admin/delete-db-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -17,12 +20,16 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
   static components = [
+    WelcomeComponent,
     HomeComponent,
     LoginDialogComponent,
-    WelcomeComponent
+    SeedDbDialogComponent,
+    DeleteDbDialogComponent
   ];
 
   static componentFactory = [
-    LoginDialogComponent
+    LoginDialogComponent,
+    SeedDbDialogComponent,
+    DeleteDbDialogComponent
   ];
 }

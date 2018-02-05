@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { LoginDialogComponent } from '../login-dialog.component';
+import { LoginDialogComponent } from '../core/login-dialog.component';
 
 @Component({
   templateUrl: `welcome.component.html`

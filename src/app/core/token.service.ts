@@ -8,52 +8,55 @@ import { Role } from './role.model';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { WelcomeComponent } from '../welcome/welcome.component';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
 export class TokensService {
     static END_POINT = '/tokens';
 
-    private _token: Token;
+    private loginUrl: String;
 
-    constructor(private httpService: HttpService, private router: Router, public snackBar: MatSnackBar) { }
+    constructor(private httpService: HttpService, private router: Router, public snackBar: MatSnackBar) {
+        this.httpService.authorizedObservable().subscribe(
+            value => {
+                if (value) {
+                    this.router.navigate(['/' + this.loginUrl]);
+                } else {
+                    this.router.navigate(['']);
+                }
 
-    login(token: Token) {
-        this._token = token;
+            }
+        );
     }
 
     logout() {
-        this._token = undefined;
-        this.router.navigate(['/' + WelcomeComponent.URL]);
+        this.httpService.logout();
     }
 
-    logged(): boolean {
-        return this._token !== undefined;
+    login(mobile: number, password: string, route?: string) {
+        this.loginUrl = route;
+        this.httpService.login(mobile, password, TokensService.END_POINT);
     }
 
-    get token(): string {
-        return this._token.token;
+    isLogged(): boolean {
+        return this.httpService.isAuthorized();
     }
 
     isAdmin(): boolean {
-        return this._token.roles.includes(Role.ADMIN);
+        if (this.isLogged()) {
+            return this.httpService.getRoles().includes(Role.ADMIN);
+        } else {
+            return false;
+        }
     }
 
     isManager(): boolean {
-        return this._token.roles.includes(Role.MANAGER);
+        if (this.isLogged()) {
+            return this.httpService.getRoles().includes(Role.MANAGER);
+        } else {
+            return false;
+        }
     }
 
-    read(mobile: number, password: string, route?: string) {
-        this.httpService.header('Authorization', 'Basic ' + btoa(mobile + ':' + password)).post(TokensService.END_POINT).subscribe(
-            (token: Token) => {
-                this._token = token;
-                if (route !== undefined) {
-                    this.router.navigate(['/' + route]);
-                }
-            },
-            error => this.snackBar.open(error.message, 'Error', {
-                duration: 3000
-            })
-        );
-    }
 
 }

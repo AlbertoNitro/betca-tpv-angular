@@ -27,6 +27,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TokensService } from './core/token.service';
 import { HttpService } from './core/http.service';
+import { AdminsService } from './admin/admins.service';
 
 
 @NgModule({
@@ -79,6 +80,6 @@ import { HttpService } from './core/http.service';
   ],
   entryComponents: [AppRoutingModule.componentFactory],
   bootstrap: [AppComponent],
-  providers: [HttpService, TokensService]
+  providers: [HttpService, TokensService, AdminsService]
 })
 export class AppModule { }

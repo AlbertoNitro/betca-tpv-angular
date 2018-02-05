@@ -6,14 +6,22 @@
   </button>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
-  <button  *ngIf="!tokensService.logged()" mat-menu-item (click)="login()">
+  <button *ngIf="!tokensService.isLogged()" mat-menu-item (click)="login()">
     <mat-icon>person_outline</mat-icon>
     <span>Login</span>
   </button>
-  <button *ngIf="tokensService.logged()" mat-menu-item  (click)="logout()">
+  <button *ngIf="tokensService.isLogged()" mat-menu-item (click)="logout()">
     <mat-icon>person</mat-icon>
     <span>Logout</span>
   </button>
+  <button *ngIf="tokensService.isAdmin()" mat-menu-item [matMenuTriggerFor]="settings">
+    <mat-icon>settings</mat-icon>
+    <span>Admin</span>
+  </button>
+</mat-menu>
+<mat-menu #settings="matMenu">
+  <button mat-menu-item  (click)="seedDb()">Seed Database</button>
+  <button mat-menu-item  (click)="deleteDb()">Delete Database</button>
 </mat-menu>
 
 <router-outlet></router-outlet>
