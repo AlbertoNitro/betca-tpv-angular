@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginDialogComponent } from './core/login-dialog.component';
 import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
 import { DeleteDbDialogComponent } from './admin/delete-db-dialog.component';
+import { DateComponent } from './core/date.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -22,13 +23,14 @@ export class AppRoutingModule {
   static components = [
     WelcomeComponent,
     HomeComponent,
-    LoginDialogComponent,
+    //DateComponent,
+    //LoginDialogComponent,
     SeedDbDialogComponent,
     DeleteDbDialogComponent
   ];
 
   static componentFactory = [
-    LoginDialogComponent,
+    //LoginDialogComponent,
     SeedDbDialogComponent,
     DeleteDbDialogComponent
   ];

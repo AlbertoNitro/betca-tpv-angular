@@ -28,6 +28,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TokensService } from './core/token.service';
 import { HttpService } from './core/http.service';
 import { AdminsService } from './admin/admins.service';
+import { CoreModule } from './core/core.module';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { AdminsService } from './admin/admins.service';
     CdkTableModule,
     FlexLayoutModule,
 
-    AppRoutingModule
+    AppRoutingModule,
+    CoreModule
   ],
   declarations: [
     AppComponent,

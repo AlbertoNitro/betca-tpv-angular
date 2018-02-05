@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 import { $ } from 'protractor';
 import { Token } from './token.model';
 import { Role } from './role.model';
+import { Error } from './error.model';
 
 @Injectable()
 export class HttpService {
@@ -144,14 +145,19 @@ export class HttpService {
         }
     }
 
-    private handleError(error: Response): any {
-        if (error.status === HttpService.UNAUTHORIZED) {
+    private handleError(response: Response): any {
+        let error: Error;
+        if (response.status === HttpService.UNAUTHORIZED) {
             this.logout();
         }
         try {
-            return Observable.throw(error.json());
-        } catch (e) {
+            error = {
+                httpError: response.status, exception: response.json().exception,
+                message: response.json().message, path: response.json().path
+            };
             return Observable.throw(error);
+        } catch (e) {
+            return Observable.throw(response);
         }
     }
 }

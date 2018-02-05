@@ -22,6 +22,9 @@ export class TokensService {
                 if (value) {
                     this.router.navigate(['/' + this.loginUrl]);
                 } else {
+                    this.snackBar.open('Bad Credentials', 'Error', {
+                        duration: 8000
+                    });
                     this.router.navigate(['']);
                 }
 
