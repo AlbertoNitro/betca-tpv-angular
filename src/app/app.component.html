@@ -6,9 +6,13 @@
   </button>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
-  <button mat-menu-item routerLink="home">
-    <mat-icon>home</mat-icon>
-    <span>Home</span>
+  <button  *ngIf="!tokensService.logged()" mat-menu-item (click)="login()">
+    <mat-icon>person_outline</mat-icon>
+    <span>Login</span>
+  </button>
+  <button *ngIf="tokensService.logged()" mat-menu-item  (click)="logout()">
+    <mat-icon>person</mat-icon>
+    <span>Logout</span>
   </button>
 </mat-menu>
 

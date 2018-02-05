@@ -25,6 +25,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TokensService } from './core/token.service';
+import { HttpService } from './core/http.service';
 
 
 @NgModule({
@@ -70,12 +72,13 @@ import { AppRoutingModule } from './app-routing.module';
     FlexLayoutModule,
 
     AppRoutingModule
-],
+  ],
   declarations: [
     AppComponent,
     AppRoutingModule.components
   ],
+  entryComponents: [AppRoutingModule.componentFactory],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [HttpService, TokensService]
 })
 export class AppModule { }
