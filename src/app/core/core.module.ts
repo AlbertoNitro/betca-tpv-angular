@@ -11,14 +11,13 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
-        HttpModule,
-        MatDialogModule,
         BrowserAnimationsModule,
         FormsModule,
+        HttpModule,
+        MatButtonModule,
+        MatDialogModule,
         MatIconModule,
         MatInputModule,
-        MatButtonModule,
-
     ],
     declarations: [
         DateComponent,
@@ -31,6 +30,9 @@ import { FormsModule } from '@angular/forms';
     entryComponents: [
         LoginDialogComponent
     ],
-    providers: [HttpService, TokensService]
+    providers: [
+        HttpService,
+        TokensService
+    ]
 })
 export class CoreModule { }

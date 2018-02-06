@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from './http.service';
 
-import { Token } from './token.model';
-import { Role } from './role.model';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { WelcomeComponent } from '../welcome/welcome.component';
-import { forEach } from '@angular/router/src/utils/collection';
+
+import { Role } from './role.model';
 
 @Injectable()
 export class TokensService {
@@ -22,7 +21,7 @@ export class TokensService {
                 if (value) {
                     this.router.navigate(['/' + this.loginUrl]);
                 } else {
-                    this.snackBar.open('Bad Credentials', 'Error', {
+                    this.snackBar.open('Bad Credentials', 'Warning', {
                         duration: 8000
                     });
                     this.router.navigate(['']);

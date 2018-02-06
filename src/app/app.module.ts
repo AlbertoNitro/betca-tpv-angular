@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 
@@ -19,16 +17,19 @@ import {
   MatTabsModule, MatToolbarModule, MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
-
 import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { TokensService } from './core/token.service';
-import { HttpService } from './core/http.service';
-import { AdminsService } from './admin/admins.service';
 import { CoreModule } from './core/core.module';
+
+import { AdminsService } from './admin/admins.service';
+import { HttpService } from './core/http.service';
+import { TokensService } from './core/token.service';
+
+import { AppComponent } from './app.component';
+import { CashierService } from './home/cashier.service';
+
 
 
 @NgModule({
@@ -82,6 +83,9 @@ import { CoreModule } from './core/core.module';
   ],
   entryComponents: [AppRoutingModule.componentFactory],
   bootstrap: [AppComponent],
-  providers: [HttpService, TokensService, AdminsService]
+  providers: [
+    AdminsService,
+    CashierService
+  ]
 })
 export class AppModule { }

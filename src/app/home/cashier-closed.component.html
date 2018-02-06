@@ -1,0 +1,10 @@
+<h2 id="page-title">Cashier Closed</h2>
+<div fxLayoutAlign="space-around center">
+	<mat-card fxLayout="column" fxLayoutAlign="space-around ">
+	  	<p>
+	  		<span *ngIf="cashierLastDate"> The cashier was closed at {{cashierLastDate | date: 'medium'}}</span>
+	  		<span *ngIf="!cashierLastDate"> Doesn’t Cashier</span>
+	  	</p>
+		<button mat-raised-button color="primary" (click)="open()">Open cashier</button>
+	</mat-card> 
+</div>

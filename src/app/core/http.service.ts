@@ -6,15 +6,16 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
-import { $ } from 'protractor';
+
 import { Token } from './token.model';
 import { Role } from './role.model';
 import { Error } from './error.model';
+import { HttpResponse } from '@angular/common/http/src/response';
 
 @Injectable()
 export class HttpService {
 
-    static API_URI = 'http://localhost:8080/api/v0';
+    static API_END_POINT = 'http://localhost:8080/api/v0';
 
     static UNAUTHORIZED = 401;
 
@@ -87,7 +88,7 @@ export class HttpService {
     }
 
     get(endpoint: string): Observable<any> {
-        return this.http.get(HttpService.API_URI + endpoint, this.createOptions()).map(
+        return this.http.get(HttpService.API_END_POINT + endpoint, this.createOptions()).map(
             response => this.extractData(response)).catch(
             error => {
                 return this.handleError(error);
@@ -95,7 +96,7 @@ export class HttpService {
     }
 
     post(endpoint: string, body?: Object): Observable<any> {
-        return this.http.post(HttpService.API_URI + endpoint, body, this.createOptions()).map(
+        return this.http.post(HttpService.API_END_POINT + endpoint, body, this.createOptions()).map(
             response => this.extractData(response)).catch(
             error => {
                 return this.handleError(error);
@@ -103,7 +104,7 @@ export class HttpService {
     }
 
     delete(endpoint: string): Observable<any> {
-        return this.http.delete(HttpService.API_URI + endpoint, this.createOptions()).map(
+        return this.http.delete(HttpService.API_END_POINT + endpoint, this.createOptions()).map(
             response => this.extractData(response)).catch(
             error => {
                 return this.handleError(error);
@@ -111,7 +112,7 @@ export class HttpService {
     }
 
     put(endpoint: string, body?: Object): Observable<any> {
-        return this.http.put(HttpService.API_URI + endpoint, body, this.createOptions()).map(
+        return this.http.put(HttpService.API_END_POINT + endpoint, body, this.createOptions()).map(
             response => this.extractData(response)).catch(
             error => {
                 return this.handleError(error);
@@ -119,7 +120,7 @@ export class HttpService {
     }
 
     patch(endpoint: string, body?: Object): Observable<any> {
-        return this.http.patch(HttpService.API_URI + endpoint, body, this.createOptions()).map(
+        return this.http.patch(HttpService.API_END_POINT + endpoint, body, this.createOptions()).map(
             response => this.extractData(response)).catch(
             error => {
                 return this.handleError(error);
@@ -133,15 +134,15 @@ export class HttpService {
         return options;
     }
 
-    private extractData(res: Response): any {
-        if (res.text()) {
-            if (res.headers.get('content-type').indexOf('application/json') !== -1) {
-                return res.json(); // Para filtrar: .map((item: Item) => item.???)
+    private extractData(response: Response): any {
+        if (response.text()) {
+            if (response.headers.get('content-type').indexOf('application/json') !== -1) {
+                return response.json(); // Para filtrar: .map((item: Item) => item.???)
             } else {
-                return res.text();
+                return response.text();
             }
         } else {
-            return res;
+            return response;
         }
     }
 

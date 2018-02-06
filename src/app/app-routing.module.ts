@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { WelcomeComponent } from './welcome/welcome.component';
-import { HomeComponent } from './home/home.component';
-
-import { LoginDialogComponent } from './core/login-dialog.component';
-import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
 import { DeleteDbDialogComponent } from './admin/delete-db-dialog.component';
-import { DateComponent } from './core/date.component';
+import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
+
+import { HomeComponent } from './home/home.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { CashierClosedComponent } from './home/cashier-closed.component';
+import { CashierOpenedComponent } from './home/cashier-opened.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
   { path: WelcomeComponent.URL, component: WelcomeComponent },
-  { path: HomeComponent.URL, component: HomeComponent }
+  { path: HomeComponent.URL, component: HomeComponent,
+    children: [
+      { path: 'cashier-closed', component: CashierClosedComponent },
+      { path: 'cashier-opened', component: CashierOpenedComponent },
+    ]
+  }
 ];
 
 @NgModule({
@@ -21,17 +26,16 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
   static components = [
-    WelcomeComponent,
+    CashierClosedComponent,
+    CashierOpenedComponent,
+    DeleteDbDialogComponent,
     HomeComponent,
-    //DateComponent,
-    //LoginDialogComponent,
     SeedDbDialogComponent,
-    DeleteDbDialogComponent
+    WelcomeComponent
   ];
 
   static componentFactory = [
-    //LoginDialogComponent,
-    SeedDbDialogComponent,
-    DeleteDbDialogComponent
+    DeleteDbDialogComponent,
+    SeedDbDialogComponent
   ];
 }

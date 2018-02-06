@@ -6,7 +6,6 @@ import { TokensService } from './token.service';
 import { HomeComponent } from '../home/home.component';
 
 @Component({
-    selector: 'app-dialog-login',
     templateUrl: 'login-dialog.component.html',
     styleUrls: ['./login-dialog.component.css']
 })

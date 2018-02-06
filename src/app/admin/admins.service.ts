@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { Router } from '@angular/router';
+
 import { MatSnackBar } from '@angular/material';
-import { WelcomeComponent } from '../welcome/welcome.component';
+
 import { HttpService } from '../core/http.service';
 import { TokensService } from '../core/token.service';
+
+import { WelcomeComponent } from '../welcome/welcome.component';
+
 
 @Injectable()
 export class AdminsService {
@@ -21,7 +26,7 @@ export class AdminsService {
                 duration: 2000
             }),
             error => this.snackBar.open(error.message, 'Error', {
-                duration: 10000
+                duration: 8000
             })
         );
     }
