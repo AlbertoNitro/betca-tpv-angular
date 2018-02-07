@@ -22,7 +22,7 @@ export class CashierService {
         return this.cashierLast.asObservable();
     }
 
-    synchronizeLast() {
+    synchronizeLast(): void {
         this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST).subscribe(
             data => this.cashierLast.next(data)
         );

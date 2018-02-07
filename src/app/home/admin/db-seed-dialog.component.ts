@@ -4,10 +4,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AdminsService } from './admins.service';
 
 @Component({
-    templateUrl: 'seed-db-dialog.component.html',
+    templateUrl: 'db-seed-dialog.component.html',
     styleUrls: ['./db-dialog.component.css']
 })
-export class SeedDbDialogComponent {
+export class DbSeedDialogComponent {
     constructor(private adminsService: AdminsService) {
     }
 

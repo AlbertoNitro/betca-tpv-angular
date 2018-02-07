@@ -52,12 +52,12 @@ export class HttpService {
         }
     }
 
-    logout() {
+    logout(): void {
         this.token = undefined;
         this.authorized.next(false);
     }
 
-    login(mobile: number, password: string, endPoint: string) {
+    login(mobile: number, password: string, endPoint: string): void {
         this.authBasic(mobile, password).post(endPoint).subscribe(
             token => {
                 this.token = token;

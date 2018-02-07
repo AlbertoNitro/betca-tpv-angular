@@ -20,7 +20,7 @@ export class AdminsService {
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) { }
 
 
-    seedDb(ymlFileName: string) {
+    seedDb(ymlFileName: string): void {
         this.httpService.authToken().post(AdminsService.END_POINT + AdminsService.DB, ymlFileName).subscribe(
             () => this.snackBar.open('Successful', '', {
                 duration: 2000
@@ -31,7 +31,7 @@ export class AdminsService {
         );
     }
 
-    deleteDb() {
+    deleteDb(): void {
         this.httpService.authToken().delete(AdminsService.END_POINT + AdminsService.DB).subscribe(
             () => this.snackBar.open('Successful', '', {
                 duration: 2000

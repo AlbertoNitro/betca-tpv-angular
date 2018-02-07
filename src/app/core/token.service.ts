@@ -19,16 +19,16 @@ export class TokensService {
         return this.httpService.authorizedObservable();
     }
 
-    logout() {
-        this.httpService.logout();
+    synchronizeLogged(): void {
+        this.httpService.synchronizeAuthorized(TokensService.END_POINT + TokensService.AUTHENTICATED);
     }
 
-    login(mobile: number, password: string) {
+    login(mobile: number, password: string): void {
         this.httpService.login(mobile, password, TokensService.END_POINT);
     }
 
-    synchronizeLogged() {
-        return this.httpService.synchronizeAuthorized(TokensService.END_POINT + TokensService.AUTHENTICATED);
+    logout(): void {
+        this.httpService.logout();
     }
 
     isAdmin(): boolean {
@@ -46,6 +46,4 @@ export class TokensService {
             return false;
         }
     }
-
-
 }

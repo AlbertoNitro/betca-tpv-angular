@@ -2,10 +2,10 @@ import { Component} from '@angular/core';
 import { AdminsService } from './admins.service';
 
 @Component({
-    templateUrl: 'delete-db-dialog.component.html',
+    templateUrl: 'db-delete-dialog.component.html',
     styleUrls: ['./db-dialog.component.css']
 })
-export class DeleteDbDialogComponent {
+export class DbDeleteDialogComponent {
     constructor(private adminsService: AdminsService) {
     }
 

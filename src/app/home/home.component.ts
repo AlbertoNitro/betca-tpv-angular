@@ -6,8 +6,8 @@ import { MatDialog } from '@angular/material';
 import { CashierService } from './cashier.service';
 import { TokensService } from '../core/token.service';
 
-import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
-import { DeleteDbDialogComponent } from './admin/delete-db-dialog.component';
+import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
+import { DbDeleteDialogComponent } from './admin/db-delete-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 
@@ -39,11 +39,11 @@ export class HomeComponent {
   }
 
   seedDb() {
-    this.dialog.open(SeedDbDialogComponent);
+    this.dialog.open(DbSeedDialogComponent);
   }
 
   deleteDb() {
-    this.dialog.open(DeleteDbDialogComponent);
+    this.dialog.open(DbDeleteDialogComponent);
   }
 
   closeCashier() {

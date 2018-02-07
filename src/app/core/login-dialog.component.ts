@@ -16,7 +16,7 @@ export class LoginDialogComponent {
     constructor(private tokensService: TokensService) {
     }
 
-    login() {
+    login(): void {
         this.tokensService.login(this.mobile, this.password);
     }
 }
