@@ -6,8 +6,8 @@ import { MatDialog } from '@angular/material';
 import { CashierService } from './cashier.service';
 import { TokensService } from '../core/token.service';
 
-import { SeedDbDialogComponent } from '../admin/seed-db-dialog.component';
-import { DeleteDbDialogComponent } from '../admin/delete-db-dialog.component';
+import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
+import { DeleteDbDialogComponent } from './admin/delete-db-dialog.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],

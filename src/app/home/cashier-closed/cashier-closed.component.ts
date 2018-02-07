@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CashierService } from './cashier.service';
-import { LastCashier } from './last-cashier.model';
+import { CashierService } from '../cashier.service';
+import { CashierLast } from './cashier-last.model';
 
 @Component({
     templateUrl: `cashier-closed.component.html`
@@ -12,7 +12,7 @@ export class CashierClosedComponent {
 
     constructor(private cashierService: CashierService) {
         this.cashierService.getCashierLast().subscribe(
-            (date: LastCashier) => {
+            (date: CashierLast) => {
                 this.cashierLastDate = date.closureDate;
             }
         );

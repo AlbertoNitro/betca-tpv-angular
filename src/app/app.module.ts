@@ -23,7 +23,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
-import { AdminsService } from './admin/admins.service';
+import { AdminsService } from './home/admin/admins.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/token.service';
 
@@ -79,7 +79,8 @@ import { CashierService } from './home/cashier.service';
   ],
   declarations: [
     AppComponent,
-    AppRoutingModule.components
+    AppRoutingModule.components,
+    AppRoutingModule.componentFactory
   ],
   entryComponents: [AppRoutingModule.componentFactory],
   bootstrap: [AppComponent],

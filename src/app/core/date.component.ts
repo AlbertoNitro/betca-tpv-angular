@@ -1,11 +1,7 @@
-/**
-  * @author Sergio Banegas Cortijo
-  * Github: https://github.com/sergiobanegas 
-*/
-import { Component, Attribute, NgZone } from '@angular/core'
+import { Component, Attribute, NgZone } from '@angular/core';
 
 @Component({
-    selector: 'date',
+    selector: 'app-date',
     template: `<a>{{date | date: format}}</a>`,
     styles: [`
         a {
@@ -25,7 +21,7 @@ export class DateComponent {
     public date: Date;
     public format: string;
 
-    constructor( @Attribute("format") format: string, private ngZone: NgZone) {
+    constructor( @Attribute('format') format: string, private ngZone: NgZone) {
         this.format = format;
         this.date = new Date();
         this.ngZone.runOutsideAngular(() => {
@@ -37,4 +33,4 @@ export class DateComponent {
         });
     }
 
-} 
+}

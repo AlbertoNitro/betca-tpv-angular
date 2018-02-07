@@ -15,6 +15,7 @@ export class TokensService {
 
     private loginUrl: String;
 
+
     constructor(private httpService: HttpService, private router: Router, public snackBar: MatSnackBar) {
         this.httpService.authorizedObservable().subscribe(
             value => {

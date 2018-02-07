@@ -3,21 +3,21 @@ import { HttpService } from '../core/http.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { LastCashier } from './last-cashier.model';
+import { CashierLast } from './cashier-closed/cashier-last.model';
 import { Subject } from 'rxjs/Subject';
-import { CashierClosure } from './cashier- closure.model';
+import { CashierClosure } from './cashier-opened/cashier-closure.model';
 
 @Injectable()
 export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
 
-    private lastCashier: Subject<LastCashier> = new Subject();
+    private lastCashier: Subject<CashierLast> = new Subject();
 
     constructor(private httpService: HttpService, private router: Router, public snackBar: MatSnackBar) {
     }
 
-    getCashierLast(): Observable<LastCashier> {
+    getCashierLast(): Observable<CashierLast> {
         this.readCashierLast();
         return this.lastCashier.asObservable();
     }

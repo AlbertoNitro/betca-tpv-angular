@@ -6,10 +6,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { MatSnackBar } from '@angular/material';
 
-import { HttpService } from '../core/http.service';
-import { TokensService } from '../core/token.service';
+import { HttpService } from '../../core/http.service';
+import { TokensService } from '../../core/token.service';
 
-import { WelcomeComponent } from '../welcome/welcome.component';
+import { WelcomeComponent } from '../../welcome/welcome.component';
 
 
 @Injectable()

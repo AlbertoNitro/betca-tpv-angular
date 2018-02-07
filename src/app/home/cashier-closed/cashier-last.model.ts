@@ -1,4 +1,4 @@
-export interface LastCashier {
+export interface CashierLast {
     closed: boolean;
     closureDate?: Date;
 }
