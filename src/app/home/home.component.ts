@@ -8,6 +8,8 @@ import { TokensService } from '../core/token.service';
 
 import { SeedDbDialogComponent } from './admin/seed-db-dialog.component';
 import { DeleteDbDialogComponent } from './admin/delete-db-dialog.component';
+import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
+import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -20,13 +22,13 @@ export class HomeComponent {
 
   constructor(public dialog: MatDialog, private tokensService: TokensService,
     private cashierService: CashierService, private router: Router) {
-    this.cashierService.getCashierLast().subscribe(
+    this.cashierService.lastObservable().subscribe(
       data => {
         this.cashierClosed = data.closed;
         if (data.closed) {
-          this.router.navigate(['/home/cashier-closed']);
+          this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
         } else {
-          this.router.navigate(['/home/cashier-opened']);
+          this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
         }
       }
     );
@@ -45,7 +47,7 @@ export class HomeComponent {
   }
 
   closeCashier() {
-    this.cashierService.closeCashier();
+    this.cashierService.close();
   }
 
 }

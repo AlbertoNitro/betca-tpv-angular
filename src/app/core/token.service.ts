@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from './http.service';
-
-import { MatSnackBar } from '@angular/material';
 
 import { Role } from './role.model';
 
@@ -13,40 +10,29 @@ import { Role } from './role.model';
 export class TokensService {
     static END_POINT = '/tokens';
 
-    private loginUrl: String;
+    static AUTHENTICATED = '/authenticated';
 
+    constructor(private httpService: HttpService) {
+    }
 
-    constructor(private httpService: HttpService, private router: Router, public snackBar: MatSnackBar) {
-        this.httpService.authorizedObservable().subscribe(
-            value => {
-                if (value) {
-                    this.router.navigate(['/' + this.loginUrl]);
-                } else {
-                    this.snackBar.open('Bad Credentials', 'Warning', {
-                        duration: 8000
-                    });
-                    this.router.navigate(['']);
-                }
-
-            }
-        );
+    loggedObservable(): Observable<boolean> {
+        return this.httpService.authorizedObservable();
     }
 
     logout() {
         this.httpService.logout();
     }
 
-    login(mobile: number, password: string, route?: string) {
-        this.loginUrl = route;
+    login(mobile: number, password: string) {
         this.httpService.login(mobile, password, TokensService.END_POINT);
     }
 
-    isLogged(): boolean {
-        return this.httpService.isAuthorized();
+    synchronizeLogged() {
+        return this.httpService.synchronizeAuthorized(TokensService.END_POINT + TokensService.AUTHENTICATED);
     }
 
     isAdmin(): boolean {
-        if (this.isLogged()) {
+        if (this.httpService.getRoles() !== undefined) {
             return this.httpService.getRoles().includes(Role.ADMIN);
         } else {
             return false;
@@ -54,7 +40,7 @@ export class TokensService {
     }
 
     isManager(): boolean {
-        if (this.isLogged()) {
+        if (this.httpService.getRoles() !== undefined) {
             return this.httpService.getRoles().includes(Role.MANAGER);
         } else {
             return false;

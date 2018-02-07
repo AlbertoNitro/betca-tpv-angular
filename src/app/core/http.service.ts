@@ -11,6 +11,7 @@ import { Token } from './token.model';
 import { Role } from './role.model';
 import { Error } from './error.model';
 import { HttpResponse } from '@angular/common/http/src/response';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class HttpService {
@@ -27,7 +28,7 @@ export class HttpService {
 
     private headers: Headers;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private snackBar: MatSnackBar) {
         this.params = new URLSearchParams();
         this.headers = new Headers();
     }
@@ -36,8 +37,11 @@ export class HttpService {
         return this.authorized.asObservable();
     }
 
-    isAuthorized(): boolean {
-        return this.token !== undefined;
+    synchronizeAuthorized(endPoint: string): void {
+        this.authToken().get(endPoint).subscribe(
+            data => this.authorized.next(true),
+            error => this.logout()
+        );
     }
 
     getRoles(): Array<Role> {
@@ -156,6 +160,9 @@ export class HttpService {
                 httpError: response.status, exception: response.json().exception,
                 message: response.json().message, path: response.json().path
             };
+            this.snackBar.open(error.message, 'Error', {
+                duration: 8000
+            });
             return Observable.throw(error);
         } catch (e) {
             return Observable.throw(response);

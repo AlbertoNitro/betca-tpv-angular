@@ -11,7 +11,7 @@ export class CashierClosedComponent {
     cashierLastDate: Date;
 
     constructor(private cashierService: CashierService) {
-        this.cashierService.getCashierLast().subscribe(
+        this.cashierService.lastObservable().subscribe(
             (date: CashierLast) => {
                 this.cashierLastDate = date.closureDate;
             }

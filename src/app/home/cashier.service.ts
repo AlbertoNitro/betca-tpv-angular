@@ -12,46 +12,37 @@ export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
 
-    private lastCashier: Subject<CashierLast> = new Subject();
+    private cashierLast: Subject<CashierLast> = new Subject();
 
-    constructor(private httpService: HttpService, private router: Router, public snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService, private router: Router) {
     }
 
-    getCashierLast(): Observable<CashierLast> {
-        this.readCashierLast();
-        return this.lastCashier.asObservable();
+    lastObservable(): Observable<CashierLast> {
+        this.synchronizeLast();
+        return this.cashierLast.asObservable();
     }
 
-    readCashierLast() {
+    synchronizeLast() {
         this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST).subscribe(
-            data => this.lastCashier.next(data),
-            error => this.snackBar.open(error.message, 'Error', {
-                duration: 8000
-            })
+            data => this.cashierLast.next(data)
         );
     }
 
     open(): void {
         this.httpService.authToken().post(CashierService.END_POINT).subscribe(
             () => {
-                this.readCashierLast();
-            },
-            error => this.snackBar.open(error.message, 'Error', {
-                duration: 8000
-            })
+                this.synchronizeLast();
+            }
         );
     }
 
-    closeCashier(): void {
+    close(): void {
         // TODO componente de recogida de datos
         const chashierClosure: CashierClosure = { finalCash: 30, salesCard: 50, comment: 'test' };
         this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, chashierClosure).subscribe(
             () => {
-                this.readCashierLast();
-            },
-            error => this.snackBar.open(error.message, 'Error', {
-                duration: 8000
-            })
+                this.synchronizeLast();
+            }
         );
     }
 

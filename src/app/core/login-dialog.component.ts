@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { TokensService } from './token.service';
@@ -17,6 +17,6 @@ export class LoginDialogComponent {
     }
 
     login() {
-        this.tokensService.login(this.mobile, this.password, HomeComponent.URL);
+        this.tokensService.login(this.mobile, this.password);
     }
 }
