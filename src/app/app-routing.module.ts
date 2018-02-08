@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
+import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -30,6 +31,7 @@ export class AppRoutingModule {
     CashierClosedComponent,
     CashierOpenedComponent,
     HomeComponent,
+    ShoppingCartComponent,
     WelcomeComponent
   ];
 

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../core/http.service';
-import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { CashierLast } from './cashier-closed/cashier-last.model';
 import { Subject } from 'rxjs/Subject';
+
+import { CashierLast } from './cashier-closed/cashier-last.model';
 import { CashierClosure } from './cashier-opened/cashier-closure.model';
+
+import { HttpService } from '../core/http.service';
+import { ArticleService } from './shared/article.service';
 
 @Injectable()
 export class CashierService {
@@ -14,7 +16,7 @@ export class CashierService {
 
     private cashierLast: Subject<CashierLast> = new Subject();
 
-    constructor(private httpService: HttpService, private router: Router) {
+    constructor(private httpService: HttpService) {
     }
 
     lastObservable(): Observable<CashierLast> {
@@ -30,14 +32,12 @@ export class CashierService {
 
     open(): void {
         this.httpService.authToken().post(CashierService.END_POINT).subscribe(
-            () => {
-                this.synchronizeLast();
-            }
+            () => this.synchronizeLast()
         );
     }
 
     close(): void {
-        // TODO componente de recogida de datos
+        // TODO componente de recogida de datos para el cierre de caja
         const chashierClosure: CashierClosure = { finalCash: 30, salesCard: 50, comment: 'test' };
         this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, chashierClosure).subscribe(
             () => {

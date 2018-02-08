@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
-
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {
   MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
   MatCardModule, MatCheckboxModule, MatChipsModule,
@@ -29,13 +29,12 @@ import { TokensService } from './core/token.service';
 
 import { AppComponent } from './app.component';
 import { CashierService } from './home/cashier.service';
-
-
+import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
+import { ArticleService } from './home/shared/article.service';
+import { TicketService } from './home/shared/ticket.service';
 
 @NgModule({
   imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
@@ -71,8 +70,11 @@ import { CashierService } from './home/cashier.service';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+
     CdkTableModule,
     FlexLayoutModule,
+    BrowserModule,
+    BrowserAnimationsModule,
 
     AppRoutingModule,
     CoreModule
@@ -86,7 +88,10 @@ import { CashierService } from './home/cashier.service';
   bootstrap: [AppComponent],
   providers: [
     AdminsService,
-    CashierService
+    CashierService,
+    ShoppingCartService,
+    ArticleService,
+    TicketService
   ]
 })
 export class AppModule { }

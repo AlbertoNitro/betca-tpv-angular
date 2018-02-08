@@ -10,16 +10,4 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-
-  constructor(private tokensService: TokensService, private router: Router) {
-    this.tokensService.loggedObservable().subscribe(
-      value => {
-        if (value) {
-          this.router.navigate([HomeComponent.URL]);
-        } else {
-          this.router.navigate(['']);
-        }
-      }
-    );
-  }
 }

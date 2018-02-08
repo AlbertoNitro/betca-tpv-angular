@@ -12,6 +12,7 @@ import { Role } from './role.model';
 import { Error } from './error.model';
 import { HttpResponse } from '@angular/common/http/src/response';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
@@ -22,24 +23,18 @@ export class HttpService {
 
     private token: Token;
 
-    private authorized: Subject<boolean> = new Subject();
-
     private params: URLSearchParams;
 
     private headers: Headers;
 
-    constructor(private http: Http, private snackBar: MatSnackBar) {
+    constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
         this.params = new URLSearchParams();
         this.headers = new Headers();
     }
 
-    authorizedObservable(): Observable<boolean> {
-        return this.authorized.asObservable();
-    }
-
-    synchronizeAuthorized(endPoint: string): void {
-        this.authToken().get(endPoint).subscribe(
-            data => this.authorized.next(true),
+    synchronizeAuthorized(endPoint: string): Observable<any> {
+        return this.authToken().get(endPoint).map(
+            token => token,
             error => this.logout()
         );
     }
@@ -54,15 +49,12 @@ export class HttpService {
 
     logout(): void {
         this.token = undefined;
-        this.authorized.next(false);
+        this.router.navigate(['']);
     }
 
-    login(mobile: number, password: string, endPoint: string): void {
-        this.authBasic(mobile, password).post(endPoint).subscribe(
-            token => {
-                this.token = token;
-                this.authorized.next(true);
-            },
+    login(mobile: number, password: string, endPoint: string): Observable<any> {
+        return this.authBasic(mobile, password).post(endPoint).map(
+            token => this.token = token,
             error => this.logout()
         );
     }

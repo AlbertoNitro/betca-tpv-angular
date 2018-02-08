@@ -8,12 +8,12 @@ import { CashierLast } from './cashier-last.model';
 export class CashierClosedComponent {
     static URL = 'cashier-closed';
 
-    cashierLastDate: Date;
+    cashierLastClosedDate: Date;
 
     constructor(private cashierService: CashierService) {
         this.cashierService.lastObservable().subscribe(
             (date: CashierLast) => {
-                this.cashierLastDate = date.closureDate;
+                this.cashierLastClosedDate = date.closureDate;
             }
         );
     }

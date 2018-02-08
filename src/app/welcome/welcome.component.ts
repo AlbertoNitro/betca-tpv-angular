@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { LoginDialogComponent } from '../core/login-dialog.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -13,7 +14,7 @@ export class WelcomeComponent {
   }
 
   login() {
-    this.dialog.open(LoginDialogComponent);
+    this.dialog.open(LoginDialogComponent).componentInstance.targetUrl = HomeComponent.URL;
   }
 
 }
