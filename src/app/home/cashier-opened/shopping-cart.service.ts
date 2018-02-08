@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Shopping } from '../shared/shopping.model';
-import { ArticleService } from '../shared/article.service';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
-import { TicketService } from '../shared/ticket.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+import { Shopping } from '../shared/shopping.model';
+import { ArticleService } from '../shared/article.service';
+import { TicketService } from '../shared/ticket.service';
 
 @Injectable()
 export class ShoppingCartService {

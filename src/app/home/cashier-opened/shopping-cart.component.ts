@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { MatTableDataSource } from '@angular/material';
 
 import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
-import { Subscription } from 'rxjs/Subscription';
+
 
 @Component({
     selector: 'app-shopping-cart',

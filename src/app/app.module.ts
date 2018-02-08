@@ -22,16 +22,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
-
 import { AdminsService } from './home/admin/admins.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/token.service';
-
-import { AppComponent } from './app.component';
 import { CashierService } from './home/cashier.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
+import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
@@ -88,9 +86,9 @@ import { TicketService } from './home/shared/ticket.service';
   bootstrap: [AppComponent],
   providers: [
     AdminsService,
+    ArticleService,
     CashierService,
     ShoppingCartService,
-    ArticleService,
     TicketService
   ]
 })

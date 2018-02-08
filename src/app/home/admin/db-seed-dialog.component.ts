@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component} from '@angular/core';
+
 import { AdminsService } from './admins.service';
 
 @Component({

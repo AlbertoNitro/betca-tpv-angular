@@ -1,16 +1,14 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Subscription } from 'rxjs/Subscription';
 import { MatDialog } from '@angular/material';
 
 import { CashierService } from './cashier.service';
 import { TokensService } from '../core/token.service';
-
 import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
 import { DbDeleteDialogComponent } from './admin/db-delete-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],

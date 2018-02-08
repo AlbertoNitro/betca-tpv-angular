@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { CashierService } from '../cashier.service';
 import { CashierLast } from './cashier-last.model';
+
+import { CashierService } from '../cashier.service';
 
 @Component({
     templateUrl: `cashier-closed.component.html`

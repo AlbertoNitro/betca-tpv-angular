@@ -5,7 +5,6 @@ import { Subject } from 'rxjs/Subject';
 
 import { CashierLast } from './cashier-closed/cashier-last.model';
 import { CashierClosure } from './cashier-opened/cashier-closure.model';
-
 import { HttpService } from '../core/http.service';
 import { ArticleService } from './shared/article.service';
 
