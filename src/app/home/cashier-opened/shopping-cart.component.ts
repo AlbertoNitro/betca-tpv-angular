@@ -45,10 +45,6 @@ export class ShoppingCartComponent implements OnDestroy {
         this.shoppingCartService.delete(shopping);
     }
 
-    deleteAll() {
-        this.shoppingCartService.deleteAll();
-    }
-
     add(code: string) {
         this.shoppingCartService.add(code);
     }

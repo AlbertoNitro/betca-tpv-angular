@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { DbDeleteDialogComponent } from './home/admin/db-delete-dialog.component';
+import { CancelYesDialogComponent } from './core/cancel-yes-dialog.component';
 import {DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
 
 import { HomeComponent } from './home/home.component';
@@ -36,7 +36,7 @@ export class AppRoutingModule {
   ];
 
   static componentFactory = [
-    DbDeleteDialogComponent,
+    CancelYesDialogComponent,
     DbSeedDialogComponent
   ];
 }
