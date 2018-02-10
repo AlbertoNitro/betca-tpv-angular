@@ -10,6 +10,7 @@ import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
+import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -56,7 +57,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   closeCashier() {
-    this.cashierService.close();
+    this.dialog.open(CashierCloseDialogComponent);
   }
 
   ngOnDestroy(): void {

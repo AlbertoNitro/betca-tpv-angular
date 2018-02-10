@@ -9,6 +9,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
+import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
+import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -37,6 +39,8 @@ export class AppRoutingModule {
 
   static componentFactory = [
     CancelYesDialogComponent,
-    DbSeedDialogComponent
+    DbSeedDialogComponent,
+    CashierCloseDialogComponent,
+    ShoppingCartCheckOutDialogComponent
   ];
 }

@@ -35,10 +35,8 @@ export class CashierService {
         );
     }
 
-    close(): void {
-        // TODO componente de recogida de datos para el cierre de caja
-        const chashierClosure: CashierClosure = { finalCash: 30, salesCard: 50, comment: 'test' };
-        this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, chashierClosure).subscribe(
+    close( cashierClosure: CashierClosure): void {
+        this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure).subscribe(
             () => {
                 this.synchronizeLast();
             }

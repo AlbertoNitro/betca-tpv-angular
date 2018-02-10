@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { HttpService } from '../../core/http.service';
 import { Shopping } from './shopping.model';
+import { TicketCreation } from './ticket-creation.model';
 
 @Injectable()
 export class TicketService {
@@ -11,8 +12,8 @@ export class TicketService {
     constructor(private httpService: HttpService) {
     }
 
-    createObservable(shoppingCart: Shopping[]): Observable<boolean> {
-        return this.httpService.authToken().post(TicketService.END_POINT, shoppingCart);
+    createObservable(ticketCreation: TicketCreation): Observable<any> {
+        return this.httpService.authToken().responseBlob().post(TicketService.END_POINT, ticketCreation);
     }
 
 

@@ -6,6 +6,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { TicketService } from '../shared/ticket.service';
+import { TicketCreation } from '../shared/ticket-creation.model';
 
 @Injectable()
 export class ShoppingCartService {
@@ -39,7 +40,7 @@ export class ShoppingCartService {
         for (const shopping of this.shoppingCart) {
             total = total + shopping.total;
         }
-        this._total = total;
+        this._total = Math.round(total * 100) / 100;
     }
 
     private synchronizeAll() {
@@ -63,17 +64,25 @@ export class ShoppingCartService {
     add(code: string) {
         this.articleService.readObservable(code).subscribe(
             article => {
-                this.shoppingCart.push(new Shopping(code, article.description, article.retailPrice));
+                const shopping = new Shopping(article.code, article.description, article.retailPrice);
+                if (article.code === '1') {
+                    shopping.total = Number(code) / 100;
+                    shopping.updateDiscount();
+                }
+                this.shoppingCart.push(shopping);
                 this.synchronizeAll();
             }
         );
     }
 
-    checkOut(): void {
-        this.ticketService.createObservable(this.shoppingCart).subscribe(
-            data => {
+    checkOut(ticketCreation: TicketCreation): void {
+        ticketCreation.shoppingCart = this.shoppingCart;
+        this.ticketService.createObservable(ticketCreation).subscribe(
+            blob => {
                 this.shoppingCart = new Array();
                 this.synchronizeAll();
+                const url = window.URL.createObjectURL(blob);
+                 window.open(url);
             }
         );
     }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions, URLSearchParams } from '@angular/http';
+import { Http, Response, Headers, RequestOptions, URLSearchParams, ResponseContentType } from '@angular/http';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +11,7 @@ import { Token } from './token.model';
 import { Role } from './role.model';
 import { Error } from './error.model';
 import { HttpResponse } from '@angular/common/http/src/response';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, _MatOptgroupMixinBase } from '@angular/material';
 import { Router } from '@angular/router';
 
 @Injectable()
@@ -27,9 +27,16 @@ export class HttpService {
 
     private headers: Headers;
 
+    private responseType: ResponseContentType;
+
     constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
-        this.params = new URLSearchParams();
+        this.resetOptions();
+    }
+
+    private resetOptions(): void {
         this.headers = new Headers();
+        this.params = new URLSearchParams();
+        this.responseType = ResponseContentType.Text;
     }
 
     synchronizeAuthorized(endPoint: string): Observable<any> {
@@ -83,6 +90,11 @@ export class HttpService {
         return this;
     }
 
+    responseBlob(): HttpService {
+        this.responseType = ResponseContentType.Blob;
+        return this;
+    }
+
     get(endpoint: string): Observable<any> {
         return this.http.get(HttpService.API_END_POINT + endpoint, this.createOptions()).map(
             response => this.extractData(response)).catch(
@@ -124,23 +136,30 @@ export class HttpService {
     }
 
     private createOptions(): RequestOptions {
-        const options: RequestOptions = new RequestOptions({ headers: this.headers, params: this.params });
-        this.headers = new Headers();
-        this.params = new URLSearchParams();
+        const options: RequestOptions = new RequestOptions({
+            headers: this.headers,
+            params: this.params,
+            responseType: this.responseType
+        });
+        this.resetOptions();
         return options;
     }
 
     private extractData(response: Response): any {
-        if (response.text()) {
-            if (response.headers.get('content-type').indexOf('application/json') !== -1) {
-                return response.json(); // Para filtrar: .map((item: Item) => item.???)
-            } else {
-                return response.text();
+        const contentType = response.headers.get('content-type');
+        if (contentType) {
+            if (contentType.indexOf('application/pdf') !== -1) {
+                return new Blob([response.blob()], { type: 'application/pdf' });
+            } else if (contentType.indexOf('application/json') !== -1) {
+                return response.json();
             }
+        }else if (response.text()) {
+            return response.text();
         } else {
             return response;
         }
     }
+
 
     private handleError(response: Response): any {
         let error: Error;
@@ -157,6 +176,9 @@ export class HttpService {
             });
             return Observable.throw(error);
         } catch (e) {
+            this.snackBar.open(response.toString(), 'Error', {
+                duration: 8000
+            });
             return Observable.throw(response);
         }
     }

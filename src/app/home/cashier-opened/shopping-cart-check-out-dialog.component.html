@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Total: {{total | currency:'EUR':'symbol'}}</h2>
+<mat-dialog-content>
+    <!--Input-->
+    <mat-form-field>
+        <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
+        <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="ticketCreation.cash=0; ticketCreation.card=total; ticketCreation.voucher=0">
+            <mat-icon color="warn">credit_card</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Cash" [(ngModel)]="ticketCreation.cash" />
+        <button mat-button matSuffix mat-icon-button aria-label="Eur" (click)="ticketCreation.cash=total; ticketCreation.card=0; ticketCreation.voucher=0">
+            <mat-icon color="warn">euro_symbol</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Voucher" [(ngModel)]="ticketCreation.voucher" />
+        <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="ticketCreation.cash=0; ticketCreation.card=0; ticketCreation.voucher=total">
+            <mat-icon color="warn">check_circle</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field color="warn">
+        <input readonly matInput type="number" placeholder="Return" #return [value]="(ticketCreation.cash+ticketCreation.card+ticketCreation.voucher)-total"
+        />
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="return.value<0">Check Out</button>
+</mat-dialog-actions>

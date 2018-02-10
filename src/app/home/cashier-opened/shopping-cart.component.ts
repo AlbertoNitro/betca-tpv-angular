@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
 
 import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
+import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class ShoppingCartComponent implements OnDestroy {
 
     private subscription: Subscription;
 
-    constructor(public shoppingCartService: ShoppingCartService) {
+    constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
         this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<Shopping>(data);
@@ -50,7 +51,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     checkOut() {
-        this.shoppingCartService.checkOut();
+        this.dialog.open(ShoppingCartCheckOutDialogComponent).componentInstance.total = this.shoppingCartService.total;
     }
 
     exchange() {
