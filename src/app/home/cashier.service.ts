@@ -35,11 +35,9 @@ export class CashierService {
         );
     }
 
-    close( cashierClosure: CashierClosure): void {
+    close(cashierClosure: CashierClosure): void {
         this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure).subscribe(
-            () => {
-                this.synchronizeLast();
-            }
+            () => this.synchronizeLast()
         );
     }
 

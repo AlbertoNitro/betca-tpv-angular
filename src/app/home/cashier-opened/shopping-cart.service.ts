@@ -77,7 +77,7 @@ export class ShoppingCartService {
 
     checkOut(ticketCreation: TicketCreation): void {
         ticketCreation.shoppingCart = this.shoppingCart;
-        this.ticketService.createObservable(ticketCreation).subscribe(
+        this.ticketService.create(ticketCreation).subscribe(
             blob => {
                 this.shoppingCart = new Array();
                 this.synchronizeAll();

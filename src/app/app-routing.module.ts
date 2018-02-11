@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CancelYesDialogComponent } from './core/cancel-yes-dialog.component';
 import {DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
-
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
@@ -39,8 +38,8 @@ export class AppRoutingModule {
 
   static componentFactory = [
     CancelYesDialogComponent,
-    DbSeedDialogComponent,
     CashierCloseDialogComponent,
+    DbSeedDialogComponent,
     ShoppingCartCheckOutDialogComponent
   ];
 }

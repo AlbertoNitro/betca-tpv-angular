@@ -13,18 +13,20 @@ export class AdminsService {
 
     seedDb(ymlFileName: string): void {
         this.httpService.authToken().post(AdminsService.END_POINT + AdminsService.DB, ymlFileName).subscribe(
-            () => this.snackBar.open('Successful', '', {
-                duration: 2000
-            })
+            () => this.successful()
         );
     }
 
     deleteDb(): void {
         this.httpService.authToken().delete(AdminsService.END_POINT + AdminsService.DB).subscribe(
-            () => this.snackBar.open('Successful', '', {
-                duration: 2000
-            })
+            () => this.successful()
         );
+    }
+
+    private successful() {
+        this.snackBar.open('Successful', '', {
+            duration: 2000
+        });
     }
 
 }

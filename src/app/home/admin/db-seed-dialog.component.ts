@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AdminsService } from './admins.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
     templateUrl: 'db-seed-dialog.component.html',
@@ -13,9 +14,7 @@ export class DbSeedDialogComponent {
     constructor(private adminsService: AdminsService) {
     }
 
-    ymlFileName: string;
-
-    seedDb() {
-        this.adminsService.seedDb(this.ymlFileName);
+    seedDb( ymlFileName: string) {
+        this.adminsService.seedDb(ymlFileName);
     }
 }

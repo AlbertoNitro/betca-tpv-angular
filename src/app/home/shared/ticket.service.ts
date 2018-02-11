@@ -12,7 +12,7 @@ export class TicketService {
     constructor(private httpService: HttpService) {
     }
 
-    createObservable(ticketCreation: TicketCreation): Observable<any> {
+    create(ticketCreation: TicketCreation): Observable<any> {
         return this.httpService.authToken().responseBlob().post(TicketService.END_POINT, ticketCreation);
     }
 
