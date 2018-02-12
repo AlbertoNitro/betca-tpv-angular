@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
-import { CashierLast } from './cashier-closed/cashier-last.model';
+import { CashierLast } from './cashier-last.model';
 import { CashierClosure } from './cashier-opened/cashier-closure.model';
 import { HttpService } from '../core/http.service';
 import { ArticleService } from './shared/article.service';
@@ -18,15 +18,15 @@ export class CashierService {
     constructor(private httpService: HttpService) {
     }
 
-    lastObservable(): Observable<CashierLast> {
-        this.synchronizeLast();
-        return this.cashierLast.asObservable();
-    }
-
-    synchronizeLast(): void {
+    private synchronizeLast(): void {
         this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST).subscribe(
             data => this.cashierLast.next(data)
         );
+    }
+
+    lastObservable(): Observable<CashierLast> {
+        this.synchronizeLast();
+        return this.cashierLast.asObservable();
     }
 
     open(): void {

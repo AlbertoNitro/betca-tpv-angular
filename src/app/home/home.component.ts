@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { MatDialog } from '@angular/material';
 
 import { CashierService } from './cashier.service';
-import { TokensService } from '../core/token.service';
+import { TokensService } from '../core/tokens.service';
 import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
 import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';

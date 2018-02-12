@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule, MatIconModule, MatInputModule, MatButtonModule } from '@angular/material';
 
 import { HttpService } from './http.service';
-import { TokensService } from './token.service';
+import { TokensService } from './tokens.service';
 
 import { DateComponent } from './date.component';
 

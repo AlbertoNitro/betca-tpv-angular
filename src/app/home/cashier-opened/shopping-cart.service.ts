@@ -75,6 +75,13 @@ export class ShoppingCartService {
         );
     }
 
+    exchange(): void {
+        this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
+        this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
+        this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
+        this.synchronizeAll();
+    }
+
     checkOut(ticketCreation: TicketCreation): void {
         ticketCreation.shoppingCart = this.shoppingCart;
         this.ticketService.create(ticketCreation).subscribe(
@@ -82,16 +89,9 @@ export class ShoppingCartService {
                 this.shoppingCart = new Array();
                 this.synchronizeAll();
                 const url = window.URL.createObjectURL(blob);
-                 window.open(url);
+                window.open(url);
             }
         );
-    }
-
-    exchange(): void {
-        this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
-        this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
-        this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
-        this.synchronizeAll();
     }
 
 }

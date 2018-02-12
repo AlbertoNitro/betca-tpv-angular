@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 
 import { LoginDialogComponent } from '../core/login-dialog.component';
 import { HomeComponent } from '../home/home.component';
-import { TokensService } from '../core/token.service';
+import { TokensService } from '../core/tokens.service';
 import { Router } from '@angular/router';
 
 @Component({
