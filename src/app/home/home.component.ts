@@ -47,10 +47,9 @@ export class HomeComponent implements OnDestroy {
   }
 
   deleteDb() {
-    const dialogRef = this.dialog.open(CancelYesDialogComponent);
-    dialogRef.afterClosed().subscribe(
-      yes => {
-        if (yes) {
+    this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
+      result => {
+        if (result) {
           this.adminsService.deleteDb();
         }
       });
