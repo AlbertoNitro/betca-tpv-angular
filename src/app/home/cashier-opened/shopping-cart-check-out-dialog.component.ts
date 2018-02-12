@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { CashierClosure } from './cashier-closure.model';
-import { CashierService } from '../cashier.service';
+import { CashierClosure } from '../shared/cashier-closure.model';
+import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 

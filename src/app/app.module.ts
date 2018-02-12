@@ -25,7 +25,7 @@ import { CoreModule } from './core/core.module';
 import { AdminsService } from './home/admin/admins.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
-import { CashierService } from './home/cashier.service';
+import { CashierService } from './home/shared/cashier.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';

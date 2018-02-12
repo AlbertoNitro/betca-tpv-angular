@@ -4,9 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
 import { CashierLast } from './cashier-last.model';
-import { CashierClosure } from './cashier-opened/cashier-closure.model';
-import { HttpService } from '../core/http.service';
-import { ArticleService } from './shared/article.service';
+import { CashierClosure } from './cashier-closure.model';
+import { HttpService } from '../../core/http.service';
+import { ArticleService } from './article.service';
 
 @Injectable()
 export class CashierService {

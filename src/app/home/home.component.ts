@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { MatDialog } from '@angular/material';
 
-import { CashierService } from './cashier.service';
+import { CashierService } from './shared/cashier.service';
 import { TokensService } from '../core/tokens.service';
 import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
 import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
