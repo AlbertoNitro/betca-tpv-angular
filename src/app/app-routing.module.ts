@@ -28,7 +28,7 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-  static components = [
+  static COMPONENTS = [
     CashierClosedComponent,
     CashierOpenedComponent,
     HomeComponent,
@@ -36,7 +36,7 @@ export class AppRoutingModule {
     WelcomeComponent
   ];
 
-  static componentFactory = [
+  static COMPONENT_FACTORY = [
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     DbSeedDialogComponent,

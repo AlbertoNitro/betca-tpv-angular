@@ -79,10 +79,10 @@ import { AppComponent } from './app.component';
   ],
   declarations: [
     AppComponent,
-    AppRoutingModule.components,
-    AppRoutingModule.componentFactory
+    AppRoutingModule.COMPONENTS,
+    AppRoutingModule.COMPONENT_FACTORY
   ],
-  entryComponents: [AppRoutingModule.componentFactory],
+  entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
   providers: [
     AdminsService,
