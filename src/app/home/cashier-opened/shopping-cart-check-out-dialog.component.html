@@ -1,7 +1,13 @@
 <h2 mat-dialog-title>Total: {{total | currency:'EUR':'symbol'}}</h2>
 <mat-dialog-content>
     <!--Input-->
-
+    <mat-form-field>
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="mobile" [disabled]="foundMobile"/>
+        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="findUser()"[disabled]="mobile===undefined">
+            <mat-icon *ngIf="!foundMobile" color="warn">cached</mat-icon>
+            <mat-icon *ngIf="foundMobile">done</mat-icon>
+        </button>
+    </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
         <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="ticketCreation.cash=0; ticketCreation.card=total; ticketCreation.voucher=0">

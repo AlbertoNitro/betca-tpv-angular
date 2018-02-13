@@ -14,6 +14,8 @@ import { TicketCreation } from '../shared/ticket-creation.model';
 export class ShoppingCartCheckOutDialogComponent {
 
     @Input() total: number;
+    mobile: number;
+    foundMobile = false;
 
 
     ticketCreation: TicketCreation;
@@ -25,5 +27,19 @@ export class ShoppingCartCheckOutDialogComponent {
 
     checkOut() {
         this.shoppingCartService.checkOut(this.ticketCreation);
+    }
+
+    findUser() {
+        if (!this.foundMobile) {
+            if (this.mobile === 1) {
+                this.foundMobile = true;
+            } else {
+                console.log('>>>> ' + this.mobile + 'no encontrado');
+            }
+        } else {
+            this.mobile = undefined;
+            this.foundMobile = false;
+        }
+
     }
 }
