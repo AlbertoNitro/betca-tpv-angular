@@ -1,6 +1,7 @@
 <h2 mat-dialog-title>Total: {{total | currency:'EUR':'symbol'}}</h2>
 <mat-dialog-content>
     <!--Input-->
+
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
         <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="ticketCreation.cash=0; ticketCreation.card=total; ticketCreation.voucher=0">
