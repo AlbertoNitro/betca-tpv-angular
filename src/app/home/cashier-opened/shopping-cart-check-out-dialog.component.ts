@@ -30,7 +30,7 @@ export class ShoppingCartCheckOutDialogComponent {
     }
 
     findUser() {
-        if (!this.foundMobile) {
+        if (!this.foundMobile && this.mobile) {
             if (this.mobile === 1) {
                 this.foundMobile = true;
             } else {
