@@ -2,6 +2,13 @@
 <mat-dialog-content>
     <!--Input-->
     <mat-form-field>
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="mobile" [disabled]="foundMobile" />
+        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="findUser()"*ngIf="mobile!==undefined">
+            <mat-icon *ngIf="!foundMobile" color="warn">cached</mat-icon>
+            <mat-icon *ngIf="foundMobile">done</mat-icon>
+        </button>
+    </mat-form-field>
+    <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
         <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="ticketCreation.cash=0; ticketCreation.card=total; ticketCreation.voucher=0">
             <mat-icon color="warn">credit_card</mat-icon>
@@ -27,5 +34,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="return.value<0">Check Out</button>
+    <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="return.value<0 || (mobile!==undefined && !foundMobile) ">Check Out</button>
 </mat-dialog-actions>
