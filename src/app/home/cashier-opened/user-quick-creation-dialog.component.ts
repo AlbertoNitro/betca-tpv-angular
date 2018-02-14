@@ -29,6 +29,10 @@ export class UserQuickCreationDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.dialogRef.close(this.userService.create(this.user));
+        this.userService.createObservable(this.user).subscribe(
+            data => this.dialogRef.close(true),
+            error => this.dialogRef.close()
+        );
+
     }
 }
