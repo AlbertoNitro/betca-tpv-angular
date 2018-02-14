@@ -3,6 +3,8 @@ import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
+import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -21,7 +23,7 @@ export class ShoppingCartCheckOutDialogComponent {
     ticketCreation: TicketCreation;
 
 
-    constructor(public shoppingCartService: ShoppingCartService) {
+    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService) {
         this.ticketCreation = { cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
 
@@ -34,12 +36,20 @@ export class ShoppingCartCheckOutDialogComponent {
             if (this.mobile === 1) {
                 this.foundMobile = true;
             } else {
-                console.log('>>>> ' + this.mobile + 'no encontrado');
+                const dialogRef = this.dialog.open(UserQuickCreationDialogComponent);
+                dialogRef.componentInstance.mobile = this.mobile;
+                dialogRef.afterClosed().subscribe(
+                    result => {
+                        if (result) {
+                            this.foundMobile = true;
+                        }
+                    }
+                );
             }
         } else {
             this.mobile = undefined;
             this.foundMobile = false;
         }
-
     }
 }
+

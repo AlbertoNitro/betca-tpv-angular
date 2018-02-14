@@ -10,6 +10,7 @@ import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.com
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
+import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -40,6 +41,7 @@ export class AppRoutingModule {
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     DbSeedDialogComponent,
-    ShoppingCartCheckOutDialogComponent
+    ShoppingCartCheckOutDialogComponent,
+    UserQuickCreationDialogComponent
   ];
 }
