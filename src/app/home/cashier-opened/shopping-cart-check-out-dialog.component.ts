@@ -5,9 +5,8 @@ import { CashierClosure } from '../shared/cashier-closure.model';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
-import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
-
 import { UserService } from './user.service';
+import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -19,15 +18,15 @@ import { UserService } from './user.service';
 export class ShoppingCartCheckOutDialogComponent {
 
     @Input() total: number;
-    mobile: number;
-    foundMobile = false;
-
-
     ticketCreation: TicketCreation;
-
+    foundMobile = undefined;
 
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
-        this.ticketCreation = { cash: 0, card: 0, voucher: 0, shoppingCart: null };
+        this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+    }
+
+    invalidCheckOut(): boolean {
+        return this.return() < 0 || (this.foundMobile === false);
     }
 
     return(): number {
@@ -48,24 +47,29 @@ export class ShoppingCartCheckOutDialogComponent {
     }
 
     findUser() {
-        if (!this.foundMobile && this.mobile) {
-            if (this.userService.findUser(this.mobile)) {
-                this.foundMobile = true;
-            } else {
-                const dialogRef = this.dialog.open(UserQuickCreationDialogComponent);
-                dialogRef.componentInstance.mobile = this.mobile;
-                dialogRef.afterClosed().subscribe(
-                    result => {
-                        if (result) {
-                            this.foundMobile = true;
-                        }
-                    }
-                );
-            }
+        if (this.foundMobile) {
+            this.ticketCreation.userMobile = undefined;
+            this.foundMobile = undefined;
         } else {
-            this.mobile = undefined;
-            this.foundMobile = false;
+            this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+                data => this.foundMobile = true,
+                error => this.createUser()
+            );
         }
+    }
+
+    private createUser() {
+        const dialogRef = this.dialog.open(UserQuickCreationDialogComponent);
+        dialogRef.componentInstance.mobile = this.ticketCreation.userMobile;
+        dialogRef.afterClosed().subscribe(
+            result => {
+                if (result) {
+                    this.foundMobile = true;
+                } else {
+                    this.foundMobile = false;
+                }
+            }
+        );
     }
 }
 

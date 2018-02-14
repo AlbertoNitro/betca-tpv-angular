@@ -2,8 +2,8 @@
 <mat-dialog-content>
     <!--Input-->
     <mat-form-field>
-        <input matInput type="number" placeholder="Mobile" [(ngModel)]="mobile" [disabled]="foundMobile" />
-        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="findUser()"*ngIf="mobile!==undefined">
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="ticketCreation.userMobile" [disabled]="foundMobile" />
+        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="findUser()"*ngIf="ticketCreation.userMobile">
             <mat-icon *ngIf="!foundMobile" color="warn">cached</mat-icon>
             <mat-icon *ngIf="foundMobile">done</mat-icon>
         </button>
@@ -30,5 +30,5 @@
 <h4 mat-dialog-title>Return: {{return() | currency:'EUR':'symbol'}}</h4>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="return()<0 || (mobile!==undefined && !foundMobile) ">Check Out</button>
+    <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
 </mat-dialog-actions>
