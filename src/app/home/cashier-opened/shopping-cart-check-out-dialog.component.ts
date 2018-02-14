@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material';
+
 import { CashierClosure } from '../shared/cashier-closure.model';
+import { TicketCreation } from '../shared/ticket-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
-import { TicketCreation } from '../shared/ticket-creation.model';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
-import { MatDialog } from '@angular/material';
+
 import { UserService } from './user.service';
 
 @Component({
@@ -26,6 +28,19 @@ export class ShoppingCartCheckOutDialogComponent {
 
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { cash: 0, card: 0, voucher: 0, shoppingCart: null };
+    }
+
+    return(): number {
+        return Math.round(
+            ((this.ticketCreation.cash + this.ticketCreation.card + this.ticketCreation.voucher) - this.total) * 100
+        ) / 100;
+    }
+
+    fill(type: string) {
+        this.ticketCreation.cash = 0;
+        this.ticketCreation.card = 0;
+        this.ticketCreation.voucher = 0;
+        this.ticketCreation[type] = this.total;
     }
 
     checkOut() {
