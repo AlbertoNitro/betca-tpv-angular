@@ -11,7 +11,7 @@ import { CashierClosedComponent } from './cashier-closed/cashier-closed.componen
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CustomersComponent } from './customers/customers.component';
+import { UsersComponent } from './users/users.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -65,7 +65,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   customers() {
-    this.router.navigate([HomeComponent.URL, CustomersComponent.URL]);
+    this.router.navigate([HomeComponent.URL, UsersComponent.URL]);
   }
 
   ngOnDestroy(): void {

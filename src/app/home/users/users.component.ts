@@ -1,12 +1,13 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { User } from '../cashier-opened/user.model';
 import { UserService } from '../cashier-opened/user.service';
+import { UserCreationDialogComponent } from './user-creation-dialog.component';
 
 @Component({
-    templateUrl: `customers.component.html`
+    templateUrl: `users.component.html`
 })
-export class CustomersComponent implements OnInit {
+export class UsersComponent implements OnInit {
     static URL = 'customers';
 
     displayedColumns = ['mobile', 'username', 'email', 'actions'];
@@ -14,7 +15,7 @@ export class CustomersComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(private userService: UserService) {
+    constructor(public dialog: MatDialog, private userService: UserService) {
     }
 
     ngOnInit(): void {
@@ -26,4 +27,11 @@ export class CustomersComponent implements OnInit {
         );
     }
 
+    create() {
+        this.dialog.open(UserCreationDialogComponent);
+    }
+
+    edit(user: User) {
+        this.dialog.open(UserCreationDialogComponent);
+    }
 }
