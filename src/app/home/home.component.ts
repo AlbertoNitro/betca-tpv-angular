@@ -11,6 +11,7 @@ import { CashierClosedComponent } from './cashier-closed/cashier-closed.componen
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
+import { CustomersComponent } from './customers/customers.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -29,11 +30,7 @@ export class HomeComponent implements OnDestroy {
     this.subscription = this.cashierService.lastObservable().subscribe(
       data => {
         this.cashierClosed = data.closed;
-        if (data.closed) {
-          this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
-        } else {
-          this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
-        }
+        this.home();
       }
     );
   }
@@ -55,8 +52,20 @@ export class HomeComponent implements OnDestroy {
       });
   }
 
+  home() {
+    if (this.cashierClosed) {
+      this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
+    } else {
+      this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
+    }
+  }
+
   closeCashier() {
     this.dialog.open(CashierCloseDialogComponent);
+  }
+
+  customers() {
+    this.router.navigate([HomeComponent.URL, CustomersComponent.URL]);
   }
 
   ngOnDestroy(): void {

@@ -11,6 +11,7 @@ import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.compo
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
+import { CustomersComponent } from './home/customers/customers.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -20,6 +21,7 @@ const appRoutes: Routes = [
     children: [
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
+      { path: CustomersComponent.URL, component: CustomersComponent }
     ]
   }
 ];
@@ -32,6 +34,7 @@ export class AppRoutingModule {
   static COMPONENTS = [
     CashierClosedComponent,
     CashierOpenedComponent,
+    CustomersComponent,
     HomeComponent,
     ShoppingCartComponent,
     WelcomeComponent
