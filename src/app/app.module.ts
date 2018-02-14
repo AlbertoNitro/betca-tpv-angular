@@ -30,6 +30,7 @@ import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { AppComponent } from './app.component';
+import { UserService } from './home/cashier-opened/user.service';
 
 @NgModule({
   imports: [
@@ -89,7 +90,8 @@ import { AppComponent } from './app.component';
     ArticleService,
     CashierService,
     ShoppingCartService,
-    TicketService
+    TicketService,
+    UserService
   ]
 })
 export class AppModule { }
