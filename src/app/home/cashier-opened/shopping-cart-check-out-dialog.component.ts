@@ -5,6 +5,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { MatDialog } from '@angular/material';
+import { UserService } from './user.service';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -23,7 +24,7 @@ export class ShoppingCartCheckOutDialogComponent {
     ticketCreation: TicketCreation;
 
 
-    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService) {
+    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
 
@@ -33,7 +34,7 @@ export class ShoppingCartCheckOutDialogComponent {
 
     findUser() {
         if (!this.foundMobile && this.mobile) {
-            if (this.mobile === 1) {
+            if (this.userService.findUser(this.mobile)) {
                 this.foundMobile = true;
             } else {
                 const dialogRef = this.dialog.open(UserQuickCreationDialogComponent);
