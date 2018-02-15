@@ -14,10 +14,6 @@
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Username </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.username}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="email">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{item.email}} </mat-cell>
-            </ng-container>
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef>
                     <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="create()">

@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { User } from '../cashier-opened/user.model';
-import { UserService } from '../cashier-opened/user.service';
+import { User } from '../shared/user.model';
+import { UserService } from '../shared/user.service';
 import { UserCreationDialogComponent } from './user-creation-dialog.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { UserCreationDialogComponent } from './user-creation-dialog.component';
 export class UsersComponent implements OnInit {
     static URL = 'customers';
 
-    displayedColumns = ['mobile', 'username', 'email', 'actions'];
+    displayedColumns = ['mobile', 'username', 'actions'];
     dataSource: MatTableDataSource<User>;
 
     @ViewChild(MatSort) sort: MatSort;
@@ -19,6 +19,10 @@ export class UsersComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.synchronize();
+    }
+
+    synchronize() {
         this.userService.readAll().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<User>(data);
@@ -27,11 +31,20 @@ export class UsersComponent implements OnInit {
         );
     }
 
-    create() {
-        this.dialog.open(UserCreationDialogComponent);
+    edit(user: User) {
+        const dialogRef = this.dialog.open(UserCreationDialogComponent);
+        dialogRef.componentInstance.user = user;
+        dialogRef.componentInstance.edit = true;
+        dialogRef.afterClosed().subscribe(
+            result => this.synchronize()
+        );
     }
 
-    edit(user: User) {
-        this.dialog.open(UserCreationDialogComponent);
-    }
+    create() {
+        const dialogRef = this.dialog.open(UserCreationDialogComponent);
+        dialogRef.componentInstance.edit = false;
+        dialogRef.afterClosed().subscribe(
+            result => this.synchronize()
+        );
+   }
 }

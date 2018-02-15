@@ -18,6 +18,11 @@ export class UserService {
     createObservable(user: User): Observable<boolean> {
         return this.httpService.authToken().post(UserService.END_POINT, user);
     }
+
+    putObservable(user: User): Observable<boolean> {
+        return this.httpService.authToken().put(UserService.END_POINT, user);
+    }
+
     readAll(): Observable<User[]> {
         return this.httpService.authToken().get(UserService.END_POINT);
      }
