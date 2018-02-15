@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 
-import { User } from './user.model';
-import { UserService } from './user.service';
+import { User } from '../shared/user.model';
+import { UserService } from '../shared/user.service';
 
 
 @Component({

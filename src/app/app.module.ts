@@ -30,7 +30,7 @@ import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { AppComponent } from './app.component';
-import { UserService } from './home/cashier-opened/user.service';
+import { UserService } from './home/shared/user.service';
 
 @NgModule({
   imports: [

@@ -1,0 +1,30 @@
+<h2 mat-dialog-title *ngIf="!edit">New Customer</h2>
+<h2 mat-dialog-title *ngIf="edit">Edit Customer</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="user.mobile" [disabled]="edit" cdkFocusInitial/>
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Username" required [(ngModel)]="user.username" />
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="email" placeholder="Email" [(ngModel)]="user.email">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="DNI" [(ngModel)]="user.dni">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Address" [(ngModel)]="user.address">
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="user.active" *ngIf="edit">Active</mat-checkbox>
+    <div *ngIf="edit">
+        Registration Date: {{user.registrationDate | date: 'medium'}}
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()">Save</button>
+    <button mat-raised-button *ngIf="!edit" (click)="create()">Create</button>
+</mat-dialog-actions>

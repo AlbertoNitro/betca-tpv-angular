@@ -5,7 +5,7 @@ import { CashierClosure } from '../shared/cashier-closure.model';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
-import { UserService } from './user.service';
+import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 
 @Component({
