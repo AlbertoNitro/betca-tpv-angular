@@ -13,7 +13,7 @@ export class TicketService {
     }
 
     create(ticketCreation: TicketCreation): Observable<any> {
-        return this.httpService.authToken().responseBlob().post(TicketService.END_POINT, ticketCreation);
+        return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
     }
 
 

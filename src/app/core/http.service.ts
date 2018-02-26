@@ -90,49 +90,50 @@ export class HttpService {
         return this;
     }
 
-    responseBlob(): HttpService {
+    pdf(): HttpService {
         this.responseType = ResponseContentType.Blob;
+        this.headers.append('Accept', 'application/pdf');
         return this;
     }
 
     get(endpoint: string): Observable<any> {
         return this.http.get(HttpService.API_END_POINT + endpoint, this.createOptions()).map(
             response => this.extractData(response)).catch(
-            error => {
-                return this.handleError(error);
-            });
+                error => {
+                    return this.handleError(error);
+                });
     }
 
     post(endpoint: string, body?: Object): Observable<any> {
         return this.http.post(HttpService.API_END_POINT + endpoint, body, this.createOptions()).map(
             response => this.extractData(response)).catch(
-            error => {
-                return this.handleError(error);
-            });
+                error => {
+                    return this.handleError(error);
+                });
     }
 
     delete(endpoint: string): Observable<any> {
         return this.http.delete(HttpService.API_END_POINT + endpoint, this.createOptions()).map(
             response => this.extractData(response)).catch(
-            error => {
-                return this.handleError(error);
-            });
+                error => {
+                    return this.handleError(error);
+                });
     }
 
     put(endpoint: string, body?: Object): Observable<any> {
         return this.http.put(HttpService.API_END_POINT + endpoint, body, this.createOptions()).map(
             response => this.extractData(response)).catch(
-            error => {
-                return this.handleError(error);
-            });
+                error => {
+                    return this.handleError(error);
+                });
     }
 
     patch(endpoint: string, body?: Object): Observable<any> {
         return this.http.patch(HttpService.API_END_POINT + endpoint, body, this.createOptions()).map(
             response => this.extractData(response)).catch(
-            error => {
-                return this.handleError(error);
-            });
+                error => {
+                    return this.handleError(error);
+                });
     }
 
     private createOptions(): RequestOptions {
@@ -153,7 +154,7 @@ export class HttpService {
             } else if (contentType.indexOf('application/json') !== -1) {
                 return response.json();
             }
-        }else if (response.text()) {
+        } else if (response.text()) {
             return response.text();
         } else {
             return response;

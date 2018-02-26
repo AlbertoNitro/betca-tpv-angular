@@ -32,11 +32,15 @@ export class UsersComponent implements OnInit {
     }
 
     edit(user: User) {
-        const dialogRef = this.dialog.open(UserCreationDialogComponent);
-        dialogRef.componentInstance.user = user;
-        dialogRef.componentInstance.edit = true;
-        dialogRef.afterClosed().subscribe(
-            result => this.synchronize()
+        this.userService.readObservable(user.mobile).subscribe(
+            data => {
+                const dialogRef = this.dialog.open(UserCreationDialogComponent);
+                dialogRef.componentInstance.user = data;
+                dialogRef.componentInstance.edit = true;
+                dialogRef.afterClosed().subscribe(
+                    result => this.synchronize()
+                );
+            }
         );
     }
 
@@ -46,5 +50,5 @@ export class UsersComponent implements OnInit {
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
-   }
+    }
 }
