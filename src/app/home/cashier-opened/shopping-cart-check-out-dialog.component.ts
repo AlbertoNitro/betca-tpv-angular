@@ -19,14 +19,18 @@ export class ShoppingCartCheckOutDialogComponent {
 
     @Input() total: number;
     ticketCreation: TicketCreation;
-    foundMobile = undefined;
+    foundMobile = false;
 
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
 
+    mobileSynchronize(): boolean {
+        return this.ticketCreation.userMobile && !this.foundMobile;
+    }
+
     invalidCheckOut(): boolean {
-        return this.return() < 0 || (this.foundMobile === false);
+        return this.return() < 0 || this.mobileSynchronize();
     }
 
     return(): number {
@@ -43,13 +47,22 @@ export class ShoppingCartCheckOutDialogComponent {
     }
 
     checkOut() {
+        if (!this.ticketCreation.cash) {
+            this.ticketCreation.cash = 0;
+        }
+        if (!this.ticketCreation.card) {
+            this.ticketCreation.card = 0;
+        }
+        if (!this.ticketCreation.voucher) {
+            this.ticketCreation.voucher = 0;
+        }
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
-    findUser() {
+    checkMobile() {
         if (this.foundMobile) {
             this.ticketCreation.userMobile = undefined;
-            this.foundMobile = undefined;
+            this.foundMobile = false;
         } else {
             this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
                 data => this.foundMobile = true,

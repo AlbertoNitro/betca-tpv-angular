@@ -3,8 +3,8 @@
     <!--Input-->
     <mat-form-field>
         <input matInput type="number" placeholder="Mobile" [(ngModel)]="ticketCreation.userMobile" [disabled]="foundMobile" />
-        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="findUser()"*ngIf="ticketCreation.userMobile">
-            <mat-icon *ngIf="!foundMobile" color="warn">cached</mat-icon>
+        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="checkMobile()" *ngIf="ticketCreation.userMobile">
+            <mat-icon *ngIf="mobileSynchronize()" color="warn">cached</mat-icon>
             <mat-icon *ngIf="foundMobile">done</mat-icon>
         </button>
     </mat-form-field>
