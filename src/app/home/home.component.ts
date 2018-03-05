@@ -25,7 +25,7 @@ export class HomeComponent implements OnDestroy {
 
   subscription: Subscription;
 
-  constructor(public dialog: MatDialog, private tokensService: TokensService,
+  constructor(public dialog: MatDialog, public tokensService: TokensService,
     private cashierService: CashierService, private router: Router, private adminsService: AdminsService) {
     this.subscription = this.cashierService.lastObservable().subscribe(
       data => {
