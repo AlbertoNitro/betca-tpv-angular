@@ -18,7 +18,6 @@ export class WelcomeComponent {
 
   login() {
     this.dialog.open(LoginDialogComponent).afterClosed().subscribe(
-
       usr => {
         if (usr) {
           this.tokensService.login(usr.mobile, usr.password).subscribe(
@@ -26,7 +25,6 @@ export class WelcomeComponent {
           );
         }
       }
-
     );
   }
 

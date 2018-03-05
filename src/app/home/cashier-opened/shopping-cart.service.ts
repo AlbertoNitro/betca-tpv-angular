@@ -16,8 +16,8 @@ export class ShoppingCartService {
 
     private shoppingCart: Array<Shopping> = new Array();
 
-    private shoppingCartList: Array<Array<Shopping>> = new Array();
     private indexShoppingCart = 0;
+    private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
