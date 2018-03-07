@@ -1,1 +1,72 @@
-<h2 id="page-title">Estadisticas </h2>
+<br>
+<div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+    <div class="item item-1" fxFlex="35%">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span>Ventas anuales</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-card class="example-card">
+            <mat-card-content>
+                <mat-form-field fxFlex="35%">
+                    <input matInput [matDatepicker]="dpInicio" placeholder="Periodo de Inicio" #dpInicioAD disabled>
+                    <mat-datepicker-toggle matSuffix [for]="dpInicio"></mat-datepicker-toggle>
+                    <mat-datepicker #dpInicio disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field fxFlex="40%" class="dpFin">
+                    <input matInput [matDatepicker]="dpFin" placeholder="Fin de Periodo" #dpFinAD disabled>
+                    <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
+                    <mat-datepicker #dpFin disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <button type="submit" mat-fab color="primary" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''" style="margin-left: 5%">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </mat-card-content>
+            <img mat-card-image src="https://i.imgur.com/qdU2YZD.png" alt="Grafica">
+        </mat-card>
+    </div>
+    <div class="item item-2" fxFlex="35%">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span>Ventas mensuales</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-card class="example-card">
+            <mat-card-content>
+                <mat-form-field fxFlex="35%">
+                    <input matInput [matDatepicker]="dpInicioM" placeholder="Periodo de Inicio" #dpInicioMD disabled>
+                    <mat-datepicker-toggle matSuffix [for]="dpInicioM"></mat-datepicker-toggle>
+                    <mat-datepicker #dpInicioM disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="dpFin" fxFlex="40%">
+                    <input matInput [matDatepicker]="dpFinM" placeholder="Fin de Periodo" #dpFinMD disabled>
+                    <mat-datepicker-toggle matSuffix [for]="dpFinM"></mat-datepicker-toggle>
+                    <mat-datepicker #dpFinM disabled="false"></mat-datepicker>
+                </mat-form-field>
+                <button type="submit" mat-fab color="primary" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''" style="margin-left: 5%">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </mat-card-content>
+            <img mat-card-image src="https://i.imgur.com/qdU2YZD.png" alt="Grafica">
+        </mat-card>
+    </div>
+    <div class="item item-3" fxFlex="35%">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row>
+                <span>Producto por mes</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <mat-card class="example-card">
+            <mat-card-content>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Product by code" type="text" #code>
+                </mat-form-field>
+                <button type="submit" mat-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
+                    <mat-icon>search</mat-icon>
+                </button>
+            </mat-card-content>
+            <img mat-card-image src="https://i.imgur.com/qdU2YZD.png" alt="Grafica">
+        </mat-card>
+    </div>
+</div>
+<br>
