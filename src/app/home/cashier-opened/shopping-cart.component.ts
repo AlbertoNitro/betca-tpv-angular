@@ -54,6 +54,10 @@ export class ShoppingCartComponent implements OnDestroy {
         this.dialog.open(ShoppingCartCheckOutDialogComponent).componentInstance.total = this.shoppingCartService.total;
     }
 
+    createBudget(){
+        console.log("Botón create budget pulsado!!");
+    }
+
     exchange() {
         this.shoppingCartService.exchange();
     }
