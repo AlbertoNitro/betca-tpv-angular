@@ -42,6 +42,10 @@
     <mat-icon>assignment</mat-icon>
     <span>Family</span>
   </button>
+  <button mat-menu-item (click)="statistics()">
+    <mat-icon>assessment</mat-icon>
+    <span>Statistics</span>
+  </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
