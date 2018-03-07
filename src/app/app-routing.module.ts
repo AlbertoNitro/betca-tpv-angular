@@ -13,6 +13,7 @@ import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopp
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationDialogComponent } from './home/users/user-creation-dialog.component';
+import { VouchersComponent } from './home/vouchers/vouchers.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -22,7 +23,8 @@ const appRoutes: Routes = [
     children: [
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
-      { path: UsersComponent.URL, component: UsersComponent }
+      { path: UsersComponent.URL, component: UsersComponent },
+      { path: VouchersComponent.URL, component: VouchersComponent }
     ]
   }
 ];
@@ -38,7 +40,8 @@ export class AppRoutingModule {
     UsersComponent,
     HomeComponent,
     ShoppingCartComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    VouchersComponent
   ];
 
   static COMPONENT_FACTORY = [
