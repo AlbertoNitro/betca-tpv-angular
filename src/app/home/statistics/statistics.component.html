@@ -18,7 +18,7 @@
                     <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
                     <mat-datepicker #dpFin disabled="false"></mat-datepicker>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''" style="margin-left: 5%">
+                <button class="refresh" type="submit" mat-fab color="primary" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
@@ -43,7 +43,7 @@
                     <mat-datepicker-toggle matSuffix [for]="dpFinM"></mat-datepicker-toggle>
                     <mat-datepicker #dpFinM disabled="false"></mat-datepicker>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''" style="margin-left: 5%">
+                <button class="refresh" type="submit" mat-fab color="primary" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
