@@ -25,9 +25,9 @@ const appRoutes: Routes = [
     children: [
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
+      { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
-      { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent }
     ]
   }
