@@ -71,7 +71,10 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-            }
+            },
+            error => {
+                console.log("---------> No encuentro datos");
+            },
         );
     }
 
@@ -92,6 +95,10 @@ export class ShoppingCartService {
                 window.open(url);
             }
         );
+    }
+
+    createBudget(param: string ): void {
+        console.log("Llamada a shopping-cart service con " + param);
     }
 
 }
