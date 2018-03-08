@@ -71,7 +71,10 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-            }
+            },
+            error => {
+                console.log("---------> No encuentro datos");
+            },
         );
     }
 
