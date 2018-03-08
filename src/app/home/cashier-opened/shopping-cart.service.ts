@@ -97,4 +97,8 @@ export class ShoppingCartService {
         );
     }
 
+    createBudget(param: string ): void {
+        console.log("Llamada a shopping-cart service con " + param);
+    }
+
 }
