@@ -15,6 +15,7 @@ import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-qui
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationDialogComponent } from './home/users/user-creation-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
+import { ProvidersComponent } from './home/providers/providers.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -26,7 +27,8 @@ const appRoutes: Routes = [
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
-      { path: StatisticsComponent.URL, component: StatisticsComponent }
+      { path: StatisticsComponent.URL, component: StatisticsComponent },
+      { path: ProvidersComponent.URL, component: ProvidersComponent }
     ]
   }
 ];
@@ -44,7 +46,8 @@ export class AppRoutingModule {
     ShoppingCartComponent,
     StatisticsComponent,
     WelcomeComponent,
-    VouchersComponent
+    VouchersComponent,
+    ProvidersComponent
   ];
 
   static COMPONENT_FACTORY = [
