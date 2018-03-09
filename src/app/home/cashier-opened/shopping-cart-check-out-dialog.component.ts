@@ -89,4 +89,8 @@ export class ShoppingCartCheckOutDialogComponent {
             }
         );
     }
+
+    private updateUser() {
+       this.dialog.open(UserQuickUpdateDialogComponent);
+    }
 }
