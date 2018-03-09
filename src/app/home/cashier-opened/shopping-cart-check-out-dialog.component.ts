@@ -64,6 +64,10 @@ export class ShoppingCartCheckOutDialogComponent {
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
+    reservation() {
+        console.log('Se ha creado una reserva');
+    }
+
     checkMobile() {
         if (this.foundMobile) {
             this.ticketCreation.userMobile = undefined;
