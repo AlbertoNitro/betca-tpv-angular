@@ -27,6 +27,7 @@ import { AdminsService } from './home/admin/admins.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
+import { ProviderService } from './home/shared/provider.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
@@ -92,6 +93,7 @@ import { AppComponent } from './app.component';
     AdminsService,
     ArticleService,
     CashierService,
+    ProviderService,
     ShoppingCartService,
     TicketService,
     UserService
