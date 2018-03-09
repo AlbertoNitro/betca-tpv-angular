@@ -5,6 +5,7 @@ import { CancelYesDialogComponent } from './core/cancel-yes-dialog.component';
 import {DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
   static COMPONENTS = [
+    AdvancedSearchComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
     UsersComponent,
