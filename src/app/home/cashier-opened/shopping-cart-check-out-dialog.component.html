@@ -31,5 +31,5 @@
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
     <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
-    <button mat-raised-button>Invioce</button>
+    <button mat-raised-button mat-dialog-close [disabled]="invalidInvioce()" >Invioce</button> 
 </mat-dialog-actions>
