@@ -18,7 +18,7 @@
                     <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
                     <mat-datepicker #dpFin disabled="false"></mat-datepicker>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="createVentaAnual();" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
@@ -47,7 +47,7 @@
                     <mat-datepicker-toggle matSuffix [for]="dpFinM"></mat-datepicker-toggle>
                     <mat-datepicker #dpFinM disabled="false"></mat-datepicker>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="createVentaMes();" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
@@ -67,7 +67,7 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Product by code" type="text" #code>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
+                <button type="submit" mat-fab color="primary" (click)="createProdxMes(code.value); createProdxMes.value=''" [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
