@@ -10,10 +10,12 @@ import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.com
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
+import { StatisticsComponent } from './home/statistics/statistics.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationDialogComponent } from './home/users/user-creation-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
+import { ProvidersComponent } from './home/providers/providers.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -23,8 +25,10 @@ const appRoutes: Routes = [
     children: [
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
+      { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: UsersComponent.URL, component: UsersComponent },
-      { path: VouchersComponent.URL, component: VouchersComponent }
+      { path: VouchersComponent.URL, component: VouchersComponent },
+      { path: ProvidersComponent.URL, component: ProvidersComponent }
     ]
   }
 ];
@@ -40,8 +44,10 @@ export class AppRoutingModule {
     UsersComponent,
     HomeComponent,
     ShoppingCartComponent,
+    StatisticsComponent,
     WelcomeComponent,
-    VouchersComponent
+    VouchersComponent,
+    ProvidersComponent
   ];
 
   static COMPONENT_FACTORY = [

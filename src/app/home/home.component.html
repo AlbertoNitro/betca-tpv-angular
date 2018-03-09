@@ -30,6 +30,10 @@
     <mat-icon>account_circle</mat-icon>
     <span>Customers</span>
   </button>
+  <button mat-menu-item (click)="providers()">
+    <mat-icon>local_shipping</mat-icon>
+    <span>Providers</span>
+  </button>
   <button mat-menu-item>
     <mat-icon>account_circle</mat-icon>
     <span>Tickets</span>
@@ -41,6 +45,14 @@
   <button mat-menu-item (click)="family()">
     <mat-icon>assignment</mat-icon>
     <span>Family</span>
+  </button>
+  <button mat-menu-item (click)="statistics()">
+    <mat-icon>assessment</mat-icon>
+    <span>Statistics</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>account_circle</mat-icon>
+    <span>Busqueda avanzada</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
