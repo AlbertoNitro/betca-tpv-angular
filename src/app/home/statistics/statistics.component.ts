@@ -12,10 +12,25 @@ export class StatisticsComponent implements OnInit {
     ngOnInit(): void {
 
         google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawVentaAnual);
-        google.charts.setOnLoadCallback(drawVentaMes);
-        google.charts.setOnLoadCallback(drawProdxMes);
+        google.charts.setOnLoadCallback(draw);
+        function draw() {
 
+            var data = google.visualization.arrayToDataTable([
+                ['--', 'Ventas'],
+                ['0', 0],
+            ]);
+
+            var chart_anual = new google.visualization.AreaChart(document.getElementById('chart_anual'));
+            chart_anual.draw(data);
+            var chart_mes = new google.visualization.ColumnChart(document.getElementById('chart_mes'));
+            chart_mes.draw(data);
+            var chart_prodmes = new google.visualization.AreaChart(document.getElementById('chart_prodmes'));
+            chart_prodmes.draw(data);
+        }
+    }
+
+    createVentaAnual(): void {
+        google.charts.setOnLoadCallback(drawVentaAnual);
         function drawVentaAnual() {
 
             var data = google.visualization.arrayToDataTable([
@@ -31,13 +46,13 @@ export class StatisticsComponent implements OnInit {
                 vAxis: { title: 'Ventas', minValue: 0 }
             };
 
-
             var chart = new google.visualization.AreaChart(document.getElementById('chart_anual'));
             chart.draw(data, optionsAnual);
         }
+    }
 
-
-
+    createVentaMes(): void {
+        google.charts.setOnLoadCallback(drawVentaMes);
         function drawVentaMes() {
 
             var data = google.visualization.arrayToDataTable([
@@ -56,9 +71,10 @@ export class StatisticsComponent implements OnInit {
 
             chart.draw(data, optionsMes);
         }
+    }
 
-
-
+    createProdxMes(): void {
+        google.charts.setOnLoadCallback(drawProdxMes);
         function drawProdxMes() {
 
             var data = google.visualization.arrayToDataTable([
