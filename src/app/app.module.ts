@@ -36,6 +36,7 @@ import { UserService } from './home/shared/user.service';
 import { AppComponent } from './app.component';
 
 
+
 @NgModule({
   imports: [
     FormsModule,
@@ -85,7 +86,7 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY
+    AppRoutingModule.COMPONENT_FACTORY,
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
