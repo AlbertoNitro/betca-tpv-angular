@@ -74,7 +74,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     createBudget() {
-        this.shoppingCartService.createBudget("prueba");
+        this.shoppingCartService.createBudget();
     }
 
     exchange() {
