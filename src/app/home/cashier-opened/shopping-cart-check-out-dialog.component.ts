@@ -7,6 +7,7 @@ import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
+import { UserQuickUpdateDialogComponent } from './user-quick-update-dialog.component';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -31,6 +32,10 @@ export class ShoppingCartCheckOutDialogComponent {
 
     invalidCheckOut(): boolean {
         return this.return() < 0 || this.mobileSynchronize();
+    }
+
+    invalidInvioce(): boolean {
+        return this.invalidCheckOut();
     }
 
     return(): number {
@@ -88,5 +93,8 @@ export class ShoppingCartCheckOutDialogComponent {
             }
         );
     }
-}
 
+    private updateUser() {
+       this.dialog.open(UserQuickUpdateDialogComponent);
+    }
+}

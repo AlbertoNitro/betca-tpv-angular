@@ -11,12 +11,12 @@
                 <mat-form-field fxFlex="35%">
                     <input matInput [matDatepicker]="dpInicio" placeholder="Periodo de Inicio" #dpInicioAD disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpInicio"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicio disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpInicio startView="multi-year" disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field fxFlex="40%" class="dpFin">
                     <input matInput [matDatepicker]="dpFin" placeholder="Fin de Periodo" #dpFinAD disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFin disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpFin startView="multi-year" disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <button class="refresh" type="submit" mat-fab color="primary" (click)="createVentaAnual();" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''">
                     <mat-icon>refresh</mat-icon>
@@ -40,12 +40,12 @@
                 <mat-form-field fxFlex="35%">
                     <input matInput [matDatepicker]="dpInicioM" placeholder="Periodo de Inicio" #dpInicioMD disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpInicioM"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicioM disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpInicioM startView="year" disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="dpFin" fxFlex="40%">
                     <input matInput [matDatepicker]="dpFinM" placeholder="Fin de Periodo" #dpFinMD disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpFinM"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFinM disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpFinM startView="year" disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <button class="refresh" type="submit" mat-fab color="primary" (click)="createVentaMes();" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''">
                     <mat-icon>refresh</mat-icon>
