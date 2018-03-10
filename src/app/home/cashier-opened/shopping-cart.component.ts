@@ -17,7 +17,7 @@ import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-d
 export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
-
+    private aux;
     private subscription: Subscription;
 
     constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
@@ -26,6 +26,11 @@ export class ShoppingCartComponent implements OnDestroy {
                 this.dataSource = new MatTableDataSource<Shopping>(data);
             }
         );
+
+        this.shoppingCartService.getAux().subscribe( aux => {
+            this.aux = aux;
+        });
+
     }
 
     update(shopping: Shopping, event: any, column: string): void {
@@ -54,7 +59,7 @@ export class ShoppingCartComponent implements OnDestroy {
         this.dialog.open(ShoppingCartCheckOutDialogComponent).componentInstance.total = this.shoppingCartService.total;
     }
 
-    createBudget(){       
+    createBudget() {
         this.shoppingCartService.createBudget("prueba");
     }
 

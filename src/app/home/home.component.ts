@@ -15,6 +15,7 @@ import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProvidersComponent } from './providers/providers.component';
+import {TicketsComponent} from './tickets/tickets.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -71,12 +72,16 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, UsersComponent.URL]);
   }
 
-  vouchers(){
+  vouchers() {
     this.router.navigate([HomeComponent.URL, VouchersComponent.URL]);
   }
 
-  statistics(){
+  statistics() {
     this.router.navigate([HomeComponent.URL, StatisticsComponent.URL]);
+  }
+
+  tickets() {
+    this.router.navigate([HomeComponent.URL, TicketsComponent.URL]);
   }
 
   providers() {
