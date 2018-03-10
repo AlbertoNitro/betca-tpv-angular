@@ -13,6 +13,7 @@ import { ProviderCreationDialogComponent } from './home/providers/provider-creat
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
+import { ShoppingCartDialogComponent } from './home/cashier-opened/shoping-cart-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick-update-dialog.component';
@@ -60,6 +61,7 @@ export class AppRoutingModule {
     DbSeedDialogComponent,
     ProviderCreationDialogComponent,
     ShoppingCartCheckOutDialogComponent,
+    ShoppingCartDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateDialogComponent
