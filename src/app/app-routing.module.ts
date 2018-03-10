@@ -17,7 +17,7 @@ import { StatisticsComponent } from './home/statistics/statistics.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick-update-dialog.component';
 import { UsersComponent } from './home/users/users.component';
-import { UserCreationDialogComponent } from './home/users/user-creation-dialog.component';
+import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
 
 const appRoutes: Routes = [
@@ -60,7 +60,7 @@ export class AppRoutingModule {
     DbSeedDialogComponent,
     ProviderCreationDialogComponent,
     ShoppingCartCheckOutDialogComponent,
-    UserCreationDialogComponent,
+    UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateDialogComponent
   ];
