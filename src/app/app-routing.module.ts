@@ -14,6 +14,7 @@ import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.compo
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
+import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick-update-dialog.component';
 import { UsersComponent } from './home/users/users.component';
@@ -28,10 +29,11 @@ const appRoutes: Routes = [
     children: [
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
+      { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
+      { path: TicketsComponent.URL, component: TicketsComponent },
       { path: UsersComponent.URL, component: UsersComponent },
-      { path: VouchersComponent.URL, component: VouchersComponent },
-      { path: ProvidersComponent.URL, component: ProvidersComponent }
+      { path: VouchersComponent.URL, component: VouchersComponent }
     ]
   }
 ];
@@ -42,16 +44,18 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
   static COMPONENTS = [
+    // Poner las cosas por orden alfabetico
     AdvancedSearchComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
-    UsersComponent,
     HomeComponent,
+    ProvidersComponent,
     ShoppingCartComponent,
     StatisticsComponent,
-    WelcomeComponent,
+    TicketsComponent,
+    UsersComponent,
     VouchersComponent,
-    ProvidersComponent
+    WelcomeComponent
   ];
 
   static COMPONENT_FACTORY = [
