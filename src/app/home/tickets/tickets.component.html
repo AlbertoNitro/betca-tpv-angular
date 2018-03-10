@@ -1,0 +1,89 @@
+<h2>Gestion Tickets</h2>
+<mat-card>
+  <mat-card-content>
+    <h2 class="example-h2"><mat-icon>search</mat-icon> Buscar por:</h2>
+    <mat-tab-group class="demo-tab-group">
+
+      <!-- DIA -->
+      <mat-tab label="Dia">
+        <div class="demo-tab-content">
+          <!-- DATEPICKER 0 -->
+          <mat-form-field class="fecha">
+            <input matInput [matDatepicker]="fecha" placeholder="Elige una fecha">
+            <mat-datepicker-toggle matSuffix [for]="fecha"></mat-datepicker-toggle>
+            <mat-datepicker #fecha></mat-datepicker>
+          </mat-form-field>
+          <!-- DATEPICKER 0 -->
+        </div>
+      </mat-tab>
+      <!-- DIA -->
+
+      <!-- RANGO DIAS -->
+      <mat-tab label="Rango de fechas">
+        <div class="demo-tab-content">
+          <!-- DATEPICKER 1 -->
+          <mat-form-field class="fecha">
+            <input matInput [matDatepicker]="fechaInicial" placeholder="Elige la fecha inicial">
+            <mat-datepicker-toggle matSuffix [for]="fechaInicial"></mat-datepicker-toggle>
+            <mat-datepicker #fechaInicial></mat-datepicker>
+          </mat-form-field>
+          <!-- DATEPICKER 1 -->
+
+          <!-- DATEPICKER 2 -->
+          <mat-form-field class="fecha" style="margin-left: 2em;">
+            <input matInput [matDatepicker]="fechaFinal" placeholder="Elige la fecha final">
+            <mat-datepicker-toggle matSuffix [for]="fechaFinal"></mat-datepicker-toggle>
+            <mat-datepicker #fechaFinal></mat-datepicker>
+          </mat-form-field>
+          <!-- DATEPICKER 2 -->
+        </div>
+      </mat-tab>
+      <!-- RANGO DIAS -->
+
+
+      <!-- <mat-icon>receipt</mat-icon> -->
+
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>
+
+<!-- DATATABLE TICKETS -->
+<div class="mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="progress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="color">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+<!-- DATATABLE TICKETS -->
+
+
+
