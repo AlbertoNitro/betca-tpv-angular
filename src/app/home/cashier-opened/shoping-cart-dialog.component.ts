@@ -20,4 +20,8 @@ export class ShoppingCartDialogComponent {
             console.log(this.code);
         }
 
+    onNoClick(): void {
+        this.dialogRef.close();
+    }
+
 }
