@@ -5,8 +5,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
+import { BudgetService } from '../shared/budget.service';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
+import { BudgetCreation } from '../shared/budget-creation.model';
 
 @Injectable()
 export class ShoppingCartService {
@@ -21,10 +23,13 @@ export class ShoppingCartService {
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
-    constructor(private articleService: ArticleService, private ticketService: TicketService) {
+    private budgetCreation: BudgetCreation;
+
+    constructor(private articleService: ArticleService, private ticketService: TicketService, private budgetService: BudgetService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
+        this.budgetCreation = { shoppingCart: null };
     }
 
     shoppingCartObservable(): Observable<Shopping[]> {
@@ -103,8 +108,9 @@ export class ShoppingCartService {
         );
     }
 
-    createBudget(param: string ): void {
-        console.log("Llamada a shopping-cart service con " + param);
+    createBudget(): void {
+        this.budgetCreation.shoppingCart = this.shoppingCart;
+        this.budgetService.create(this.budgetCreation);
     }
 
 }
