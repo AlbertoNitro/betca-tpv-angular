@@ -12,5 +12,4 @@ export class VouchersComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    
 }
