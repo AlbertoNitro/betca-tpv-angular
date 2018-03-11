@@ -17,6 +17,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
+import { Statistics2Component} from './statistics2/statistics2.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -95,6 +96,9 @@ export class HomeComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  statistics2() {
+    this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
 
 }

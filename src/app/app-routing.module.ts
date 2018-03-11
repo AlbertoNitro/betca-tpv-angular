@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CancelYesDialogComponent } from './core/cancel-yes-dialog.component';
-import {DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
+import { DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
 import { ProvidersComponent } from './home/providers/providers.component';
-import { ProviderCreationDialogComponent } from './home/providers/provider-creation-dialog.component';
+import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
@@ -22,6 +22,7 @@ import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
 import { ArticlesComponent } from './home/articles/articles.component';
+import { Statistics2Component } from './home/statistics2/statistics2.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
-      { path: VouchersComponent.URL, component: VouchersComponent }
+      { path: VouchersComponent.URL, component: VouchersComponent },
+      { path: Statistics2Component.URL, component: Statistics2Component }
     ]
   }
 ];
@@ -58,14 +60,15 @@ export class AppRoutingModule {
     TicketsComponent,
     UsersComponent,
     VouchersComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    Statistics2Component
   ];
 
   static COMPONENT_FACTORY = [
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     DbSeedDialogComponent,
-    ProviderCreationDialogComponent,
+    ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
     ShoppingCartDialogComponent,
     UserCreationEditDialogComponent,
