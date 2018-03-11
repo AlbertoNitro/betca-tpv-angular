@@ -35,6 +35,7 @@ import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
 
 import { AppComponent } from './app.component';
+import { ArticlesComponent } from './home/articles/articles.component';
 
 
 
@@ -87,7 +88,8 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY
+    AppRoutingModule.COMPONENT_FACTORY,
+    ArticlesComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
