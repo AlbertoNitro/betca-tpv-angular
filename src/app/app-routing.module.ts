@@ -21,6 +21,7 @@ import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
+import { ArticlesComponent } from './home/articles/articles.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
+      { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent }
     ]
