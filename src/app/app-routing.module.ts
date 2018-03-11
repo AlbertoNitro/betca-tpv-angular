@@ -13,6 +13,7 @@ import { ProviderCreationDialogComponent } from './home/providers/provider-creat
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
+import { ShoppingCartDialogComponent } from './home/cashier-opened/shoping-cart-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
@@ -20,6 +21,7 @@ import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
+import { ArticlesComponent } from './home/articles/articles.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -32,6 +34,7 @@ const appRoutes: Routes = [
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
+      { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent }
     ]
@@ -64,6 +67,7 @@ export class AppRoutingModule {
     DbSeedDialogComponent,
     ProviderCreationDialogComponent,
     ShoppingCartCheckOutDialogComponent,
+    ShoppingCartDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateDialogComponent

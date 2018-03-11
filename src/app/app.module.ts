@@ -24,6 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
 import { AdminsService } from './home/admin/admins.service';
+import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
@@ -34,6 +35,7 @@ import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
 
 import { AppComponent } from './app.component';
+import { ArticlesComponent } from './home/articles/articles.component';
 
 
 
@@ -86,13 +88,15 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY
+    AppRoutingModule.COMPONENT_FACTORY,
+    ArticlesComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
   providers: [
     AdminsService,
     ArticleService,
+    BudgetService,
     CashierService,
     ProviderService,
     ShoppingCartService,
