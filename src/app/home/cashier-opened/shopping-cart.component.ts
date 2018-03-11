@@ -38,11 +38,15 @@ export class ShoppingCartComponent implements OnDestroy {
     openDialog() {
         console.log(this.code);
         //this.dialog.open(ShoppingCartDialogComponent).componentInstance.code = this.code;
-        this.dialog.open(ShoppingCartDialogComponent, {
+        const dialogRef = this.dialog.open(ShoppingCartDialogComponent, {
             width: '40%',
+            height: '40%',
             data: this.code
         }
         );
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
 
     }
 
