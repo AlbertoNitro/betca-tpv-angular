@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { Provider } from '../shared/provider.model';
 import { ProviderService } from '../shared/provider.service';
-import { ProviderCreationDialogComponent } from './provider-creation-dialog.component';
+import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
 
 @Component({
     templateUrl: `providers.component.html`
@@ -35,7 +35,7 @@ export class ProvidersComponent implements OnInit {
     edit(provider: Provider) {
         // this.providerService.readObservable(provider.id).subscribe(
         //     data => {
-                const dialogRef = this.dialog.open(ProviderCreationDialogComponent);
+                const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
                 // dialogRef.componentInstance.provider = data;
                 dialogRef.componentInstance.provider = this.testProvider[provider.id];
                 dialogRef.componentInstance.edit = true;
@@ -47,7 +47,7 @@ export class ProvidersComponent implements OnInit {
     }
 
     create() {
-        const dialogRef = this.dialog.open(ProviderCreationDialogComponent);
+        const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
         dialogRef.componentInstance.edit = false;
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
