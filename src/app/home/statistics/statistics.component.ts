@@ -16,34 +16,46 @@ declare var google: any;
 export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
 
-    displayedColumns = ['salesCard'];
     dataSource: MatTableDataSource<CashierClosure>;
-
-
-    @ViewChild(MatSort) sort: MatSort;
-
     constructor(private dateAdapter: DateAdapter<Date>, private cashierService: CashierService) {
         dateAdapter.setLocale('es-ES'); // Format Spanish
     }
 
     ngOnInit(): void {
 
-        this.synchronize();
-        this.create('', '', '', '', '', '');
-
-    }
-    synchronize() {
-        this.cashierService.readAll().subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<CashierClosure>(data);
-                this.dataSource.sort = this.sort; 
-            }
-        );
-    }
-
-    create(code: string, dpInicioA: string, dpFinA: string, titleh: string, titlev: string, estado: string) {
         google.charts.load('current', { 'packages': ['corechart'] });
         google.charts.setOnLoadCallback(draw);
+
+        function draw() {
+
+            var data = google.visualization.arrayToDataTable([
+                ['', ''],
+                ['', 0]
+            ]);
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_areA'));
+            chart.draw(data);
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_col'));
+            chart.draw(data);
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_areM'));
+            chart.draw(data);
+        }
+    }
+
+
+
+    create(code: string, dpInicio: string, dpFin: string, titleh: string, titlev: string, estado: string) {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(draw);
+
+        var fechaI = 'ISODate("' + dpInicio + 'T00:00:00.000Z)"';
+        var fechaF = 'ISODate("' + dpFin + 'T99:99:99.999Z)"';
+
+        this.cashierService.readObservable(fechaI, fechaF).subscribe(
+            data => {
+                this.dataSource = new MatTableDataSource<CashierClosure>(data);
+            }
+        );
+
         function draw() {
 
             var dataAPI = google.visualization.arrayToDataTable([
@@ -70,20 +82,8 @@ export class StatisticsComponent implements OnInit {
                     hAxis: { title: titleh, titleTextStyle: { color: '#333' } },
                     vAxis: { title: titlev, minValue: 0 }
                 };
-                console.log(code+"-------------------");
                 var chart = new google.visualization.AreaChart(document.getElementById('chart_areM'));
                 chart.draw(dataAPI, options);
-            } else {
-                var data = google.visualization.arrayToDataTable([
-                    ['', ''],
-                    ['', 0]
-                ]);
-                var chart = new google.visualization.AreaChart(document.getElementById('chart_areA'));
-                chart.draw(data, options);
-                var chart = new google.visualization.ColumnChart(document.getElementById('chart_col'));
-                chart.draw(data, options);
-                var chart = new google.visualization.AreaChart(document.getElementById('chart_areM'));
-                chart.draw(data, options);
             }
         }
     }
