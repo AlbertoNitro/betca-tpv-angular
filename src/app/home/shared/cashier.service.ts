@@ -41,5 +41,7 @@ export class CashierService {
         );
     }
 
-
+    readAll(): Observable<CashierClosure[]> {
+        return this.httpService.authToken().get(CashierService.END_POINT);
+    }
 }
