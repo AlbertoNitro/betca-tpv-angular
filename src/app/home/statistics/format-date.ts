@@ -6,7 +6,7 @@ export class AppDateAdapter extends NativeDateAdapter {
         let day = date.getDate();
         let month = date.getMonth() + 1;
         let year = date.getFullYear();
-        return year + '/' + this._to2digit(month) + '/' + this._to2digit(day);
+        return year + '-' + this._to2digit(month) + '-' + this._to2digit(day);
     }
 
     private _to2digit(n: number) {
