@@ -9,7 +9,7 @@ import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.c
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
 import { ProvidersComponent } from './home/providers/providers.component';
-import { ProviderCreationDialogComponent } from './home/providers/provider-creation-dialog.component';
+import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
@@ -68,7 +68,7 @@ export class AppRoutingModule {
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     DbSeedDialogComponent,
-    ProviderCreationDialogComponent,
+    ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
     ShoppingCartDialogComponent,
     UserCreationEditDialogComponent,
