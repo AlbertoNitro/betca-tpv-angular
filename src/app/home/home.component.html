@@ -34,17 +34,17 @@
     <mat-icon>local_shipping</mat-icon>
     <span>Providers</span>
   </button>
-  <button mat-menu-item>
-    <mat-icon>account_circle</mat-icon>
+  <button mat-menu-item (click)="tickets()">
+    <mat-icon>receipt</mat-icon>
     <span>Tickets</span>
   </button>
-  <button mat-menu-item (click)="vouchers()">
-    <mat-icon>assignment</mat-icon>
-    <span>Vouchers</span>
+  <button mat-menu-item (click)="article()">
+      <mat-icon>view_list</mat-icon>
+      <span>Artículos</span>
   </button>
-  <button mat-menu-item (click)="family()">
-    <mat-icon>assignment</mat-icon>
-    <span>Family</span>
+  <button mat-menu-item (click)="vouchers()">
+    <mat-icon>local_offer</mat-icon>
+    <span>Vouchers</span>
   </button>
   <button mat-menu-item (click)="statistics()">
     <mat-icon>assessment</mat-icon>

@@ -1,13 +1,21 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
+import { AppDateAdapter, APP_DATE_FORMATS } from './format-date'
 declare var google: any;
 
 @Component({
     templateUrl: `statistics.component.html`,
-    styleUrls: [`statistics.component.css`]
+    styleUrls: [`statistics.component.css`],
+    providers: [
+        { provide: DateAdapter, useClass: AppDateAdapter },
+        { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    ]
 })
 export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
+    constructor(private dateAdapter: DateAdapter<Date>) {
+        dateAdapter.setLocale('es-ES'); // Format Spanish
+    }
 
     ngOnInit(): void {
 
@@ -29,7 +37,7 @@ export class StatisticsComponent implements OnInit {
         }
     }
 
-    createVentaAnual(): void {
+    createVentaAnual(dpInicioA:string, dpFinA:string): void {
         google.charts.setOnLoadCallback(drawVentaAnual);
         function drawVentaAnual() {
 
@@ -51,43 +59,42 @@ export class StatisticsComponent implements OnInit {
         }
     }
 
-    createVentaMes(): void {
+    createVentaMes(dpInicioMounth: string, dpFinMounth:string): void {
+
         google.charts.setOnLoadCallback(drawVentaMes);
         function drawVentaMes() {
 
             var data = google.visualization.arrayToDataTable([
-                    ['Mes', 'Ventas'],
-                    ['Enero',  1000],
-                    ['Febreo',  1170],
-                    ['Marzo',  660]
-                  ]);
+                ['Mes', 'Ventas'],
+                ['Enero', 1000],
+                ['Febreo', 1170],
+                ['Marzo', 660]
+            ]);
 
             var optionsMes = {
                 hAxis: { title: 'Meses' },
-                vAxis: {title: 'Ventas'}
+                vAxis: { title: 'Ventas' }
             };
 
             var chart = new google.visualization.ColumnChart(document.getElementById('chart_mes'));
-
             chart.draw(data, optionsMes);
         }
     }
 
-    createProdxMes(): void {
+    createProdxMes(code: string): void {
         google.charts.setOnLoadCallback(drawProdxMes);
         function drawProdxMes() {
 
             var data = google.visualization.arrayToDataTable([
                 ['Anio', 'Ventas'],
-                ['2017', 11000],
-                ['2018', 1100]
+                ['Enero', 11000],
+                ['Febrero', 1100]
             ]);
 
             var options = {
-                hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
+                hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Total', minValue: 0 }
             };
-
 
             var chart = new google.visualization.AreaChart(document.getElementById('chart_prodmes'));
             chart.draw(data, options);
