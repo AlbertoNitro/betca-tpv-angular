@@ -21,7 +21,6 @@ export class ArticleService {
   }
 
   articleGenerateObservable(article: Article): Observable<Article> {
-    console.log("------"article);
     return this.httpService.authToken().post(ArticleService.END_POINT, article);
 
   }
