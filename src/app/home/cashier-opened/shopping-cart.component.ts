@@ -29,7 +29,7 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
-        this.shoppingCartService.getAux().subscribe( aux => {
+        this.shoppingCartService.getArticleSearchObservable().subscribe( aux => {
             this.aux = aux;
         });
 
@@ -37,7 +37,6 @@ export class ShoppingCartComponent implements OnDestroy {
 
     openDialog() {
         console.log(this.code);
-        //this.dialog.open(ShoppingCartDialogComponent).componentInstance.code = this.code;
         const dialogRef = this.dialog.open(ShoppingCartDialogComponent, {
             width: '40%',
             height: '40%',
