@@ -33,6 +33,7 @@ import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
+import { VoucherService } from './home/shared/voucher.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
@@ -108,7 +109,8 @@ import {StatComponent} from './shared/modules/stat/stat.component';
     ProviderService,
     ShoppingCartService,
     TicketService,
-    UserService
+    UserService,
+    VoucherService
   ]
 })
 export class AppModule { }
