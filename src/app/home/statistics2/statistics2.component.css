@@ -1,0 +1,12 @@
+.container{
+    margin:1rem;
+}
+
+.refreshBtnContainer{
+    align-items: center;
+    display: flex;
+}
+
+mat-card-content{
+    height: 22rem;
+}

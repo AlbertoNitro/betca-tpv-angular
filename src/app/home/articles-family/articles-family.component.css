@@ -1,0 +1,55 @@
+
+.example-card {
+  max-width: 700px;
+}
+
+.example-container {
+  width: 100%;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  width: 100px;
+}
+
+.producto {
+  margin: 0 5px
+}
+
+.ocultar {
+  opacity: 0.4;
+}
+
+.producto .imagen {
+  text-align: center;
+  padding: 13px 0;
+  border: solid 1px;
+}
+
+.producto p {
+  font-size: 12px;
+}
+
+.producto .precio {
+  font-weight: bold;
+  font-size: 25px;
+  border-bottom: 1px solid;
+  text-align: right;
+  margin-bottom: 19px;
+}
+
+.carrito {
+  border: solid 1px silver;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+mat-grid-tile {
+  background: buttonface;
+}
