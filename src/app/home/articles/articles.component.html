@@ -1,3 +1,42 @@
-<p>
-  articles works!
-</p>
+<mat-card>
+    <mat-card-title>
+        <mat-icon color="primary">shopping_cart</mat-icon> Articles list
+    </mat-card-title>
+    <mat-card-content>
+        <mat-table #table [dataSource]="dataSource">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+        
+            <!-- Position Column -->
+            <ng-container matColumnDef="code">
+              <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="reference">
+                <mat-header-cell *matHeaderCellDef> Reference </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.reference}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="retailprice">
+                <mat-header-cell *matHeaderCellDef> Retail Price </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.retailPrice}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="stock">
+                <mat-header-cell *matHeaderCellDef> Stock </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+
+          </mat-table>
+    </mat-card-content>
+</mat-card>

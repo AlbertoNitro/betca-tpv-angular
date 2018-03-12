@@ -36,9 +36,7 @@ import { UserService } from './home/shared/user.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
-import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
-import {StatComponent} from './shared/modules/stat/stat.component';
-
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -86,15 +84,15 @@ import {StatComponent} from './shared/modules/stat/stat.component';
     BrowserAnimationsModule,
 
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    ChartsModule
+
   ],
   declarations: [
     AppComponent,
-    StatComponent,
     AppRoutingModule.COMPONENTS,
     AppRoutingModule.COMPONENT_FACTORY,
-    ArticlesComponent,
-    ArticlesFamilyComponent
+    ArticlesComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
