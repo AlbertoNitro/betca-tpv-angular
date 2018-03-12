@@ -36,6 +36,9 @@ import { UserService } from './home/shared/user.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
+import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
+import {StatComponent} from './shared/modules/stat/stat.component';
+
 
 
 
@@ -87,9 +90,11 @@ import { ArticlesComponent } from './home/articles/articles.component';
   ],
   declarations: [
     AppComponent,
+    StatComponent,
     AppRoutingModule.COMPONENTS,
     AppRoutingModule.COMPONENT_FACTORY,
-    ArticlesComponent
+    ArticlesComponent,
+    ArticlesFamilyComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
