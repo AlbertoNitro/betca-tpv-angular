@@ -17,7 +17,7 @@ export class ShoppingCartService {
     private _total = 0;
 
     private shoppingCart: Array<Shopping> = new Array();
-    private aux: Subject<String> = new BehaviorSubject(undefined);
+    private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
     private indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
@@ -53,8 +53,8 @@ export class ShoppingCartService {
         this.synchronizeTotal();
     }
 
-    getAux(): Observable<String> {
-        return this.aux.asObservable();
+    getArticleSearchObservable(): Observable<String> {
+        return this.articleSearchObservable.asObservable();
     }
 
     delete(shopping: Shopping): void {
@@ -80,11 +80,11 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-                this.aux.next('0');
+                this.articleSearchObservable.next('0');
 
             },
             error => {
-                this.aux.next('1');
+                this.articleSearchObservable.next('1');
             },
         );
     }
