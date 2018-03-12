@@ -38,6 +38,10 @@
     <mat-icon>receipt</mat-icon>
     <span>Tickets</span>
   </button>
+  <button mat-menu-item (click)="article()">
+      <mat-icon>view_list</mat-icon>
+      <span>Artículos</span>
+  </button>
   <button mat-menu-item (click)="vouchers()">
     <mat-icon>local_offer</mat-icon>
     <span>Vouchers</span>
@@ -49,6 +53,10 @@
   <button mat-menu-item>
     <mat-icon>account_circle</mat-icon>
     <span>Busqueda avanzada</span>
+  </button>
+  <button mat-menu-item (click)="statistics2()">
+    <mat-icon>assessment</mat-icon>
+    <span>Statistics2</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">

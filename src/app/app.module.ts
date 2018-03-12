@@ -35,6 +35,10 @@ import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
 
 import { AppComponent } from './app.component';
+import { ArticlesComponent } from './home/articles/articles.component';
+import { ChartsModule } from 'ng2-charts';
+import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
+import {StatComponent} from './shared/modules/stat/stat.component';
 
 
 
@@ -82,12 +86,17 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
 
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    ChartsModule
+
   ],
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY
+    AppRoutingModule.COMPONENT_FACTORY,
+    ArticlesComponent,
+    ArticlesFamilyComponent,
+    StatComponent,
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],

@@ -1,18 +1,23 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import { Article } from './article.model';
-import { HttpService } from '../../core/http.service';
+import {Article} from './article.model';
+import {HttpService} from '../../core/http.service';
 
 @Injectable()
 export class ArticleService {
-    static END_POINT = '/articles';
+  static END_POINT = '/articles';
 
-    constructor(private httpService: HttpService) {
-    }
+  constructor(private httpService: HttpService) {
+  }
 
-    readObservable(code: String): Observable<Article> {
-        return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
-    }
+  readObservable(code: String): Observable<Article> {
+    return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
+  }
+
+  readAll(): Observable<Article[]> {
+    return this.httpService.authToken().get(ArticleService.END_POINT);
+  }
+
 
 }

@@ -1,3 +1,21 @@
+<h2 mat-dialog-title>Articulo: {{code}}</h2>
 <mat-dialog-content>
-<h1>Articulo: {{code}}</h1>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="Code" [disabled]="edit" value="{{code}}" cdkFocusInitial/>
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Description" required  />
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="email" placeholder="Retailprice" required>
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+
 </mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

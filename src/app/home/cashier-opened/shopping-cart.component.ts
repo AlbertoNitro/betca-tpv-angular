@@ -29,7 +29,7 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
-        this.shoppingCartService.getAux().subscribe( aux => {
+        this.shoppingCartService.getArticleSearchObservable().subscribe( aux => {
             this.aux = aux;
         });
 
@@ -37,12 +37,15 @@ export class ShoppingCartComponent implements OnDestroy {
 
     openDialog() {
         console.log(this.code);
-        //this.dialog.open(ShoppingCartDialogComponent).componentInstance.code = this.code;
-        this.dialog.open(ShoppingCartDialogComponent, {
-            width: '40%',
+        const dialogRef = this.dialog.open(ShoppingCartDialogComponent, {
+            width: '600px',
+            height: '600px',
             data: this.code
         }
         );
+        dialogRef.afterClosed().subscribe(result => {
+            console.log('The dialog was closed');
+          });
 
     }
 

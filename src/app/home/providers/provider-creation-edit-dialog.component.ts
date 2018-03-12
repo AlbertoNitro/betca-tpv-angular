@@ -4,17 +4,17 @@ import { Provider } from '../shared/provider.model';
 import { ProviderService } from '../shared/provider.service';
 
 @Component({
-    templateUrl: 'provider-creation-dialog.component.html',
+    templateUrl: 'provider-creation-edit-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
-export class ProviderCreationDialogComponent implements OnInit {
+export class ProviderCreationEditDialogComponent implements OnInit {
     edit: boolean;
     provider: Provider;
 
-    constructor(public dialogRef: MatDialogRef<ProviderCreationDialogComponent>,
+    constructor(public dialogRef: MatDialogRef<ProviderCreationEditDialogComponent>,
         private providerService: ProviderService) {
     }
 
