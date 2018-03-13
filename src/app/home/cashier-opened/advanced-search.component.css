@@ -1,0 +1,18 @@
+.example-card {
+    max-width: 700px;
+  }
+  
+  .example-container {
+    width: 100%;
+  }
+  
+
+  .example-section {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    height: 60px;
+  }
+  .example-margin {
+    width:100px;
+  }

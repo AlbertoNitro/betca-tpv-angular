@@ -1,80 +1,90 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatTableDataSource, DateAdapter, MAT_DATE_FORMATS, MatSort } from '@angular/material';
+import { AppDateAdapter, APP_DATE_FORMATS } from './format-date';
+import { CashierClosure } from '../shared/cashier-closure.model';
+import { CashierService } from '../shared/cashier.service';
 declare var google: any;
 
 @Component({
     templateUrl: `statistics.component.html`,
-    styleUrls: [`statistics.component.css`]
+    styleUrls: [`statistics.component.css`],
+    providers: [
+        { provide: DateAdapter, useClass: AppDateAdapter },
+        { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS }
+    ]
 })
 export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
 
+    dataSource: MatTableDataSource<CashierClosure>;
+    constructor(private dateAdapter: DateAdapter<Date>, private cashierService: CashierService) {
+        dateAdapter.setLocale('es-ES'); // Format Spanish
+    }
+
     ngOnInit(): void {
 
         google.charts.load('current', { 'packages': ['corechart'] });
-        google.charts.setOnLoadCallback(drawVentaAnual);
-        google.charts.setOnLoadCallback(drawVentaMes);
-        google.charts.setOnLoadCallback(drawProdxMes);
+        google.charts.setOnLoadCallback(draw);
 
-        function drawVentaAnual() {
+        function draw() {
 
             var data = google.visualization.arrayToDataTable([
-                ['Anio', 'Ventas'],
-                ['2015', 18000],
-                ['2016', 1000],
-                ['2017', 100],
-                ['2018', 1100]
+                ['', ''],
+                ['', 0]
+            ]);
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_areA'));
+            chart.draw(data);
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_col'));
+            chart.draw(data);
+            var chart = new google.visualization.AreaChart(document.getElementById('chart_areM'));
+            chart.draw(data);
+        }
+    }
+
+
+
+    create(code: string, dpInicio: string, dpFin: string, titleh: string, titlev: string, estado: string) {
+        google.charts.load('current', { 'packages': ['corechart'] });
+        google.charts.setOnLoadCallback(draw);
+
+        var fechaI = 'ISODate("' + dpInicio + 'T00:00:00.000Z)"';
+        var fechaF = 'ISODate("' + dpFin + 'T99:99:99.999Z)"';
+
+        this.cashierService.readObservable(fechaI, fechaF).subscribe(
+            data => {
+                this.dataSource = new MatTableDataSource<CashierClosure>(data);
+            }
+        );
+
+        function draw() {
+
+            var dataAPI = google.visualization.arrayToDataTable([
+                ['', '----'],
+                ['prueba', 2000]
             ]);
 
-            var optionsAnual = {
-                hAxis: { title: 'Años', titleTextStyle: { color: '#333' } },
-                vAxis: { title: 'Ventas', minValue: 0 }
-            };
-
-
-            var chart = new google.visualization.AreaChart(document.getElementById('chart_anual'));
-            chart.draw(data, optionsAnual);
-        }
-
-
-
-        function drawVentaMes() {
-
-            var data = google.visualization.arrayToDataTable([
-                    ['Mes', 'Ventas'],
-                    ['Enero',  1000],
-                    ['Febreo',  1170],
-                    ['Marzo',  660]
-                  ]);
-
-            var optionsMes = {
-                hAxis: { title: 'Meses' },
-                vAxis: {title: 'Ventas'}
-            };
-
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_mes'));
-
-            chart.draw(data, optionsMes);
-        }
-
-
-
-        function drawProdxMes() {
-
-            var data = google.visualization.arrayToDataTable([
-                ['Anio', 'Ventas'],
-                ['2017', 11000],
-                ['2018', 1100]
-            ]);
-
-            var options = {
-                hAxis: { title: 'Year', titleTextStyle: { color: '#333' } },
-                vAxis: { title: 'Total', minValue: 0 }
-            };
-
-
-            var chart = new google.visualization.AreaChart(document.getElementById('chart_prodmes'));
-            chart.draw(data, options);
+            if (estado === 'areaA') {
+                var options = {
+                    hAxis: { title: titleh, titleTextStyle: { color: '#333' } },
+                    vAxis: { title: titlev, minValue: 0 }
+                };
+                var chart = new google.visualization.AreaChart(document.getElementById('chart_areA'));
+                chart.draw(dataAPI, options);
+            } else if (estado === 'columna') {
+                var options = {
+                    hAxis: { title: titleh, titleTextStyle: { color: '#333' } },
+                    vAxis: { title: titlev, minValue: 0 }
+                };
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_col'));
+                chart.draw(dataAPI, options);
+            } else if (estado === 'areaM') {
+                var options = {
+                    hAxis: { title: titleh, titleTextStyle: { color: '#333' } },
+                    vAxis: { title: titlev, minValue: 0 }
+                };
+                var chart = new google.visualization.AreaChart(document.getElementById('chart_areM'));
+                chart.draw(dataAPI, options);
+            }
         }
     }
 }

@@ -7,6 +7,8 @@ import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
 import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
+import { ArticleQuickDialogComponent } from './article-quick-generate-dialog.component';
+import { Article } from '../shared/article.model';
 
 
 @Component({
@@ -17,7 +19,9 @@ import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-d
 export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
-    private aux;
+    private fastArticleControl;
+    private fastArticle: Article;
+    private code;
     private subscription: Subscription;
 
     constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
@@ -27,9 +31,24 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
-        this.shoppingCartService.getAux().subscribe( aux => {
-            this.aux = aux;
+        this.shoppingCartService.getArticleSearchObservable().subscribe( fastArticleControl => {
+            this.fastArticleControl = fastArticleControl;
         });
+
+    }
+
+    openDialog() {
+        console.log(this.code);
+        const dialogRef = this.dialog.open(ArticleQuickDialogComponent, {
+            width: '600px',
+            height: '600px',
+            data: {code: this.code, article: this.fastArticle}
+        }
+        );
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(result);
+
+          });
 
     }
 
@@ -52,6 +71,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     add(code: string) {
+        this.code = code;
         this.shoppingCartService.add(code);
     }
 
@@ -60,7 +80,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     createBudget() {
-        this.shoppingCartService.createBudget("prueba");
+        this.shoppingCartService.createBudget();
     }
 
     exchange() {
