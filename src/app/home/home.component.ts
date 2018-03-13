@@ -18,6 +18,7 @@ import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component} from './statistics2/statistics2.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -99,6 +100,10 @@ export class HomeComponent implements OnDestroy {
   }
   statistics2() {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
+  }
+
+  schedule() {
+    this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
 
 }

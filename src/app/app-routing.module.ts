@@ -27,7 +27,7 @@ import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-crea
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
-
+import { ScheduleComponent } from './home/schedule/schedule.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -43,7 +43,8 @@ const appRoutes: Routes = [
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
-      { path: Statistics2Component.URL, component: Statistics2Component }
+      { path: Statistics2Component.URL, component: Statistics2Component },
+      { path: ScheduleComponent.URL, component: ScheduleComponent }
     ]
   }
 ];
@@ -65,7 +66,8 @@ export class AppRoutingModule {
     UsersComponent,
     VouchersComponent,
     WelcomeComponent,
-    Statistics2Component
+    Statistics2Component,
+    ScheduleComponent
   ];
 
   static COMPONENT_FACTORY = [
