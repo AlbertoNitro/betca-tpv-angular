@@ -22,14 +22,13 @@
       </div>
       <section class="example-section" *ngIf="showPrice">
         <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Min Price" [(ngModel)]="articleForm.Price">
+          <input matInput type="number" placeholder="Min Price" [(ngModel)]="articleForm.retailPriceMin">
         </mat-form-field>
         <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Max Price" [(ngModel)]="max">
+          <input matInput type="number" placeholder="Max Price" [(ngModel)]="articleForm.retailPriceMax">
         </mat-form-field>
       </section>
     </div>
-
 
     <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
       <ng-container matColumnDef="id">
