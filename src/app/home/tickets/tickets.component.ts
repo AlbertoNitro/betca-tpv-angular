@@ -10,7 +10,7 @@ import {EditTicketDialogComponent} from './edit-ticket-dialog/edit-ticket-dialog
 })
 export class TicketsComponent implements OnInit, AfterViewInit {
   static URL = 'tickets';
-  displayedColumns = ['ticketIcon', 'id', 'creationDate', 'actions'];
+  displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
   listTickets: Ticket[] = [];
   dataSource: MatTableDataSource<Ticket>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,8 +49,8 @@ export class TicketsComponent implements OnInit, AfterViewInit {
 
   showEditDialog() {
     this.dialog.open(EditTicketDialogComponent, {
-      height: '400px',
-      width: '600px',
+      height: '500px',
+      width: '900px',
     });
   }
 
