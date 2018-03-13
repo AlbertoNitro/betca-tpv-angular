@@ -1,5 +1,5 @@
 export interface Provider {
-    id: number;
+    id: number; 
     company: string;
     address?: string;
     mobile?: string;
