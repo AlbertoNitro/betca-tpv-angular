@@ -21,7 +21,7 @@ export class VoucherConsumeDialogComponent implements OnInit {
     }
 
     consume(){
-       
+        this.dialogRef.close( this.reference );
     }
 
 }
