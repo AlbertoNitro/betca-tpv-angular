@@ -22,7 +22,7 @@
     </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Voucher" [(ngModel)]="ticketCreation.voucher" />
-        <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="fill('voucher')">
+        <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="consumeVoucher()">
             <mat-icon color="warn">check_circle</mat-icon>
         </button>
     </mat-form-field>

@@ -26,6 +26,7 @@ import { VouchersComponent } from './home/vouchers/vouchers.component';
 import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
+import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -79,6 +80,7 @@ export class AppRoutingModule {
     UserQuickCreationDialogComponent,
     UserQuickCreateInvoiceDialogComponent,
     UserQuickUpdateDialogComponent,
-    VoucherCreationEditDialogComponent
+    VoucherCreationEditDialogComponent,
+    VoucherConsumeDialogComponent
   ];
 }
