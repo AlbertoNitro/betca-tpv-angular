@@ -26,14 +26,11 @@ export class ShoppingCartService {
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
-    private budgetCreation: BudgetCreation;
-
     constructor(private articleService: ArticleService, private ticketService: TicketService,
          private budgetService: BudgetService, public snackBar: MatSnackBar) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
-        this.budgetCreation = { shoppingCart: null };
     }
 
     shoppingCartObservable(): Observable<Shopping[]> {
@@ -137,8 +134,13 @@ export class ShoppingCartService {
     }
 
     createBudget(): void {
-        this.budgetCreation.shoppingCart = this.shoppingCart;
-        this.budgetService.create(this.budgetCreation);
+        var budgetCreation: BudgetCreation;
+        budgetCreation = { shoppingCart : this.shoppingCart };
+        this.budgetService.create(budgetCreation).subscribe(
+            blob => {
+                console.log("Angular: API " + blob);
+            }
+        )
     }
 
 }
