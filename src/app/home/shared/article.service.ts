@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material';
 export class ArticleService {
 
   static END_POINT = '/articles';
+  static FILTRO = '/filter';
 
   constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
   }
@@ -37,7 +38,14 @@ export class ArticleService {
 
     );
 }
-
+readAdvancedSearch(article: Article): Observable<Article[]> {
+    return this.httpService.authToken().post(ArticleService.END_POINT + ArticleService.FILTRO, article).map(
+        data => {
+            console.log(data);
+            return data;
+        }
+    );
+  }
 private successful() {
     this.snackBar.open('Successful', '', {
         duration: 2000
