@@ -93,30 +93,6 @@ export class ShoppingCartService {
         );
     }
 
-    fastArticleGenerate(article: Article) {
-        this.articleService.articleGenerateObservable(article).subscribe(
-            data => {
-                this.successful();
-            },
-            error => {
-                this.unsuccessful();
-            }
-
-        );
-    }
-
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
-    }
-
-    private unsuccessful() {
-        this.snackBar.open('Unsuccessful', '', {
-            duration: 2000
-        });
-    }
-
     exchange(): void {
         this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
         this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
