@@ -8,6 +8,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { UserQuickUpdateDialogComponent } from './user-quick-update-dialog.component';
+import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -96,5 +97,10 @@ export class ShoppingCartCheckOutDialogComponent {
 
     private updateUser() {
        this.dialog.open(UserQuickUpdateDialogComponent);
+    }
+
+
+    private consumeVoucher(){
+        this.dialog.open( VoucherConsumeDialogComponent);
     }
 }
