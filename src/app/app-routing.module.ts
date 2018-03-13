@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CancelYesDialogComponent } from './core/cancel-yes-dialog.component';
-import {DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
+import { DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.component';
@@ -13,7 +13,7 @@ import { ProviderCreationEditDialogComponent } from './home/providers/provider-c
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
-import { ShoppingCartDialogComponent } from './home/cashier-opened/shoping-cart-dialog.component';
+import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
@@ -21,7 +21,9 @@ import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
+import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
+import { Statistics2Component } from './home/statistics2/statistics2.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -36,7 +38,8 @@ const appRoutes: Routes = [
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
-      { path: VouchersComponent.URL, component: VouchersComponent }
+      { path: VouchersComponent.URL, component: VouchersComponent },
+      { path: Statistics2Component.URL, component: Statistics2Component }
     ]
   }
 ];
@@ -58,7 +61,8 @@ export class AppRoutingModule {
     TicketsComponent,
     UsersComponent,
     VouchersComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    Statistics2Component
   ];
 
   static COMPONENT_FACTORY = [
@@ -67,9 +71,10 @@ export class AppRoutingModule {
     DbSeedDialogComponent,
     ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
-    ShoppingCartDialogComponent,
+    ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
-    UserQuickUpdateDialogComponent
+    UserQuickUpdateDialogComponent,
+    VoucherCreationEditDialogComponent
   ];
 }
