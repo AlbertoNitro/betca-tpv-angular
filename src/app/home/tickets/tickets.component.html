@@ -50,9 +50,9 @@
 <div class="mat-elevation-z8">
   <mat-table #table [dataSource]="dataSource" matSort>
 
-    <ng-container matColumnDef="ticketIcon">
-        <mat-header-cell *matHeaderCellDef> Ticket </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"><mat-icon>receipt</mat-icon></mat-cell>
+    <ng-container matColumnDef="numTicket">
+      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="creationDate">
