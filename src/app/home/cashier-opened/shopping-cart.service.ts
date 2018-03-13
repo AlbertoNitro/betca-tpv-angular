@@ -114,7 +114,10 @@ export class ShoppingCartService {
         budgetCreation = { shoppingCart : this.shoppingCart };
         this.budgetService.create(budgetCreation).subscribe(
             blob => {
-                console.log("Angular: API " + blob);
+                this.shoppingCart = new Array();
+                this.synchronizeAll();
+                const url = window.URL.createObjectURL(blob);
+                window.open(url);
             }
         )
     }
