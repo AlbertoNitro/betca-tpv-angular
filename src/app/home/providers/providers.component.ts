@@ -55,9 +55,9 @@ export class ProvidersComponent implements OnInit {
     }
 
     testProvider: Provider[] = [
-        {id: 1, company: 'Company 1'},
-        {id: 2, company: 'Company 2'},
-        {id: 3, company: 'Company 3'}
+        {id: "1", company: 'Company 1'},
+        {id: "2", company: 'Company 2'},
+        {id: "3", company: 'Company 3'}
       ];
 
 }
