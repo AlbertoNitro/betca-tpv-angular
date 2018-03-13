@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Provider } from '../shared/provider.model';
-import { ProviderService } from '../shared/provider.service';
+import { Provider } from './provider.model';
+import { ProviderService } from './provider.service';
 
 @Component({
     templateUrl: 'provider-creation-edit-dialog.component.html',
