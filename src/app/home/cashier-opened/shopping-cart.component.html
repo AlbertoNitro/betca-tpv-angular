@@ -61,7 +61,7 @@
             <button type="submit" mat-mini-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
                 <mat-icon>search</mat-icon>
             </button>
-            <button *ngIf="aux == 1" type="submit" mat-mini-fab color="primary" (click)="openDialog()">
+            <button *ngIf="fastArticleControl == 1" type="submit" mat-mini-fab color="primary" (click)="openDialog()">
                 <i class="material-icons">add</i>
             </button>
         </form>
