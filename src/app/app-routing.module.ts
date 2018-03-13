@@ -21,6 +21,7 @@ import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
+import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 
@@ -73,6 +74,7 @@ export class AppRoutingModule {
     ShoppingCartDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
-    UserQuickUpdateDialogComponent
+    UserQuickUpdateDialogComponent,
+    VoucherCreationEditDialogComponent
   ];
 }
