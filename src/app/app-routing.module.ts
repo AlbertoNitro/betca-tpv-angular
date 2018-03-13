@@ -13,6 +13,7 @@ import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
+import { CashMovementDialogComponent } from './home/cash-movement/cash-movement-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
@@ -73,6 +74,7 @@ export class AppRoutingModule {
   static COMPONENT_FACTORY = [
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
+    CashMovementDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
