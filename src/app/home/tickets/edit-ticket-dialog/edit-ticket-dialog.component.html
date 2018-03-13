@@ -1,38 +1,60 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
+<mat-dialog-content>
+  <!-- DATATABLE SHOPPINGS -->
+  <div class="mat-elevation-z8">
+    <mat-table #table [dataSource]="dataSourceEdit" matSort>
+      <ng-container matColumnDef="numLineShopping">
+        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+        <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+      </ng-container>
 
-<!-- DATATABLE SHOPPINGS -->
-<div class="mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="numLineShopping">
-      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="code">
+        <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
+        <mat-cell *matCellDef="let shopping"> {{shopping.code}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.amount}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let shopping"> {{shopping.description}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="discount">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Discount </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.discount}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="retailPrice">
+        <mat-header-cell *matHeaderCellDef> RetailPrice </mat-header-cell>
+        <mat-cell *matCellDef="let shopping"> {{shopping.retailPrice}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="total">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.total}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let shopping"> {{shopping.amount}} </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="committed">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Committed </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.committed}} </mat-cell>
-    </ng-container>
+      <ng-container matColumnDef="discount">
+        <mat-header-cell *matHeaderCellDef> Discount </mat-header-cell>
+        <mat-cell *matCellDef="let shopping"> {{shopping.discount}} </mat-cell>
+      </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let ticket; columns: displayedColumns;">
-    </mat-row>
-  </mat-table>
-  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
-  </mat-paginator>
-</div>
-<!-- DATATABLE SHOPPINGS -->
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+        <mat-cell *matCellDef="let shopping">
+            <input matInput min="0" [max]="shopping.total" type="number" [value]="shopping.total" [disabled]="shopping.total===0"/>
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="committed">
+        <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
+        <mat-cell *matCellDef="let shopping">
+          <mat-checkbox [(ngModel)]="shopping.committed"></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let ticket; columns: displayedColumns;">
+      </mat-row>
+    </mat-table>
+  </div>
+  <!-- DATATABLE SHOPPINGS -->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary">Save changes</button>
+</mat-dialog-actions>
