@@ -14,11 +14,14 @@ import {Article} from '../shared/article.model';
 export class ArticlesFamilyComponent implements OnInit {
   static URL = 'articlesfamily';
 
+  imagePathArticle = '../../../assets/img/articles/art-azul (1).png';
+  imagePathFamily ='../../../assets/img/articles/art-azul (2).png';
+
   listArt: Article[] = [
-    {code: '1', reference: 'a', description: 'a', retailPrice: 1, stock: 1},
-    {code: '2', reference: 'b', description: 'b', retailPrice: 2, stock: 2},
-    {code: '3', reference: 'c', description: 'c', retailPrice: 3, stock: 3},
-    {code: '4', reference: 'd', description: 'd', retailPrice: 1, stock: 1}
+    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
+    {code: '211', reference: 'Article12', description: 'Article12 The titles of Washed', retailPrice: 26, stock: 28},
+    {code: '311', reference: 'Article13', description: 'Article13 The titles of Washed', retailPrice: 37, stock: 39},
+    {code: '411', reference: 'Article14', description: 'Article14 The titles of Washed', retailPrice: 51, stock: 16}
   ];
 
 

@@ -28,7 +28,7 @@ import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
-import { ProviderService } from './home/shared/provider.service';
+import { ProviderService } from './home/providers/provider.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
@@ -39,7 +39,7 @@ import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
 import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
-import {StatComponent} from './shared/modules/stat/stat.component';
+import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog/edit-ticket-dialog.component';
 
 
 
@@ -96,8 +96,7 @@ import {StatComponent} from './shared/modules/stat/stat.component';
     AppRoutingModule.COMPONENTS,
     AppRoutingModule.COMPONENT_FACTORY,
     ArticlesComponent,
-    ArticlesFamilyComponent,
-    StatComponent,
+    ArticlesFamilyComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
