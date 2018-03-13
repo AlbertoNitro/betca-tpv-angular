@@ -61,8 +61,8 @@
             <button type="submit" mat-mini-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
                 <mat-icon>search</mat-icon>
             </button>
-            <button type="submit" mat-mini-fab color="primary" [disabled]="code.value === ''">
-                <mat-icon>search</mat-icon>
+            <button *ngIf="aux == 1" type="submit" mat-mini-fab color="primary" (click)="openDialog()">
+                <i class="material-icons">add</i>
             </button>
         </form>
         <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="shoppingCartService.total===0">Check out</button>

@@ -24,15 +24,22 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
 import { AdminsService } from './home/admin/admins.service';
+import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
+import { ProviderService } from './home/shared/provider.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
+import { VoucherService } from './home/shared/voucher.service';
 
 import { AppComponent } from './app.component';
+import { ArticlesComponent } from './home/articles/articles.component';
+import { ChartsModule } from 'ng2-charts';
+import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
+
 
 
 @NgModule({
@@ -79,22 +86,29 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
 
     AppRoutingModule,
-    CoreModule
+    CoreModule,
+    ChartsModule
+
   ],
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY
+    AppRoutingModule.COMPONENT_FACTORY,
+    ArticlesComponent,
+    ArticlesFamilyComponent,
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
   providers: [
     AdminsService,
     ArticleService,
+    BudgetService,
     CashierService,
+    ProviderService,
     ShoppingCartService,
     TicketService,
-    UserService
+    UserService,
+    VoucherService
   ]
 })
 export class AppModule { }

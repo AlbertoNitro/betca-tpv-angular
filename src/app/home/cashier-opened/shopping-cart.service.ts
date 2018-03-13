@@ -5,26 +5,35 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
+import { BudgetService } from '../shared/budget.service';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
+import { BudgetCreation } from '../shared/budget-creation.model';
+import { Article } from '../shared/article.model';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class ShoppingCartService {
+
     static SHOPPING_CART_NUM = 4;
 
     private _total = 0;
 
     private shoppingCart: Array<Shopping> = new Array();
-
+    private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
     private indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
-    constructor(private articleService: ArticleService, private ticketService: TicketService) {
+    private budgetCreation: BudgetCreation;
+
+    constructor(private articleService: ArticleService, private ticketService: TicketService,
+         private budgetService: BudgetService, public snackBar: MatSnackBar) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
+        this.budgetCreation = { shoppingCart: null };
     }
 
     shoppingCartObservable(): Observable<Shopping[]> {
@@ -46,6 +55,10 @@ export class ShoppingCartService {
     private synchronizeAll() {
         this.shoppingCartSubject.next(this.shoppingCart);
         this.synchronizeTotal();
+    }
+
+    getArticleSearchObservable(): Observable<String> {
+        return this.articleSearchObservable.asObservable();
     }
 
     delete(shopping: Shopping): void {
@@ -71,8 +84,37 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-            }
+                this.articleSearchObservable.next('0');
+
+            },
+            error => {
+                this.articleSearchObservable.next('1');
+            },
         );
+    }
+
+    fastArticleGenerate(article: Article) {
+        this.articleService.articleGenerateObservable(article).subscribe(
+            data => {
+                this.successful();
+            },
+            error => {
+                this.unsuccessful();
+            }
+
+        );
+    }
+
+    private successful() {
+        this.snackBar.open('Successful', '', {
+            duration: 2000
+        });
+    }
+
+    private unsuccessful() {
+        this.snackBar.open('Unsuccessful', '', {
+            duration: 2000
+        });
     }
 
     exchange(): void {
@@ -92,6 +134,11 @@ export class ShoppingCartService {
                 window.open(url);
             }
         );
+    }
+
+    createBudget(): void {
+        this.budgetCreation.shoppingCart = this.shoppingCart;
+        this.budgetService.create(this.budgetCreation);
     }
 
 }

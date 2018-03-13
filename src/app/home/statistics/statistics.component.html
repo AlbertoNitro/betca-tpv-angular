@@ -9,20 +9,24 @@
         <mat-card class="example-card">
             <mat-card-content>
                 <mat-form-field fxFlex="35%">
-                    <input matInput [matDatepicker]="dpInicio" placeholder="Periodo de Inicio" #dpInicioAD disabled>
+                    <input matInput [matDatepicker]="dpInicio" placeholder="Periodo de Inicio" #dpInicioA disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpInicio"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicio disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpInicio startView="multi-year" disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field fxFlex="40%" class="dpFin">
-                    <input matInput [matDatepicker]="dpFin" placeholder="Fin de Periodo" #dpFinAD disabled>
+                    <input matInput [matDatepicker]="dpFin" placeholder="Fin de Periodo" #dpFinA disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFin disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpFin startView="multi-year" disabled="false"></mat-datepicker>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" [disabled]="dpInicioAD.value === '' || dpFinAD.value === ''">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', dpInicioA.value, dpFinA.value, titleh='Años', titlev='Ventas', estado='areaA');" [disabled]="dpInicioA.value === '' || dpFinA.value === ''">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
-            <img mat-card-image src="https://i.imgur.com/qdU2YZD.png" alt="Grafica">
+            <div class="clearfix"></div>
+            <div class="col-md-6">
+                <div id="chart_areA" class="chart"></div>
+            </div>
+
         </mat-card>
     </div>
     <div class="item item-2" fxFlex="35%">
@@ -34,20 +38,22 @@
         <mat-card class="example-card">
             <mat-card-content>
                 <mat-form-field fxFlex="35%">
-                    <input matInput [matDatepicker]="dpInicioM" placeholder="Periodo de Inicio" #dpInicioMD disabled>
+                    <input matInput [matDatepicker]="dpInicioM" placeholder="Periodo de Inicio" #dpInicioMounth disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpInicioM"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicioM disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpInicioM startView="year" disabled="false"></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field class="dpFin" fxFlex="40%">
-                    <input matInput [matDatepicker]="dpFinM" placeholder="Fin de Periodo" #dpFinMD disabled>
+                    <input matInput [matDatepicker]="dpFinM" placeholder="Fin de Periodo" #dpFinMounth disabled>
                     <mat-datepicker-toggle matSuffix [for]="dpFinM"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFinM disabled="false"></mat-datepicker>
+                    <mat-datepicker #dpFinM startView="year" disabled="false"></mat-datepicker>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" [disabled]="dpInicioMD.value === ''|| dpFinMD.value === ''">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', dpInicioMounth.value, dpFinMounth.value, titleh='Meses', titlev='Ventas', estado='columna');" [disabled]="dpInicioMounth.value === ''|| dpFinMounth.value === ''">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
-            <img mat-card-image src="https://i.imgur.com/qdU2YZD.png" alt="Grafica">
+            <div class="col-md-6">
+                <div id="chart_col" class="chart"></div>
+            </div>
         </mat-card>
     </div>
     <div class="item item-3" fxFlex="35%">
@@ -61,11 +67,14 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Product by code" type="text" #code>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
+                <button type="submit" mat-fab color="primary" (click)="create(code.value,'','', titleh='Meses', titlev='Total', estado='areaM');" [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
-            <img mat-card-image src="https://i.imgur.com/qdU2YZD.png" alt="Grafica">
+            <div class="col-md-6">
+                <div id="chart_areM" class="chart"></div>
+            </div>
+
         </mat-card>
     </div>
 </div>

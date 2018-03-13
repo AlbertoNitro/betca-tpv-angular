@@ -4,17 +4,17 @@ import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 
 @Component({
-    templateUrl: 'user-creation-dialog.component.html',
+    templateUrl: 'user-creation-edit-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
-export class UserCreationDialogComponent implements OnInit {
+export class UserCreationEditDialogComponent implements OnInit {
     edit: boolean;
     user: User;
 
-    constructor(public dialogRef: MatDialogRef<UserCreationDialogComponent>,
+    constructor(public dialogRef: MatDialogRef<UserCreationEditDialogComponent>,
         private userService: UserService) {
     }
 

@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-import { UserCreationDialogComponent } from './user-creation-dialog.component';
+import { UserCreationEditDialogComponent } from './user-creation-edit-dialog.component';
 
 @Component({
     templateUrl: `users.component.html`
@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit {
     edit(user: User) {
         this.userService.readObservable(user.mobile).subscribe(
             data => {
-                const dialogRef = this.dialog.open(UserCreationDialogComponent);
+                const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
                 dialogRef.componentInstance.user = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
@@ -45,7 +45,7 @@ export class UsersComponent implements OnInit {
     }
 
     create() {
-        const dialogRef = this.dialog.open(UserCreationDialogComponent);
+        const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
         dialogRef.componentInstance.edit = false;
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
