@@ -9,7 +9,6 @@ export class Shopping {
         this.committed = true;
         this.total = this.retailPrice * this.amount * (1 - this.discount / 100);
     }
-
     updateTotal(): void {
         this.total = this.round(this.retailPrice * this.amount * (1 - this.discount / 100));
     }
