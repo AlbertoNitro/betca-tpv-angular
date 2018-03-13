@@ -8,6 +8,7 @@ import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
 import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
 import { ShoppingCartDialogComponent } from './shoping-cart-dialog.component';
+import { Article } from '../shared/article.model';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
     private aux;
+    private fastArticle: Article;
     private code;
     private subscription: Subscription;
 
@@ -29,7 +31,7 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
-        this.shoppingCartService.getAux().subscribe( aux => {
+        this.shoppingCartService.getArticleSearchObservable().subscribe( aux => {
             this.aux = aux;
         });
 
@@ -37,15 +39,15 @@ export class ShoppingCartComponent implements OnDestroy {
 
     openDialog() {
         console.log(this.code);
-        //this.dialog.open(ShoppingCartDialogComponent).componentInstance.code = this.code;
         const dialogRef = this.dialog.open(ShoppingCartDialogComponent, {
-            width: '40%',
-            height: '40%',
-            data: this.code
+            width: '600px',
+            height: '600px',
+            data: {code: this.code, article: this.fastArticle}
         }
         );
         dialogRef.afterClosed().subscribe(result => {
-            console.log('The dialog was closed');
+            console.log(result);
+
           });
 
     }

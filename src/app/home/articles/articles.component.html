@@ -2,13 +2,13 @@
     <mat-card-title>
         <mat-icon color="primary">shopping_cart</mat-icon> Articles list
     </mat-card-title>
+    <button mat-raised-button color="primary" (click)="mostrarArticulos()">Mostrar articulos</button>
+    <button mat-raised-button color="accent" (click)="mostrarArticulosIncompletos()">Mostrar articulos incompletos</button>
+    <button mat-raised-button color="warn" (click)="filtroAvanzado()">Filtro avanzado</button>
+
     <mat-card-content>
         <mat-table #table [dataSource]="dataSource">
 
-            <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-        
-            <!-- Position Column -->
             <ng-container matColumnDef="code">
               <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>

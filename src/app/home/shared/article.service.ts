@@ -6,6 +6,7 @@ import {HttpService} from '../../core/http.service';
 
 @Injectable()
 export class ArticleService {
+
   static END_POINT = '/articles';
 
   constructor(private httpService: HttpService) {
@@ -17,6 +18,11 @@ export class ArticleService {
 
   readAll(): Observable<Article[]> {
     return this.httpService.authToken().get(ArticleService.END_POINT);
+  }
+
+  articleGenerateObservable(article: Article): Observable<Article> {
+    return this.httpService.authToken().post(ArticleService.END_POINT, article);
+
   }
 
 
