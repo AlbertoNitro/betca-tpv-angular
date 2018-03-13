@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Provider } from '../shared/provider.model';
-import { ProviderService } from '../shared/provider.service';
+import { Provider } from './provider.model';
+import { ProviderService } from './provider.service';
 import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
 
 @Component({
