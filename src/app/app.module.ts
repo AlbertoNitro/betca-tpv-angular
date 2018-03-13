@@ -33,12 +33,13 @@ import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
-import { VoucherService } from './home/shared/voucher.service';
+import { VoucherService } from './home/vouchers/voucher.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
 import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
+import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog/edit-ticket-dialog.component';
 
 
 
@@ -95,7 +96,7 @@ import {ArticlesFamilyComponent} from './home/articles-family/articles-family.co
     AppRoutingModule.COMPONENTS,
     AppRoutingModule.COMPONENT_FACTORY,
     ArticlesComponent,
-    ArticlesFamilyComponent,
+    ArticlesFamilyComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],

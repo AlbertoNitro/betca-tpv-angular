@@ -8,6 +8,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
+import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog/edit-ticket-dialog.component';
 import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
@@ -17,6 +18,7 @@ import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
+import { UserQuickCreateInvoiceDialogComponent } from './home/cashier-opened/user-quick-creation-invoice-dialog.component';
 import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick-update-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
@@ -24,6 +26,8 @@ import { VouchersComponent } from './home/vouchers/vouchers.component';
 import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
+import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
+
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -68,12 +72,15 @@ export class AppRoutingModule {
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     DbSeedDialogComponent,
+    EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
     ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
+    UserQuickCreateInvoiceDialogComponent,
     UserQuickUpdateDialogComponent,
-    VoucherCreationEditDialogComponent
+    VoucherCreationEditDialogComponent,
+    VoucherConsumeDialogComponent
   ];
 }
