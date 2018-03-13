@@ -50,7 +50,6 @@ const appRoutes: Routes = [
 })
 export class AppRoutingModule {
   static COMPONENTS = [
-    // Poner las cosas por orden alfabetico
     AdvancedSearchComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
