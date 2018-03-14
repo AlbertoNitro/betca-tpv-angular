@@ -10,7 +10,7 @@ export class ArticleService {
 
   static END_POINT = '/articles';
   static FILTRO = '/filter';
-
+  static INCOMPLETES = '/incompletos';
   constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
   }
 
@@ -18,8 +18,12 @@ export class ArticleService {
     return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
   }
 
-  readAll(): Observable<Article[]> {
+  readAll() {
     return this.httpService.authToken().get(ArticleService.END_POINT);
+  }
+
+  readAllIncomplete() {
+    return this.httpService.authToken().get(ArticleService.END_POINT + ArticleService.INCOMPLETES);
   }
 
   articleGenerateObservable(article: Article): Observable<Article> {

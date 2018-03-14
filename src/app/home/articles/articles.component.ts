@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Article } from '../shared/article.model';
 import { MatTableDataSource } from '@angular/material';
+import { ArticleService } from '../shared/article.service';
 
 @Component({
   selector: 'app-articles',
@@ -15,11 +16,8 @@ export class ArticlesComponent implements OnInit {
   private articleList: Article[] = [];
   dataSource: MatTableDataSource<Article>;
   displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock'];
-  constructor() {
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
+
+  constructor(  private articleService: ArticleService  ) {
     this.dataSource = new MatTableDataSource<Article>(this.articleList);
   }
 
@@ -27,21 +25,27 @@ export class ArticlesComponent implements OnInit {
   }
 
   mostrarArticulos() {
-    // TODO Consulta a base de dato sacando todos los articulos
     this.articleList = [];
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.dataSource = new MatTableDataSource<Article>(this.articleList);
+    this.articleService.readAll().subscribe(
+        data => {
+          console.log(data);
+          this.articleList = data;
+          this.dataSource = new MatTableDataSource<Article>(this.articleList);
+
+        },
+    );
   }
 
   mostrarArticulosIncompletos() {
-    // TODO consulta a elementos que le falte algún campo
     this.articleList = [];
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: '', reference: '288', retailPrice: 200, stock: 2 });
-    this.dataSource = new MatTableDataSource<Article>(this.articleList);
+    this.articleService.readAllIncomplete().subscribe(
+        data => {
+          console.log(data);
+          this.articleList = data;
+          this.dataSource = new MatTableDataSource<Article>(this.articleList);
+
+        },
+    );
 
   }
 
