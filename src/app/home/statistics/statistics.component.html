@@ -17,10 +17,10 @@
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
                     <mat-select placeholder="Fin de Periodo" #yearF>
-                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                    <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', yearI.value, yearF.value, titleh='Años', titlev='Ventas', estado='areaA');">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficArea(2018, yearF.value);">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
@@ -42,7 +42,8 @@
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
                     <mat-select placeholder="Periodo de Inicio" #mounthI>
-                        <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
+                      <!--  <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>-->
+                        <mat-option *ngFor="let key of meses" [value]="meses">{{meses}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
