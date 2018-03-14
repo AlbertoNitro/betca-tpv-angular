@@ -2,30 +2,26 @@
   <div mat-card-avatar>
     <mat-icon>view_quilt</mat-icon>
   </div>
-  <mat-card-title>Articles Family</mat-card-title>
+  <strong>Articles Family</strong>
 </mat-card-header>
 <mat-card-content>
-  <mat-grid-list cols="4" rowHeight="1:1.5">
-    <mat-grid-tile *ngFor="let article of listArt">
-      <mat-card class="mat-card-box  well ">
-        <mat-card-actions>
-          <button mat-mini-fab color="accent">
+  <div class="container" fxLayout="row wrap">
+    <mat-card *ngFor="let article of listArt">
+      <mat-card-actions>
+        <button mat-mini-fab color="accent">
               <span [matTooltipPosition]="positionleft" matTooltip="Add Car"> <strong>
               <mat-icon aria-label="addcar">add_shopping_cart</mat-icon>
               </strong></span>
-          </button>
-        </mat-card-actions>
-        <img class="img-article" src="{{imagePathArticle}}" height="170" width="160" alt="Washed Out"/>
-        <mat-card-title class="mat-card-title">
-          <span class="mat-card-header"><strong>{{article.reference}}</strong></span> ${{article.retailPrice}}
-        </mat-card-title>
-        <mat-card-content>
-          <mat-divider [inset]="true" *ngIf="!last"></mat-divider>
-          <span [matTooltipPosition]="positionabove"
-                matTooltip="{{article.description}}"> <strong>  Detail?</strong></span>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+        </button>
+      </mat-card-actions>
+      <img class="img-article" src="{{imagePathArticle}}" height="100" width="100" alt="Washed Out"/>
+      <br>
+      <strong>{{article.reference}}</strong> &nbsp;&nbsp;<strong> ${{article.retailPrice}}</strong>
+      <mat-card-content>
+            <span [matTooltipPosition]="positionabove"
+                  matTooltip="{{article.description}}"> <strong>  Detail?</strong></span>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </mat-card-content>
 
