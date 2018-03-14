@@ -6,7 +6,8 @@ import { CashierService } from '../shared/cashier.service';
 declare let google: any;
 let chart: any;
 let salesList = [];
-
+let pruebadate = new Date();
+let pruebadate2 = new Date("2019-12-31T00:00:00Z");
 @Component({
     templateUrl: `statistics.component.html`,
     styleUrls: [`statistics.component.css`],
@@ -47,6 +48,9 @@ export class StatisticsComponent implements OnInit {
             this.dateEnd = new Date(dateF + "-12-31T00:00:00Z");
             this.readDates();
             google.charts.setOnLoadCallback(draw);
+
+       //     console.log(salesList);
+
         }
 
         if (estado === 'columna') {
@@ -69,7 +73,7 @@ export class StatisticsComponent implements OnInit {
         function draw() {
             let dataAPI = google.visualization.arrayToDataTable([
                 ['closureDate', 'salesCard', 'salesCash'],
-                // articleList
+                //salesList
             ]);
             let options = {
                 hAxis: { title: titleh, titleTextStyle: { color: '#333' } },
@@ -88,10 +92,50 @@ export class StatisticsComponent implements OnInit {
         this.cashierService.readAll(this.dateStart).subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<CashierClosure>(data);
+
+
+                let totalsalesCash = 0;
+                let totalsalesCard = 0;
+                let aux = 1;
+                let dateAux;
+             //  let dateIni;
+
+                for (var i = 0; i < this.dataSource.data.length; i++) {
+
+                    
+
+                /*    for (var j = 1; i < this.dataSource.data.length - 1; j++) {
+                        dateAux = new Date(this.dataSource.data[j]["closureDate"]);
+
+                  //      console.log(dateAux);
+                       // if (dateIni.getFullYear() == dateAux.getFullYear()) {
+                            totalsalesCard += Number(this.dataSource.data[i]["salesCard"]);
+                            totalsalesCash += Number(this.dataSource.data[i]["salesCash"]);
+                        //}
+
+                    }*/
+
+                    //salesList = ['' + this.dataSource.data[i]["closureDate"] + '', totalsalesCash, totalsalesCard];
+
+
+                    //  salesList.push(['' + this.dataSource.data[i]["salesCard"] + '', this.dataSource.data[i]["salesCash"], this.dataSource.data[i]["salesCard"]]);
+
+                    // }
+
+                    // totalsalesCard += this.dataSource.data[i]["salesCard"];
+                    //totalsalesCash += this.dataSource.data[i]["salesCash"];
+                    //salesList = ['' + this.dataSource.data[i]["closureDate"] + '', totalsalesCash, totalsalesCard];
+
+
+                }
+                console.log(this.dataSource.data[i]["closureDate"]);
+               // salesList.push(['2018', totalsalesCash, totalsalesCard]);
+
             }
+
         );
 
-           let totalsalesCash = 0;
+        /*  let totalsalesCash = 0;
            let totalsalesCard = 0;
            let fecha;
            let aux = 1;
@@ -106,18 +150,20 @@ export class StatisticsComponent implements OnInit {
                 salesList = [];
                    totalsalesCash += this.testCashierClosure[i].salesCash;
                    totalsalesCard += this.testCashierClosure[i].salesCard;
-                   salesList = [totalsalesCash, totalsalesCard, this.testCashierClosure[i].closureDate];
+                   salesList = [totalsalesCash, totalsalesCard, 'dddddd'];
    
                }
-           }
+           }*/
     }
 
 
-      testCashierClosure: CashierClosure[] = [
-        {salesCard: 1, salesCash: 1, closureDate: this.dateEnd},
-        {salesCard: 2, salesCash: 2, closureDate: this.dateEnd},
-        {salesCard: 3, salesCash: 3, closureDate: this.dateEnd}
-      ];
 
-} 
- 
+    /* testCashierClosure: CashierClosure[] = [
+         { salesCard: 1, salesCash: 1, closureDate: pruebadate },
+         { salesCard: 2, salesCash: 2, closureDate: pruebadate },
+         { salesCard: 3, salesCash: 3, closureDate: pruebadate },
+         { salesCard: 5, salesCash: 5, closureDate: pruebadate2 }
+     ];*/
+
+}
+
