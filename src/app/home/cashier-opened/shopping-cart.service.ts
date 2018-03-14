@@ -101,10 +101,7 @@ export class ShoppingCartService {
         ticketCreation.shoppingCart = this.shoppingCart;
         this.ticketService.create(ticketCreation).subscribe(
             blob => {
-                this.shoppingCart = new Array();
-                this.synchronizeAll();
-                const url = window.URL.createObjectURL(blob);
-                window.open(url);
+                this.openPdf(blob);
             }
         );
     }
@@ -114,12 +111,16 @@ export class ShoppingCartService {
         budgetCreation = { shoppingCart: this.shoppingCart };
         this.budgetService.create(budgetCreation).subscribe(
             blob => {
-                this.shoppingCart = new Array();
-                this.synchronizeAll();
-                const url = window.URL.createObjectURL(blob);
-                window.open(url);
+                this.openPdf(blob);
             }
         );
+    }
+
+    openPdf(blob: any) {
+        this.shoppingCart = new Array();
+        this.synchronizeAll();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
     }
 
 }

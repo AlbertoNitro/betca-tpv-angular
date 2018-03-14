@@ -24,20 +24,23 @@ export class VouchersComponent implements OnInit {
     }
 
     synchronize() {
-       /* this.voucherService.readAll().subscribe(
+        this.voucherService.readAll().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<Voucher>(data);
                 this.dataSource.sort = this.sort;
-            }
-        );*/
-        this.dataSource = new MatTableDataSource<Voucher>(this.testVoucher);
-        this.totalValueVouchers = 0;
+            
+                this.totalValueVouchers = 0;
 
-        for( var i=0; i<this.testVoucher.length; i++ ) {
-            if ( this.testVoucher[i].used == false ){
-                this.totalValueVouchers += this.testVoucher[i].value;
+                for( var i=0; i< data.length; i++ ) {
+                    if ( data[i].used == false ){
+                        this.totalValueVouchers += data[i].value;
+                    }
+                }
+
             }
-        }
+        );
+
+        
     }
 
     create() {
@@ -48,8 +51,13 @@ export class VouchersComponent implements OnInit {
     }
 
     consume( voucher: Voucher ){
-        voucher.used = true;
-        this.synchronize();
+
+        this.voucherService.patchObservable(voucher.reference).subscribe(
+            data => {
+                this.synchronize();
+            }
+        );
+
     }
 
     testVoucher: Voucher[] = [

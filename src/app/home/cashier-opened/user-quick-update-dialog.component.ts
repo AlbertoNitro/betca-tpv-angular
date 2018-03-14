@@ -25,7 +25,7 @@ export class UserQuickUpdateDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.user = { mobile: this.mobile, username: '', dni: '' };
+        this.user = { mobile: this.mobile, username: this.user.username, dni: '' };
     }
 
 }
