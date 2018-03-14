@@ -26,6 +26,10 @@
     <mat-icon>work</mat-icon>
     <span>Close Cashier</span>
   </button>
+  <button mat-menu-item (click)="cashMovement()">
+    <mat-icon>euro_symbol</mat-icon>
+    <span>Cash Movements</span>
+  </button>
   <button mat-menu-item (click)="customers()">
     <mat-icon>account_circle</mat-icon>
     <span>Customers</span>
@@ -57,6 +61,10 @@
   <button mat-menu-item (click)="statistics2()">
     <mat-icon>assessment</mat-icon>
     <span>Statistics2</span>
+  </button>
+  <button mat-menu-item (click)="schedule()">
+    <mat-icon>schedule</mat-icon>
+    <span>Agenda</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">

@@ -15,10 +15,13 @@ export class ArticleService {
   }
 
   readObservable(code: String): Observable<Article> {
+    console.log("READALL__-_____");
+
     return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
   }
 
-  readAll(): Observable<Article[]> {
+  readAll() {
+    console.log("READALL");
     return this.httpService.authToken().get(ArticleService.END_POINT);
   }
 

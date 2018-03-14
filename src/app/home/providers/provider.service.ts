@@ -12,7 +12,7 @@ export class ProviderService {
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
 
-    readObservable(id: number): Observable<Provider> {
+    readObservable(id: string): Observable<Provider> {
         return this.httpService.authToken().get(ProviderService.END_POINT + '/' + id);
     }
 

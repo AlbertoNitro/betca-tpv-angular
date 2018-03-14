@@ -10,6 +10,7 @@ import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.c
 import { UserQuickCreateInvoiceDialogComponent } from './user-quick-creation-invoice-dialog.component';
 import { UserQuickUpdateDialogComponent } from './user-quick-update-dialog.component';
 import { User } from '../shared/user.model';
+import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -129,5 +130,19 @@ export class ShoppingCartCheckOutDialogComponent {
         const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateDialogComponent);
         dialogUpdateUserRef.componentInstance.mobile = this.ticketCreation.userMobile;
         dialogUpdateUserRef.componentInstance.user = data;
+    }
+
+
+    private consumeVoucher() {
+        const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
+        dialogRef.afterClosed().subscribe(
+            result => {
+                if (result == '1') {
+                    this.ticketCreation.voucher = 11;
+                } else {
+                    this.ticketCreation.voucher = 0;
+                }
+            }
+        )
     }
 }
