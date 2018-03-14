@@ -7,7 +7,7 @@ import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
 import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
-import { ShoppingCartDialogComponent } from './shoping-cart-dialog.component';
+import { ArticleQuickDialogComponent } from './article-quick-generate-dialog.component';
 import { Article } from '../shared/article.model';
 
 
@@ -19,7 +19,7 @@ import { Article } from '../shared/article.model';
 export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
-    private aux;
+    private fastArticleControl;
     private fastArticle: Article;
     private code;
     private subscription: Subscription;
@@ -31,15 +31,15 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
-        this.shoppingCartService.getArticleSearchObservable().subscribe( aux => {
-            this.aux = aux;
+        this.shoppingCartService.getArticleSearchObservable().subscribe( fastArticleControl => {
+            this.fastArticleControl = fastArticleControl;
         });
 
     }
 
     openDialog() {
         console.log(this.code);
-        const dialogRef = this.dialog.open(ShoppingCartDialogComponent, {
+        const dialogRef = this.dialog.open(ArticleQuickDialogComponent, {
             width: '600px',
             height: '600px',
             data: {code: this.code, article: this.fastArticle}

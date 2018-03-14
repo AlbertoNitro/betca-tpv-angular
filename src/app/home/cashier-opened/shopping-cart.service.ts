@@ -26,14 +26,11 @@ export class ShoppingCartService {
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
-    private budgetCreation: BudgetCreation;
-
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-         private budgetService: BudgetService, public snackBar: MatSnackBar) {
+        private budgetService: BudgetService, public snackBar: MatSnackBar) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
-        this.budgetCreation = { shoppingCart: null };
     }
 
     shoppingCartObservable(): Observable<Shopping[]> {
@@ -93,30 +90,6 @@ export class ShoppingCartService {
         );
     }
 
-    fastArticleGenerate(article: Article) {
-        this.articleService.articleGenerateObservable(article).subscribe(
-            data => {
-                this.successful();
-            },
-            error => {
-                this.unsuccessful();
-            }
-
-        );
-    }
-
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
-    }
-
-    private unsuccessful() {
-        this.snackBar.open('Unsuccessful', '', {
-            duration: 2000
-        });
-    }
-
     exchange(): void {
         this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
         this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
@@ -128,17 +101,26 @@ export class ShoppingCartService {
         ticketCreation.shoppingCart = this.shoppingCart;
         this.ticketService.create(ticketCreation).subscribe(
             blob => {
-                this.shoppingCart = new Array();
-                this.synchronizeAll();
-                const url = window.URL.createObjectURL(blob);
-                window.open(url);
+                this.openPdf(blob);
             }
         );
     }
 
     createBudget(): void {
-        this.budgetCreation.shoppingCart = this.shoppingCart;
-        this.budgetService.create(this.budgetCreation);
+        let budgetCreation: BudgetCreation;
+        budgetCreation = { shoppingCart: this.shoppingCart };
+        this.budgetService.create(budgetCreation).subscribe(
+            blob => {
+                this.openPdf(blob);
+            }
+        );
+    }
+
+    openPdf(blob: any) {
+        this.shoppingCart = new Array();
+        this.synchronizeAll();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
     }
 
 }

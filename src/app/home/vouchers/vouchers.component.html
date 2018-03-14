@@ -20,8 +20,11 @@
                     </button>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let item">
-                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="consume(item)" *ngIf="item.used">
-                        <mat-icon color="warn">check_box</mat-icon>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="consume(item)" *ngIf="!item.used">
+                        <mat-icon color="warn">radio_button_unchecked</mat-icon>
+                    </button>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="item.used">
+                        <mat-icon color="warn">radio_button_checked</mat-icon>
                     </button>
                 </mat-cell>
             </ng-container>
