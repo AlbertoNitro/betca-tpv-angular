@@ -2,9 +2,9 @@
     <mat-card-title>
         <mat-icon color="primary">shopping_cart</mat-icon> Articles list
     </mat-card-title>
-    <button mat-raised-button color="primary" (click)="mostrarArticulos()">Mostrar articulos</button>
-    <button mat-raised-button color="accent" (click)="mostrarArticulosIncompletos()">Mostrar articulos incompletos</button>
-    <button mat-raised-button color="warn" (click)="filtroAvanzado()">Filtro avanzado</button>
+    <button mat-raised-button color="primary" (click)="mostrarArticulos()"><mat-icon>search</mat-icon>Articulos</button>
+    <button mat-raised-button color="primary" (click)="mostrarArticulosIncompletos()"><mat-icon>search</mat-icon>Articulos incompletos</button>
+    <button mat-raised-button color="primary" (click)="filtroAvanzado()"><mat-icon>search</mat-icon>Filtro avanzado</button>
 
     <mat-card-content>
         <mat-table #table [dataSource]="dataSource">
