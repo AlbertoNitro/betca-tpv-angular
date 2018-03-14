@@ -43,6 +43,7 @@ export enum MONTHS {
 
 export enum GRAFIC {
     AREA_YEAR = 'areaYear',
-    COLUNM_MONTHS = 'columMonth'
+    COLUNM_MONTHS = 'columMonth',
+    AREA_MONTHS = 'areaCode'
 }
 

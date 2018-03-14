@@ -72,13 +72,13 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Product by code" type="text" #code>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" (click)="create(code.value,'','', titleh='Meses', titlev='Total', estado='areaM');"
+                <button type="submit" mat-fab color="primary" (click)="graficCode(code.value);"
                     [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
-                <div id="areaM" class="chart"></div>
+                <div id="areaCode" class="chart"></div>
             </div>
 
         </mat-card>

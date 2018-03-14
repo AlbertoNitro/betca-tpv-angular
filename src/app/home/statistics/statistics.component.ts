@@ -1,7 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { GraficYearAreaComponent} from'./grafic-year-area.component';
-import { GraficMonthsColumnComponent} from'./grafic-months-colum.component';
-import { CashierClosure } from '../shared/cashier-closure.model';
+import { GraficYearAreaComponent } from './grafic-year-area.component';
+import { GraficMonthsColumnComponent } from './grafic-months-colum.component';
+import { GraficMonthsAreaComponent } from './grafic-months-area.component';
+import { TicketService } from '../shared/ticket.service';
 import { CashierService } from '../shared/cashier.service';
 declare let google: any;
 
@@ -11,23 +12,28 @@ declare let google: any;
 })
 export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
-    
-    constructor(private cashierService: CashierService) {
+
+    constructor(private cashierService: CashierService, private ticketService: TicketService) {
         google.charts.load('current', { 'packages': ['corechart'] });
     }
-    graficAreaComponent = new GraficYearAreaComponent(this.cashierService);
-    graficColumna = new GraficMonthsColumnComponent(this.cashierService);
+    graficYearArea = new GraficYearAreaComponent(this.cashierService);
+    graficMonthColum = new GraficMonthsColumnComponent(this.cashierService);
+    graficMonthArea = new GraficMonthsAreaComponent(this.ticketService);
 
     ngOnInit(): void {
-        this.graficAreaComponent.init();
-        this.graficColumna.init();
+        this.graficYearArea.init();
+        this.graficMonthColum.init();
+        this.graficMonthArea.init();
     }
 
     graficArea(dateI: number, dateF: number) {
-        this.graficAreaComponent.create(dateI, dateF);
+        this.graficYearArea.create(dateI, dateF);
     }
-    
-    graficColum(dateI: number, dateF: number){
-        this.graficColumna.create(dateI, dateF);
+
+    graficColum(dateI: number, dateF: number) {
+        this.graficMonthColum.create(dateI, dateF);
+    }
+    graficCode(code: string) {
+        this.graficMonthArea.create(code);
     }
 }
