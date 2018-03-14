@@ -28,17 +28,17 @@ import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
-import { ProviderService } from './home/shared/provider.service';
+import { ProviderService } from './home/providers/provider.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
-import { VoucherService } from './home/shared/voucher.service';
+import { VoucherService } from '../app/home/vouchers/voucher.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
-import {ArticlesFamilyComponent} from './home/articles-family/articles-family.component';
+import {ArticlesFamilyComponent} from './home/cashier-opened/articles-family/articles-family.component';
 
 
 

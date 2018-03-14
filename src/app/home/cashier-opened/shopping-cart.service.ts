@@ -27,7 +27,7 @@ export class ShoppingCartService {
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-         private budgetService: BudgetService, public snackBar: MatSnackBar) {
+        private budgetService: BudgetService, public snackBar: MatSnackBar) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -110,8 +110,8 @@ export class ShoppingCartService {
     }
 
     createBudget(): void {
-        var budgetCreation: BudgetCreation;
-        budgetCreation = { shoppingCart : this.shoppingCart };
+        let budgetCreation: BudgetCreation;
+        budgetCreation = { shoppingCart: this.shoppingCart };
         this.budgetService.create(budgetCreation).subscribe(
             blob => {
                 this.shoppingCart = new Array();
@@ -119,7 +119,7 @@ export class ShoppingCartService {
                 const url = window.URL.createObjectURL(blob);
                 window.open(url);
             }
-        )
+        );
     }
 
 }
