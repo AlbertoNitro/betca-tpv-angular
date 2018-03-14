@@ -10,19 +10,20 @@ export class ArticleService {
 
   static END_POINT = '/articles';
   static FILTRO = '/filter';
-
+  static INCOMPLETES = '/incompletos';
   constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
   }
 
   readObservable(code: String): Observable<Article> {
-    console.log("READALL__-_____");
-
     return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
   }
 
   readAll() {
-    console.log("READALL");
     return this.httpService.authToken().get(ArticleService.END_POINT);
+  }
+
+  readAllIncomplete() {
+    return this.httpService.authToken().get(ArticleService.END_POINT + ArticleService.INCOMPLETES);
   }
 
   articleGenerateObservable(article: Article): Observable<Article> {
