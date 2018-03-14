@@ -27,7 +27,6 @@ export class ShoppingCartCheckOutDialogComponent {
     users: User[] = [
         { mobile: 199554353, username: 'user1', dni: '1104402944', address: 'direcccion1' },
         { mobile: 634969957, username: 'user2', dni: '', address: '' },
-        { mobile: 0, username: '', dni: '', address: '' }
     ];
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
@@ -41,8 +40,8 @@ export class ShoppingCartCheckOutDialogComponent {
         return this.return() < 0 || this.mobileSynchronize();
     }
 
-    invalidInvioce(): boolean {
-        return this.invalidCheckOut();
+    invalidInvoice(): boolean {
+        return !((this.foundMobile) && (this.return() >= 0));
     }
 
     return(): number {
@@ -103,9 +102,6 @@ export class ShoppingCartCheckOutDialogComponent {
 
     checkUser() {
         let user: User;
-        if (this.ticketCreation.userMobile === undefined) {
-            this.ticketCreation.userMobile = 0;
-        }
         for (const item of this.users) {
             if (item.mobile === this.ticketCreation.userMobile) {
                 user = item;
@@ -114,17 +110,10 @@ export class ShoppingCartCheckOutDialogComponent {
         if (user.mobile && user.username && user.dni && user.address) {
             console.log('LLamar al servicio para crear ticket y factura');
         } else {
-            if (user.mobile && user.username) {
-                console.log('LLamar al servicio actualizacion de usuario');
-                this.updateUserInvoice(user);
-            } else {
-                console.log('LLamar al servicio creacion de usuario');
-                this.createUserInvoice();
-            }
+            console.log('LLamar al servicio actualizacion de usuario');
+            this.updateUserInvoice(user);
+
         }
-    }
-    private createUserInvoice() {
-        this.dialog.open(UserQuickCreateInvoiceDialogComponent);
     }
     private updateUserInvoice(data) {
         const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateDialogComponent);
