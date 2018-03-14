@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { CashierLast } from './cashier-last.model';
 import { CashierClosure } from './cashier-closure.model';
+import { CashierClosureInfo } from './cashier-closure-info.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
 
@@ -14,6 +15,7 @@ export class CashierService {
     static LAST = '/last';
 
     private cashierLast: Subject<CashierLast> = new Subject();
+    private cashierClosureInfo: CashierClosureInfo = { totalCard: 120, totalCash: 20 };
 
     constructor(private httpService: HttpService) {
     }
@@ -43,5 +45,10 @@ export class CashierService {
 
     readAll(dateStart:Date): Observable<CashierClosure[]> {
         return this.httpService.authToken().get(CashierService.END_POINT+ '/' + dateStart);
+    }
+
+    getCashierClosureInfo(): CashierClosureInfo {
+        // this will have the call to httpService to retrieve total Card and total Cash
+        return this.cashierClosureInfo;
     }
 }

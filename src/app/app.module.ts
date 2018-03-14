@@ -28,6 +28,7 @@ import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
+import { CashMovementService } from './home/shared/cash-movement.service';
 import { ProviderService } from './home/providers/provider.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
@@ -104,6 +105,7 @@ import {ArticlesFamilyComponent} from './home/cashier-opened/articles-family/art
     ArticleService,
     BudgetService,
     CashierService,
+    CashMovementService,
     ProviderService,
     ShoppingCartService,
     TicketService,
