@@ -46,11 +46,7 @@ export class StatisticsComponent implements OnInit {
             this.dateStart = new Date(dateI + "-01-01T00:00:00Z");
             this.dateEnd = new Date(dateF + "-12-31T00:00:00Z");
             this.readDates();
-            let kk = [['closureDate', 'salesCard', 'salesCash'], ['closureDate', 100, 100]];
-            console.log(kk);
-            console.log("--------------------------------");
-            console.log(salesList);
-            //    google.charts.setOnLoadCallback(draw);
+            google.charts.setOnLoadCallback(draw);
         }
 
         if (estado === 'columna') {
@@ -92,56 +88,36 @@ export class StatisticsComponent implements OnInit {
         this.cashierService.readAll(this.dateStart).subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<CashierClosure>(data);
-
-                let totalsalesCash = 0;
-                let totalsalesCard = 0;
-                let aux = 1;
-                this.dataSource.data[aux].closureDate = new Date();
-                let year = this.dataSource.data[aux].closureDate.getFullYear();
-
-                for (var i = 0; i < this.dataSource.data.length; i++) {
-                    this.dataSource.data[i].closureDate = new Date();
-                    if (year == this.dataSource.data[i].closureDate.getFullYear()) {
-                        salesList.push(['' + year + '',this.dataSource.data[i].salesCard, this.dataSource.data[i].salesCash]);
-                        aux++;
-                    } else {
-                        totalsalesCard += this.dataSource.data[i].salesCard;
-                        totalsalesCash += this.dataSource.data[i].salesCash;
-                        salesList = ['' + year + '', totalsalesCash, totalsalesCard];
-                        
-                    }
-                }
-                
             }
-            
         );
 
-        /*   let totalsalesCash = 0;
+           let totalsalesCash = 0;
            let totalsalesCard = 0;
            let fecha;
            let aux = 1;
    
-   
+           this.testCashierClosure[aux].closureDate = new Date();
            for (var i = 0; i < this.testCashierClosure.length; i++) {
-   
-               if (this.testCashierClosure[i].comment === this.testCashierClosure[aux].comment) {
-                   articleList.push([this.testCashierClosure[i].finalCash, this.testCashierClosure[i].finalCash, this.testCashierClosure[i].comment]);
+            this.testCashierClosure[i].closureDate = new Date();
+               if (this.testCashierClosure[i].closureDate === this.testCashierClosure[aux].closureDate) {
+                salesList.push([this.testCashierClosure[i].salesCard, this.testCashierClosure[i].salesCash, this.testCashierClosure[i].closureDate]);
                    aux++;
                } else {
-                   articleList = [];
-                   totalsalesCash += this.testCashierClosure[i].finalCash;
+                salesList = [];
+                   totalsalesCash += this.testCashierClosure[i].salesCash;
                    totalsalesCard += this.testCashierClosure[i].salesCard;
-                   articleList = [[totalsalesCash], [totalsalesCard], [this.testCashierClosure[i].comment]];
+                   salesList = [totalsalesCash, totalsalesCard, this.testCashierClosure[i].closureDate];
    
                }
-           }**/
+           }
     }
 
 
-    /*  testCashierClosure: CashierClosure[] = [
-          { finalCash: 1, salesCard: 1, comment: 'Company1' },
-          { finalCash: 2, salesCard: 2, comment: 'Company1' },
-          { finalCash: 3, salesCard: 3, comment: 'Company3' }
-      ];*/
+      testCashierClosure: CashierClosure[] = [
+        {salesCard: 1, salesCash: 1, closureDate: this.dateEnd},
+        {salesCard: 2, salesCash: 2, closureDate: this.dateEnd},
+        {salesCard: 3, salesCash: 3, closureDate: this.dateEnd}
+      ];
 
-}
+} 
+ 
