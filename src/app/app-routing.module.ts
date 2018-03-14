@@ -19,7 +19,6 @@ import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
-import { UserQuickCreateInvoiceDialogComponent } from './home/cashier-opened/user-quick-creation-invoice-dialog.component';
 import { UserQuickUpdateDialogComponent } from './home/cashier-opened/user-quick-update-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
@@ -82,7 +81,6 @@ export class AppRoutingModule {
     ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
-    UserQuickCreateInvoiceDialogComponent,
     UserQuickUpdateDialogComponent,
     VoucherCreationEditDialogComponent,
     VoucherConsumeDialogComponent

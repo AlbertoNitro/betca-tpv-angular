@@ -7,7 +7,6 @@ import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
-import { UserQuickCreateInvoiceDialogComponent } from './user-quick-creation-invoice-dialog.component';
 import { UserQuickUpdateDialogComponent } from './user-quick-update-dialog.component';
 import { User } from '../shared/user.model';
 import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
