@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Shopping } from '../../shared/shopping.model';
 import { MatTableDataSource } from '@angular/material';
+import { Shopping } from '../../shared/shopping.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
-  templateUrl: './edit-ticket-dialog.component.html',
-  styleUrls: ['./edit-ticket-dialog.component.css']
+  templateUrl: './edit-ticket-dialog.component.html'
 })
 export class EditTicketDialogComponent implements OnInit {
   displayedColumns = ['numLineShopping', 'code', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   listShopping: Shopping[] = [];
-  dataSourceEdit: MatTableDataSource<Shopping>;
   dataSource: MatTableDataSource<Shopping>;
+  dataSourceEdit: MatTableDataSource<Shopping>;
   constructor() {
     let shopping0 = new Shopping('abc', 'vacio', 145);
     let shopping1 = new Shopping('def', 'vacio', 25);
@@ -24,9 +23,6 @@ export class EditTicketDialogComponent implements OnInit {
     this.dataSource = new MatTableDataSource<Shopping>(this.listShopping);
     this.dataSourceEdit = new MatTableDataSource<Shopping>(this.listShopping);
   }
-
   ngOnInit() {
   }
-
-
 }

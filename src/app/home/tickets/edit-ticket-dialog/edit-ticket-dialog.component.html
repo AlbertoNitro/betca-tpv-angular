@@ -1,5 +1,6 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
 <mat-dialog-content>
+
   <!-- DATATABLE SHOPPINGS -->
   <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSourceEdit" matSort>
@@ -53,7 +54,9 @@
     </mat-table>
   </div>
   <!-- DATATABLE SHOPPINGS -->
+
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary">Save changes</button>
