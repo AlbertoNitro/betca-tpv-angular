@@ -1,30 +1,31 @@
 export class FormatDate {
 
     static yearTimeInit(dateI: number): Date {
-        let dateStart = new Date(dateI + "-01-01T00:00:00Z");
+        const dateStart = new Date(dateI + '-01-01T00:00:00Z');
         return dateStart;
     }
 
     static yearTimeEnd(dateF: number): Date {
-        let dateEnd = new Date(dateF + "-12-31T00:00:00Z");
+        const dateEnd = new Date(dateF + '-12-31T00:00:00Z');
         return dateEnd;
     }
 
     static monthsTimeInit(dateI: number): Date {
-        let date = new Date();
-        let year = date.getFullYear();
-        let dateStart = new Date(year + "-" + dateI + "-01T00:00:00Z");
+        const date = new Date();
+        const year = date.getFullYear();
+        const dateStart = new Date(year + '-' + dateI + '-01T00:00:00Z');
         return dateStart;
     }
 
     static monthsTimeEnd(dateF: number): Date {
-        let date = new Date();
-        let year = date.getFullYear();
-        let dateEnd = new Date(year + "-" + dateF + "-31T00:00:00Z");
+        const date = new Date();
+        const year = date.getFullYear();
+        const dateEnd = new Date(year + '-' + dateF + '-31T00:00:00Z');
 
         return dateEnd;
     }
 
+    // tslint:disable-next-line:member-ordering
     static months = [
         { value: '01', viewValue: 'Ene' },
         { value: '02', viewValue: 'Feb' },
@@ -40,8 +41,8 @@ export class FormatDate {
         { value: '12', viewValue: 'Dic' },
     ];
 
-    static years(): object{
-        let data = []
+    static years(): object {
+        const data = [];
         for (let index = 2018; index < 2025; index++) {
             data.push(index);
         }

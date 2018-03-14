@@ -4,7 +4,7 @@ import { GraficMonthsColumnComponent } from './grafic-months-colum.component';
 import { GraficMonthsAreaComponent } from './grafic-months-area.component';
 import { TicketService } from '../shared/ticket.service';
 import { CashierService } from '../shared/cashier.service';
-import { FormatDate } from './format-date'
+import { FormatDate } from './format-date';
 declare let google: any;
 
 @Component({

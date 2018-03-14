@@ -18,22 +18,22 @@ export class GraficMonthsAreaComponent {
     init() {
         google.charts.setOnLoadCallback(draw);
         function draw() {
-            let data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
+            const data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
             chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.AREA_MONTHS));
             chart.draw(data);
         }
     }
 
-    create(code : string) {
+    create(code: string) {
         this.readData(code);
         google.charts.setOnLoadCallback(draw);
 
         function draw() {
-            let dataAPI = google.visualization.arrayToDataTable([
+            const dataAPI = google.visualization.arrayToDataTable([
                 ['closureDate', 'salesCard'],
                 ['2018', 1]
             ]);
-            let options = {
+            const options = {
                 hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Ventas', minValue: 0 }
             };

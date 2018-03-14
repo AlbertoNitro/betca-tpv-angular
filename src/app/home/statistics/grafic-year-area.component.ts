@@ -8,7 +8,9 @@ declare let google: any;
 let chart: any;
 let dateStart: any;
 let dateEnd: any;
-
+let totalsalesCash: number;
+let totalsalesCard: number;
+let salesList: object;
 export class GraficYearAreaComponent {
 
     dataSource: MatTableDataSource<CashierClosure>;
@@ -27,15 +29,18 @@ export class GraficYearAreaComponent {
     }
 
     create(dateI, dateF) {
-        this.readData(dateI, dateF);
+        dateStart = FormatDate.yearTimeInit(dateI);
+        dateEnd = FormatDate.yearTimeEnd(dateF);
+        this.read();
+        // let datos = this.readData(dateI, dateF);
         google.charts.setOnLoadCallback(draw);
 
         function draw() {
-            let dataAPI = google.visualization.arrayToDataTable([
+            const dataAPI = google.visualization.arrayToDataTable([
                 ['closureDate', 'salesCard', 'salesCash'],
-                ['2018', 1, 11]
+                ['datos', 100, 400]
             ]);
-            let options = {
+            const options = {
                 hAxis: { title: 'Años', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Ventas', minValue: 0 }
             };
@@ -44,14 +49,26 @@ export class GraficYearAreaComponent {
         }
     }
 
-    readData(dateI, dateF) {
-        dateStart = FormatDate.yearTimeInit(dateI);
-        dateEnd = FormatDate.yearTimeEnd(dateF);
+    synchronize() {
         this.cashierService.readAll(dateStart).subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<CashierClosure>(data);
-                console.log(this.dataSource.data);
             }
         );
+    }
+
+
+    read() {
+        this.synchronize();
+        totalsalesCash = 0;
+        totalsalesCard = 0;
+        console.log(this.synchronize());
+        /*   for (var i = 1; i < this.dataSource.data.length; i++) {
+               this.dataSource.data[i]["closureDate"] = new Date();
+               totalsalesCard += this.dataSource.data[i]["salesCard"];
+               totalsalesCash += this.dataSource.data[i]["salesCash"];
+           }*/
+        salesList = (['' + 2018 + '', totalsalesCard, totalsalesCash]);
+
     }
 }
