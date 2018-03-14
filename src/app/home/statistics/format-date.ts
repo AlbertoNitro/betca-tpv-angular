@@ -1,12 +1,27 @@
 export class FormatDate {
 
-    static dateTimeInit(dateI: number): Date {
+    static yearTimeInit(dateI: number): Date {
         let dateStart = new Date(dateI + "-01-01T00:00:00Z");
         return dateStart;
     }
 
-    static dateTimeEnd(dateF: number): Date {
+    static yearTimeEnd(dateF: number): Date {
         let dateEnd = new Date(dateF + "-12-31T00:00:00Z");
+        return dateEnd;
+    }
+
+    static monthsTimeInit(dateI: number): Date {
+        let date = new Date();
+        let year = date.getFullYear();
+        let dateStart = new Date(year + "-" + dateI + "-01T00:00:00Z");
+        return dateStart;
+    }
+
+    static monthsTimeEnd(dateF: number): Date {
+        let date = new Date();
+        let year = date.getFullYear();
+        let dateEnd = new Date(year + "-" + dateF + "-31T00:00:00Z");
+
         return dateEnd;
     }
 }
@@ -27,6 +42,7 @@ export enum MONTHS {
 }
 
 export enum GRAFIC {
-    AREA_YEAR = 'areaA'
+    AREA_YEAR = 'areaYear',
+    COLUNM_MONTHS = 'columMonth'
 }
 

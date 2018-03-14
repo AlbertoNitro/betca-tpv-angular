@@ -9,7 +9,7 @@ let chart: any;
 let dateStart: any;
 let dateEnd: any;
 
-export class GraficYearAreaComponent {
+export class GraficMonthsColumnComponent {
 
     dataSource: MatTableDataSource<CashierClosure>;
 
@@ -21,7 +21,7 @@ export class GraficYearAreaComponent {
         google.charts.setOnLoadCallback(draw);
         function draw() {
             let data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
-            chart = new google.visualization.AreaChart(document.getElementById(GRAFIC.AREA_YEAR));
+            chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.COLUNM_MONTHS));
             chart.draw(data);
         }
     }
@@ -36,17 +36,17 @@ export class GraficYearAreaComponent {
                 ['2018', 1, 11]
             ]);
             let options = {
-                hAxis: { title: 'Años', titleTextStyle: { color: '#333' } },
+                hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Ventas', minValue: 0 }
             };
-            chart = new google.visualization.AreaChart(document.getElementById(GRAFIC.AREA_YEAR));
+            chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.COLUNM_MONTHS));
             chart.draw(dataAPI, options);
         }
     }
 
     readData(dateI, dateF) {
-        dateStart = FormatDate.yearTimeInit(dateI);
-        dateEnd = FormatDate.yearTimeEnd(dateF);
+        dateStart = FormatDate.monthsTimeInit(dateI);
+        dateEnd = FormatDate.monthsTimeEnd(dateF);
         this.cashierService.readAll(dateStart).subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<CashierClosure>(data);
