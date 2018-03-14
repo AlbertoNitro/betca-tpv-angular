@@ -24,21 +24,29 @@ export class FormatDate {
 
         return dateEnd;
     }
-}
 
-export enum MONTHS {
-    Ene = 1,
-    Feb = 2,
-    Mar = 3,
-    Abr = 4,
-    May = 5,
-    Jun = 6,
-    Jul = 7,
-    Ago = 8,
-    Sep = 9,
-    Oct = 10,
-    Nov = 11,
-    Dic = 12
+    static months = [
+        { value: '01', viewValue: 'Ene' },
+        { value: '02', viewValue: 'Feb' },
+        { value: '03', viewValue: 'Mar' },
+        { value: '04', viewValue: 'Abr' },
+        { value: '05', viewValue: 'May' },
+        { value: '06', viewValue: 'Jun' },
+        { value: '07', viewValue: 'Jul' },
+        { value: '08', viewValue: 'Ago' },
+        { value: '09', viewValue: 'Sep' },
+        { value: '10', viewValue: 'Oct' },
+        { value: '11', viewValue: 'Nov' },
+        { value: '12', viewValue: 'Dic' },
+    ];
+
+    static years(): object{
+        let data = []
+        for (let index = 2018; index < 2025; index++) {
+            data.push(index);
+        }
+        return data;
+    }
 }
 
 export enum GRAFIC {

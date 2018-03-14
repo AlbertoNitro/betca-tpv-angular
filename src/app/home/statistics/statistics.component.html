@@ -11,24 +11,23 @@
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
                     <mat-select placeholder="Periodo de Inicio" #yearI>
-                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                        <mat-option [value]="2018">2018</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
                     <mat-select placeholder="Fin de Periodo" #yearF>
-                    <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficArea(2018, yearF.value);">
-                    <mat-icon>refresh</mat-icon>
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficAreaYear(yearI.value, yearF.value);" [disabled]="yearI.value === undefined || yearF.value === undefined">
+                    <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="clearfix"></div>
             <div class="col-md-6">
                 <div id="areaYear" class="chart"></div>
             </div>
-
         </mat-card>
     </div>
     <div class="item item-2" fxFlex="35%">
@@ -42,18 +41,17 @@
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
                     <mat-select placeholder="Periodo de Inicio" #mounthI>
-                      <!--  <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>-->
-                        <mat-option *ngFor="let key of meses" [value]="meses">{{meses}}</mat-option>
+                        <mat-option *ngFor="let mounth of date" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Periodo de Inicio" #mounthF>
-                        <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
+                    <mat-select placeholder="Fin de Periodo" #mounthF>
+                        <mat-option *ngFor="let mounth of date" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficColum(mounthI.value, mounthF.value);">
-                    <mat-icon>refresh</mat-icon>
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficColumMonth(mounthI.value, mounthF.value);" [disabled]="mounthI.value === undefined || mounthF.value === undefined">
+                    <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
@@ -72,15 +70,13 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Product by code" type="text" #code>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" (click)="graficCode(code.value);"
-                    [disabled]="code.value === ''">
+                <button type="submit" mat-fab color="primary" (click)="graficCode(code.value);" [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
                 <div id="areaCode" class="chart"></div>
             </div>
-
         </mat-card>
     </div>
 </div>

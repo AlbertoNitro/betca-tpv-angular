@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material'
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
-import { MONTHS, GRAFIC, FormatDate } from './format-date';
+import { GRAFIC, FormatDate } from './format-date';
 
 declare let google: any;
 let chart: any;

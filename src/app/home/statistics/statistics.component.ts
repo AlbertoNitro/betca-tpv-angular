@@ -4,6 +4,7 @@ import { GraficMonthsColumnComponent } from './grafic-months-colum.component';
 import { GraficMonthsAreaComponent } from './grafic-months-area.component';
 import { TicketService } from '../shared/ticket.service';
 import { CashierService } from '../shared/cashier.service';
+import { FormatDate } from './format-date'
 declare let google: any;
 
 @Component({
@@ -12,7 +13,8 @@ declare let google: any;
 })
 export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
-
+    date = FormatDate.months;
+    years = FormatDate.years();
     constructor(private cashierService: CashierService, private ticketService: TicketService) {
         google.charts.load('current', { 'packages': ['corechart'] });
     }
@@ -26,11 +28,11 @@ export class StatisticsComponent implements OnInit {
         this.graficMonthArea.init();
     }
 
-    graficArea(dateI: number, dateF: number) {
+    graficAreaYear(dateI: number, dateF: number) {
         this.graficYearArea.create(dateI, dateF);
     }
 
-    graficColum(dateI: number, dateF: number) {
+    graficColumMonth(dateI: number, dateF: number) {
         this.graficMonthColum.create(dateI, dateF);
     }
     graficCode(code: string) {
