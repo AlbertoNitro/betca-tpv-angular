@@ -8,23 +8,25 @@
         </mat-toolbar>
         <mat-card class="example-card">
             <mat-card-content>
+                <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <input matInput [matDatepicker]="dpInicio" placeholder="Periodo de Inicio" #dpInicioA disabled>
-                    <mat-datepicker-toggle matSuffix [for]="dpInicio"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicio startView="multi-year" disabled="false"></mat-datepicker>
+                    <mat-select placeholder="Periodo de Inicio" #yearI>
+                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
-                <mat-form-field fxFlex="40%" class="dpFin">
-                    <input matInput [matDatepicker]="dpFin" placeholder="Fin de Periodo" #dpFinA disabled>
-                    <mat-datepicker-toggle matSuffix [for]="dpFin"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFin startView="multi-year" disabled="false"></mat-datepicker>
+                <mat-icon>event</mat-icon>
+                <mat-form-field fxFlex="35%">
+                    <mat-select placeholder="Fin de Periodo" #yearF>
+                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', dpInicioA.value, dpFinA.value, titleh='Años', titlev='Ventas', estado='areaA');" [disabled]="dpInicioA.value === '' || dpFinA.value === ''">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', yearI.value, yearF.value, titleh='Años', titlev='Ventas', estado='areaA');">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
             <div class="clearfix"></div>
             <div class="col-md-6">
-                <div id="chart_areA" class="chart"></div>
+                <div id="areaA" class="chart"></div>
             </div>
 
         </mat-card>
@@ -37,22 +39,24 @@
         </mat-toolbar>
         <mat-card class="example-card">
             <mat-card-content>
+                <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <input matInput [matDatepicker]="dpInicioM" placeholder="Periodo de Inicio" #dpInicioMounth disabled>
-                    <mat-datepicker-toggle matSuffix [for]="dpInicioM"></mat-datepicker-toggle>
-                    <mat-datepicker #dpInicioM startView="year" disabled="false"></mat-datepicker>
+                    <mat-select placeholder="Periodo de Inicio" #mounthI>
+                        <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
-                <mat-form-field class="dpFin" fxFlex="40%">
-                    <input matInput [matDatepicker]="dpFinM" placeholder="Fin de Periodo" #dpFinMounth disabled>
-                    <mat-datepicker-toggle matSuffix [for]="dpFinM"></mat-datepicker-toggle>
-                    <mat-datepicker #dpFinM startView="year" disabled="false"></mat-datepicker>
+                <mat-icon>event</mat-icon>
+                <mat-form-field fxFlex="35%">
+                    <mat-select placeholder="Periodo de Inicio" #mounthF>
+                        <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', dpInicioMounth.value, dpFinMounth.value, titleh='Meses', titlev='Ventas', estado='columna');" [disabled]="dpInicioMounth.value === ''|| dpFinMounth.value === ''">
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', mounthI.value, mounthF.value, titleh='Meses', titlev='Ventas', estado='columna');">
                     <mat-icon>refresh</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
-                <div id="chart_col" class="chart"></div>
+                <div id="columna" class="chart"></div>
             </div>
         </mat-card>
     </div>
@@ -67,12 +71,13 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Product by code" type="text" #code>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" (click)="create(code.value,'','', titleh='Meses', titlev='Total', estado='areaM');" [disabled]="code.value === ''">
+                <button type="submit" mat-fab color="primary" (click)="create(code.value,'','', titleh='Meses', titlev='Total', estado='areaM');"
+                    [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
-                <div id="chart_areM" class="chart"></div>
+                <div id="areaM" class="chart"></div>
             </div>
 
         </mat-card>

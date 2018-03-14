@@ -1,5 +1,7 @@
 export interface CashierClosure {
-    finalCash: number;
+    finalCash?: number;
     salesCard: number;
-    comment: string;
+    comment?: string;
+    salesCash?: number;
+    closureDate?: Date;
 }
