@@ -25,6 +25,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button *ngIf="edit" (click)="save()">Save</button>
-    <button mat-raised-button *ngIf="!edit" (click)="create()">Create</button>
+    <button mat-raised-button [disabled]="!provider.company" *ngIf="edit" (click)="save()">Save</button>
+    <button mat-raised-button [disabled]="!provider.company" *ngIf="!edit" (click)="create()">Create</button>
 </mat-dialog-actions>

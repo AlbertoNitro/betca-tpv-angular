@@ -11,6 +11,7 @@ import { CashierClosedComponent } from './cashier-closed/cashier-closed.componen
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
+import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -18,6 +19,7 @@ import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component} from './statistics2/statistics2.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -70,6 +72,10 @@ export class HomeComponent implements OnDestroy {
     this.dialog.open(CashierCloseDialogComponent);
   }
 
+  cashMovement() {
+    this.dialog.open(CashMovementDialogComponent);
+  }
+
   customers() {
     this.router.navigate([HomeComponent.URL, UsersComponent.URL]);
   }
@@ -99,6 +105,10 @@ export class HomeComponent implements OnDestroy {
   }
   statistics2() {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
+  }
+
+  schedule() {
+    this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
 
 }

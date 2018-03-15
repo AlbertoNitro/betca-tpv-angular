@@ -19,7 +19,10 @@ export class AdminsService {
 
     deleteDb(): void {
         this.httpService.authToken().delete(AdminsService.END_POINT + AdminsService.DB).subscribe(
-            () => this.successful()
+            () => {
+                this.successful();
+                this.httpService.logout();
+            }
         );
     }
 
