@@ -4,6 +4,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Article} from '../../shared/article.model';
 import {ArticleService} from '../../shared/article.service';
+import {Shopping} from '../../shared/shopping.model';
+import {MatTableDataSource} from '@angular/material';
+import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
+import {ShoppingCartService} from '../../cashier-opened/shopping-cart.service';
 
 
 @Component({
@@ -14,10 +19,15 @@ import {ArticleService} from '../../shared/article.service';
 
 export class ArticlesFamilyComponent implements OnInit {
   static URL = 'articlesfamily';
-  positionabove = 'above';
-  positionleft = 'left';
-  imagePathArticle = '../../../assets/img/articles/art-blue.jpg';
-  imagePathFamily = '../../../assets/img/articles/folder-blue.png';
+  dataSource: MatTableDataSource<Shopping>;
+  private positionabove = 'above';
+  private positionleft = 'left';
+  private imagePathArticle = '../../../assets/img/articles/art-blue.jpg';
+  private imagePathFamily = '../../../assets/img/articles/folder-blue.png';
+  private code;
+  private subscription: Subscription;
+
+  private articleList: Article[] = [];
 
   listArt: Article[] = [
     {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
@@ -48,11 +58,39 @@ export class ArticlesFamilyComponent implements OnInit {
 
   ];
 
-  constructor(public articleService: ArticleService) {
+  constructor(public shoppingCartService: ShoppingCartService, public articleService: ArticleService) {
+
+    this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource<Shopping>(data);
+      }
+    );
+
 
   }
 
   ngOnInit() {
+
+    this.getAllArticles();
+
   }
 
+  getAllArticles() {
+    this.articleList = [];
+    this.articleService.readAll().subscribe(
+      data => {
+        console.log(data);
+        this.articleList = data;
+      },
+    );
+  }
+
+
+  add(code: string) {
+    this.code = code;
+    this.shoppingCartService.add(code);
+  }
 }
+
+
+
