@@ -14,10 +14,15 @@
     </span>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
+
   <button *ngIf="tokensService.isAdmin()" mat-menu-item [matMenuTriggerFor]="settings">
     <mat-icon>settings</mat-icon>
     <span>Admin</span>
   </button>
+  <button mat-menu-item [matMenuTriggerFor]="offers">
+    <mat-icon>euro_symbol</mat-icon>
+    <span>Offers</span>
+  </button> 
   <button mat-menu-item (click)="home()">
     <mat-icon>home</mat-icon>
     <span>Home</span>
@@ -70,6 +75,10 @@
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
   <button mat-menu-item (click)="deleteDb()">Delete Database</button>
+</mat-menu>
+<mat-menu #offers="matMenu">
+  <button mat-menu-item (click)="addOffer()">Add offer</button>
+  <button mat-menu-item (click)="consultOffer()">Consult offer</button>
 </mat-menu>
 
 <router-outlet></router-outlet>
