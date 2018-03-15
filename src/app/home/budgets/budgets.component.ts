@@ -10,7 +10,7 @@ export class BudgetsComponent implements OnInit {
     static URL = 'budgets';
 
     title = 'Budgets management';
-    columns = ['ID'];
+    columns = ['id'];
     data: Budget[];
 
     constructor(private dialog: MatDialog, private budgetService: BudgetService) {
