@@ -3,6 +3,7 @@
  */
 import {Component, OnInit} from '@angular/core';
 import {Article} from '../../shared/article.model';
+import {ArticleService} from '../../shared/article.service';
 
 
 @Component({
@@ -15,8 +16,8 @@ export class ArticlesFamilyComponent implements OnInit {
   static URL = 'articlesfamily';
   positionabove = 'above';
   positionleft = 'left';
-  imagePathArticle = '../../../assets/img/articles/a4azul.jpg';
-  imagePathFamily = '../../../assets/img/articles/art-azul.jpg';
+  imagePathArticle = '../../../assets/img/articles/art-blue.jpg';
+  imagePathFamily = '../../../assets/img/articles/folder-blue.png';
 
   listArt: Article[] = [
     {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
@@ -47,12 +48,9 @@ export class ArticlesFamilyComponent implements OnInit {
 
   ];
 
-
-  constructor() {
-    console.log(this.listArt);
+  constructor(public articleService: ArticleService) {
 
   }
-
 
   ngOnInit() {
   }
