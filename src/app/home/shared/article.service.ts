@@ -30,6 +30,10 @@ export class ArticleService {
 
     }
 
+    putObservable(article: Article): Observable<Article> {
+        return this.httpService.authToken().put(ArticleService.END_POINT + '/' + article.code, article);
+    }
+
     readAdvancedSearch(article: Article): Observable<Article[]> {
         return this.httpService.authToken().post(ArticleService.END_POINT + ArticleService.FILTRO, article).map(
             data => {
