@@ -29,6 +29,7 @@ import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
+import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -81,6 +82,7 @@ export class AppRoutingModule {
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
+    ArticleCreationEditDialogComponent,
     ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationDialogComponent,
