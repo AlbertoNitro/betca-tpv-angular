@@ -10,7 +10,10 @@ import { UserCreationEditDialogComponent } from './user-creation-edit-dialog.com
 export class UsersComponent implements OnInit {
     static URL = 'customers';
 
-    displayedColumns = ['mobile', 'username', 'actions'];
+    title = 'Customers management';
+    columns = ['mobile', 'username'];
+    actions = { create: true, edit: true, delete: false };
+
     dataSource: MatTableDataSource<User>;
 
     @ViewChild(MatSort) sort: MatSort;
@@ -50,5 +53,9 @@ export class UsersComponent implements OnInit {
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
+    }
+
+    delete(user: User) {
+        // TODO pendiente para crud generico
     }
 }
