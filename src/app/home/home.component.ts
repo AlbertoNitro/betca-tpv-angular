@@ -11,6 +11,7 @@ import { CashierClosedComponent } from './cashier-closed/cashier-closed.componen
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
+import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -69,6 +70,10 @@ export class HomeComponent implements OnDestroy {
 
   closeCashier() {
     this.dialog.open(CashierCloseDialogComponent);
+  }
+
+  cashMovement() {
+    this.dialog.open(CashMovementDialogComponent);
   }
 
   customers() {
