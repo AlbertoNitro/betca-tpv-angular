@@ -6,6 +6,7 @@ import { DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.component';
+import { BudgetsComponent } from './home/budgets/budgets.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
 import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog/edit-ticket-dialog.component';
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
   {
     path: HomeComponent.URL, component: HomeComponent,
     children: [
+      { path: BudgetsComponent.URL, component: BudgetsComponent },
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
@@ -56,6 +58,7 @@ const appRoutes: Routes = [
 export class AppRoutingModule {
   static COMPONENTS = [
     AdvancedSearchComponent,
+    BudgetsComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
     HomeComponent,
