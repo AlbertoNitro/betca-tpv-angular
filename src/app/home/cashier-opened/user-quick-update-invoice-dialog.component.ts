@@ -6,7 +6,7 @@ import { UserService } from '../shared/user.service';
 
 
 @Component({
-    templateUrl: 'user-quick-update-dialog.component.html',
+    templateUrl: 'user-quick-update-invoice-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
@@ -17,15 +17,19 @@ import { UserService } from '../shared/user.service';
     }
     `]
 })
-export class UserQuickUpdateDialogComponent implements OnInit {
+export class UserQuickUpdateInvoiceDialogComponent implements OnInit {
     @Input() mobile: number;
     user: User;
 
-    constructor(public dialogRef: MatDialogRef<UserQuickUpdateDialogComponent>, private userService: UserService) {
+    constructor(public dialogRef: MatDialogRef<UserQuickUpdateInvoiceDialogComponent>, private userService: UserService) {
     }
 
     ngOnInit(): void {
-        this.user = { mobile: this.mobile, username: '', dni: '' };
+        this.user = { mobile: this.mobile, username: this.user.username, dni: '' };
+    }
+
+    putUser(): void {
+        console.log('Llamar a servicion de actualizacion de usuario');
     }
 
 }

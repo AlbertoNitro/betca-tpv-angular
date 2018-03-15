@@ -31,6 +31,6 @@
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
     <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
-    <button mat-raised-button mat-dialog-close (click)="updateUser()" [disabled]="invalidInvioce()" >Invioce</button> 
+    <button mat-raised-button  (click)="checkUser()" [disabled]="invalidInvoice()">Invioce</button> 
     <button mat-raised-button mat-dialog-close (click)="reservation()">Reservation</button>
 </mat-dialog-actions>
