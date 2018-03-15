@@ -7,7 +7,7 @@
     <button mat-raised-button color="primary" (click)="filtroAvanzado()"><mat-icon>search</mat-icon>Filtro avanzado</button>
 
     <mat-card-content>
-        <mat-table #table [dataSource]="dataSource">
+        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
 
             <ng-container matColumnDef="code">
               <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
@@ -33,6 +33,19 @@
                 <mat-header-cell *matHeaderCellDef> Stock </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.stock}} </mat-cell>
             </ng-container>
+
+            <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef>
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" >
+                            <mat-icon color="warn">person_add</mat-icon>
+                        </button>
+                    </mat-header-cell>
+                    <mat-cell *matCellDef="let element">
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" >
+                            <mat-icon color="warn">mode_edit</mat-icon>
+                        </button>
+                    </mat-cell>
+                </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
