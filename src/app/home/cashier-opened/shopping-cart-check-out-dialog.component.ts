@@ -7,8 +7,7 @@ import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
-import { UserQuickCreateInvoiceDialogComponent } from './user-quick-creation-invoice-dialog.component';
-import { UserQuickUpdateDialogComponent } from './user-quick-update-dialog.component';
+import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { User } from '../shared/user.model';
 import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
 
@@ -27,7 +26,6 @@ export class ShoppingCartCheckOutDialogComponent {
     users: User[] = [
         { mobile: 199554353, username: 'user1', dni: '1104402944', address: 'direcccion1' },
         { mobile: 634969957, username: 'user2', dni: '', address: '' },
-        { mobile: 0, username: '', dni: '', address: '' }
     ];
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
@@ -41,8 +39,8 @@ export class ShoppingCartCheckOutDialogComponent {
         return this.return() < 0 || this.mobileSynchronize();
     }
 
-    invalidInvioce(): boolean {
-        return !this.foundMobile && this.invalidCheckOut();
+    invalidInvoice(): boolean {
+        return !((this.foundMobile) && (this.return() >= 0));
     }
 
     return(): number {
@@ -103,9 +101,6 @@ export class ShoppingCartCheckOutDialogComponent {
 
     checkUser() {
         let user: User;
-        if (this.ticketCreation.userMobile === undefined) {
-            this.ticketCreation.userMobile = 0;
-        }
         for (const item of this.users) {
             if (item.mobile === this.ticketCreation.userMobile) {
                 user = item;
@@ -114,20 +109,13 @@ export class ShoppingCartCheckOutDialogComponent {
         if (user.mobile && user.username && user.dni && user.address) {
             console.log('LLamar al servicio para crear ticket y factura');
         } else {
-            if (user.mobile && user.username) {
-                console.log('LLamar al servicio actualizacion de usuario');
-                this.updateUserInvoice(user);
-            } else {
-                console.log('LLamar al servicio creacion de usuario');
-                this.createUserInvoice();
-            }
+            console.log('LLamar al servicio actualizacion de usuario');
+            this.updateUserInvoice(user);
+
         }
     }
-    private createUserInvoice() {
-        this.dialog.open(UserQuickCreateInvoiceDialogComponent);
-    }
     private updateUserInvoice(data) {
-        const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateDialogComponent);
+        const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateInvoiceDialogComponent);
         dialogUpdateUserRef.componentInstance.mobile = this.ticketCreation.userMobile;
         dialogUpdateUserRef.componentInstance.user = data;
     }
