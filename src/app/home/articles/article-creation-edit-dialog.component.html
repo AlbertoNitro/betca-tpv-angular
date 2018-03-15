@@ -1,0 +1,27 @@
+<h2 mat-dialog-title *ngIf="!edit">New Article</h2>
+<h2 mat-dialog-title *ngIf="edit">Edit Article</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" [disabled]="edit" cdkFocusInitial/>
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Description" required [(ngModel)]="article.description" />
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Reference" [(ngModel)]="article.reference">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Retail Price" required [(ngModel)]="article.retailPrice">
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="stock" [(ngModel)]="article.stock">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()">Save</button>
+    <button mat-raised-button *ngIf="!edit" (click)="create()">Create</button>
+</mat-dialog-actions>

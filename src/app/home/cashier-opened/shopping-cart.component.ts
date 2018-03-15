@@ -38,7 +38,6 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     openDialog() {
-        console.log(this.code);
         const dialogRef = this.dialog.open(ArticleQuickDialogComponent, {
             width: '600px',
             height: '600px',
