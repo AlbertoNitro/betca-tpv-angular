@@ -41,7 +41,7 @@ export class CashierService {
         );
     }
 
-    readAll(dateStart:Date): Observable<CashierClosure[]> {
-        return this.httpService.authToken().get(CashierService.END_POINT+ '/' + dateStart);
+    readAll(dateStart: Date): Observable<CashierClosure[]> {
+        return this.httpService.authToken().get(CashierService.END_POINT + '/' + dateStart);
     }
 }

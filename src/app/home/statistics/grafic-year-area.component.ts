@@ -1,5 +1,4 @@
 import { OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material'
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
 import { Grafic, FormatDate } from './format-date';
@@ -37,7 +36,7 @@ export class GraficYearAreaComponent {
             controlDates = 2;
             let yearInitial;
             let yearFinal;
-            let salesList;
+            let salesList = [];
             data[controlDates]['closureDate'] = new Date();
             yearFinal = data[controlDates]['closureDate'].getFullYear();
 
@@ -45,12 +44,12 @@ export class GraficYearAreaComponent {
                 data[i]['closureDate'] = new Date();
                 yearInitial = data[i]['closureDate'].getFullYear();
                 if (yearInitial === yearFinal) {
-                    salesList = ['' + yearFinal + '', data[i]['salesCard'], data[i]['salesCash']];
-                    controlDates++;
-                } else {
                     totalsalesCard += data[i]['salesCard'];
                     totalsalesCash += data[i]['salesCash'];
                     salesList = ['' + yearInitial + '', totalsalesCard, totalsalesCash];
+                    controlDates++;
+                } else {
+                    salesList.push(['' + yearFinal + '', data[i]['salesCard'], data[i]['salesCash']]);
                 }
             }
             google.charts.setOnLoadCallback(draw(salesList));
