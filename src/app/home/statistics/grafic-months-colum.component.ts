@@ -8,7 +8,7 @@ let chart: any;
 let totalsalesCash: number;
 let totalsalesCard: number;
 let controlDates: number;
-
+const month = FormatDate.months;
 export class GraficMonthsColumnComponent {
 
     constructor(private cashierService: CashierService) {
@@ -24,8 +24,8 @@ export class GraficMonthsColumnComponent {
         }
     }
 
-    create(dateI, dateF) {
-        this.cashierService.readAll(FormatDate.monthsTimeInit(dateI)).subscribe(
+    create(monthInitial, monthFinal) {
+        this.cashierService.readAll(FormatDate.monthsTimeInit(monthInitial)).subscribe(
             data => {
                 read(data);
             }
@@ -34,23 +34,23 @@ export class GraficMonthsColumnComponent {
         function read(data: any) {
             totalsalesCash = 0;
             totalsalesCard = 0;
-            controlDates = 2;
-            let monthInitial;
-            let monthFinal;
+            controlDates = 1;
+            let dateInitial;
+            let dateFinal;
             let salesList = [];
             data[controlDates]['closureDate'] = new Date();
-            monthFinal = data[controlDates]['closureDate'].getMonth();
+            dateFinal = data[controlDates]['closureDate'].getMonth();
 
-            for (let i = 1; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 data[i]['closureDate'] = new Date();
-                monthInitial = data[i]['closureDate'].getMonth();
-                if (monthInitial === monthFinal) {
+                dateInitial = data[i]['closureDate'].getMonth();
+                if (dateInitial === dateFinal) {
                     totalsalesCard += data[i]['salesCard'];
                     totalsalesCash += data[i]['salesCash'];
-                    salesList = ['' + monthInitial + '', totalsalesCard, totalsalesCash];
+                    salesList = ['' + month[dateInitial].viewValue + '', totalsalesCard, totalsalesCash];
                     controlDates++;
                 } else {
-                    salesList.push(['' + monthFinal + '', data[i]['salesCard'], data[i]['salesCash']]);
+                    salesList.push(['' + month[dateFinal].viewValue + '', data[i]['salesCard'], data[i]['salesCash']]);
                 }
             }
             google.charts.setOnLoadCallback(draw(salesList));

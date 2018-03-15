@@ -23,24 +23,24 @@ export class GraficYearAreaComponent {
         }
     }
 
-    create(dateI, dateF) {
-        this.cashierService.readAll(FormatDate.yearTimeInit(dateI)).subscribe(
+    create(dateInit, dateEnd) {
+        this.cashierService.readAll(FormatDate.yearTimeInit(dateInit)).subscribe(
             data => {
                 read(data);
             }
         );
 
         function read(data: any) {
-            totalsalesCash = 0;
-            totalsalesCard = 0;
-            controlDates = 2;
             let yearInitial;
             let yearFinal;
             let salesList = [];
+            totalsalesCash = 0;
+            totalsalesCard = 0;
+            controlDates = 1;
             data[controlDates]['closureDate'] = new Date();
             yearFinal = data[controlDates]['closureDate'].getFullYear();
 
-            for (let i = 1; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 data[i]['closureDate'] = new Date();
                 yearInitial = data[i]['closureDate'].getFullYear();
                 if (yearInitial === yearFinal) {
