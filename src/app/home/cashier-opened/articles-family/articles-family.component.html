@@ -4,11 +4,12 @@
   </div>
   <strong>Articles Family</strong>
 </mat-card-header>
+<br>
 <mat-card-content>
   <div class="container" fxLayout="row wrap">
-    <mat-card *ngFor="let article of listArt">
+    <mat-card *ngFor="let article of articleList" fxFlex="auto" fxFlexOffset="1">
       <mat-card-actions>
-        <button mat-mini-fab color="accent">
+        <button mat-mini-fab color="accent" type="submit" (click)="add(article.code)">
               <span [matTooltipPosition]="positionleft" matTooltip="Add Car"> <strong>
               <mat-icon aria-label="addcar">add_shopping_cart</mat-icon>
               </strong></span>
@@ -24,4 +25,3 @@
     </mat-card>
   </div>
 </mat-card-content>
-

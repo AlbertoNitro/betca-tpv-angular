@@ -1,12 +1,12 @@
 mat-card-actions {
-  margin: 1px 5px 5px 55px !important;
+  margin: 1px 1px 1px 55px !important;
   position: absolute;
 }
 
 .container {
   display: flex;
-  height: 700px;
-  overflow-y: scroll !important;
+  height: 500px;
+  overflow-y: auto !important;
   overflow-x: hidden !important;
 }
 

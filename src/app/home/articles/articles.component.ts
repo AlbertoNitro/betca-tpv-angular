@@ -15,7 +15,7 @@ export class ArticlesComponent implements OnInit {
   static URL = 'articles';
   private articleList: Article[] = [];
   dataSource: MatTableDataSource<Article>;
-  displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock'];
+  displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock', 'actions'];
 
   constructor(  private articleService: ArticleService  ) {
     this.dataSource = new MatTableDataSource<Article>(this.articleList);
@@ -51,6 +51,14 @@ export class ArticlesComponent implements OnInit {
 
   filtroAvanzado() {
     // TODO Cargar vista filtro avanzado
+  }
+
+  create() {
+
+  }
+
+  edit(article: Article) {
+
   }
 
 }
