@@ -72,16 +72,20 @@ export class ShoppingCartCheckOutDialogComponent {
         console.log('Se ha creado una reserva');
     }
 
-    checkMobile() {
-        if (this.foundMobile) {
-            this.ticketCreation.userMobile = undefined;
-            this.foundMobile = false;
-        } else {
-            this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
-                data => this.foundMobile = true,
-                error => this.createUser()
-            );
-        }
+    findMobile() {
+        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+            data => this.foundMobile = true,
+            error => this.createUser()
+        );
+    }
+
+    deleteMobile() {
+        this.ticketCreation.userMobile = undefined;
+        this.foundMobile = false;
+    }
+
+    editMobile() {
+
     }
 
     private createUser() {
@@ -126,6 +130,6 @@ export class ShoppingCartCheckOutDialogComponent {
             result => {
                 this.ticketCreation.voucher += result;
             }
-        )
+        );
     }
 }
