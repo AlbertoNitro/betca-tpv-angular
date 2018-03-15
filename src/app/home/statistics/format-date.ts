@@ -50,7 +50,7 @@ export class FormatDate {
     }
 }
 
-export enum GRAFIC {
+export enum Grafic {
     AREA_YEAR = 'areaYear',
     COLUNM_MONTHS = 'columMonth',
     AREA_MONTHS = 'areaCode'

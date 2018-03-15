@@ -2,18 +2,14 @@ import { OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material'
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
-import { GRAFIC, FormatDate } from './format-date';
+import { Grafic, FormatDate } from './format-date';
 
 declare let google: any;
 let chart: any;
-let dateStart: any;
-let dateEnd: any;
 let totalsalesCash: number;
 let totalsalesCard: number;
-let salesList: object;
+let controlDates: number;
 export class GraficYearAreaComponent {
-
-    dataSource: MatTableDataSource<CashierClosure>;
 
     constructor(private cashierService: CashierService) {
         google.charts.load('current', { 'packages': ['corechart'] });
@@ -22,53 +18,53 @@ export class GraficYearAreaComponent {
     init() {
         google.charts.setOnLoadCallback(draw);
         function draw() {
-            let data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
-            chart = new google.visualization.AreaChart(document.getElementById(GRAFIC.AREA_YEAR));
+            const data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
+            chart = new google.visualization.AreaChart(document.getElementById(Grafic.AREA_YEAR));
             chart.draw(data);
         }
     }
 
     create(dateI, dateF) {
-        dateStart = FormatDate.yearTimeInit(dateI);
-        dateEnd = FormatDate.yearTimeEnd(dateF);
-        this.read();
-        // let datos = this.readData(dateI, dateF);
-        google.charts.setOnLoadCallback(draw);
+        this.cashierService.readAll(FormatDate.yearTimeInit(dateI)).subscribe(
+            data => {
+                read(data);
+            }
+        );
 
-        function draw() {
+        function read(data: any) {
+            totalsalesCash = 0;
+            totalsalesCard = 0;
+            controlDates = 2;
+            let yearInitial;
+            let yearFinal;
+            let salesList;
+            data[controlDates]['closureDate'] = new Date();
+            yearFinal = data[controlDates]['closureDate'].getFullYear();
+
+            for (let i = 1; i < data.length; i++) {
+                data[i]['closureDate'] = new Date();
+                yearInitial = data[i]['closureDate'].getFullYear();
+                if (yearInitial === yearFinal) {
+                    salesList = ['' + yearFinal + '', data[i]['salesCard'], data[i]['salesCash']];
+                    controlDates++;
+                } else {
+                    totalsalesCard += data[i]['salesCard'];
+                    totalsalesCash += data[i]['salesCash'];
+                    salesList = ['' + yearInitial + '', totalsalesCard, totalsalesCash];
+                }
+            }
+            google.charts.setOnLoadCallback(draw(salesList));
+        }
+
+        function draw(salesList) {
             const dataAPI = google.visualization.arrayToDataTable([
-                ['closureDate', 'salesCard', 'salesCash'],
-                ['datos', 100, 400]
-            ]);
+                ['Date', 'Sales Card', 'Sales Cash'], salesList]);
             const options = {
                 hAxis: { title: 'Años', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Ventas', minValue: 0 }
             };
-            chart = new google.visualization.AreaChart(document.getElementById(GRAFIC.AREA_YEAR));
+            chart = new google.visualization.AreaChart(document.getElementById(Grafic.AREA_YEAR));
             chart.draw(dataAPI, options);
         }
-    }
-
-    synchronize() {
-        this.cashierService.readAll(dateStart).subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<CashierClosure>(data);
-            }
-        );
-    }
-
-
-    read() {
-        this.synchronize();
-        totalsalesCash = 0;
-        totalsalesCard = 0;
-        console.log(this.synchronize());
-        /*   for (var i = 1; i < this.dataSource.data.length; i++) {
-               this.dataSource.data[i]["closureDate"] = new Date();
-               totalsalesCard += this.dataSource.data[i]["salesCard"];
-               totalsalesCash += this.dataSource.data[i]["salesCash"];
-           }*/
-        salesList = (['' + 2018 + '', totalsalesCard, totalsalesCash]);
-
     }
 }

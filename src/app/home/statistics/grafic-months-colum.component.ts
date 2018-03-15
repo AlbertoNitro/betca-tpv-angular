@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material'
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
-import { GRAFIC, FormatDate } from './format-date';
+import { Grafic, FormatDate } from './format-date';
 
 declare let google: any;
 let chart: any;
@@ -21,7 +21,7 @@ export class GraficMonthsColumnComponent {
         google.charts.setOnLoadCallback(draw);
         function draw() {
             const data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
-            chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.COLUNM_MONTHS));
+            chart = new google.visualization.ColumnChart(document.getElementById(Grafic.COLUNM_MONTHS));
             chart.draw(data);
         }
     }
@@ -39,7 +39,7 @@ export class GraficMonthsColumnComponent {
                 hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Ventas', minValue: 0 }
             };
-            chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.COLUNM_MONTHS));
+            chart = new google.visualization.ColumnChart(document.getElementById(Grafic.COLUNM_MONTHS));
             chart.draw(dataAPI, options);
         }
     }

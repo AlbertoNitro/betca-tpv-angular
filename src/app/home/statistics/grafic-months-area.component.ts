@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material'
 import { Ticket } from '../shared/ticket.model';
 import { TicketService } from '../shared/ticket.service';
-import { GRAFIC, FormatDate } from './format-date';
+import { Grafic, FormatDate } from './format-date';
 
 declare let google: any;
 let chart: any;
@@ -19,13 +19,13 @@ export class GraficMonthsAreaComponent {
         google.charts.setOnLoadCallback(draw);
         function draw() {
             const data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
-            chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.AREA_MONTHS));
+            chart = new google.visualization.ColumnChart(document.getElementById(Grafic.AREA_MONTHS));
             chart.draw(data);
         }
     }
 
     create(code: string) {
-        this.readData(code);
+        // this.readData(code);
         google.charts.setOnLoadCallback(draw);
 
         function draw() {
@@ -37,19 +37,8 @@ export class GraficMonthsAreaComponent {
                 hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Ventas', minValue: 0 }
             };
-            chart = new google.visualization.ColumnChart(document.getElementById(GRAFIC.AREA_MONTHS));
+            chart = new google.visualization.ColumnChart(document.getElementById(Grafic.AREA_MONTHS));
             chart.draw(dataAPI, options);
         }
-    }
-
-    readData(code) {
-     //   dateStart = FormatDate.monthsTimeInit(dateI);
-       // dateEnd = FormatDate.monthsTimeEnd(dateF);
-        this.cashierService.readAll(code).subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<Ticket>(data);
-                console.log(this.dataSource.data);
-            }
-        );
     }
 }
