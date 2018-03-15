@@ -21,7 +21,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component} from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AddOfferDialogComponent } from './offers/add-offer-dialog.component';
-//import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
+import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -118,9 +118,7 @@ export class HomeComponent implements OnDestroy {
     this.dialog.open(AddOfferDialogComponent);
   }
     
-/*
   consultOffer() {
-    this.dialog.open(CashMovementDialogComponent);
+    this.dialog.open(ConsultOfferDialogComponent);
   }
-*/
 }
