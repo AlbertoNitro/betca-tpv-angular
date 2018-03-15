@@ -137,11 +137,7 @@ export class ShoppingCartCheckOutDialogComponent {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                if (result == '1') {
-                    this.ticketCreation.voucher = 11;
-                } else {
-                    this.ticketCreation.voucher = 0;
-                }
+                this.ticketCreation.voucher = result;
             }
         )
     }
