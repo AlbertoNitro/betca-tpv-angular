@@ -52,7 +52,6 @@ export class ShoppingCartCheckOutDialogComponent {
     fill(type: string) {
         this.ticketCreation.cash = 0;
         this.ticketCreation.card = 0;
-        this.ticketCreation.voucher = 0;
         this.ticketCreation[type] = this.total;
     }
 
@@ -125,7 +124,7 @@ export class ShoppingCartCheckOutDialogComponent {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                this.ticketCreation.voucher = result;
+                this.ticketCreation.voucher += result;
             }
         )
     }

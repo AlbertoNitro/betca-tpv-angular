@@ -21,7 +21,7 @@
         </button>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="number" placeholder="Voucher" [(ngModel)]="ticketCreation.voucher" />
+        <input matInput type="number" placeholder="Voucher" [disabled]="true" [(ngModel)]="ticketCreation.voucher" />
         <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="consumeVoucher()">
             <mat-icon color="warn">local_offer</mat-icon>
         </button>
