@@ -75,6 +75,10 @@
     <mat-icon>receipt</mat-icon>
     <span>Budgets</span>
   </button>
+  <button mat-menu-item (click)="Orders()">
+    <mat-icon>local_shipping</mat-icon>
+    <span>Orders</span>
+  </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
@@ -84,5 +88,4 @@
   <button mat-menu-item (click)="addOffer()">Add offer</button>
   <button mat-menu-item (click)="consultOffer()">Consult offer</button>
 </mat-menu>
-
 <router-outlet></router-outlet>
