@@ -28,7 +28,7 @@ export class ShoppingCartCheckOutDialogComponent {
         { mobile: 634969957, username: 'user2', dni: '', address: '' },
     ];
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
-        this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+        this.ticketCreation = { userMobile: undefined, cash: undefined, card: undefined, voucher: undefined, shoppingCart: null };
     }
 
     mobileSynchronize(): boolean {
@@ -43,28 +43,44 @@ export class ShoppingCartCheckOutDialogComponent {
         return !((this.foundMobile) && (this.return() >= 0));
     }
 
+    number(value) {
+        return (value === undefined ? 0 : value);
+    }
     return(): number {
         return Math.round(
-            ((this.ticketCreation.cash + this.ticketCreation.card + this.ticketCreation.voucher) - this.total) * 100
+            ((0 + (this.number(this.ticketCreation.cash))
+                + (this.number(this.ticketCreation.card))
+                + (this.number(this.ticketCreation.voucher))
+            ) - this.total) * 100
         ) / 100;
     }
 
-    fill(type: string) {
-        this.ticketCreation.cash = 0;
-        this.ticketCreation.card = 0;
-        this.ticketCreation[type] = this.total;
+    fillCard() {
+        if (this.return() < 0) {
+            this.ticketCreation.card = -this.return();
+        } else {
+            this.ticketCreation.card = this.total;
+            this.ticketCreation.cash = undefined;
+        }
+    }
+
+    fillCash() {
+        this.ticketCreation.cash = this.number(this.ticketCreation.cash);
+        if (this.return() < 0) {
+            this.ticketCreation.cash = -this.return();
+        } else if (this.ticketCreation.cash < 20) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
+        } else if (this.ticketCreation.cash < 50) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 10) + 1) * 10;
+        } else {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 50) + 1) * 50;
+        }
     }
 
     checkOut() {
-        if (!this.ticketCreation.cash) {
-            this.ticketCreation.cash = 0;
-        }
-        if (!this.ticketCreation.card) {
-            this.ticketCreation.card = 0;
-        }
-        if (!this.ticketCreation.voucher) {
-            this.ticketCreation.voucher = 0;
-        }
+        this.ticketCreation.cash = this.number(this.ticketCreation.cash);
+        this.ticketCreation.card = this.number(this.ticketCreation.card);
+        this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
@@ -117,18 +133,18 @@ export class ShoppingCartCheckOutDialogComponent {
 
         }
     }
-    private updateUserInvoice(data) {
+
+    updateUserInvoice(data) {
         const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateInvoiceDialogComponent);
         dialogUpdateUserRef.componentInstance.mobile = this.ticketCreation.userMobile;
         dialogUpdateUserRef.componentInstance.user = data;
     }
 
-
-    private consumeVoucher() {
+    consumeVoucher() {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                this.ticketCreation.voucher += result;
+                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher) + result;
             }
         );
     }

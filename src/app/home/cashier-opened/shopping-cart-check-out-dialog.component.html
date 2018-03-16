@@ -15,13 +15,13 @@
     </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
-        <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="fill('card')">
+        <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="fillCard()">
             <mat-icon color="warn">credit_card</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Cash" [(ngModel)]="ticketCreation.cash" />
-        <button mat-button matSuffix mat-icon-button aria-label="Eur" (click)="fill('cash')">
+        <button mat-button matSuffix mat-icon-button aria-label="Eur" (click)="fillCash()">
             <mat-icon color="warn">euro_symbol</mat-icon>
         </button>
     </mat-form-field>
