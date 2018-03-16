@@ -18,6 +18,7 @@ import { CashMovementDialogComponent } from './home/cash-movement/cash-movement-
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
+import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './home/cashier-opened/user-quick-update-invoice-dialog.component';
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
+      { path: StockAlertComponent.URL, component: StockAlertComponent},
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
@@ -66,6 +68,7 @@ export class AppRoutingModule {
     ProvidersComponent,
     ShoppingCartComponent,
     StatisticsComponent,
+    StockAlertComponent,
     TicketsComponent,
     UsersComponent,
     VouchersComponent,

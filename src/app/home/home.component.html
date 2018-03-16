@@ -70,6 +70,10 @@
     <mat-icon>receipt</mat-icon>
     <span>Budgets</span>
   </button>
+  <button mat-menu-item (click)="stockAlerts()">
+    <mat-icon>notifications</mat-icon>
+    <span>Stock alerts</span>
+  </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
