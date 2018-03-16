@@ -41,7 +41,7 @@
                         </button>
                     </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-button matSuffix mat-icon-button aria-label="Clear" >
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="edit(element)" >
                             <mat-icon color="warn">mode_edit</mat-icon>
                         </button>
                     </mat-cell>

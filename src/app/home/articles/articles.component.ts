@@ -19,7 +19,7 @@ export class ArticlesComponent implements OnInit {
   displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock', 'actions'];
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(  private articleService: ArticleService, public dialog: MatDialog  ) {
+  constructor(private articleService: ArticleService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Article>(this.articleList);
   }
 
@@ -29,24 +29,24 @@ export class ArticlesComponent implements OnInit {
   mostrarArticulos() {
     this.articleList = [];
     this.articleService.readAll().subscribe(
-        data => {
-          console.log(data);
-          this.articleList = data;
-          this.dataSource = new MatTableDataSource<Article>(this.articleList);
+      data => {
+        console.log(data);
+        this.articleList = data;
+        this.dataSource = new MatTableDataSource<Article>(this.articleList);
 
-        },
+      },
     );
   }
 
   mostrarArticulosIncompletos() {
     this.articleList = [];
     this.articleService.readAllIncomplete().subscribe(
-        data => {
-          console.log(data);
-          this.articleList = data;
-          this.dataSource = new MatTableDataSource<Article>(this.articleList);
+      data => {
+        console.log(data);
+        this.articleList = data;
+        this.dataSource = new MatTableDataSource<Article>(this.articleList);
 
-        },
+      },
     );
 
   }
@@ -60,24 +60,33 @@ export class ArticlesComponent implements OnInit {
       width: '600px',
       height: '600px'
     }
-  );
-  dialogRef.afterClosed().subscribe(result => {
-    this.synchronize();
-  });
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      this.synchronize();
+    });
 
   }
 
   synchronize() {
     this.articleService.readAll().subscribe(
-        data => {
-            this.dataSource = new MatTableDataSource<Article>(data);
-            this.dataSource.sort = this.sort;
-        }
+      data => {
+        this.dataSource = new MatTableDataSource<Article>(data);
+        this.dataSource.sort = this.sort;
+      }
     );
-}
+  }
 
   edit(article: Article) {
-
+    this.articleService.readObservable(article.code).subscribe(
+      data => {
+          const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
+          dialogRef.componentInstance.article = data;
+          dialogRef.componentInstance.edit = true;
+          dialogRef.afterClosed().subscribe(
+              result => this.synchronize()
+          );
+      }
+  );
   }
 
 }
