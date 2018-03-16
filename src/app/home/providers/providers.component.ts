@@ -10,7 +10,7 @@ import { ProviderCreationEditDialogComponent } from './provider-creation-edit-di
 export class ProvidersComponent implements OnInit {
     static URL = 'providers';
 
-    displayedColumns = ['id', 'company', 'actions'];
+    displayedColumns = ['company', 'actions'];
     dataSource: MatTableDataSource<Provider>;
 
     @ViewChild(MatSort) sort: MatSort;

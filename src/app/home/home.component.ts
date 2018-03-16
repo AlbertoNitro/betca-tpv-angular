@@ -10,6 +10,7 @@ import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
+import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
 import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
@@ -109,6 +110,10 @@ export class HomeComponent implements OnDestroy {
 
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
+  }
+
+  budgets() {
+    this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
   }
 
 }
