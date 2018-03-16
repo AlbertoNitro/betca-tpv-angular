@@ -29,7 +29,10 @@ import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
+import { AddOfferDialogComponent } from './home/offers/add-offer-dialog.component';
+import { ConsultOfferDialogComponent } from './home/offers/consult-offer-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
+
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -78,6 +81,8 @@ export class AppRoutingModule {
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashMovementDialogComponent,
+    AddOfferDialogComponent,
+    ConsultOfferDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
