@@ -1,5 +1,4 @@
 import { OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material'
 import { Ticket } from '../shared/ticket.model';
 import { TicketService } from '../shared/ticket.service';
 import { Grafic, FormatDate } from './format-date';
@@ -8,8 +7,6 @@ declare let google: any;
 let chart: any;
 
 export class GraficMonthsAreaComponent {
-
-    dataSource: MatTableDataSource<Ticket>;
 
     constructor(private cashierService: TicketService) {
         google.charts.load('current', { 'packages': ['corechart'] });
