@@ -1,5 +1,6 @@
 import { Shopping } from './shopping.model';
 
-export interface BudgetCreation{
+export interface Budget {
+    id?: string;
     shoppingCart: Shopping[];
 }

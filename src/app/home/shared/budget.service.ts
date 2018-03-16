@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
-import { BudgetCreation } from './budget-creation.model'
+import { Budget } from './budget.model';
 import { HttpService } from '../../core/http.service';
 
 
@@ -11,9 +12,17 @@ export class BudgetService {
     constructor(private httpService: HttpService) {
     }
 
-    create(budgetCreation: BudgetCreation): void {
-        console.log("Realizar petición a la API : /budgets con " + budgetCreation.shoppingCart.length + " articulos");
-        //return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budgetCreation); 
+    create(budget: Budget): Observable<any> {
+        return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budget);
+    }
+
+    readAll(): Budget[] {
+        const data = [
+            {id: '1234', shoppingCart: null},
+            {id: '5678', shoppingCart: null},
+            {id: '9191', shoppingCart: null}
+        ];
+        return data;
     }
 
 }

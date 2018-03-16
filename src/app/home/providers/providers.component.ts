@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Provider } from '../shared/provider.model';
-import { ProviderService } from '../shared/provider.service';
+import { Provider } from './provider.model';
+import { ProviderService } from './provider.service';
 import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
 
 @Component({
@@ -10,7 +10,7 @@ import { ProviderCreationEditDialogComponent } from './provider-creation-edit-di
 export class ProvidersComponent implements OnInit {
     static URL = 'providers';
 
-    displayedColumns = ['id', 'company', 'actions'];
+    displayedColumns = ['company', 'actions'];
     dataSource: MatTableDataSource<Provider>;
 
     @ViewChild(MatSort) sort: MatSort;
@@ -23,27 +23,25 @@ export class ProvidersComponent implements OnInit {
     }
 
     synchronize() {
-        // this.providerService.readAll().subscribe(
-        //     data => {
-        //         this.dataSource = new MatTableDataSource<Provider>(data);
-        //         this.dataSource.sort = this.sort;
-        //     }
-        // );
-        this.dataSource = new MatTableDataSource<Provider>(this.testProvider);
+        this.providerService.readAll().subscribe(
+            data => {
+                this.dataSource = new MatTableDataSource<Provider>(data);
+                this.dataSource.sort = this.sort;
+            }
+        );
     }
 
     edit(provider: Provider) {
-        // this.providerService.readObservable(provider.id).subscribe(
-        //     data => {
+        this.providerService.readObservable(provider.id).subscribe(
+            data => {
                 const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
-                // dialogRef.componentInstance.provider = data;
-                dialogRef.componentInstance.provider = this.testProvider[provider.id];
+                dialogRef.componentInstance.provider = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
                     result => this.synchronize()
                 );
-        //     }
-        // );
+            }
+        );
     }
 
     create() {
@@ -53,11 +51,5 @@ export class ProvidersComponent implements OnInit {
             result => this.synchronize()
         );
     }
-
-    testProvider: Provider[] = [
-        {id: 1, company: 'Company 1'},
-        {id: 2, company: 'Company 2'},
-        {id: 3, company: 'Company 3'}
-      ];
 
 }
