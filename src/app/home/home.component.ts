@@ -22,6 +22,9 @@ import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component} from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { OrdersComponent } from './orders/orders.component';
+import { AddOfferDialogComponent } from './offers/add-offer-dialog.component';
+import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
 
 
 @Component({
@@ -113,6 +116,14 @@ export class HomeComponent implements OnDestroy {
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
+    
+  addOffer() {
+    this.dialog.open(AddOfferDialogComponent);
+  }
+    
+  consultOffer() {
+    this.dialog.open(ConsultOfferDialogComponent);
+  }
 
   budgets() {
     this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
@@ -120,6 +131,9 @@ export class HomeComponent implements OnDestroy {
 
   stockAlerts() {
     this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
+  }
+  Orders(){
+    this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
   }
 
 }
