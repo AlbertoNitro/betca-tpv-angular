@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
 import { Grafic, FormatDate } from './format-date';
-
+import { MatSnackBar } from '@angular/material';
 declare let google: any;
 let chart: any;
 let totalsalesCash: number;
@@ -11,7 +11,7 @@ let controlDates: number;
 const month = FormatDate.months;
 export class GraficMonthsColumnComponent {
 
-    constructor(private cashierService: CashierService) {
+    constructor(private cashierService: CashierService, public snackBar: MatSnackBar) {
         google.charts.load('current', { 'packages': ['corechart'] });
     }
 
@@ -24,33 +24,39 @@ export class GraficMonthsColumnComponent {
         }
     }
 
-    create(monthInitial, monthFinal) {
-        this.cashierService.readAll(FormatDate.monthsTimeInit(monthInitial)).subscribe(
+    create(monthStart, monthFinish) {
+        this.cashierService.readAllBetweenDates(FormatDate.monthsTimeStart(monthStart), FormatDate.monthsTimeFinish(monthFinish)).subscribe(
             data => {
-                read(data);
+                if (data.length === 0) {
+                    this.snackBar.open('There is not information, check the periods', 'X', {
+                        duration: 2000,
+                    });
+                } else {
+                    read(data);
+                }
             }
         );
 
         function read(data: any) {
+            let dateStart;
+            let dateFinish;
+            let salesList = [];
             totalsalesCash = 0;
             totalsalesCard = 0;
             controlDates = 1;
-            let dateInitial;
-            let dateFinal;
-            let salesList = [];
             data[controlDates]['closureDate'] = new Date();
-            dateFinal = data[controlDates]['closureDate'].getMonth();
+            dateFinish = data[controlDates]['closureDate'].getMonth();
 
             for (let i = 0; i < data.length; i++) {
                 data[i]['closureDate'] = new Date();
-                dateInitial = data[i]['closureDate'].getMonth();
-                if (dateInitial === dateFinal) {
+                dateStart = data[i]['closureDate'].getMonth();
+                if (dateStart === dateFinish) {
                     totalsalesCard += data[i]['salesCard'];
                     totalsalesCash += data[i]['salesCash'];
-                    salesList = ['' + month[dateInitial].viewValue + '', totalsalesCard, totalsalesCash];
+                    salesList = ['' + month[dateStart].viewValue + '', totalsalesCard, totalsalesCash];
                     controlDates++;
                 } else {
-                    salesList.push(['' + month[dateFinal].viewValue + '', data[i]['salesCard'], data[i]['salesCash']]);
+                    salesList.push(['' + month[dateFinish].viewValue + '', data[i]['salesCard'], data[i]['salesCash']]);
                 }
             }
             google.charts.setOnLoadCallback(draw(salesList));
@@ -60,8 +66,8 @@ export class GraficMonthsColumnComponent {
             const dataAPI = google.visualization.arrayToDataTable([
                 ['Date', 'Sales Card', 'Sales Cash'], salesList]);
             const options = {
-                hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
-                vAxis: { title: 'Ventas', minValue: 0 }
+                hAxis: { title: 'Months', titleTextStyle: { color: '#333' } },
+                vAxis: { title: 'Sales', minValue: 0 }
             };
             chart = new google.visualization.ColumnChart(document.getElementById(Grafic.COLUNM_MONTHS));
             chart.draw(dataAPI, options);

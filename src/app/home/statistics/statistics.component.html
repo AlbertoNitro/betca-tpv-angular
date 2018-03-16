@@ -3,20 +3,20 @@
     <div class="item item-1" fxFlex="35%">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <span>Ventas anuales</span>
+                <span>Sales for years</span>
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-card class="example-card">
             <mat-card-content>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Periodo de Inicio" #yearI>
-                        <mat-option [value]="2018">2018</mat-option>
+                    <mat-select placeholder="Start period" #yearI>
+                        <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Fin de Periodo" #yearF>
+                    <mat-select placeholder="Finish period" #yearF>
                         <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -33,20 +33,20 @@
     <div class="item item-2" fxFlex="35%">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <span>Ventas mensuales</span>
+                <span>Sales for months</span>
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-card class="example-card">
             <mat-card-content>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Periodo de Inicio" #mounthI>
+                    <mat-select placeholder="Start period" #mounthI>
                         <mat-option *ngFor="let mounth of date" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Fin de Periodo" #mounthF>
+                    <mat-select placeholder="Finish period" #mounthF>
                         <mat-option *ngFor="let mounth of date" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -62,7 +62,7 @@
     <div class="item item-3" fxFlex="35%">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <span>Producto por mes</span>
+                <span>Product by months</span>
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-card class="example-card">
