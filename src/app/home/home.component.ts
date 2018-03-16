@@ -19,14 +19,11 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
-import { Statistics2Component} from './statistics2/statistics2.component';
+import { Statistics2Component } from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-<<<<<<< HEAD
 import { OrdersComponent } from './orders/orders.component';
-=======
 import { AddOfferDialogComponent } from './offers/add-offer-dialog.component';
 import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
->>>>>>> develop
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -117,11 +114,11 @@ export class HomeComponent implements OnDestroy {
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
-    
+
   addOffer() {
     this.dialog.open(AddOfferDialogComponent);
   }
-    
+
   consultOffer() {
     this.dialog.open(ConsultOfferDialogComponent);
   }
@@ -130,8 +127,16 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
   }
 
-  Orders(){
+  Orders() {
     this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
+  }
+
+  password() {
+    alert('password changing');
+  }
+
+  roleManagement() {
+    alert('role Management');
   }
 
 }
