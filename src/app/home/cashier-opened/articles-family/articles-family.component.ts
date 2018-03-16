@@ -4,6 +4,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Article} from '../../shared/article.model';
 import {ArticleService} from '../../shared/article.service';
+import {ArticleFamilyService} from '../../shared/article-family.service';
 import {Shopping} from '../../shared/shopping.model';
 import {MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
@@ -26,21 +27,21 @@ export class ArticlesFamilyComponent implements OnInit {
   private imagePathFamily = '../../../assets/img/articles/folder-blue.png';
   private code;
   private subscription: Subscription;
+
   private articleList: Article[] = [];
   private articleFamilyList: Article[] = [];
-
 
   listArt: Article[] = [
     {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
     {code: '211', reference: 'Article12', description: 'Article12 The titles of Washed', retailPrice: 26, stock: 28},
     {code: '311', reference: 'Article13', description: 'Article13 The titles of Washed', retailPrice: 37, stock: 39},
     {code: '411', reference: 'Article14', description: 'Article14 The titles of Washed', retailPrice: 51, stock: 16},
-    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
-    {code: '211', reference: 'Article12', description: 'Article12 The titles of Washed', retailPrice: 26, stock: 28}
-
+    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156}
   ];
 
-  constructor(public shoppingCartService: ShoppingCartService, public articleService: ArticleService) {
+  constructor(public shoppingCartService: ShoppingCartService,
+              public articleService: ArticleService,
+              public articleFamilyService: ArticleFamilyService) {
 
     this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
       data => {
@@ -50,8 +51,10 @@ export class ArticlesFamilyComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.getAllArticles();
     this.getAllArticleFamily();
+
   }
 
   getAllArticles() {
@@ -66,6 +69,12 @@ export class ArticlesFamilyComponent implements OnInit {
 
   getAllArticleFamily() {
     this.articleFamilyList = [];
+    this.articleFamilyService.readAll().subscribe(
+      data => {
+        console.log(data);
+        this.articleFamilyList = data;
+      },
+    );
   }
 
   add(code: string) {
@@ -73,6 +82,3 @@ export class ArticlesFamilyComponent implements OnInit {
     this.shoppingCartService.add(code);
   }
 }
-
-
-
