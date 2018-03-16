@@ -34,6 +34,7 @@ import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
 import { VoucherService } from '../app/home/vouchers/voucher.service';
+import { orderService } from '../app/home/orders/orders.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
@@ -108,7 +109,8 @@ import {ArticlesFamilyComponent} from './home/cashier-opened/articles-family/art
     ShoppingCartService,
     TicketService,
     UserService,
-    VoucherService
+    VoucherService,
+    orderService
   ]
 })
 export class AppModule { }

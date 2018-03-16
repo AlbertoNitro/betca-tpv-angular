@@ -60,10 +60,4 @@ export class VouchersComponent implements OnInit {
 
     }
 
-    testVoucher: Voucher[] = [
-        {reference: '1', value: 11, used: false},
-        {reference: '2', value: 22, used: true},
-        {reference: '3', value: 33, used: false}
-      ];
-
 }
