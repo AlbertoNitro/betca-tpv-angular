@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
-    templateUrl: `cashier-opened.component.html`
-  })
-  export class CashierOpenedComponent {
-    static URL = 'cashier-opened';
-  }
+  templateUrl: `cashier-opened.component.html`,
+  styleUrls: ['./cashier-opened.component.css']
+})
+export class CashierOpenedComponent {
+  static URL = 'cashier-opened';
+}

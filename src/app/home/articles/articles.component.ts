@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Article } from '../shared/article.model';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
+import { ArticleService } from '../shared/article.service';
+import { ArticleCreationEditDialogComponent } from './article-creation-edit-dialog.component';
 
 @Component({
   selector: 'app-articles',
@@ -14,12 +16,10 @@ export class ArticlesComponent implements OnInit {
   static URL = 'articles';
   private articleList: Article[] = [];
   dataSource: MatTableDataSource<Article>;
-  displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock'];
-  constructor() {
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
+  displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock', 'actions'];
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private articleService: ArticleService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource<Article>(this.articleList);
   }
 
@@ -27,26 +27,66 @@ export class ArticlesComponent implements OnInit {
   }
 
   mostrarArticulos() {
-    // TODO Consulta a base de dato sacando todos los articulos
     this.articleList = [];
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '288', retailPrice: 200, stock: 2 });
-    this.dataSource = new MatTableDataSource<Article>(this.articleList);
+    this.articleService.readAll().subscribe(
+      data => {
+        console.log(data);
+        this.articleList = data;
+        this.dataSource = new MatTableDataSource<Article>(this.articleList);
+
+      },
+    );
   }
 
   mostrarArticulosIncompletos() {
-    // TODO consulta a elementos que le falte algún campo
     this.articleList = [];
-    this.articleList.push({ code: '12345', description: 'holaholahola', reference: '', retailPrice: 200, stock: 2 });
-    this.articleList.push({ code: '12345', description: '', reference: '288', retailPrice: 200, stock: 2 });
-    this.dataSource = new MatTableDataSource<Article>(this.articleList);
+    this.articleService.readAllIncomplete().subscribe(
+      data => {
+        console.log(data);
+        this.articleList = data;
+        this.dataSource = new MatTableDataSource<Article>(this.articleList);
+
+      },
+    );
 
   }
 
   filtroAvanzado() {
     // TODO Cargar vista filtro avanzado
+  }
+
+  create() {
+    const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent, {
+      width: '600px',
+      height: '600px'
+    }
+    );
+    dialogRef.afterClosed().subscribe(result => {
+      this.synchronize();
+    });
+
+  }
+
+  synchronize() {
+    this.articleService.readAll().subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource<Article>(data);
+        this.dataSource.sort = this.sort;
+      }
+    );
+  }
+
+  edit(article: Article) {
+    this.articleService.readObservable(article.code).subscribe(
+      data => {
+          const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
+          dialogRef.componentInstance.article = data;
+          dialogRef.componentInstance.edit = true;
+          dialogRef.afterClosed().subscribe(
+              result => this.synchronize()
+          );
+      }
+  );
   }
 
 }
