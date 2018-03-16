@@ -3,25 +3,30 @@
     <!--Input-->
     <mat-form-field>
         <input matInput type="number" placeholder="Mobile" [(ngModel)]="ticketCreation.userMobile" [disabled]="foundMobile" />
-        <button mat-button matSuffix mat-icon-button aria-label="Mobile" (click)="checkMobile()" *ngIf="ticketCreation.userMobile">
-            <mat-icon *ngIf="mobileSynchronize()" color="warn">cached</mat-icon>
-            <mat-icon *ngIf="foundMobile">done</mat-icon>
+        <button mat-button matSuffix mat-icon-button (click)="findMobile()" *ngIf="ticketCreation.userMobile">
+            <mat-icon *ngIf="mobileSynchronize()" color="warn">search</mat-icon>
+        </button>
+        <button mat-button matSuffix mat-icon-button *ngIf="foundMobile" (click)="editMobile()">
+            <mat-icon color="warn">mode_edit</mat-icon>
+        </button>
+        <button mat-button matSuffix mat-icon-button *ngIf="foundMobile" (click)="deleteMobile()">
+            <mat-icon color="warn">close</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
-        <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="fill('card')">
+        <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="fillCard()">
             <mat-icon color="warn">credit_card</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Cash" [(ngModel)]="ticketCreation.cash" />
-        <button mat-button matSuffix mat-icon-button aria-label="Eur" (click)="fill('cash')">
+        <button mat-button matSuffix mat-icon-button aria-label="Eur" (click)="fillCash()">
             <mat-icon color="warn">euro_symbol</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="number" placeholder="Voucher" [(ngModel)]="ticketCreation.voucher" />
+        <input matInput type="number" placeholder="Voucher" [disabled]="true" [(ngModel)]="ticketCreation.voucher" />
         <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="consumeVoucher()">
             <mat-icon color="warn">local_offer</mat-icon>
         </button>
@@ -31,6 +36,6 @@
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
     <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
-    <button mat-raised-button  (click)="checkUser()" [disabled]="invalidInvioce()">Invioce</button> 
+    <button mat-raised-button  (click)="checkUser()" [disabled]="invalidInvoice()">Invioce</button> 
     <button mat-raised-button mat-dialog-close (click)="reservation()">Reservation</button>
 </mat-dialog-actions>
