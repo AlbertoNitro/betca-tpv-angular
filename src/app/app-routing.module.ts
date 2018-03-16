@@ -30,6 +30,7 @@ import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
+import { OrdersComponent } from './home/orders/orders.component';
 
 const appRoutes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: WelcomeComponent.URL },
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
-      { path: ScheduleComponent.URL, component: ScheduleComponent }
+      { path: ScheduleComponent.URL, component: ScheduleComponent },
+      { path: OrdersComponent.URL , component: OrdersComponent}
     ]
   }
 ];
@@ -71,7 +73,8 @@ export class AppRoutingModule {
     VouchersComponent,
     WelcomeComponent,
     Statistics2Component,
-    ScheduleComponent
+    ScheduleComponent,
+    OrdersComponent
   ];
 
   static COMPONENT_FACTORY = [

@@ -1,0 +1,96 @@
+
+<mat-card>
+    <mat-card-title>
+        <mat-icon color="primary">shopping_cart</mat-icon>ORDERS 
+    </mat-card-title>
+    <mat-card-content>
+        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="Id">
+                <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Id_provedor">
+                <mat-header-cell *matHeaderCellDef> Codigo </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.id_provedor}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Provedor">
+                <mat-header-cell *matHeaderCellDef> Provedor </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.nombre_provedor}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
+    <mat-card-content>
+        <form>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Order By Code" type="text" #codigoProvedor>
+            </mat-form-field>
+            <button type="submit" mat-mini-fab color="primary" (click)="mostrar_cuerpo(codigoProvedor.value)">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button type="submit" mat-mini-fab color="primary" (click)="agregar_si_existe(codigoProvedor.value)">
+                <i class="material-icons">add</i>
+            </button>
+        </form>
+    </mat-card-content>
+    <br>
+    <mat-card-content>
+        <mat-table class="mat-elevation-z8" #table2 [dataSource]="dataSourceBody" matSort>
+            <ng-container matColumnDef="Id">
+                <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+                <mat-cell *matCellDef="let elemento"> {{elemento.id}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="id_order">
+                <mat-header-cell *matHeaderCellDef> Order </mat-header-cell>
+                <mat-cell *matCellDef="let elemento"> {{elemento.id_order}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="id_provedor">
+                <mat-header-cell *matHeaderCellDef> Codigo </mat-header-cell>
+                <mat-cell *matCellDef="let elemento"> {{elemento.id_provedor}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="id_articulo">
+                <mat-header-cell *matHeaderCellDef> Cod.Art </mat-header-cell>
+                <mat-cell *matCellDef="let elemento"> {{elemento.id_articulo}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="articulo">
+                <mat-header-cell *matHeaderCellDef> Articulo </mat-header-cell>
+                <mat-cell *matCellDef="let elemento"> {{elemento.articulo}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="cantidad">
+                <mat-header-cell *matHeaderCellDef> cantidad </mat-header-cell>
+                <mat-cell *matCellDef="let elemento"> {{elemento.cantidad}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumnsCuerpo"></mat-header-row>
+            <mat-row *matRowDef="let elemento; columns: displayedColumnsCuerpo;"></mat-row>
+        </mat-table>
+    </mat-card-content>  
+</mat-card>
+<br>
+<br>
+<mat-card>
+    <mat-card-title>
+        <mat-icon color="primary">shopping_cart</mat-icon>New Order 
+    </mat-card-title>    
+    <mat-card-content>
+        <form>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Provedor por codigo" type="text" #code>
+            </mat-form-field>
+            <button type="submit" mat-mini-fab color="primary" (click)=alert(1)>
+                <mat-icon>search</mat-icon>
+            </button>
+        </form>
+        <form>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Producto por codigo" type="text" #code>
+            </mat-form-field>
+            <button type="submit" mat-mini-fab color="primary" (click)=alert(1)>
+                <mat-icon>search</mat-icon>
+            </button>
+            <button type="submit" mat-mini-fab color="primary" (click)=Alert(2)>
+                <i class="material-icons">add</i>
+            </button>
+        </form>
+    </mat-card-content>
+</mat-card>
