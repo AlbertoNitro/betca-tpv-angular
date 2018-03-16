@@ -26,6 +26,10 @@
     <mat-icon>work</mat-icon>
     <span>Close Cashier</span>
   </button>
+  <button mat-menu-item (click)="cashMovement()">
+    <mat-icon>euro_symbol</mat-icon>
+    <span>Cash Movements</span>
+  </button>
   <button mat-menu-item (click)="customers()">
     <mat-icon>account_circle</mat-icon>
     <span>Customers</span>
@@ -34,17 +38,17 @@
     <mat-icon>local_shipping</mat-icon>
     <span>Providers</span>
   </button>
-  <button mat-menu-item>
-    <mat-icon>account_circle</mat-icon>
+  <button mat-menu-item (click)="tickets()">
+    <mat-icon>receipt</mat-icon>
     <span>Tickets</span>
   </button>
-  <button mat-menu-item (click)="vouchers()">
-    <mat-icon>assignment</mat-icon>
-    <span>Vouchers</span>
+  <button mat-menu-item (click)="article()">
+      <mat-icon>view_list</mat-icon>
+      <span>Artículos</span>
   </button>
-  <button mat-menu-item (click)="family()">
-    <mat-icon>assignment</mat-icon>
-    <span>Family</span>
+  <button mat-menu-item (click)="vouchers()">
+    <mat-icon>local_offer</mat-icon>
+    <span>Vouchers</span>
   </button>
   <button mat-menu-item (click)="statistics()">
     <mat-icon>assessment</mat-icon>
@@ -53,6 +57,18 @@
   <button mat-menu-item>
     <mat-icon>account_circle</mat-icon>
     <span>Busqueda avanzada</span>
+  </button>
+  <button mat-menu-item (click)="statistics2()">
+    <mat-icon>assessment</mat-icon>
+    <span>Statistics2</span>
+  </button>
+  <button mat-menu-item (click)="schedule()">
+    <mat-icon>schedule</mat-icon>
+    <span>Agenda</span>
+  </button>
+  <button mat-menu-item (click)="budgets()">
+    <mat-icon>receipt</mat-icon>
+    <span>Budgets</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">

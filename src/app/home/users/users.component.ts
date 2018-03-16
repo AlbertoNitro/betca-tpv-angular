@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-import { UserCreationDialogComponent } from './user-creation-dialog.component';
+import { UserCreationEditDialogComponent } from './user-creation-edit-dialog.component';
 
 @Component({
     templateUrl: `users.component.html`
@@ -10,12 +10,11 @@ import { UserCreationDialogComponent } from './user-creation-dialog.component';
 export class UsersComponent implements OnInit {
     static URL = 'customers';
 
-    displayedColumns = ['mobile', 'username', 'actions'];
-    dataSource: MatTableDataSource<User>;
+    title = 'Customers management';
+    columns = ['mobile', 'username'];
+    data: User[];
 
-    @ViewChild(MatSort) sort: MatSort;
-
-    constructor(public dialog: MatDialog, private userService: UserService) {
+    constructor(private dialog: MatDialog, private userService: UserService) {
     }
 
     ngOnInit(): void {
@@ -24,17 +23,14 @@ export class UsersComponent implements OnInit {
 
     synchronize() {
         this.userService.readAll().subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<User>(data);
-                this.dataSource.sort = this.sort;
-            }
+            data => this.data = data
         );
     }
 
     edit(user: User) {
         this.userService.readObservable(user.mobile).subscribe(
             data => {
-                const dialogRef = this.dialog.open(UserCreationDialogComponent);
+                const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
                 dialogRef.componentInstance.user = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
@@ -45,10 +41,11 @@ export class UsersComponent implements OnInit {
     }
 
     create() {
-        const dialogRef = this.dialog.open(UserCreationDialogComponent);
+        const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
         dialogRef.componentInstance.edit = false;
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
     }
+
 }

@@ -4,5 +4,26 @@
     <mat-card-title>
        Providers management
     </mat-card-title>
-    <!-- Providers table -->
+    <mat-card-content>
+        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="company">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Company </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.company}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef>
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="create()">
+                        <mat-icon color="warn">person_add</mat-icon>
+                    </button>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="edit(item)">
+                        <mat-icon color="warn">mode_edit</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+        </mat-table>
+    </mat-card-content>
 </mat-card>

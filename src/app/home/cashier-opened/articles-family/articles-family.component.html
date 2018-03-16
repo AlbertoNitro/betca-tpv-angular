@@ -1,0 +1,27 @@
+<mat-card-header>
+  <div mat-card-avatar>
+    <mat-icon>view_quilt</mat-icon>
+  </div>
+  <strong>Articles Family</strong>
+</mat-card-header>
+<br>
+<mat-card-content>
+  <div class="container" fxLayout="row wrap">
+    <mat-card *ngFor="let article of articleList" fxFlex="auto" fxFlexOffset="1">
+      <mat-card-actions>
+        <button mat-mini-fab color="accent" type="submit" (click)="add(article.code)">
+              <span [matTooltipPosition]="positionleft" matTooltip="Add Car"> <strong>
+              <mat-icon aria-label="addcar">add_shopping_cart</mat-icon>
+              </strong></span>
+        </button>
+      </mat-card-actions>
+      <img class="img-article" src="{{imagePathArticle}}" height="100" width="100" alt="Washed Out"/>
+      <br>
+      <strong>{{article.reference}}</strong> &nbsp;&nbsp;<strong> ${{article.retailPrice}}</strong>
+      <mat-card-content>
+            <span [matTooltipPosition]="positionabove"
+                  matTooltip="{{article.description}}"> <strong>  Detail?</strong></span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-card-content>

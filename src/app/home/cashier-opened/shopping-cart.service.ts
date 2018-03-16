@@ -5,23 +5,29 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
+import { BudgetService } from '../shared/budget.service';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
+import { Budget } from '../shared/budget.model';
+import { Article } from '../shared/article.model';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class ShoppingCartService {
+
     static SHOPPING_CART_NUM = 4;
 
     private _total = 0;
 
     private shoppingCart: Array<Shopping> = new Array();
-    private aux: Subject<String> = new BehaviorSubject(undefined);
+    private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
     private indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
-    constructor(private articleService: ArticleService, private ticketService: TicketService) {
+    constructor(private articleService: ArticleService, private ticketService: TicketService,
+        private budgetService: BudgetService, public snackBar: MatSnackBar) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -48,8 +54,8 @@ export class ShoppingCartService {
         this.synchronizeTotal();
     }
 
-    getAux(): Observable<String> {
-        return this.aux.asObservable();
+    getArticleSearchObservable(): Observable<String> {
+        return this.articleSearchObservable.asObservable();
     }
 
     delete(shopping: Shopping): void {
@@ -75,11 +81,11 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-                this.aux.next('0');
+                this.articleSearchObservable.next('0');
 
             },
             error => {
-                this.aux.next('1');
+                this.articleSearchObservable.next('1');
             },
         );
     }
@@ -95,16 +101,26 @@ export class ShoppingCartService {
         ticketCreation.shoppingCart = this.shoppingCart;
         this.ticketService.create(ticketCreation).subscribe(
             blob => {
-                this.shoppingCart = new Array();
-                this.synchronizeAll();
-                const url = window.URL.createObjectURL(blob);
-                window.open(url);
+                this.openPdf(blob);
             }
         );
     }
 
-    createBudget(param: string ): void {
-        console.log("Llamada a shopping-cart service con " + param);
+    createBudget(): void {
+        let budget: Budget;
+        budget = { shoppingCart: this.shoppingCart };
+        this.budgetService.create(budget).subscribe(
+            blob => {
+                this.openPdf(blob);
+            }
+        );
+    }
+
+    openPdf(blob: any) {
+        this.shoppingCart = new Array();
+        this.synchronizeAll();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
     }
 
 }

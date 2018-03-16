@@ -10,11 +10,17 @@ import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
+import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
+import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { ProvidersComponent } from './providers/providers.component';
+import { TicketsComponent } from './tickets/tickets.component';
+import { ArticlesComponent } from './articles/articles.component';
+import { Statistics2Component} from './statistics2/statistics2.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -67,16 +73,28 @@ export class HomeComponent implements OnDestroy {
     this.dialog.open(CashierCloseDialogComponent);
   }
 
+  cashMovement() {
+    this.dialog.open(CashMovementDialogComponent);
+  }
+
   customers() {
     this.router.navigate([HomeComponent.URL, UsersComponent.URL]);
   }
 
-  vouchers(){
+  vouchers() {
     this.router.navigate([HomeComponent.URL, VouchersComponent.URL]);
   }
 
-  statistics(){
+  statistics() {
     this.router.navigate([HomeComponent.URL, StatisticsComponent.URL]);
+  }
+
+  tickets() {
+    this.router.navigate([HomeComponent.URL, TicketsComponent.URL]);
+  }
+
+  article() {
+    this.router.navigate([HomeComponent.URL, ArticlesComponent.URL]);
   }
 
   providers() {
@@ -85,6 +103,17 @@ export class HomeComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+  statistics2() {
+    this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
+  }
+
+  schedule() {
+    this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
+  }
+
+  budgets() {
+    this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
   }
 
 }
