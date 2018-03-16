@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
 import { Grafic, FormatDate } from './format-date';
-
+import { MatSnackBar } from '@angular/material';
 declare let google: any;
 let chart: any;
 let totalsalesCash: number;
@@ -10,7 +10,7 @@ let totalsalesCard: number;
 let controlDates: number;
 export class GraficYearAreaComponent {
 
-    constructor(private cashierService: CashierService) {
+    constructor(private cashierService: CashierService, public snackBar: MatSnackBar) {
         google.charts.load('current', { 'packages': ['corechart'] });
     }
 
@@ -24,9 +24,16 @@ export class GraficYearAreaComponent {
     }
 
     create(dateInit, dateEnd) {
-        this.cashierService.readAll(FormatDate.yearTimeInit(dateInit)).subscribe(
+        this.cashierService.readAll(FormatDate.yearTimeInit(dateInit), FormatDate.yearTimeEnd(dateEnd)).subscribe(
             data => {
-                read(data);
+                if (data.length === 0) {
+                    this.snackBar.open('No existe información, comprueba los periodos', 'X', {
+                        duration: 2000,
+                    });
+                } else {
+                    read(data);
+                }
+
             }
         );
 
@@ -37,6 +44,11 @@ export class GraficYearAreaComponent {
             totalsalesCash = 0;
             totalsalesCard = 0;
             controlDates = 1;
+            if (data[controlDates]['closureDate'] === undefined) {
+                this.snackBar.open('No existe datos en la bd', 'X', {
+                    duration: 2000,
+                });
+            }
             data[controlDates]['closureDate'] = new Date();
             yearFinal = data[controlDates]['closureDate'].getFullYear();
 
@@ -53,6 +65,9 @@ export class GraficYearAreaComponent {
                 }
             }
             google.charts.setOnLoadCallback(draw(salesList));
+
+
+
         }
 
         function draw(salesList) {
