@@ -1,6 +1,6 @@
 <h3 mat-dialog-title>Cash Movements</h3>
 <mat-dialog-content>
-        <mat-radio-group class="radio-buttons-column" [(ngModel)]="cashMovement.selectedOperation">
+        <mat-radio-group class="radio-buttons-column" [(ngModel)]="selectedOperation">
             <mat-radio-button *ngFor="let operation of operations" [value]="operation" (click)="isChecked = true">
                 {{operation}} to Cashier
             </mat-radio-button>
