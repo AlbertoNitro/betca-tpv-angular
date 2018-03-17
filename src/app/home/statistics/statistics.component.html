@@ -3,67 +3,66 @@
     <div class="item item-1" fxFlex="35%">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <span>Ventas anuales</span>
+                <span>Sales for years</span>
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-card class="example-card">
             <mat-card-content>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Periodo de Inicio" #yearI>
+                    <mat-select placeholder="Start period" #yearI>
                         <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Fin de Periodo" #yearF>
+                    <mat-select placeholder="Finish period" #yearF>
                         <mat-option *ngFor="let year of years" [value]="year">{{year}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', yearI.value, yearF.value, titleh='Años', titlev='Ventas', estado='areaA');">
-                    <mat-icon>refresh</mat-icon>
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficAreaYear(yearI.value, yearF.value);" [disabled]="yearI.value === undefined || yearF.value === undefined">
+                    <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="clearfix"></div>
             <div class="col-md-6">
-                <div id="areaA" class="chart"></div>
+                <div id="areaYear" class="chart"></div>
             </div>
-
         </mat-card>
     </div>
     <div class="item item-2" fxFlex="35%">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <span>Ventas mensuales</span>
+                <span>Sales for months</span>
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-card class="example-card">
             <mat-card-content>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Periodo de Inicio" #mounthI>
-                        <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
+                    <mat-select placeholder="Start period" #mounthI>
+                        <mat-option *ngFor="let mounth of date" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-icon>event</mat-icon>
                 <mat-form-field fxFlex="35%">
-                    <mat-select placeholder="Periodo de Inicio" #mounthF>
-                        <mat-option *ngFor="let mounth of mounths" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
+                    <mat-select placeholder="Finish period" #mounthF>
+                        <mat-option *ngFor="let mounth of date" [value]="mounth.value">{{mounth.viewValue}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="create('', mounthI.value, mounthF.value, titleh='Meses', titlev='Ventas', estado='columna');">
-                    <mat-icon>refresh</mat-icon>
+                <button class="refresh" type="submit" mat-fab color="primary" (click)="graficColumMonth(mounthI.value, mounthF.value);" [disabled]="mounthI.value === undefined || mounthF.value === undefined">
+                    <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
-                <div id="columna" class="chart"></div>
+                <div id="columMonth" class="chart"></div>
             </div>
         </mat-card>
     </div>
     <div class="item item-3" fxFlex="35%">
         <mat-toolbar color="primary">
             <mat-toolbar-row>
-                <span>Producto por mes</span>
+                <span>Product by months</span>
             </mat-toolbar-row>
         </mat-toolbar>
         <mat-card class="example-card">
@@ -71,15 +70,13 @@
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Product by code" type="text" #code>
                 </mat-form-field>
-                <button type="submit" mat-fab color="primary" (click)="create(code.value,'','', titleh='Meses', titlev='Total', estado='areaM');"
-                    [disabled]="code.value === ''">
+                <button type="submit" mat-fab color="primary" (click)="graficCode(code.value);" [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>
                 </button>
             </mat-card-content>
             <div class="col-md-6">
-                <div id="areaM" class="chart"></div>
+                <div id="areaCode" class="chart"></div>
             </div>
-
         </mat-card>
     </div>
 </div>

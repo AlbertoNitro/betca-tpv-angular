@@ -7,8 +7,7 @@ import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
-import { UserQuickCreateInvoiceDialogComponent } from './user-quick-creation-invoice-dialog.component';
-import { UserQuickUpdateDialogComponent } from './user-quick-update-dialog.component';
+import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { User } from '../shared/user.model';
 import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
 
@@ -27,7 +26,6 @@ export class ShoppingCartCheckOutDialogComponent {
     users: User[] = [
         { mobile: 199554353, username: 'user1', dni: '1104402944', address: 'direcccion1' },
         { mobile: 634969957, username: 'user2', dni: '', address: '' },
-        { mobile: 0, username: '', dni: '', address: '' }
     ];
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
@@ -41,33 +39,49 @@ export class ShoppingCartCheckOutDialogComponent {
         return this.return() < 0 || this.mobileSynchronize();
     }
 
-    invalidInvioce(): boolean {
-        return !this.foundMobile && this.invalidCheckOut();
+    invalidInvoice(): boolean {
+        return !((this.foundMobile) && (this.return() >= 0));
+    }
+
+    number(value: number): number {
+        return ((value === undefined || value === null) ? 0 : value);
     }
 
     return(): number {
         return Math.round(
-            ((this.ticketCreation.cash + this.ticketCreation.card + this.ticketCreation.voucher) - this.total) * 100
+            (0 + this.number(this.ticketCreation.cash)
+                + this.number(this.ticketCreation.card)
+                + this.number(this.ticketCreation.voucher)
+                - this.total) * 100
         ) / 100;
     }
 
-    fill(type: string) {
-        this.ticketCreation.cash = 0;
-        this.ticketCreation.card = 0;
-        this.ticketCreation.voucher = 0;
-        this.ticketCreation[type] = this.total;
+    fillCard() {
+        if (this.return() < 0) {
+            this.ticketCreation.card = -this.return();
+        } else {
+            this.ticketCreation.card = this.total;
+            this.ticketCreation.cash = undefined;
+        }
+    }
+
+    fillCash() {
+        this.ticketCreation.cash = this.number(this.ticketCreation.cash);
+        if (this.return() < 0) {
+            this.ticketCreation.cash = -this.return();
+        } else if (this.ticketCreation.cash < 20) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
+        } else if (this.ticketCreation.cash < 50) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 10) + 1) * 10;
+        } else {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 50) + 1) * 50;
+        }
     }
 
     checkOut() {
-        if (!this.ticketCreation.cash) {
-            this.ticketCreation.cash = 0;
-        }
-        if (!this.ticketCreation.card) {
-            this.ticketCreation.card = 0;
-        }
-        if (!this.ticketCreation.voucher) {
-            this.ticketCreation.voucher = 0;
-        }
+        this.ticketCreation.cash = this.number(this.ticketCreation.cash);
+        this.ticketCreation.card = this.number(this.ticketCreation.card);
+        this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
@@ -75,16 +89,20 @@ export class ShoppingCartCheckOutDialogComponent {
         console.log('Se ha creado una reserva');
     }
 
-    checkMobile() {
-        if (this.foundMobile) {
-            this.ticketCreation.userMobile = undefined;
-            this.foundMobile = false;
-        } else {
-            this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
-                data => this.foundMobile = true,
-                error => this.createUser()
-            );
-        }
+    findMobile() {
+        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+            data => this.foundMobile = true,
+            error => this.createUser()
+        );
+    }
+
+    deleteMobile() {
+        this.ticketCreation.userMobile = undefined;
+        this.foundMobile = false;
+    }
+
+    editMobile() {
+
     }
 
     private createUser() {
@@ -103,9 +121,6 @@ export class ShoppingCartCheckOutDialogComponent {
 
     checkUser() {
         let user: User;
-        if (this.ticketCreation.userMobile === undefined) {
-            this.ticketCreation.userMobile = 0;
-        }
         for (const item of this.users) {
             if (item.mobile === this.ticketCreation.userMobile) {
                 user = item;
@@ -114,31 +129,24 @@ export class ShoppingCartCheckOutDialogComponent {
         if (user.mobile && user.username && user.dni && user.address) {
             console.log('LLamar al servicio para crear ticket y factura');
         } else {
-            if (user.mobile && user.username) {
-                console.log('LLamar al servicio actualizacion de usuario');
-                this.updateUserInvoice(user);
-            } else {
-                console.log('LLamar al servicio creacion de usuario');
-                this.createUserInvoice();
-            }
+            console.log('LLamar al servicio actualizacion de usuario');
+            this.updateUserInvoice(user);
+
         }
     }
-    private createUserInvoice() {
-        this.dialog.open(UserQuickCreateInvoiceDialogComponent);
-    }
-    private updateUserInvoice(data) {
-        const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateDialogComponent);
+
+    updateUserInvoice(data) {
+        const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateInvoiceDialogComponent);
         dialogUpdateUserRef.componentInstance.mobile = this.ticketCreation.userMobile;
         dialogUpdateUserRef.componentInstance.user = data;
     }
 
-
-    private consumeVoucher() {
+    consumeVoucher() {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                this.ticketCreation.voucher = result;
+                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher) + result;
             }
-        )
+        );
     }
 }

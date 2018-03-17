@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-
+import { URLSearchParams, RequestOptions } from '@angular/http';
 import { CashierLast } from './cashier-last.model';
 import { CashierClosure } from './cashier-closure.model';
 import { CashierClosureInfo } from './cashier-closure-info.model';
@@ -13,6 +13,7 @@ import { ArticleService } from './article.service';
 export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
+    static SEARCH = '/search';
 
     private cashierLast: Subject<CashierLast> = new Subject();
     private cashierClosureInfo: CashierClosureInfo = { totalCard: 120, totalCash: 20 };
@@ -43,8 +44,12 @@ export class CashierService {
         );
     }
 
-    readAll(dateStart:Date): Observable<CashierClosure[]> {
-        return this.httpService.authToken().get(CashierService.END_POINT+ '/' + dateStart);
+    readAllBetweenDates(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
+        const cpParams = new URLSearchParams();
+        cpParams.append('dateStart', dateStart.toISOString());
+        cpParams.append('dateFinish', dateFinish.toISOString());
+        const options = new RequestOptions({ params: cpParams });
+        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + '?' + options.search);
     }
 
     getCashierClosureInfo(): CashierClosureInfo {

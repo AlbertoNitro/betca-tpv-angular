@@ -36,12 +36,12 @@
 
             <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef>
-                        <button mat-button matSuffix mat-icon-button aria-label="Clear" >
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="create()" >
                             <mat-icon color="warn">person_add</mat-icon>
                         </button>
                     </mat-header-cell>
                     <mat-cell *matCellDef="let element">
-                        <button mat-button matSuffix mat-icon-button aria-label="Clear" >
+                        <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="edit(element)" >
                             <mat-icon color="warn">mode_edit</mat-icon>
                         </button>
                     </mat-cell>
