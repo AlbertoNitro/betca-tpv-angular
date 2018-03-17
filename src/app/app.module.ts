@@ -37,10 +37,11 @@ import {UserService} from './home/shared/user.service';
 import {VoucherService} from '../app/home/vouchers/voucher.service';
 import {orderService} from '../app/home/orders/orders.service';
 
-import {AppComponent} from './app.component';
-import {ArticlesComponent} from './home/articles/articles.component';
-import {ChartsModule} from 'ng2-charts';
-import {ArticlesFamilyComponent} from './home/cashier-opened/articles-family/articles-family.component';
+import { AppComponent } from './app.component';
+import { ArticlesComponent } from './home/articles/articles.component';
+import { ChartsModule } from 'ng2-charts';
+import { ArticlesFamilyComponent } from './home/cashier-opened/articles-family/articles-family.component';
+import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import {ArticlesFamilyComponent} from './home/cashier-opened/articles-family/art
     AppRoutingModule.COMPONENT_FACTORY,
     ArticlesComponent,
     ArticlesFamilyComponent,
+    HistoricChartComponent
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
