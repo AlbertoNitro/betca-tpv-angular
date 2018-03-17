@@ -1,0 +1,15 @@
+<h3 mat-dialog-title>Consult Offer</h3>
+<form>
+    <mat-dialog-content>
+        <mat-form-field>
+            <input matInput type="text" placeholder="offer" #offer />
+            <mat-error>Field required</mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+    
+    <mat-dialog-actions>
+        <button mat-button mat-dialog-close>Cancel</button>
+        <button type="submit" mat-button mat-dialog-close  (click)="consultOffer()">Seed Database</button>
+    </mat-dialog-actions>
+    
+</form>
