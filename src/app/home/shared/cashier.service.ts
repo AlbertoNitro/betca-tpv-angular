@@ -5,7 +5,6 @@ import { Subject } from 'rxjs/Subject';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import { CashierLast } from './cashier-last.model';
 import { CashierClosure } from './cashier-closure.model';
-import { CashierClosureInfo } from './cashier-closure-info.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
 
@@ -16,7 +15,8 @@ export class CashierService {
     static SEARCH = '/search';
 
     private cashierLast: Subject<CashierLast> = new Subject();
-    private cashierClosureInfo: CashierClosureInfo = { totalCard: 120, totalCash: 20 };
+    private cashierClosure: CashierClosure = { finalCash: 0, salesCard: 0,
+                                                    totalCard: 120, totalCash: 20 };
 
     constructor(private httpService: HttpService) {
     }
@@ -52,8 +52,8 @@ export class CashierService {
         return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + '?' + options.search);
     }
 
-    getCashierClosureInfo(): CashierClosureInfo {
+    getCashierClosureInfo(): CashierClosure {
         // this will have the call to httpService to retrieve total Card and total Cash
-        return this.cashierClosureInfo;
+        return this.cashierClosure;
     }
 }

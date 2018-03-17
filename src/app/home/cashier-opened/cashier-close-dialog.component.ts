@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CashierClosure } from '../shared/cashier-closure.model';
-import { CashierClosureInfo } from '../shared/cashier-closure-info.model';
 import { CashierService } from '../shared/cashier.service';
 
 @Component({
@@ -11,11 +10,11 @@ import { CashierService } from '../shared/cashier.service';
     }`]
 })
 export class CashierCloseDialogComponent {
-    cashierClosure: CashierClosure = { finalCash: 0, salesCard: 0, comment: '' };
-    cashierClosureInfo: CashierClosureInfo = { totalCard: 0, totalCash: 0 };
+    cashierClosure: CashierClosure = { finalCash: 0, salesCard: 0, comment: '',
+                                            totalCard: 0, totalCash: 0 };
 
     constructor(private cashierService: CashierService) {
-        this.cashierClosureInfo = this.cashierService.getCashierClosureInfo();
+        this.cashierClosure = this.cashierService.getCashierClosureInfo();
     }
 
     close() {
