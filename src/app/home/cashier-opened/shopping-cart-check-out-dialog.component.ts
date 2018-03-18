@@ -23,12 +23,8 @@ export class ShoppingCartCheckOutDialogComponent {
     @Input() total: number;
     ticketCreation: TicketCreation;
     foundMobile = false;
-    users: User[] = [
-        { mobile: 199554353, username: 'user1', dni: '1104402944', address: 'direcccion1' },
-        { mobile: 634969957, username: 'user2', dni: '', address: '' },
-    ];
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
-        this.ticketCreation = { userMobile: undefined, cash: undefined, card: undefined, voucher: undefined, shoppingCart: null };
+        this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
 
     mobileSynchronize(): boolean {
@@ -43,15 +39,16 @@ export class ShoppingCartCheckOutDialogComponent {
         return !((this.foundMobile) && (this.return() >= 0));
     }
 
-    number(value) {
-        return (value === undefined ? 0 : value);
+    number(value: number): number {
+        return ((value === undefined || value === null) ? 0 : value);
     }
+
     return(): number {
         return Math.round(
-            ((0 + (this.number(this.ticketCreation.cash))
-                + (this.number(this.ticketCreation.card))
-                + (this.number(this.ticketCreation.voucher))
-            ) - this.total) * 100
+            (0 + this.number(this.ticketCreation.cash)
+                + this.number(this.ticketCreation.card)
+                + this.number(this.ticketCreation.voucher)
+                - this.total) * 100
         ) / 100;
     }
 
@@ -119,19 +116,15 @@ export class ShoppingCartCheckOutDialogComponent {
     }
 
     checkUser() {
-        let user: User;
-        for (const item of this.users) {
-            if (item.mobile === this.ticketCreation.userMobile) {
-                user = item;
+        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+            data => {
+                if (data.username && data.dni && data.address) {
+                    console.log('LLamar al servicio para crear ticket y factura');
+                } else {
+                    this.updateUserInvoice(data);
+                }
             }
-        }
-        if (user.mobile && user.username && user.dni && user.address) {
-            console.log('LLamar al servicio para crear ticket y factura');
-        } else {
-            console.log('LLamar al servicio actualizacion de usuario');
-            this.updateUserInvoice(user);
-
-        }
+        );
     }
 
     updateUserInvoice(data) {
