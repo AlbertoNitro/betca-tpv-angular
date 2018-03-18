@@ -27,10 +27,12 @@ export class CashMovementDialogComponent {
         if (this.selectedOperation === Operations[Operations.Add]) {
             this.cashMovement.value = Math.abs(this.cashMovement.value);
         }
+
         if (this.selectedOperation === Operations[Operations.Remove]) {
             this.cashMovement.value =
                 (this.cashMovement.value < 0) ? this.cashMovement.value : -1 * this.cashMovement.value;
         }
+
         this.cashMovementService.createObservable(this.cashMovement).subscribe();
     }
 
