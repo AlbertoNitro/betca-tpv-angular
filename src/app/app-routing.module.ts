@@ -34,6 +34,7 @@ import { CreateOfferDialogComponent } from './home/offers/create-offer-dialog.co
 import { SearchOfferDialogComponent } from './home/offers/search-offer-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
+import { OffersComponent } from './home/offers/offers.component';
 
 
 const appRoutes: Routes = [
@@ -54,7 +55,8 @@ const appRoutes: Routes = [
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
-      { path: OrdersComponent.URL , component: OrdersComponent}
+      { path: OrdersComponent.URL , component: OrdersComponent},
+      { path: OffersComponent.URL , component: OffersComponent}
     ]
   }
 ];
@@ -80,7 +82,8 @@ export class AppRoutingModule {
     WelcomeComponent,
     Statistics2Component,
     ScheduleComponent,
-    OrdersComponent
+    OrdersComponent,
+    OffersComponent
   ];
 
   static COMPONENT_FACTORY = [

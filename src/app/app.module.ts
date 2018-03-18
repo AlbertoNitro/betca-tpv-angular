@@ -37,6 +37,7 @@ import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
 import { VoucherService } from '../app/home/vouchers/voucher.service';
 import { orderService } from '../app/home/orders/orders.service';
+import { OfferService } from './home/shared/offer.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
@@ -115,7 +116,8 @@ import { HistoricChartComponent } from './home/statistics2/historicChart.compone
     TicketService,
     UserService,
     VoucherService,
-    orderService
+    orderService,
+    OfferService
   ]
 })
 export class AppModule {
