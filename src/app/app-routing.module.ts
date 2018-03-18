@@ -30,8 +30,8 @@ import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
-import { CreateOfferDialogComponent } from './home/offers/create-offer-dialog.component';
-import { SearchOfferDialogComponent } from './home/offers/search-offer-dialog.component';
+import { OfferSearchDialogComponent } from './home/offers/offer-search-dialog.component';
+import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
@@ -90,8 +90,8 @@ export class AppRoutingModule {
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashMovementDialogComponent,
-    CreateOfferDialogComponent,
-    SearchOfferDialogComponent,
+    OfferSearchDialogComponent,
+    OfferCreateEditDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,

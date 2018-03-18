@@ -1,4 +1,5 @@
-<h2 mat-dialog-title >Add Offer</h2>
+<h2 mat-dialog-title *ngIf="!edit">New Offer</h2>
+<h2 mat-dialog-title *ngIf="edit">Edit Offer</h2>
 <mat-dialog-content>  
     <mat-form-field>
         <input matInput type="text" placeholder="code" required  [(ngModel)]="offer.code" />
@@ -25,5 +26,6 @@
 
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button (click)="createOffer()" cdkFocusInitial [disabled]="!offer.code">Create</button>
+   
+    <button mat-raised-button *ngIf="!edit" cdkFocusInitial (click)="create()" [disabled]="!offer.code" >Create</button>
 </mat-dialog-actions>

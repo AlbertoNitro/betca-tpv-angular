@@ -23,8 +23,7 @@ import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component } from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
-import { CreateOfferDialogComponent } from './offers/create-offer-dialog.component';
-import { SearchOfferDialogComponent } from './offers/search-offer-dialog.component';
+import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
 import { OffersComponent } from './offers/offers.component';
 
 @Component({
@@ -121,15 +120,11 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
 
-  createOffer() {
-    this.dialog.open(CreateOfferDialogComponent);
-  }
-
   searchOffer() {
-    this.dialog.open(SearchOfferDialogComponent);
+    this.dialog.open(OfferSearchDialogComponent);
   }
     
-  managmentOffers () {
+  OffersManagment () {
     this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 
