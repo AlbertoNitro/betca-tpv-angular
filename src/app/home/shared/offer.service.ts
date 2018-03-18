@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Offer } from './offer.model';   
 import { HttpService } from '../../core/http.service';
 import { Observable } from 'rxjs/Observable';
@@ -43,5 +42,4 @@ export class OfferService {
             duration: 2000
         });
     }
-
 }
