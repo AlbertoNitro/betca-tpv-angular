@@ -23,12 +23,9 @@ export class OffersComponent implements OnInit {
     }
 
     synchronize() {   
-        /*
         this.offerService.readAll().subscribe(
             data => this.data = data
         );
-        */
-       this.data = [ { code: 1, percentage: 20 , expiration : "ddd", description: "ll"}]
     }
 
     edit(offer: Offer) {
