@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { CashMovement } from '../shared/cash-movement.model';
+import { Component, Input } from '@angular/core';
+import { CashMovement } from './cash-movement.model';
+import { CashMovementService } from './cash-movement.service';
 
 @Component({
     templateUrl: 'cash-movement-dialog.component.html',
@@ -9,14 +10,25 @@ import { CashMovement } from '../shared/cash-movement.model';
     }`]
 })
 export class CashMovementDialogComponent {
-    cashMovement: CashMovement = { value: 0, comment: '', selectedOperation: '' };
+    cashMovement: CashMovement = { value: 0, comment: '' };
     isChecked = false;
-    operations = [ 'Add', 'Remove'];
+    selectedOperation = '';
+    operations = ['Add', 'Remove'];
 
-    constructor() {
+    constructor(private cashMovementService: CashMovementService) {
     }
 
     createMovement() {
-        console.log(this.cashMovement.selectedOperation);
+        if (this.selectedOperation === Operations[Operations.Add]) {
+            this.cashMovementService.add(this.cashMovement);
+        }
+        if (this.selectedOperation === Operations[Operations.Remove]) {
+            this.cashMovementService.remove(this.cashMovement);
+        }
     }
+}
+
+enum Operations {
+  Add,
+  Remove
 }
