@@ -25,6 +25,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
 import { CreateOfferDialogComponent } from './offers/create-offer-dialog.component';
 import { SearchOfferDialogComponent } from './offers/search-offer-dialog.component';
+import { OffersComponent } from './offers/offers.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -127,13 +128,16 @@ export class HomeComponent implements OnDestroy {
   searchOffer() {
     this.dialog.open(SearchOfferDialogComponent);
   }
+    
+  managmentOffers () {
+    this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
+  }
 
   budgets() {
     this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
   }
 
   Orders() {
-
     this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
   }
 
