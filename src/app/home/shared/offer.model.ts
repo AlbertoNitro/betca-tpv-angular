@@ -1,6 +1,6 @@
 export interface Offer {
-    code: string;
+    code: number;
     percentage: number;
-    expiration: string;
-    description: string;
+    expiration?: string;
+    description?: string;
 }
