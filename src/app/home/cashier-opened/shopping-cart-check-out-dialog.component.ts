@@ -23,10 +23,6 @@ export class ShoppingCartCheckOutDialogComponent {
     @Input() total: number;
     ticketCreation: TicketCreation;
     foundMobile = false;
-    users: User[] = [
-        { mobile: 199554353, username: 'user1', dni: '1104402944', address: 'direcccion1' },
-        { mobile: 634969957, username: 'user2', dni: '', address: '' },
-    ];
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
@@ -120,19 +116,15 @@ export class ShoppingCartCheckOutDialogComponent {
     }
 
     checkUser() {
-        let user: User;
-        for (const item of this.users) {
-            if (item.mobile === this.ticketCreation.userMobile) {
-                user = item;
+        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+            data => {
+                if (data.username && data.dni && data.address) {
+                    console.log('LLamar al servicio para crear ticket y factura');
+                } else {
+                    this.updateUserInvoice(data);
+                }
             }
-        }
-        if (user.mobile && user.username && user.dni && user.address) {
-            console.log('LLamar al servicio para crear ticket y factura');
-        } else {
-            console.log('LLamar al servicio actualizacion de usuario');
-            this.updateUserInvoice(user);
-
-        }
+        );
     }
 
     updateUserInvoice(data) {
