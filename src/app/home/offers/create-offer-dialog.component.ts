@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { Offer } from '../shared/offer.model';
 
 @Component({
-    templateUrl: 'add-offer-dialog.component.html',
+    templateUrl: 'create-offer-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
     
-export class AddOfferDialogComponent implements OnInit{
+export class CreateOfferDialogComponent implements OnInit{
         
     offer : Offer;
-    
+
     constructor() {
     }
     
@@ -22,7 +22,7 @@ export class AddOfferDialogComponent implements OnInit{
         }
     }
 
-    addOffer() {
+    createOffer() {
         console.log("Code: " + this.offer.code);
         console.log("percentage: " + this.offer.percentage);
         console.log("expiration: " + this.offer.expiration);
