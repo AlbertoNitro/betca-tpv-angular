@@ -37,7 +37,7 @@ export class HistoricChartComponent implements OnInit {
         this.disabled = true;
 
         // hacer llamada al servicio
-        this.ticketService.readNumProductsBeweenDates(
+        this.ticketService.readNumProductsBetweenDates(
             new Date(this.initDate.value),
             new Date(this.endDate.value)
         ).subscribe(

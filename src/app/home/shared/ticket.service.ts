@@ -20,7 +20,7 @@ export class TicketService {
         return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
     }
 
-    readNumProductsBeweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
+    readNumProductsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
 
         const historicalProducts = '/historicalProducts';
         // return this.httpService.authToken().get(TicketService.END_POINT + historicalProducts );
