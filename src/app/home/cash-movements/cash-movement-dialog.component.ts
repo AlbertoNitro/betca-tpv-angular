@@ -42,7 +42,6 @@ export class CashMovementDialogComponent {
     onCommentChange(comment: string) {
         this.isErrorCommentOn = (!this.cashMovement.comment || this.cashMovement.comment === '') ?
             true : false;
-        }
     }
 }
 
