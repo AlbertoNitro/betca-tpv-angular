@@ -12,7 +12,6 @@ const month = FormatDate.months;
 export class GraficMonthsColumnComponent {
 
     constructor(private cashierService: CashierService, public snackBar: MatSnackBar) {
-        google.charts.load('current', { 'packages': ['corechart'] });
     }
 
     init() {

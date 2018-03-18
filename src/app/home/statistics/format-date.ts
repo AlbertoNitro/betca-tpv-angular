@@ -6,7 +6,7 @@ export class FormatDate {
     }
 
     static yearTimeFinish(dateF: number): Date {
-        const dateEnd = new Date(dateF, 12, 31, 99, 99, 99);
+        const dateEnd = new Date(dateF, 12, 31, 11, 59, 59);
         return dateEnd;
     }
 
