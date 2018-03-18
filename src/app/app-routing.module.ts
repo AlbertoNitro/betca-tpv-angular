@@ -14,7 +14,7 @@ import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './home/cash-movement/cash-movement-dialog.component';
+import { CashMovementDialogComponent } from './home/cash-movements/cash-movement-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
@@ -46,6 +46,7 @@ const appRoutes: Routes = [
       { path: BudgetsComponent.URL, component: BudgetsComponent },
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
+      { path: CashMovementDialogComponent.URL, component: CashMovementDialogComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: StockAlertComponent.URL, component: StockAlertComponent},
@@ -71,6 +72,7 @@ export class AppRoutingModule {
     BudgetsComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
+    CashMovementDialogComponent,
     HomeComponent,
     ProvidersComponent,
     ShoppingCartComponent,
