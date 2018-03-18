@@ -21,7 +21,9 @@ export class BudgetsComponent implements OnInit {
     }
 
     synchronize() {
-        this.data = this.budgetService.readAll();
+        this.budgetService.readAll().subscribe(
+            data => this.data = data
+        );
     }
 
 }
