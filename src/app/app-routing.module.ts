@@ -18,6 +18,7 @@ import { CashMovementDialogComponent } from './home/cash-movement/cash-movement-
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
 import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
+import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
 import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './home/cashier-opened/user-quick-update-invoice-dialog.component';
@@ -29,8 +30,8 @@ import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
-import { AddOfferDialogComponent } from './home/offers/add-offer-dialog.component';
-import { ConsultOfferDialogComponent } from './home/offers/consult-offer-dialog.component';
+import { CreateOfferDialogComponent } from './home/offers/create-offer-dialog.component';
+import { SearchOfferDialogComponent } from './home/offers/search-offer-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
 
@@ -46,6 +47,7 @@ const appRoutes: Routes = [
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
+      { path: StockAlertComponent.URL, component: StockAlertComponent},
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
@@ -71,6 +73,7 @@ export class AppRoutingModule {
     ProvidersComponent,
     ShoppingCartComponent,
     StatisticsComponent,
+    StockAlertComponent,
     TicketsComponent,
     UsersComponent,
     VouchersComponent,
@@ -84,8 +87,8 @@ export class AppRoutingModule {
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashMovementDialogComponent,
-    AddOfferDialogComponent,
-    ConsultOfferDialogComponent,
+    CreateOfferDialogComponent,
+    SearchOfferDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
