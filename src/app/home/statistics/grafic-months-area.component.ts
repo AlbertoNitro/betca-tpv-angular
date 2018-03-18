@@ -26,7 +26,6 @@ export class GraficMonthsAreaComponent {
     create(id) {
         this.ticketService.readAllBetweenDates(id).subscribe(
             data => {
-                console.log(data);
                 if (data.length === 0) {
                     this.snackBar.open('There is not information', 'X', {
                         duration: 2000,
