@@ -8,8 +8,7 @@ let chart: any;
 
 export class GraficMonthsAreaComponent {
 
-    constructor(private cashierService: TicketService) {
-        google.charts.load('current', { 'packages': ['corechart'] });
+    constructor(private ticketService: TicketService) {
     }
 
     init() {
@@ -21,21 +20,11 @@ export class GraficMonthsAreaComponent {
         }
     }
 
-    create(code: string) {
-        // this.readData(code);
-        google.charts.setOnLoadCallback(draw);
-
-        function draw() {
-            const dataAPI = google.visualization.arrayToDataTable([
-                ['closureDate', 'salesCard'],
-                ['2018', 1]
-            ]);
-            const options = {
-                hAxis: { title: 'Meses', titleTextStyle: { color: '#333' } },
-                vAxis: { title: 'Ventas', minValue: 0 }
-            };
-            chart = new google.visualization.ColumnChart(document.getElementById(Grafic.AREA_MONTHS));
-            chart.draw(dataAPI, options);
-        }
+    create(id) {
+        this.ticketService.readAllBetweenDates(id).subscribe(
+            data => {
+                console.log(data);
+            }
+        );
     }
 }
