@@ -8,7 +8,7 @@ import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
-import { BudgetCreation } from '../shared/budget-creation.model';
+import { Budget } from '../shared/budget.model';
 import { Article } from '../shared/article.model';
 import { MatSnackBar } from '@angular/material';
 
@@ -107,9 +107,9 @@ export class ShoppingCartService {
     }
 
     createBudget(): void {
-        let budgetCreation: BudgetCreation;
-        budgetCreation = { shoppingCart: this.shoppingCart };
-        this.budgetService.create(budgetCreation).subscribe(
+        let budget: Budget;
+        budget = { shoppingCart: this.shoppingCart };
+        this.budgetService.create(budget).subscribe(
             blob => {
                 this.openPdf(blob);
             }

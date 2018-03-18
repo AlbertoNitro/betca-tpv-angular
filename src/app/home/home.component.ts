@@ -10,16 +10,21 @@ import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
+import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
 import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { StockAlertComponent } from './stock-alert/stock-alert.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
-import { Statistics2Component} from './statistics2/statistics2.component';
+import { Statistics2Component } from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { OrdersComponent } from './orders/orders.component';
+import { AddOfferDialogComponent } from './offers/add-offer-dialog.component';
+import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -107,8 +112,37 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
 
+  stockAlerts() {
+    this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
+  }
+
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
+  }
+
+  addOffer() {
+    this.dialog.open(AddOfferDialogComponent);
+  }
+
+  consultOffer() {
+    this.dialog.open(ConsultOfferDialogComponent);
+  }
+
+  budgets() {
+    this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
+  }
+
+  Orders() {
+
+    this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
+  }
+
+  password() {
+    alert('password changing');
+  }
+
+  roleManagement() {
+    alert('role Management');
   }
 
 }
