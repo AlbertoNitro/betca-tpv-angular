@@ -15,6 +15,8 @@ export class CashierService {
     static SEARCH = '/search?';
 
     private cashierLast: Subject<CashierLast> = new Subject();
+    private cashierClosure: CashierClosure = { finalCash: 0, salesCard: 0,
+                                                    totalCard: 120, totalCash: 20 };
 
     constructor(private httpService: HttpService) {
     }
@@ -48,5 +50,10 @@ export class CashierService {
         cpParams.append('dateFinish', dateFinish.toISOString());
         const options = new RequestOptions({ params: cpParams });
         return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + options.search);
+    }
+
+    getCashierClosureInfo(): CashierClosure {
+        // this will have the call to httpService to retrieve total Card and total Cash
+        return this.cashierClosure;
     }
 }
