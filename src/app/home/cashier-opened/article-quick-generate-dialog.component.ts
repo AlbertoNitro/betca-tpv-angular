@@ -37,6 +37,7 @@ export class ArticleQuickDialogComponent {
         this.articleService.articleGenerateObservable(article).subscribe(
             data => {
                 this.successful();
+                this.dialogRef.close();
             },
             error => {
                 this.unsuccessful();
