@@ -12,7 +12,7 @@ import { CashierOpenedComponent } from './cashier-opened/cashier-opened.componen
 import { AdminsService } from './admin/admins.service';
 import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
+import { CashMovementDialogComponent } from './cash-movements/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
