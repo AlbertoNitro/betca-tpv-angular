@@ -13,7 +13,7 @@ export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
     static SEARCH = '/search';
-    static GET_TOTALS = '/get-totals';
+    static GET_TOTALS = '/totals';
 
     private cashierLast: Subject<CashierLast> = new Subject();
 
