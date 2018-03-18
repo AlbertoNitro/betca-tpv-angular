@@ -47,5 +47,4 @@ export class OffersComponent implements OnInit {
             result => this.synchronize()
         );
     }
-
 }
