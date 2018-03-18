@@ -11,7 +11,6 @@ let controlDates: number;
 export class GraficYearAreaComponent {
 
     constructor(private cashierService: CashierService, public snackBar: MatSnackBar) {
-        google.charts.load('current', { 'packages': ['corechart'] });
     }
 
     init() {

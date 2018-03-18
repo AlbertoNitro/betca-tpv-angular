@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material';
 
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
+import { error } from 'util';
 
 
 @Component({
@@ -25,11 +26,14 @@ export class UserQuickUpdateInvoiceDialogComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.user = { mobile: this.mobile, username: this.user.username, dni: '' };
+        this.user = { mobile: this.mobile, username: this.user.username };
     }
 
     putUser(): void {
-        console.log('Llamar a servicion de actualizacion de usuario');
+        this.userService.putObservable(this.user).subscribe(
+            data => this.dialogRef.close(true),
+            error => this.dialogRef.close()
+        );
     }
 
 }

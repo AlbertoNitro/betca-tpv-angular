@@ -8,24 +8,25 @@
         <div fxLayout fxLayout.xs="column" fxLayoutGap="0.5%">
             <div fxFlex="75%">
                 <mat-form-field>
-                    <input matInput [matDatepicker]="initDateTimeHistoricProducts" placeholder="Choose a date">
-                    <mat-datepicker-toggle matSuffix [for]="initDateTimeHistoricProducts"></mat-datepicker-toggle>
-                    <mat-datepicker #initDateTimeHistoricProducts></mat-datepicker>
+                    <input matInput [matDatepicker]="initDatePicker" placeholder="Choose a date" [formControl]="initDate">
+                    <mat-datepicker-toggle matSuffix [for]="initDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #initDatePicker></mat-datepicker>
                 </mat-form-field>
                 <mat-form-field>
-                    <input matInput [matDatepicker]="endDateTimeHistoricProducts" placeholder="Choose a date">
-                    <mat-datepicker-toggle matSuffix [for]="endDateTimeHistoricProducts"></mat-datepicker-toggle>
-                    <mat-datepicker #endDateTimeHistoricProducts></mat-datepicker>
+                    <input matInput [matDatepicker]="endDatePicker" placeholder="Choose a date" [formControl]="endDate">
+                    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                    <mat-datepicker #endDatePicker></mat-datepicker>
                 </mat-form-field>
             </div>
             <div fxFlex="25%" class="refreshBtnContainer">
-                <button class="refresh" type="submit" mat-fab color="primary" (click)="refreshHistoricalProductsChart()">
-                    <mat-icon>refresh</mat-icon>
+                <button class="refresh" type="submit" disabled={{disabled}} mat-fab color="primary" (click)="refreshHistoricalProductsChart()">
+                    <mat-icon>search</mat-icon>
                 </button>
             </div>
         </div>
         <div style="display: block;">
-            <canvas baseChart #chartHistoric="base-chart" [datasets]="lineChartData" [labels]="lineChartLabels" [legend]="lineChartLegend" [chartType]="lineChartType"></canvas>
+            <canvas baseChart #chartHistoric="base-chart" [datasets]="lineChartData" [labels]="lineChartLabels" [legend]="lineChartLegend"
+                [chartType]="lineChartType"></canvas>
         </div>
     </mat-card-content>
 </mat-card>

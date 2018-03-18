@@ -12,8 +12,8 @@ import { ArticleService } from './article.service';
 export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
-    static SEARCH = '/search';
-    static GET_TOTALS = '/totals';
+    static SEARCH = '/search?';
+    static TOTALS = '/totals';
 
     private cashierLast: Subject<CashierLast> = new Subject();
 
@@ -48,7 +48,7 @@ export class CashierService {
         cpParams.append('dateStart', dateStart.toISOString());
         cpParams.append('dateFinish', dateFinish.toISOString());
         const options = new RequestOptions({ params: cpParams });
-        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + '?' + options.search);
+        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + options.search);
     }
 
     readTotalsObservable(): Observable<CashierClosure> {

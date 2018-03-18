@@ -16,14 +16,16 @@ import { CashMovementDialogComponent } from './cash-movements/cash-movement-dial
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { StockAlertComponent } from './stock-alert/stock-alert.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component } from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
-import { AddOfferDialogComponent } from './offers/add-offer-dialog.component';
-import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
+import { CreateOfferDialogComponent } from './offers/create-offer-dialog.component';
+import { SearchOfferDialogComponent } from './offers/search-offer-dialog.component';
+import { OffersComponent } from './offers/offers.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -111,16 +113,24 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
 
+  stockAlerts() {
+    this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
+  }
+
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
 
-  addOffer() {
-    this.dialog.open(AddOfferDialogComponent);
+  createOffer() {
+    this.dialog.open(CreateOfferDialogComponent);
   }
 
-  consultOffer() {
-    this.dialog.open(ConsultOfferDialogComponent);
+  searchOffer() {
+    this.dialog.open(SearchOfferDialogComponent);
+  }
+    
+  managmentOffers () {
+    this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 
   budgets() {
