@@ -112,6 +112,10 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
 
+  stockAlerts() {
+    this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
+  }
+
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
@@ -126,11 +130,6 @@ export class HomeComponent implements OnDestroy {
 
   budgets() {
     this.router.navigate([HomeComponent.URL, BudgetsComponent.URL]);
-  }
-
-
-  stockAlerts() {
-    this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
   }
 
   Orders() {
