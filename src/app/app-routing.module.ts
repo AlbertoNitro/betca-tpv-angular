@@ -89,8 +89,7 @@ export class AppRoutingModule {
     ScheduleComponent,
     OrdersComponent,
     OffersComponent,
-    RoleManagementComponent,
-    RoleManagementDialogComponent
+    RoleManagementComponent
   ];
 
   static COMPONENT_FACTORY = [
@@ -106,6 +105,7 @@ export class AppRoutingModule {
     ArticleCreationEditDialogComponent,
     ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
+    RoleManagementDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
     VoucherCreationEditDialogComponent,
