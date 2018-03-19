@@ -21,7 +21,7 @@ export class ShoppingCartService {
 
     private shoppingCart: Array<Shopping> = new Array();
     private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
-    private indexShoppingCart = 0;
+    private _indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
@@ -35,6 +35,14 @@ export class ShoppingCartService {
 
     shoppingCartObservable(): Observable<Shopping[]> {
         return this.shoppingCartSubject.asObservable();
+    }
+
+    get indexShoppingCart(): number {
+        if (this._indexShoppingCart === 0) {
+            return undefined;
+        } else {
+            return this._indexShoppingCart + 1;
+        }
     }
 
     get total() {
@@ -91,9 +99,9 @@ export class ShoppingCartService {
     }
 
     exchange(): void {
-        this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
-        this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
-        this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
+        this.shoppingCartList[this._indexShoppingCart++] = this.shoppingCart;
+        this._indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
+        this.shoppingCart = this.shoppingCartList[this._indexShoppingCart];
         this.synchronizeAll();
     }
 

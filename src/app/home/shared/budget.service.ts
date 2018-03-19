@@ -16,13 +16,8 @@ export class BudgetService {
         return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budget);
     }
 
-    readAll(): Budget[] {
-        const data = [
-            {id: '1234', shoppingCart: null},
-            {id: '5678', shoppingCart: null},
-            {id: '9191', shoppingCart: null}
-        ];
-        return data;
+    readAll(): Observable<Budget[]> {
+        return this.httpService.authToken().get(BudgetService.END_POINT);
     }
 
 }

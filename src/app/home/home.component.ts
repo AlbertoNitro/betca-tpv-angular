@@ -12,18 +12,20 @@ import { CashierOpenedComponent } from './cashier-opened/cashier-opened.componen
 import { AdminsService } from './admin/admins.service';
 import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
+import { CashMovementDialogComponent } from './cash-movements/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { StockAlertComponent } from './stock-alert/stock-alert.component';
 import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component } from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
-import { AddOfferDialogComponent } from './offers/add-offer-dialog.component';
-import { ConsultOfferDialogComponent } from './offers/consult-offer-dialog.component';
+import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
+import { OffersComponent } from './offers/offers.component';
+import { RoleManagementComponent } from './role-management/role-management.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -111,16 +113,20 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
 
+  stockAlerts() {
+    this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
+  }
+
   schedule() {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
 
-  addOffer() {
-    this.dialog.open(AddOfferDialogComponent);
+  searchOffer() {
+    this.dialog.open(OfferSearchDialogComponent);
   }
 
-  consultOffer() {
-    this.dialog.open(ConsultOfferDialogComponent);
+  OffersManagment() {
+    this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 
   budgets() {
@@ -136,7 +142,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   roleManagement() {
-    alert('role Management');
+    this.router.navigate([HomeComponent.URL, RoleManagementComponent.URL]);
   }
 
 }

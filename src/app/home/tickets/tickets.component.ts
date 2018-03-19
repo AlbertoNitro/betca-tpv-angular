@@ -3,7 +3,6 @@ import {EditTicketDialogComponent} from './edit-ticket-dialog/edit-ticket-dialog
 import {MatPaginator, MatDialog, MatSort, MatTableDataSource} from '@angular/material';
 import {Shopping} from '../shared/shopping.model';
 import {Ticket} from '../shared/ticket.model';
-import {TicketCreation} from '../shared/ticket-creation.model';
 import {TicketService} from '../shared/ticket.service';
 
 @Component({
@@ -66,14 +65,13 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     listShopping.push(shopping3);
     return listShopping;
   }
-  showTicket() {
-    let listShopping = this.generateShoppingMock();
-    let ticketCreation: TicketCreation = {userMobile: 123, cash: 0, card: 0, voucher: 0, shoppingCart: listShopping};
-    this.ticketService.create(ticketCreation).subscribe(
-      blob => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
-      }
+  openPdf(blob: any) {
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+  }
+  showTicket(id: string) {
+    this.ticketService.read(id).subscribe(
+      blob => this.openPdf(blob)
     );
   }
 }
