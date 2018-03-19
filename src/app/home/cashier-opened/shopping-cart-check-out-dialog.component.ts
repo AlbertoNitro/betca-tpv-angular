@@ -78,6 +78,7 @@ export class ShoppingCartCheckOutDialogComponent {
         this.ticketCreation.cash = this.number(this.ticketCreation.cash);
         this.ticketCreation.card = this.number(this.ticketCreation.card);
         this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
+        
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
