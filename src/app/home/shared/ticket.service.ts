@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-
 import { HttpService } from '../../core/http.service';
-import { Shopping } from './shopping.model';
-import { TicketCreation } from './ticket-creation.model';
 import { NumProductSold } from './numProductSold.model';
-import { HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Ticket } from './ticket.model';
+import { TicketCreation } from './ticket-creation.model';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 
 @Injectable()
@@ -40,6 +38,10 @@ export class TicketService {
         cpParams.append('dateFinish', year + '-12-31 11:59:59');
         const options = new RequestOptions({ params: cpParams });
         return this.httpService.authToken().get(TicketService.END_POINT + TicketService.SEARCH + options.search);
+    }
+
+    read(id: string): Observable<Ticket> {
+      return this.httpService.authToken().get(`${TicketService.END_POINT}/${id}`);
     }
 
 }
