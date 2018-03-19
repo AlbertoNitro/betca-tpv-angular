@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Voucher } from './voucher.model';
+import { Voucher } from '../shared/voucher.model';
 import { VoucherService } from '../shared/voucher.service';
 import { VoucherCreationEditDialogComponent } from './voucher-creation-edit-dialog.component';
 
