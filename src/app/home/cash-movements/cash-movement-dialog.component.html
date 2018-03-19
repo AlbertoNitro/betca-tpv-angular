@@ -1,0 +1,22 @@
+<h3 mat-dialog-title>Cash Movements</h3>
+<mat-dialog-content>
+    <mat-error [hidden]="!isErrorValueOn && !isErrorCommentOn">Please fill all the fields</mat-error>
+    <mat-radio-group class="radio-buttons-column" [(ngModel)]="selectedOperation">
+        <mat-radio-button *ngFor="let operation of operations" [value]="operation" (click)="isChecked = true">
+            {{operation}} to Cashier
+        </mat-radio-button>
+        <br />
+    </mat-radio-group>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Value" [(ngModel)]="cashMovement.value"
+            (input)="onValueChange($event.target.value)" />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Comment" [(ngModel)]="cashMovement.comment" 
+            (input)="onCommentChange($event.target.value)" />
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close color="primary" cdkFocusInitial>Cancel</button>
+    <button mat-raised-button [mat-dialog-close]="!isErrorOn" (click)="createMovement()" [disabled]="!isChecked || !cashMovement.value || !cashMovement.comment || (isErrorValueOn && isErrorCommentOn)">Cash Movements</button>
+</mat-dialog-actions>
