@@ -1,16 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-import { UserCreationEditDialogComponent } from '../users/user-creation-edit-dialog.component';
-import { MatDialog } from '@angular/material';
+import { RoleManagementDialogComponent } from './role-management-dialog.component';
 
 @Component({
-  selector: 'app-role-management',
-  templateUrl: './role-management.component.html',
-  styleUrls: ['./role-management.component.css']
+  templateUrl: './role-management.component.html'
 })
 export class RoleManagementComponent implements OnInit {
-
   static URL = 'role-management';
 
   title = 'Role Management';
@@ -32,7 +29,7 @@ export class RoleManagementComponent implements OnInit {
   edit(user: User) {
     this.userService.readObservable(user.mobile).subscribe(
       data => {
-        const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
+        const dialogRef = this.dialog.open(RoleManagementDialogComponent);
         dialogRef.componentInstance.user = data;
         dialogRef.componentInstance.edit = true;
         dialogRef.afterClosed().subscribe(
@@ -42,6 +39,14 @@ export class RoleManagementComponent implements OnInit {
     );
   }
 
-  read(user: User) {}
+  create() {
+    const dialogRef = this.dialog.open(RoleManagementDialogComponent);
+    dialogRef.componentInstance.edit = false;
+    dialogRef.afterClosed().subscribe(
+      result => this.synchronize()
+    );
+
+  }
 
 }
+
