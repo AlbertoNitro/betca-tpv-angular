@@ -1,8 +1,7 @@
-<h2 mat-dialog-title>Create Customer</h2>
+<h2 mat-dialog-title>Update Customer</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="number" placeholder="Mobile" required cdkFocusInitial [(ngModel)]="user.mobile" />
-        <mat-error>Field required</mat-error>
+        <input matInput type="number" placeholder="Mobile" [value]="user.mobile" [disabled]="true" />
     </mat-form-field>
     <mat-form-field>
         <input matInput type="text" placeholder="Username" required cdkFocusInitial [(ngModel)]="user.username" />
@@ -21,6 +20,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button cdkFocusInitial [disabled]="!user.mobile ||!user.username || !user.dni || !user.address">Create
+    <button mat-raised-button cdkFocusInitial  (click)="putUser()" [disabled]="!user.username || !user.dni || !user.address">Update
     </button>
 </mat-dialog-actions>

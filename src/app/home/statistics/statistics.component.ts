@@ -1,123 +1,42 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material'
-import { CashierClosure } from '../shared/cashier-closure.model';
+import { GraficYearAreaComponent } from './grafic-year-area.component';
+import { GraficMonthsColumnComponent } from './grafic-months-colum.component';
+import { GraficMonthsAreaComponent } from './grafic-months-area.component';
+import { TicketService } from '../shared/ticket.service';
 import { CashierService } from '../shared/cashier.service';
-
+import { FormatDate } from './format-date';
+import { MatSnackBar } from '@angular/material';
 declare let google: any;
-let chart: any;
-let salesList = [];
 
 @Component({
     templateUrl: `statistics.component.html`,
-    styleUrls: [`statistics.component.css`],
+    styleUrls: [`statistics.component.css`]
 })
 export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
-    dataSource: MatTableDataSource<CashierClosure>;
-    private dateStart: Date;
-    private dateEnd: Date;
-
-    years = ['2018', '2019', '2020', '2021', '2022'];
-    mounths = [{ value: '01', viewValue: 'Ene' }, { value: '02', viewValue: 'Feb' }, { value: '03', viewValue: 'Mar' },
-    { value: '04', viewValue: 'Abr' }, { value: '05', viewValue: 'May' }, { value: '06', viewValue: 'Jun' },
-    { value: '07', viewValue: 'Jul' }, { value: '08', viewValue: 'Ago' }, { value: '09', viewValue: 'Sep' },
-    { value: '10', viewValue: 'Oct' }, { value: '11', viewValue: 'Nov' }, { value: '12', viewValue: 'Dic' }]
-
-    constructor(private cashierService: CashierService) {
+    date = FormatDate.months;
+    years = FormatDate.years();
+    constructor(private cashierService: CashierService, private ticketService: TicketService, public snackBar: MatSnackBar) {
         google.charts.load('current', { 'packages': ['corechart'] });
     }
+    graficYearArea = new GraficYearAreaComponent(this.cashierService, this.snackBar);
+    graficMonthColum = new GraficMonthsColumnComponent(this.cashierService, this.snackBar);
+    graficMonthArea = new GraficMonthsAreaComponent(this.ticketService, this.snackBar);
 
     ngOnInit(): void {
-        google.charts.setOnLoadCallback(draw);
-        function draw() {
-            let data = google.visualization.arrayToDataTable([['', ''], ['', 0]]);
-            chart = new google.visualization.AreaChart(document.getElementById('areaA'));
-            chart.draw(data);
-            chart = new google.visualization.ColumnChart(document.getElementById('columna'));
-            chart.draw(data);
-            chart = new google.visualization.AreaChart(document.getElementById('areaM'));
-            chart.draw(data);
-        }
+        this.graficYearArea.init();
+        this.graficMonthColum.init();
+        this.graficMonthArea.init();
     }
 
-    create(code: string, dateI: number, dateF: number, titleh: string, titlev: string, estado: string) {
-
-        if (estado === 'areaA') {
-            this.dateStart = new Date(dateI + "-01-01T00:00:00Z");
-            this.dateEnd = new Date(dateF + "-12-31T00:00:00Z");
-            this.readDates();
-            google.charts.setOnLoadCallback(draw);
-        }
-
-        if (estado === 'columna') {
-            this.dateStart = new Date();
-            let year = this.dateStart.getFullYear();
-            this.dateStart = new Date(year + "-" + dateI + "-01T00:00:00Z");
-            this.dateEnd = new Date(year + "-" + dateF + "-31T00:00:00Z");
-            this.readDates();
-            google.charts.setOnLoadCallback(draw);
-        } else {
-            this.dateStart = new Date();
-            let year = this.dateStart.getFullYear();
-            this.dateStart = new Date(year + "-01-01T00:00:00Z");
-            this.dateEnd = new Date(year + "-12-31T00:00:00Z");
-            this.readDates();
-            google.charts.setOnLoadCallback(draw);
-
-        }
-
-        function draw() {
-            let dataAPI = google.visualization.arrayToDataTable([
-                ['closureDate', 'salesCard', 'salesCash'],
-                // articleList
-            ]);
-            let options = {
-                hAxis: { title: titleh, titleTextStyle: { color: '#333' } },
-                vAxis: { title: titlev, minValue: 0 }
-            };
-            if (estado === 'columna')
-                chart = new google.visualization.ColumnChart(document.getElementById(estado));
-            chart = new google.visualization.AreaChart(document.getElementById(estado));
-            chart.draw(dataAPI, options);
-        }
+    graficAreaYear(dateI: number, dateF: number) {
+        this.graficYearArea.create(dateI, dateF);
     }
 
-
-    readDates() {
-
-        this.cashierService.readAll(this.dateStart).subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<CashierClosure>(data);
-            }
-        );
-
-           let totalsalesCash = 0;
-           let totalsalesCard = 0;
-           let fecha;
-           let aux = 1;
-   
-           this.testCashierClosure[aux].closureDate = new Date();
-           for (var i = 0; i < this.testCashierClosure.length; i++) {
-            this.testCashierClosure[i].closureDate = new Date();
-               if (this.testCashierClosure[i].closureDate === this.testCashierClosure[aux].closureDate) {
-                salesList.push([this.testCashierClosure[i].salesCard, this.testCashierClosure[i].salesCash, this.testCashierClosure[i].closureDate]);
-                   aux++;
-               } else {
-                salesList = [];
-                   totalsalesCash += this.testCashierClosure[i].salesCash;
-                   totalsalesCard += this.testCashierClosure[i].salesCard;
-                   salesList = [totalsalesCash, totalsalesCard, this.testCashierClosure[i].closureDate];
-   
-               }
-           }
+    graficColumMonth(dateI: number, dateF: number) {
+        this.graficMonthColum.create(dateI, dateF);
     }
-
-
-      testCashierClosure: CashierClosure[] = [
-        {salesCard: 1, salesCash: 1, closureDate: this.dateEnd},
-        {salesCard: 2, salesCash: 2, closureDate: this.dateEnd},
-        {salesCard: 3, salesCash: 3, closureDate: this.dateEnd}
-      ];
-
-} 
- 
+    graficCode(code: string) {
+        this.graficMonthArea.create(code);
+    }
+}
