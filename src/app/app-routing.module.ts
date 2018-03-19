@@ -35,6 +35,7 @@ import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
+import { RoleManagementComponent } from './home/role-management/role-management.component';
 
 
 const appRoutes: Routes = [
@@ -49,15 +50,16 @@ const appRoutes: Routes = [
       { path: CashMovementDialogComponent.URL, component: CashMovementDialogComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
-      { path: StockAlertComponent.URL, component: StockAlertComponent},
+      { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
+      { path: RoleManagementComponent.URL, component: RoleManagementComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
-      { path: OrdersComponent.URL , component: OrdersComponent},
-      { path: OffersComponent.URL , component: OffersComponent}
+      { path: OrdersComponent.URL, component: OrdersComponent },
+      { path: OffersComponent.URL, component: OffersComponent }
     ]
   }
 ];
@@ -85,7 +87,8 @@ export class AppRoutingModule {
     Statistics2Component,
     ScheduleComponent,
     OrdersComponent,
-    OffersComponent
+    OffersComponent,
+    RoleManagementComponent
   ];
 
   static COMPONENT_FACTORY = [
@@ -107,4 +110,3 @@ export class AppRoutingModule {
     VoucherConsumeDialogComponent
   ];
 }
- 
