@@ -36,6 +36,7 @@ import { ArticleCreationEditDialogComponent } from './home/articles/article-crea
 import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
 import { RoleManagementComponent } from './home/role-management/role-management.component';
+import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -88,7 +89,8 @@ export class AppRoutingModule {
     ScheduleComponent,
     OrdersComponent,
     OffersComponent,
-    RoleManagementComponent
+    RoleManagementComponent,
+    RoleManagementDialogComponent
   ];
 
   static COMPONENT_FACTORY = [

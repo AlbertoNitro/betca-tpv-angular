@@ -1,3 +1,2 @@
-<p>
-  role-management works!
-</p>
+<app-crud [title]="title" [columns]="columns" [readAction]="true" [createAction]="false" [editAction]="true" [deleteAction]="false" [data]="data" 
+(read)="read($event)" (edit)="edit($event)"></app-crud>
