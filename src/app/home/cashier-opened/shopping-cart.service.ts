@@ -8,7 +8,7 @@ import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
-import { BudgetCreation } from '../shared/budget-creation.model';
+import { Budget } from '../shared/budget.model';
 import { Article } from '../shared/article.model';
 import { MatSnackBar } from '@angular/material';
 
@@ -21,7 +21,7 @@ export class ShoppingCartService {
 
     private shoppingCart: Array<Shopping> = new Array();
     private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
-    private indexShoppingCart = 0;
+    private _indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
@@ -35,6 +35,14 @@ export class ShoppingCartService {
 
     shoppingCartObservable(): Observable<Shopping[]> {
         return this.shoppingCartSubject.asObservable();
+    }
+
+    get indexShoppingCart(): number {
+        if (this._indexShoppingCart === 0) {
+            return undefined;
+        } else {
+            return this._indexShoppingCart + 1;
+        }
     }
 
     get total() {
@@ -91,9 +99,9 @@ export class ShoppingCartService {
     }
 
     exchange(): void {
-        this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
-        this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
-        this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
+        this.shoppingCartList[this._indexShoppingCart++] = this.shoppingCart;
+        this._indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
+        this.shoppingCart = this.shoppingCartList[this._indexShoppingCart];
         this.synchronizeAll();
     }
 
@@ -107,9 +115,9 @@ export class ShoppingCartService {
     }
 
     createBudget(): void {
-        let budgetCreation: BudgetCreation;
-        budgetCreation = { shoppingCart: this.shoppingCart };
-        this.budgetService.create(budgetCreation).subscribe(
+        let budget: Budget;
+        budget = { shoppingCart: this.shoppingCart };
+        this.budgetService.create(budget).subscribe(
             blob => {
                 this.openPdf(blob);
             }

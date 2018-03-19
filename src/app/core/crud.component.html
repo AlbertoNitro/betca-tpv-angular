@@ -12,10 +12,13 @@
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef>
                     <button mat-button matSuffix mat-icon-button *ngIf="createAction==true" (click)="onCreate()">
-                        <mat-icon color="warn">person_add</mat-icon>
+                        <mat-icon color="warn">add</mat-icon>
                     </button>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let item">
+                    <button mat-button matSuffix mat-icon-button *ngIf="readAction==true" (click)="onRead(item)">
+                        <mat-icon color="warn">visibility</mat-icon>
+                    </button>
                     <button mat-button matSuffix mat-icon-button *ngIf="editAction==true" (click)="onEdit(item)">
                         <mat-icon color="warn">mode_edit</mat-icon>
                     </button>

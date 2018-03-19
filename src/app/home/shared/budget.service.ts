@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { BudgetCreation } from './budget-creation.model';
+import { Budget } from './budget.model';
 import { HttpService } from '../../core/http.service';
 
 
@@ -12,8 +12,12 @@ export class BudgetService {
     constructor(private httpService: HttpService) {
     }
 
-    create(budgetCreation: BudgetCreation): Observable<any> {
-        return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budgetCreation);
+    create(budget: Budget): Observable<any> {
+        return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budget);
+    }
+
+    readAll(): Observable<Budget[]> {
+        return this.httpService.authToken().get(BudgetService.END_POINT);
     }
 
 }

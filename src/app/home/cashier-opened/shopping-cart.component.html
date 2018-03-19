@@ -5,7 +5,7 @@
     <mat-card-content>
         <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>{{shoppingCartService.indexShoppingCart}} # </mat-header-cell>
                 <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
@@ -36,7 +36,7 @@
             </ng-container>
             <ng-container matColumnDef="committed">
                 <mat-header-cell *matHeaderCellDef>
-                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="exchange()">
+                    <button mat-button matSuffix mat-icon-button (click)="exchange()">
                         <mat-icon color="warn">autorenew</mat-icon>
                     </button>
                 </mat-header-cell>
@@ -65,7 +65,8 @@
                 <i class="material-icons">add</i>
             </button>
         </form>
-        <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="shoppingCartService.total===0">Check out</button>
+        <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="shoppingCartService.total===0">
+            <mat-icon mat-icon-button>credit_card</mat-icon> Check out <mat-icon>euro_symbol</mat-icon></button>
         <button mat-raised-button color="accent" (click)="createBudget()" [disabled]="shoppingCartService.total===0">Budget</button>
     </mat-card-content>
 </mat-card>
