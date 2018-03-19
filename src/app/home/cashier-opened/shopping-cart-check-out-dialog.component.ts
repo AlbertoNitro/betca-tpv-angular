@@ -42,6 +42,10 @@ export class ShoppingCartCheckOutDialogComponent {
         return !((this.foundMobile) && (this.return() >= 0));
     }
 
+    invalidReservation(): boolean {
+        return !(this.return() * -1 <= this.total - this.total * 0.1);
+    }
+
     number(value: number): number {
         return ((value === undefined || value === null) ? 0 : value);
     }
