@@ -35,7 +35,7 @@ import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
-import { VoucherService } from '../app/home/vouchers/voucher.service';
+import { VoucherService } from './home/shared/voucher.service';
 import { orderService } from '../app/home/orders/orders.service';
 import { OfferService } from './home/shared/offer.service';
 
