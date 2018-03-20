@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
+import { InvoiceService } from '../shared/invoice.service';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
@@ -27,7 +29,7 @@ export class ShoppingCartService {
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, public snackBar: MatSnackBar) {
+        private budgetService: BudgetService, public snackBar: MatSnackBar, private invoiceService: InvoiceService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -123,6 +125,15 @@ export class ShoppingCartService {
             }
         );
     }
+    createInvoice(invoiceCreation: InvoiceCreation): void {
+        invoiceCreation.shoppingCart = this.shoppingCart;
+        this.invoiceService.create(invoiceCreation).subscribe(
+            blob => {
+                this.openPdf(blob);
+            }
+        );
+    }
+
 
     openPdf(blob: any) {
         this.shoppingCart = new Array();
