@@ -12,25 +12,16 @@ export class TicketService {
     static END_POINT = '/tickets';
     static SEARCH = '/search?';
     static SEARCH_BY_CREATION_DATES = '/searchByCreationDates?';
-    private allTickets: Subject<Ticket[]> = new Subject();
 
     constructor(private httpService: HttpService) {
     }
-    private readTicketsCreationDatesBetween() {
-      this.httpService.authToken().param('initialDate', '2017-01-01 00:00:00').param('finalDate', '2019-01-01 00:00:00')
-        .get(TicketService.END_POINT + TicketService.SEARCH_BY_CREATION_DATES).subscribe(
-        (ticketsArray: Ticket[]) => this.allTickets.next(ticketsArray),
-        error => alert(error)
-      );
-    }
-    getTicketsCreationDatesBetween(): Observable<Ticket[]> {
-      this.readTicketsCreationDatesBetween();
-      return this.allTickets.asObservable();
+    readTicketsCreationDatesBetween(): Observable<Ticket[]> {
+      return this.httpService.authToken().param('initialDate', '2017-01-01 00:00:00').param('finalDate', '2019-01-01 00:00:00')
+        .get(TicketService.END_POINT + TicketService.SEARCH_BY_CREATION_DATES);
     }
     create(ticketCreation: TicketCreation): Observable<any> {
         return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
     }
-
     readNumProductsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
 
         const historicalProducts = '/historicalProducts';
@@ -54,7 +45,7 @@ export class TicketService {
     }
 
     read(id: string): Observable<Ticket> {
-      return this.httpService.authToken().get(`${TicketService.END_POINT}/${id}`);
+      return this.httpService.authToken().pdf().get(`${TicketService.END_POINT}/${id}`);
     }
 
 }
