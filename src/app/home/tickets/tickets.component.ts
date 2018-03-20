@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {EditTicketDialogComponent} from './edit-ticket-dialog/edit-ticket-dialog.component';
 import {MatPaginator, MatDialog, MatSort, MatTableDataSource} from '@angular/material';
-import {Shopping} from '../shared/shopping.model';
 import {Ticket} from '../shared/ticket.model';
 import {TicketService} from '../shared/ticket.service';
 
@@ -10,16 +9,23 @@ import {TicketService} from '../shared/ticket.service';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit, AfterViewInit {
+export class TicketsComponent implements OnInit, AfterViewInit, OnChanges {
   static URL = 'tickets';
+  listTickets: Ticket[] = [];
   dataSource: MatTableDataSource<Ticket>;
   displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
-  listTickets: Ticket[] = [];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['listTickets']) {
+      alert('hay cambios en listTickets');
+      this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
+      this.dataSource.paginator = this.paginator;
+    }
   }
   constructor(private ticketService: TicketService, public dialog: MatDialog) {
     this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
@@ -53,18 +59,6 @@ export class TicketsComponent implements OnInit, AfterViewInit {
       width: '900px',
     });
   }
-  private generateShoppingMock(): Array<Shopping> {
-    let listShopping = new Array<Shopping>();
-    let shopping0 = new Shopping('abc', 'vacio', 45);
-    let shopping1 = new Shopping('def', 'vacio', 25);
-    let shopping2 = new Shopping('ghi', 'vacio', 5);
-    let shopping3 = new Shopping('jkl', 'vacio', 65);
-    listShopping.push(shopping0);
-    listShopping.push(shopping1);
-    listShopping.push(shopping2);
-    listShopping.push(shopping3);
-    return listShopping;
-  }
   openPdf(blob: any) {
     const url = window.URL.createObjectURL(blob);
     window.open(url);
@@ -73,5 +67,19 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     this.ticketService.read(id).subscribe(
       blob => this.openPdf(blob)
     );
+  }
+
+  findTicketsCreationDatesBetween() {
+    alert("findTicketsCreationDatesBetween");
+    /*
+    this.ticketService.getTicketsCreationDatesBetween().subscribe(
+      (listTickets: Ticket[]) => {
+        alert('me subscribo al getTicketsCreationDatesBetween y me devuelve una lista de ticket');
+        for (const ticket of listTickets) {
+          alert('Ticket= [' + ' id:' + ticket.id + ' cashDeposited:' + ticket.cashDeposited + ' creationDate:' + ticket.creationDate + ' reference:' + ticket.reference + ' shoppingList:' + ticket.shoppingList + ']');
+        }
+      }
+    );
+    */
   }
 }
