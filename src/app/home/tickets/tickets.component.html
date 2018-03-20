@@ -3,43 +3,25 @@
   <mat-card-content>
     <h2 class="example-h2"><mat-icon>search</mat-icon> Search by:</h2>
     <mat-tab-group>
-
-      <!-- SEARCH BY DAY -->
-      <mat-tab label="Day">
-        <div>
-          <!-- DATEPICKER 0 -->
-          <mat-form-field class="date">
-            <input matInput [matDatepicker]="date" placeholder="Choose a date">
-            <mat-datepicker-toggle matSuffix [for]="date"></mat-datepicker-toggle>
-            <mat-datepicker #date></mat-datepicker>
-          </mat-form-field>
-          <!-- DATEPICKER 0 -->
-          <!-- BUTTON SEARCH -->
-          <button mat-mini-fab color="primary" class="margin-left-2em"><mat-icon>search</mat-icon></button>
-          <!-- BUTTON SEARCH -->
-        </div>
-      </mat-tab>
-      <!-- SEARCH BY DAY -->
-
       <!-- SEARCH BY RANGE DAYS -->
       <mat-tab label="Date ranges">
         <div>
           <!-- DATEPICKER 1 -->
           <mat-form-field class="date">
-            <input matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
+            <input required matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
             <mat-datepicker-toggle matSuffix [for]="initialDate"></mat-datepicker-toggle>
             <mat-datepicker #initialDate></mat-datepicker>
           </mat-form-field>
           <!-- DATEPICKER 1 -->
           <!-- DATEPICKER 2 -->
           <mat-form-field class="date margin-left-2em">
-            <input matInput [matDatepicker]="finalDate" placeholder="Choose a final date">
+            <input required matInput [matDatepicker]="finalDate" placeholder="Choose a final date">
             <mat-datepicker-toggle matSuffix [for]="finalDate"></mat-datepicker-toggle>
             <mat-datepicker #finalDate></mat-datepicker>
           </mat-form-field>
           <!-- DATEPICKER 2 -->
           <!-- BUTTON SEARCH -->
-          <button mat-mini-fab color="primary" class="margin-left-2em"><mat-icon>search</mat-icon></button>
+          <button mat-mini-fab color="primary" class="margin-left-2em" (click)="findTicketsCreationDatesBetween()"><mat-icon>search</mat-icon></button>
           <!-- BUTTON SEARCH -->
         </div>
       </mat-tab>
