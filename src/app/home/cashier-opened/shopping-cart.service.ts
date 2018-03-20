@@ -123,6 +123,10 @@ export class ShoppingCartService {
             }
         );
     }
+    createInvoice(): void {
+        
+    }
+
 
     openPdf(blob: any) {
         this.shoppingCart = new Array();
