@@ -1,0 +1,17 @@
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.roles-radio-group {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .roles-radio-button {
+    margin: 5px;
+  }
+  
+  .roles-selected-value {
+    margin: 15px 0;
+  }

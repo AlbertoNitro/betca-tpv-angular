@@ -37,6 +37,7 @@ import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
 import { RoleManagementComponent } from './home/role-management/role-management.component';
 import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
+import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -89,8 +90,7 @@ export class AppRoutingModule {
     ScheduleComponent,
     OrdersComponent,
     OffersComponent,
-    RoleManagementComponent,
-    RoleManagementDialogComponent
+    RoleManagementComponent
   ];
 
   static COMPONENT_FACTORY = [
@@ -106,6 +106,8 @@ export class AppRoutingModule {
     ArticleCreationEditDialogComponent,
     ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
+    UserChangingPasswordDialogComponent,
+    RoleManagementDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
     VoucherCreationEditDialogComponent,
