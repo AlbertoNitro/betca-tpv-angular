@@ -25,6 +25,8 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
 import { OffersComponent } from './offers/offers.component';
+import { RoleManagementComponent } from './role-management/role-management.component';
+import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -123,8 +125,8 @@ export class HomeComponent implements OnDestroy {
   searchOffer() {
     this.dialog.open(OfferSearchDialogComponent);
   }
-    
-  OffersManagment () {
+
+  OffersManagment() {
     this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 
@@ -137,11 +139,11 @@ export class HomeComponent implements OnDestroy {
   }
 
   password() {
-    alert('password changing');
+    this.dialog.open(UserChangingPasswordDialogComponent);
   }
 
   roleManagement() {
-    alert('role Management');
+    this.router.navigate([HomeComponent.URL, RoleManagementComponent.URL]);
   }
 
 }

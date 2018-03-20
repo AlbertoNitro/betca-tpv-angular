@@ -45,7 +45,6 @@ import { ChartsModule } from 'ng2-charts';
 import { ArticlesFamilyComponent } from './home/cashier-opened/articles-family/articles-family.component';
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 
-
 @NgModule({
   imports: [
     FormsModule,
