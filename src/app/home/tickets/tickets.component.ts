@@ -37,7 +37,6 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     window.open(url);
   }
   showTicket(id: string) {
-    alert('TCIKET ID= ' + id);
     this.ticketService.read(id).subscribe(
       blob => this.openPdf(blob)
     );
@@ -46,9 +45,6 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   findTicketsCreationDatesBetween() {
     this.ticketService.readTicketsCreationDatesBetween().subscribe(
       (listTickets: Ticket[]) => {
-        for (const ticket of listTickets) {
-          //alert('Ticket= [' + ' id:' + ticket.id + ' cashDeposited:' + ticket.cashDeposited + ' creationDate:' + ticket.creationDate + ' reference:' + ticket.reference + ' shoppingList:' + ticket.shoppingList + ']');
-        }
         this.listTickets = listTickets;
         this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
         this.dataSource.sort = this.sort;
