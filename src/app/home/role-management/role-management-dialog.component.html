@@ -1,0 +1,19 @@
+<h2 mat-dialog-title *ngIf="edit">Edit Role Management</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="user.mobile" [disabled]="edit" cdkFocusInitial/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Username" required [(ngModel)]="user.username" [disabled]="edit" />
+    </mat-form-field>
+<mat-radio-group class="roles-radio-group" [(ngModel)]="favoriteUserRole">
+  <mat-radio-button class="roles-radio-button" *ngFor="let roll of roles" [value]="roll">
+    {{roll}}
+  </mat-radio-button>
+</mat-radio-group>
+<div class="roles-selected-value">Chosen role: {{favoriteUserRole}}</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()">Save</button>
+</mat-dialog-actions>

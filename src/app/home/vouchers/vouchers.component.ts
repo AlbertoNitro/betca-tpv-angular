@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Voucher } from './voucher.model';
-import { VoucherService } from './voucher.service';
+import { Voucher } from '../shared/voucher.model';
+import { VoucherService } from '../shared/voucher.service';
 import { VoucherCreationEditDialogComponent } from './voucher-creation-edit-dialog.component';
 
 @Component({
@@ -59,11 +59,5 @@ export class VouchersComponent implements OnInit {
         );
 
     }
-
-    testVoucher: Voucher[] = [
-        {reference: '1', value: 11, used: false},
-        {reference: '2', value: 22, used: true},
-        {reference: '3', value: 33, used: false}
-      ];
 
 }

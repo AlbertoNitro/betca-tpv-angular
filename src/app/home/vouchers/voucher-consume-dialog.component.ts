@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Voucher } from './voucher.model';
-import { VoucherService } from './voucher.service';
+import { Voucher } from '../shared/voucher.model';
+import { VoucherService } from '../shared/voucher.service';
 
 @Component({
     templateUrl: 'voucher-consume-dialog.component.html',
@@ -23,18 +23,8 @@ export class VoucherConsumeDialogComponent implements OnInit {
     consume(){
 
         this.voucherService.patchObservable( this.reference ).subscribe(
-            data => {
-                this.voucherService.readObservable( this.reference ).subscribe(
-
-                    data=>{
-        
-                        this.dialogRef.close( data.value );
-                    },
-                    error => {
-        
-                        this.dialogRef.close( 0 );
-                    }
-                )
+            data=>{
+                this.dialogRef.close( data );
             }
         );
 
