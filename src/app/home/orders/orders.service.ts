@@ -1,21 +1,17 @@
 import { Injectable } from "@angular/core";
 import { order } from "../shared/order.model";
 import { Observable } from 'rxjs/Observable';
+import { HttpService } from '../../core/http.service';
 import { Subject } from 'rxjs/Subject';
 import { orderBody } from "../shared/order-body.model";
 
 @Injectable()
 export class orderService{
-    orders:  Subject<order[]> = new Subject();
-    orderBody: Subject<orderBody[]> = new Subject();
-    constructor() {
+    static END_POINT = "/orders";
+    constructor(private httpService:HttpService) {
     }
     readAll(): Observable<order[]> {
-        return this.orders.asObservable();
-    }
-
-    readBody(IdOrder:number) : Observable<orderBody[]>{        
-        return this.orderBody.asObservable();
+        return this.httpService.authToken().get(orderService.END_POINT);
     }
 
 }

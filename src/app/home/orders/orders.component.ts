@@ -8,21 +8,17 @@ import { orderBody } from '../shared/order-body.model';
     templateUrl: `orders.component.html`
 })
 export class OrdersComponent implements OnInit {
-
-    private orderService : orderService
     static URL = 'orders';
-    Orders : order[]; 
     order : order;
     orderBodyElement : orderBody;
-    orderBody : orderBody[];
-    displayedColumns = [ 'Id' , 'Id_provedor' , 'Provedor'];
+    displayedColumns = [ 'Id' , 'Provider_id' , 'Provider_name','Order_date'];
     displayedColumnsCuerpo = [ 'Id' ,'id_order', 'id_provedor'  , 'id_articulo' , 'articulo' , 'cantidad' ]
     dataSource: MatTableDataSource<order>;
     dataSourceBody : MatTableDataSource<orderBody>;
 
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(public dialog: MatDialog) {
+    constructor(public dialog: MatDialog,private orderService : orderService) {
     }
 
     ngOnInit(): void {   
@@ -33,18 +29,15 @@ export class OrdersComponent implements OnInit {
         this.orderService.readAll().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<order>(data);
-                this.dataSource.sort = this.sort;
             }
         );   
     }
 
+    readOrder(code:string){
+        alert(code);
+    }
+
     mostrar_cuerpo(code : string){
-        this.orderService.readBody(parseInt(code)).subscribe(
-            data => {
-                this.dataSourceBody = new MatTableDataSource<orderBody>(data);
-                this.dataSourceBody.sort = this.sort;
-            }
-        )
         alert("servicio y si existe el id, vamos a buscar el cuerpo")
     }
 
