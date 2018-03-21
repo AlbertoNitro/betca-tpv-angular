@@ -16,7 +16,6 @@ export class TicketService {
     constructor(private httpService: HttpService) {
     }
     private convertToString(date: Date): string {
-      alert(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
       return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
     readTicketsCreationDatesBetween(initialDate: Date, finalDate: Date): Observable<Ticket[]> {
