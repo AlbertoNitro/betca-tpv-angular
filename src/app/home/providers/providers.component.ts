@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Provider } from './provider.model';
 import { ProviderService } from './provider.service';
 import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
@@ -10,10 +10,9 @@ import { ProviderCreationEditDialogComponent } from './provider-creation-edit-di
 export class ProvidersComponent implements OnInit {
     static URL = 'providers';
 
-    displayedColumns = ['company', 'actions'];
-    dataSource: MatTableDataSource<Provider>;
-
-    @ViewChild(MatSort) sort: MatSort;
+    title = 'Providers management';
+    columns = ['company'];
+    data: Provider[];
 
     constructor(public dialog: MatDialog, private providerService: ProviderService) {
     }
@@ -24,10 +23,7 @@ export class ProvidersComponent implements OnInit {
 
     synchronize() {
         this.providerService.readAll().subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<Provider>(data);
-                this.dataSource.sort = this.sort;
-            }
+            data => this.data = data
         );
     }
 

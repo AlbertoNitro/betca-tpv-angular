@@ -12,7 +12,7 @@ import { CashierOpenedComponent } from './cashier-opened/cashier-opened.componen
 import { AdminsService } from './admin/admins.service';
 import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './cash-movement/cash-movement-dialog.component';
+import { CashMovementDialogComponent } from './cash-movements/cash-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -23,8 +23,10 @@ import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component } from './statistics2/statistics2.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
-import { CreateOfferDialogComponent } from './offers/create-offer-dialog.component';
-import { SearchOfferDialogComponent } from './offers/search-offer-dialog.component';
+import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
+import { OffersComponent } from './offers/offers.component';
+import { RoleManagementComponent } from './role-management/role-management.component';
+import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -120,12 +122,12 @@ export class HomeComponent implements OnDestroy {
     this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
   }
 
-  createOffer() {
-    this.dialog.open(CreateOfferDialogComponent);
+  searchOffer() {
+    this.dialog.open(OfferSearchDialogComponent);
   }
 
-  searchOffer() {
-    this.dialog.open(SearchOfferDialogComponent);
+  OffersManagment() {
+    this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 
   budgets() {
@@ -133,16 +135,15 @@ export class HomeComponent implements OnDestroy {
   }
 
   Orders() {
-
     this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
   }
 
   password() {
-    alert('password changing');
+    this.dialog.open(UserChangingPasswordDialogComponent);
   }
 
   roleManagement() {
-    alert('role Management');
+    this.router.navigate([HomeComponent.URL, RoleManagementComponent.URL]);
   }
 
 }

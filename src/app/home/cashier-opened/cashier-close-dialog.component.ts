@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { CashierService } from '../shared/cashier.service';
 
@@ -9,12 +9,20 @@ import { CashierService } from '../shared/cashier.service';
         flex-direction: column;
     }`]
 })
-export class CashierCloseDialogComponent {
+export class CashierCloseDialogComponent implements OnInit  {
     cashierClosure: CashierClosure = { finalCash: 0, salesCard: 0, comment: '',
                                             totalCard: 0, totalCash: 0 };
 
     constructor(private cashierService: CashierService) {
-        this.cashierClosure = this.cashierService.getCashierClosureInfo();
+    }
+
+    ngOnInit(): void {
+        this.cashierService.readTotalsObservable().subscribe(
+            data => {
+                this.cashierClosure.totalCard = data.totalCard;
+                this.cashierClosure.totalCash = data.totalCash;
+            }
+        );
     }
 
     close() {
