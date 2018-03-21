@@ -35,7 +35,7 @@ import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
-import { VoucherService } from '../app/home/vouchers/voucher.service';
+import { VoucherService } from './home/shared/voucher.service';
 import { orderService } from '../app/home/orders/orders.service';
 import { OfferService } from './home/shared/offer.service';
 
@@ -44,7 +44,7 @@ import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
 import { ArticlesFamilyComponent } from './home/cashier-opened/articles-family/articles-family.component';
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
-
+import { InvoiceService } from './home/shared/invoice.service';
 
 @NgModule({
   imports: [
@@ -111,6 +111,7 @@ import { HistoricChartComponent } from './home/statistics2/historicChart.compone
     BudgetService,
     CashierService,
     CashMovementService,
+    InvoiceService,
     ProviderService,
     ShoppingCartService,
     TicketService,

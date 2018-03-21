@@ -52,6 +52,6 @@ export class CashierService {
     }
 
     readTotalsObservable(): Observable<CashierClosure> {
-        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.GET_TOTALS);
+        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.TOTALS);
     }
 }

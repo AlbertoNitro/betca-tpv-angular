@@ -30,11 +30,14 @@ import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
-import { CreateOfferDialogComponent } from './home/offers/create-offer-dialog.component';
-import { SearchOfferDialogComponent } from './home/offers/search-offer-dialog.component';
+import { OfferSearchDialogComponent } from './home/offers/offer-search-dialog.component';
+import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
+import { RoleManagementComponent } from './home/role-management/role-management.component';
+import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
+import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -49,15 +52,16 @@ const appRoutes: Routes = [
       { path: CashMovementDialogComponent.URL, component: CashMovementDialogComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
-      { path: StockAlertComponent.URL, component: StockAlertComponent},
+      { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
+      { path: RoleManagementComponent.URL, component: RoleManagementComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
-      { path: OrdersComponent.URL , component: OrdersComponent},
-      { path: OffersComponent.URL , component: OffersComponent}
+      { path: OrdersComponent.URL, component: OrdersComponent },
+      { path: OffersComponent.URL, component: OffersComponent }
     ]
   }
 ];
@@ -85,15 +89,16 @@ export class AppRoutingModule {
     Statistics2Component,
     ScheduleComponent,
     OrdersComponent,
-    OffersComponent
+    OffersComponent,
+    RoleManagementComponent
   ];
 
   static COMPONENT_FACTORY = [
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashMovementDialogComponent,
-    CreateOfferDialogComponent,
-    SearchOfferDialogComponent,
+    OfferSearchDialogComponent,
+    OfferCreateEditDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
@@ -101,10 +106,11 @@ export class AppRoutingModule {
     ArticleCreationEditDialogComponent,
     ArticleQuickDialogComponent,
     UserCreationEditDialogComponent,
+    UserChangingPasswordDialogComponent,
+    RoleManagementDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
     VoucherCreationEditDialogComponent,
     VoucherConsumeDialogComponent
   ];
 }
- 
