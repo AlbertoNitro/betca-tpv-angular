@@ -12,6 +12,7 @@ import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoi
 import { User } from '../shared/user.model';
 import { Voucher } from '../shared/voucher.model';
 import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -24,6 +25,7 @@ export class ShoppingCartCheckOutDialogComponent {
 
     @Input() total: number;
     ticketCreation: TicketCreation;
+    ivoiceCreation: InvoiceCreation;
     voucher: Voucher;
     foundMobile = false;
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService, private voucherService: VoucherService) {
@@ -86,7 +88,7 @@ export class ShoppingCartCheckOutDialogComponent {
         this.ticketCreation.card = this.number(this.ticketCreation.card);
         this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
 
-        if ( this.return() > 0 ){
+        if (this.return() > 0) {
             this.voucher = { value: this.return() }
 
             this.voucherService.createObservable(this.voucher).subscribe(
@@ -135,7 +137,13 @@ export class ShoppingCartCheckOutDialogComponent {
         this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
             data => {
                 if (data.username && data.dni && data.address) {
-                    console.log('LLamar al servicio para crear ticket y factura');
+                    this.ivoiceCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+                    this.ivoiceCreation.userMobile = this.ticketCreation.userMobile;
+                    this.ivoiceCreation.card = this.ticketCreation.card;
+                    this.ivoiceCreation.cash = this.ticketCreation.cash;
+                    this.ivoiceCreation.voucher = this.ticketCreation.voucher;
+                    this.shoppingCartService.createInvoice(this.ivoiceCreation);
+                    this.dialog.closeAll();
                 } else {
                     this.updateUserInvoice(data);
                 }
