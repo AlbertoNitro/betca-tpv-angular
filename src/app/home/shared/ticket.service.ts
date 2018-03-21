@@ -15,8 +15,13 @@ export class TicketService {
 
     constructor(private httpService: HttpService) {
     }
-    readTicketsCreationDatesBetween(): Observable<Ticket[]> {
-      return this.httpService.authToken().param('initialDate', '2017-01-01 00:00:00').param('finalDate', '2019-01-01 00:00:00')
+    private convertToString(date: Date): string {
+      alert(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
+      return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+    }
+    readTicketsCreationDatesBetween(initialDate: Date, finalDate: Date): Observable<Ticket[]> {
+      return this.httpService.authToken().param('initialDate', `${this.convertToString(initialDate)} 00:00:00`)
+        .param('finalDate', `${this.convertToString(finalDate)} 23:59:59`)
         .get(TicketService.END_POINT + TicketService.SEARCH_BY_CREATION_DATES);
     }
     create(ticketCreation: TicketCreation): Observable<any> {

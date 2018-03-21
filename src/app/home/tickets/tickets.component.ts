@@ -12,6 +12,8 @@ import {TicketService} from '../shared/ticket.service';
 export class TicketsComponent implements OnInit, AfterViewInit {
   static URL = 'tickets';
   private listTickets: Ticket[] = [];
+  initialDateInput: Date = undefined;
+  finalDateInput: Date = undefined;
   dataSource: MatTableDataSource<Ticket>;
   displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -43,7 +45,7 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   }
 
   findTicketsCreationDatesBetween() {
-    this.ticketService.readTicketsCreationDatesBetween().subscribe(
+    this.ticketService.readTicketsCreationDatesBetween(this.initialDateInput, this.finalDateInput).subscribe(
       (listTickets: Ticket[]) => {
         this.listTickets = listTickets;
         this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
