@@ -37,7 +37,7 @@
       <ng-container matColumnDef="total">
         <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
         <mat-cell *matCellDef="let shopping">
-            <input matInput min="0" [max]="shopping.total" type="number" [value]="shopping.total" [disabled]="shopping.total===0"/>
+            <input type="number" matInput min="0" [max]="shopping.total" [value]="shopping.total"/>
         </mat-cell>
       </ng-container>
 
