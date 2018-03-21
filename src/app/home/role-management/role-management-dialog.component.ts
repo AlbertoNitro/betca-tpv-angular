@@ -9,14 +9,17 @@ import { Role } from '../../core/role.model';
   styleUrls: [`role-management-dialog.component.css`]
 })
 export class RoleManagementDialogComponent implements OnInit {
-  edit: boolean;
   user: User;
-  favoriteUserRole: string;
+  edit: boolean;
+  roleKeys = Object.keys(Role); // ["ADMIN", "MANAGER", "OPERATOR", "CUSTOMER"]
+  roleValues = this.roleKeys.map(k => Role[k as any]); // [0, 1, 2, 3]
 
-  roles = [this.capitalizeFirstLetter(Role['ADMIN']),
-  this.capitalizeFirstLetter(Role['MANAGER']),
-  this.capitalizeFirstLetter(Role['OPERATOR'])
-  ];
+  // user: User = {mobile: 686573341, username: 'Karlos'};
+  items = this.roleKeys;
+  userRoles: Array<Role>;
+
+
+  selected = [];
 
   constructor(public dialogRef: MatDialogRef<RoleManagementDialogComponent>,
     private userService: UserService) {
@@ -28,8 +31,21 @@ export class RoleManagementDialogComponent implements OnInit {
     }
   }
 
-  capitalizeFirstLetter(name: string): string {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  changeUserRoles() {
+    this.userRoles = [Role.ADMIN];
+  }
+
+  toggle(item: string, list: string[]): void {
+    const idx = list.indexOf(item);
+    if (idx > -1) {
+      list.splice(idx, 1);
+    } else {
+      list.push(item);
+    }
+  }
+
+  exists(item, list): boolean {
+    return list.indexOf(item) > -1;
   }
 
   create(): void {
