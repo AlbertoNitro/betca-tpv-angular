@@ -7,12 +7,15 @@ import { HttpService } from '../../core/http.service';
 export class AdminsService {
     static END_POINT = '/admins';
     static DB = '/db';
+    static STATE = '/state';
 
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) { }
 
 
     powerOff() {
-        console.log('Power Off');
+        this.httpService.authToken().delete(AdminsService.END_POINT + AdminsService.STATE).subscribe(
+            () => this.successful()
+        );
     }
 
     seedDb(ymlFileName: string): void {

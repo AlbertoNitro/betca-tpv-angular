@@ -56,6 +56,7 @@ export class HomeComponent implements OnDestroy {
 
   powerOff() {
     this.adminsService.powerOff();
+    this.logout();
   }
 
   seedDb() {
