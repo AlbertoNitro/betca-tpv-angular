@@ -11,16 +11,15 @@ import { VoucherService } from './voucher.service';
     }`]
 })
 export class VoucherCreationEditDialogComponent implements OnInit {
-    edit: boolean;
     voucher: Voucher;
 
-    constructor(public dialogRef: MatDialogRef<VoucherCreationEditDialogComponent>,
+    constructor(private dialogRef: MatDialogRef<VoucherCreationEditDialogComponent>,
         private voucherService: VoucherService) {
     }
 
     ngOnInit(): void {
         if (!this.voucher) {
-            this.voucher = { value: undefined  };
+            this.voucher = { value: undefined };
         }
     }
 
@@ -28,6 +27,10 @@ export class VoucherCreationEditDialogComponent implements OnInit {
         this.voucherService.createObservable(this.voucher).subscribe(
             data => this.dialogRef.close()
         );
+    }
+
+    nonValidValue(): boolean {
+        return this.voucher.value === undefined || this.voucher.value <= 0 || this.voucher.value.toString.length <= 0;
     }
 
 }
