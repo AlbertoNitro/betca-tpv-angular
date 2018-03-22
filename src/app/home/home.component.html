@@ -12,6 +12,11 @@
       <mat-icon>account_box</mat-icon>
       <span>Profile</span>
     </button>
+    <button mat-button (click)="powerOff()">
+      <mat-icon>power_settings_new</mat-icon>
+      <span>Power-off</span>
+    </button>
+    
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -30,7 +35,7 @@
     <mat-icon>work</mat-icon>
     <span>Close Cashier</span>
   </button>
-    <button mat-menu-item [matMenuTriggerFor]="offers">
+  <button mat-menu-item [matMenuTriggerFor]="offers">
     <mat-icon>thumb_up</mat-icon>
     <span>Offers</span>
   </button>

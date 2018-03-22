@@ -11,6 +11,10 @@ export class AdminsService {
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) { }
 
 
+    powerOff() {
+        console.log('Power Off');
+    }
+
     seedDb(ymlFileName: string): void {
         this.httpService.authToken().post(AdminsService.END_POINT + AdminsService.DB, ymlFileName).subscribe(
             () => this.successful()

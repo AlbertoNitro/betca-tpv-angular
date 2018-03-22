@@ -54,6 +54,10 @@ export class HomeComponent implements OnDestroy {
     this.tokensService.logout();
   }
 
+  powerOff() {
+    this.adminsService.powerOff();
+  }
+
   seedDb() {
     this.dialog.open(DbSeedDialogComponent);
   }
