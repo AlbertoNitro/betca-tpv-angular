@@ -5,8 +5,7 @@ import { Grafic, FormatDate } from './format-date';
 import { MatSnackBar } from '@angular/material';
 declare let google: any;
 let chart: any;
-let totalshoppingCart: number;
-let controlDates: number;
+let salesList = [];
 const month = FormatDate.months;
 
 export class GraficMonthsAreaComponent {
@@ -23,45 +22,50 @@ export class GraficMonthsAreaComponent {
         }
     }
 
-    create(id) {
-        this.ticketService.readAllBetweenDates(id).subscribe(
+    search(id) {
+        this.ticketService.readIdArticleDatesBetween(id).subscribe(
             data => {
                 if (data.length === 0) {
                     this.snackBar.open('There is not information', 'X', {
                         duration: 2000,
                     });
                 } else {
+                    salesList = [];
                     read(data);
                 }
             }
         );
 
         function read(data: any) {
-            let dateStart;
-            let dateFinish;
-            let salesList = [];
-            totalshoppingCart = 0;
-            controlDates = 1;
-            data[controlDates]['creationDate'] = new Date();
-            dateFinish = data[controlDates]['creationDate'].getMonth();
 
-            for (let i = 0; i < data.length; i++) {
-                data[i]['creationDate'] = new Date();
-                dateStart = data[i]['creationDate'].getMonth();
-                if (dateStart === dateFinish) {
-                    totalshoppingCart += data[i]['shoppingCart'];
-                    salesList = ['' + month[dateStart].viewValue + '', totalshoppingCart];
-                    controlDates++;
-                } else {
-                    salesList.push(['' + month[dateFinish].viewValue + '', data[i]['shoppingCart']]);
+            const mapper = give => {
+                const months = new Date(give.creationDate).getMonth();
+                const saleArticle = Number(give.shoppingCart);
+                return { month: months, sales: saleArticle };
+            };
+
+            const reducer = (group, all) => {
+                const i = group.findIndex(give => (give.month === all.month));
+                if (i === -1) {
+                    return [...group, all];
                 }
+
+                group[i].sales += all.sales;
+                return group;
+            };
+            const dataMap = data.map(mapper).reduce(reducer, []);
+
+            for (let i = 0; i < dataMap.length; i++) {
+                const dateStart = dataMap[i]['month'];
+                salesList[i] = ['' + month[Number(dateStart)].viewValue + '', dataMap[i]['sales']];
             }
-            google.charts.setOnLoadCallback(draw(salesList));
+
+            salesList.unshift(['Date', 'Sales Product']);
+            google.charts.setOnLoadCallback(draw);
         }
 
-        function draw(salesList) {
-            const dataAPI = google.visualization.arrayToDataTable([
-                ['Date', 'Sales Product'], salesList]);
+        function draw() {
+            const dataAPI = google.visualization.arrayToDataTable(salesList);
             const options = {
                 hAxis: { title: 'Months', titleTextStyle: { color: '#333' } },
                 vAxis: { title: 'Sales', minValue: 0 }

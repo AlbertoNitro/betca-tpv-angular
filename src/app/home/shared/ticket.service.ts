@@ -18,7 +18,7 @@ export class TicketService {
         return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
     }
 
-    readAllBetweenDates(id: string): Observable<TicketCreation[]> {
+    readIdArticleDatesBetween(id: string): Observable<TicketCreation[]> {
         const date = new Date();
         const year = date.getFullYear();
         const cpParams = new URLSearchParams();

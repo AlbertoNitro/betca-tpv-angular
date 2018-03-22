@@ -44,7 +44,7 @@ export class CashierService {
         );
     }
 
-    readAllBetweenDates(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
+    readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
         const cpParams = new URLSearchParams();
         cpParams.append('dateStart', dateStart.toISOString());
         cpParams.append('dateFinish', dateFinish.toISOString());
