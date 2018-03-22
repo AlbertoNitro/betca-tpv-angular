@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Offer } from '../shared/offer.model';
 
 @Component({
-    templateUrl: 'search-offer-dialog.component.html',
+    templateUrl: 'offer-search-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
     
-export class SearchOfferDialogComponent implements OnInit{
+export class OfferSearchDialogComponent implements OnInit{
         
     offer : Offer;
 
