@@ -1,0 +1,27 @@
+<h2 mat-dialog-title *ngIf="edit">Edit Role Management</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="user.mobile" [disabled]="edit" cdkFocusInitial/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Username" required [(ngModel)]="user.username" [disabled]="edit" />
+    </mat-form-field>
+
+    <section class="roles-section" *ngFor="let item of items">
+        <mat-checkbox [value]="item" (checked)="exists(item, selected)" (click)="toggle(item, selected)">
+            <span>{{ item }}</span>
+        </mat-checkbox>
+    </section>
+
+    <mat-card class="roles-section">
+        <mat-card-content>
+            <h2 mat-dialog-title>Selected User Role Set</h2>
+            <span> {{selected | json}}</span>
+        </mat-card-content>
+    </mat-card>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()">Save</button>
+</mat-dialog-actions>
