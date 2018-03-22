@@ -28,7 +28,6 @@ export class VouchersComponent implements OnInit {
             data => {
                 this.dataSource = new MatTableDataSource<Voucher>(data);
                 this.dataSource.sort = this.sort;
-            
                 this.totalValueVouchers = 0;
 
                 for( var i=0; i< data.length; i++ ) {
