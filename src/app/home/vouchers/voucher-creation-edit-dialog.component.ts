@@ -24,6 +24,7 @@ export class VoucherCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
+        
         this.voucherService.createObservable(this.voucher).subscribe(
             data => this.dialogRef.close()
         );
