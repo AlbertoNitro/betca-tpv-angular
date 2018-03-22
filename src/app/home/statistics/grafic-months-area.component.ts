@@ -40,8 +40,8 @@ export class GraficMonthsAreaComponent {
 
             const mapper = give => {
                 const months = new Date(give.creationDate).getMonth();
-                const saleArticle = Number(give.shoppingCart);
-                return { month: months, sales: saleArticle };
+                const countArticle = Number(give.shoppingCart);
+                return { month: months, sales: countArticle };
             };
 
             const reducer = (group, all) => {
