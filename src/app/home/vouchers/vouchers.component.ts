@@ -39,8 +39,7 @@ export class VouchersComponent implements OnInit {
 
             }
         );
-
-        
+   
     }
 
     create() {
