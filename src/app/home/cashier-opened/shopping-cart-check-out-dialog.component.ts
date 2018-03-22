@@ -6,11 +6,9 @@ import { TicketCreation } from '../shared/ticket-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
-import { VoucherService } from '../shared/voucher.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { User } from '../shared/user.model';
-import { Voucher } from '../shared/voucher.model';
 import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
 import { InvoiceCreation } from '../shared/invoice-creation.model';
 
@@ -26,9 +24,8 @@ export class ShoppingCartCheckOutDialogComponent {
     @Input() total: number;
     ticketCreation: TicketCreation;
     ivoiceCreation: InvoiceCreation;
-    voucher: Voucher;
     foundMobile = false;
-    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService, private voucherService: VoucherService) {
+    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
 
@@ -87,15 +84,6 @@ export class ShoppingCartCheckOutDialogComponent {
         this.ticketCreation.cash = this.number(this.ticketCreation.cash);
         this.ticketCreation.card = this.number(this.ticketCreation.card);
         this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
-
-        if (this.return() > 0) {
-            this.voucher = { value: this.return() }
-
-            this.voucherService.createObservable(this.voucher).subscribe(
-
-            );
-        }
-
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
