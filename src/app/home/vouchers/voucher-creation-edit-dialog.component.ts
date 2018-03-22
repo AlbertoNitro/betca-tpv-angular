@@ -24,10 +24,17 @@ export class VoucherCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        
         this.voucherService.createObservable(this.voucher).subscribe(
-            data => this.dialogRef.close()
+            blob => {
+                this.openPdf(blob);
+            }
         );
+    }
+
+    openPdf(blob: any) {
+        this.dialogRef.close();
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
     }
 
     nonValidValue(): boolean {
