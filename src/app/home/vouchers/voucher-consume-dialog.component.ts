@@ -20,14 +20,15 @@ export class VoucherConsumeDialogComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    consume(){
-
-        this.voucherService.patchObservable( this.reference ).subscribe(
-            data=>{
-                this.dialogRef.close( data );
+    consume() {
+        this.voucherService.patchObservable(this.reference).subscribe(
+            data => {
+                this.dialogRef.close(data);
+            },
+            error => {
+                this.dialogRef.close(0);
             }
         );
-
     }
 
 }
