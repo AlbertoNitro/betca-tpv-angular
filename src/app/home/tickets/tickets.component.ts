@@ -52,7 +52,6 @@ export class TicketsComponent implements OnInit, AfterViewInit {
       blob => this.openPdf(blob)
     );
   }
-
   findTicketsCreationDatesBetween() {
     this.ticketService.readTicketsCreationDatesBetween(this.initialDateInput, this.finalDateInput).subscribe(
       (listTickets: Ticket[]) => {
