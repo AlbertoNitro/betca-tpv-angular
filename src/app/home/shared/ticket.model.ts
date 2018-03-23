@@ -1,7 +1,7 @@
 import { Shopping } from './shopping.model';
 
 export interface Ticket {
-  id: String;
+  id: string;
   creationDate: Date;
   reference?: String;
   cashDeposited?: number;
