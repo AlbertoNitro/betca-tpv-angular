@@ -21,7 +21,7 @@ export class VoucherConsumeDialogComponent implements OnInit {
     }
 
     consume() {
-        this.voucherService.patchObservable(this.reference).subscribe(
+        this.voucherService.consume(this.reference).subscribe(
             data => {
                 this.dialogRef.close(data);
             },

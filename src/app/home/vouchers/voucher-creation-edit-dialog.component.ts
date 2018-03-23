@@ -24,7 +24,7 @@ export class VoucherCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.voucherService.createObservable(this.voucher).subscribe(
+        this.voucherService.create(this.voucher).subscribe(
             blob => {
                 this.openPdf(blob);
             }

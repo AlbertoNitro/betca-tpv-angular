@@ -10,7 +10,6 @@ import { VoucherCreationEditDialogComponent } from './voucher-creation-edit-dial
 export class VouchersComponent implements OnInit {
     static URL = 'vouchers';
     totalValueVouchers: number;
-
     displayedColumns = ['reference', 'value', 'actions'];
     dataSource: MatTableDataSource<Voucher>;
 
@@ -29,13 +28,11 @@ export class VouchersComponent implements OnInit {
                 this.dataSource = new MatTableDataSource<Voucher>(data);
                 this.dataSource.sort = this.sort;
                 this.totalValueVouchers = 0;
-
-                for( var i=0; i< data.length; i++ ) {
-                    if ( data[i].used == false ){
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i].used === false) {
                         this.totalValueVouchers += data[i].value;
                     }
                 }
-
             }
         );
     }
@@ -47,14 +44,11 @@ export class VouchersComponent implements OnInit {
         );
     }
 
-    consume( voucher: Voucher ){
-
-        this.voucherService.patchObservable(voucher.reference).subscribe(
+    consume(voucher: Voucher) {
+        this.voucherService.consume(voucher.reference).subscribe(
             data => {
                 this.synchronize();
             }
         );
-
     }
-
 }
