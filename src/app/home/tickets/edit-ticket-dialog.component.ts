@@ -1,13 +1,14 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { Shopping } from '../../shared/shopping.model';
+import { Shopping } from '../shared/shopping.model';
 import { MAT_DIALOG_DATA } from '@angular/material';
-import { TicketService } from '../../shared/ticket.service';
-import {TicketUpdation} from "../../shared/ticket-updation.model";
+import { TicketService } from '../shared/ticket.service';
+import {TicketUpdation} from '../shared/ticket-updation.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
-  templateUrl: './edit-ticket-dialog.component.html'
+  templateUrl: './edit-ticket-dialog.component.html',
+  styleUrls: ['./edit-ticket-dialog.component.css']
 })
 export class EditTicketDialogComponent implements OnInit  {
   idTicket: string = this.data.ticket.id;

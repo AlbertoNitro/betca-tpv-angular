@@ -9,7 +9,7 @@ import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search/a
 import { BudgetsComponent } from './home/budgets/budgets.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
-import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog/edit-ticket-dialog.component';
+import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog.component';
 import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';

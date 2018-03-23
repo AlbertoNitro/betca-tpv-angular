@@ -32,10 +32,10 @@
           <button *ngIf="isMinAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
             <mat-icon>remove_circle_outline</mat-icon>
           </button>
-          <button *ngIf="!isMaxAmountShopping(i)" mat-icon-button color="accent" (click)="increaseAmount(i)">
+          <button class="btnIncreaseAmount" *ngIf="!isMaxAmountShopping(i)" mat-icon-button color="accent" (click)="increaseAmount(i)">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
-          <button *ngIf="isMaxAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
+          <button class="btnIncreaseAmount" *ngIf="isMaxAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
         </mat-cell>
