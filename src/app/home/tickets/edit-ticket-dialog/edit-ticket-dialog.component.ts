@@ -28,7 +28,7 @@ export class EditTicketDialogComponent implements OnInit  {
     if (this.listAmountsShoppings[indexShopping] > 0) {
       this.listAmountsShoppings[indexShopping]--;
       if (this.listAmountsShoppings[indexShopping] === 0 && !this.data.ticket.shoppingList[indexShopping].committed) {
-        alert("Es 0 y estaba no entregado");
+        alert('Es 0 y estaba no entregado');
         this.listCommitedsShoppings[indexShopping] = true;
       }
     }
