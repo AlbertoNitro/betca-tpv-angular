@@ -4,9 +4,7 @@ import { NumProductSold } from './numProductSold.model';
 import { Observable } from 'rxjs/Observable';
 import { Ticket } from './ticket.model';
 import { TicketCreation } from './ticket-creation.model';
-import { URLSearchParams, RequestOptions } from '@angular/http';
-import {Subject} from 'rxjs/Subject';
-import {TicketUpdation} from "./ticket-updation.model";
+import { TicketUpdation } from './ticket-updation.model';
 
 @Injectable()
 export class TicketService {
@@ -19,13 +17,11 @@ export class TicketService {
     private convertToString(date: Date): string {
       return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
-
     readTicketsCreationDatesBetween(initialDate: Date, finalDate: Date): Observable<Ticket[]> {
       return this.httpService.authToken().param('initialDate', `${this.convertToString(initialDate)} 00:00:00`)
         .param('finalDate', `${this.convertToString(finalDate)} 23:59:59`)
         .get(TicketService.END_POINT + TicketService.SEARCH_BY_CREATION_DATES);
     }
-
     updateAmountAndStateTicket(id: string, listAmountsShoppings: number[], listCommitedsShoppings: boolean[]) {
       const ticketUpdation: TicketUpdation = {listAmountsShoppings: listAmountsShoppings, listCommitedsShoppings: listCommitedsShoppings}
       this.httpService.authToken().patch(`${TicketService.END_POINT}/${id}`, ticketUpdation).subscribe(
@@ -33,7 +29,9 @@ export class TicketService {
         error => alert(error)
       );
     }
-
+    read(id: string): Observable<Ticket> {
+      return this.httpService.authToken().pdf().get(`${TicketService.END_POINT}/${id}`);
+    }
     create(ticketCreation: TicketCreation): Observable<any> {
         return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
     }
@@ -47,7 +45,6 @@ export class TicketService {
             .get(TicketService.END_POINT + historicalProducts);
 
     }
-
     readIdArticleDatesBetween(id: string): Observable<TicketCreation[]> {
         const date = new Date();
         const year = date.getFullYear();
@@ -57,9 +54,4 @@ export class TicketService {
         .param('dateFinish', year + '-12-31 23:59:59')
         .get(TicketService.END_POINT + TicketService.SEARCH_BY_ID_ARTICLE);
     }
-
-    read(id: string): Observable<Ticket> {
-      return this.httpService.authToken().pdf().get(`${TicketService.END_POINT}/${id}`);
-    }
-
 }
