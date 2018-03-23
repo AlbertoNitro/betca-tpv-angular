@@ -25,8 +25,7 @@ export class TicketService {
     updateAmountAndStateTicket(id: string, listAmountsShoppings: number[], listCommitedsShoppings: boolean[]) {
       const ticketUpdation: TicketUpdation = {listAmountsShoppings: listAmountsShoppings, listCommitedsShoppings: listCommitedsShoppings}
       this.httpService.authToken().patch(`${TicketService.END_POINT}/${id}`, ticketUpdation).subscribe(
-        () => true,
-        error => alert(error)
+        () => true
       );
     }
     read(id: string): Observable<Ticket> {
