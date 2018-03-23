@@ -1,28 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck, Inject, IterableDiffers, OnInit} from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Shopping } from '../../shared/shopping.model';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
   templateUrl: './edit-ticket-dialog.component.html'
 })
-export class EditTicketDialogComponent implements OnInit {
-  displayedColumns = ['numLineShopping', 'code', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
-  listShopping: Shopping[] = [];
+export class EditTicketDialogComponent implements OnInit  {
+  ticketId: string = this.data.ticket.id;
+  displayedColumns = ['numLineShopping', 'description', 'retailPrice', 'amount', 'discount', 'committed'];
+  listAmountsShoppings: number[];
+  listCommitedsShoppings: boolean[];
   dataSource: MatTableDataSource<Shopping>;
-  dataSourceEdit: MatTableDataSource<Shopping>;
-  constructor() {
-    let shopping0 = new Shopping('abc', 'vacio', 145);
-    let shopping1 = new Shopping('def', 'vacio', 25);
-    let shopping2 = new Shopping('ghi', 'vacio', 4465);
-    let shopping3 = new Shopping('jkl', 'vacio', 5465);
-    this.listShopping.push(shopping0);
-    this.listShopping.push(shopping1);
-    this.listShopping.push(shopping2);
-    this.listShopping.push(shopping3);
-    this.dataSource = new MatTableDataSource<Shopping>(this.listShopping);
-    this.dataSourceEdit = new MatTableDataSource<Shopping>(this.listShopping);
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any) {
+    this.dataSource = new MatTableDataSource<Shopping>(this.data.ticket.shoppingList);
+    this.listAmountsShoppings = [];
+    this.listCommitedsShoppings = [];
+    for (const shopping of this.data.ticket.shoppingList) {
+      this.listAmountsShoppings.push(shopping.amount);
+      this.listCommitedsShoppings.push(shopping.committed);
+    }
   }
   ngOnInit() {
+  }
+  decreaseAmount(indexShopping: number) {
+    if (this.listAmountsShoppings[indexShopping] > 0) {
+      this.listAmountsShoppings[indexShopping]--;
+      if (this.listAmountsShoppings[indexShopping] === 0 && !this.data.ticket.shoppingList[indexShopping].committed) {
+        alert("Es 0 y estaba no entregado");
+        this.listCommitedsShoppings[indexShopping] = true;
+      }
+    }
+  }
+  increaseAmount(indexShopping: number) {
+    if (this.listAmountsShoppings[indexShopping] < this.data.ticket.shoppingList[indexShopping].amount) {
+      this.listAmountsShoppings[indexShopping]++;
+    }
+  }
+  isMaxAmountShopping(indexShopping: number): boolean {
+    return this.listAmountsShoppings[indexShopping] === this.data.ticket.shoppingList[indexShopping].amount;
+  }
+  isMinAmountShopping(indexShopping: number): boolean {
+    return this.listAmountsShoppings[indexShopping] === 0;
   }
 }
