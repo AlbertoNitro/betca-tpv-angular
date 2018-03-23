@@ -13,6 +13,7 @@ export class VoucherService {
 
     read(reference: string): Observable<Voucher> {
         return this.httpService.authToken().get(VoucherService.END_POINT + '/' + reference);
+        
     }
 
     create(voucher: Voucher): Observable<any> {
