@@ -46,20 +46,10 @@ export class ArticlesFamilyComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getAllArticles();
     this.getAllArticleFamily();
 
   }
 
-  getAllArticles() {
-    this.articleList = [];
-    this.articleService.readAll().subscribe(
-      data => {
-        console.log(data);
-        this.articleList = data;
-      },
-    );
-  }
 
   getAllArticleFamily() {
     this.articleFamilyList = [];
@@ -76,7 +66,15 @@ export class ArticlesFamilyComponent implements OnInit {
     this.shoppingCartService.add(code);
   }
 
-  viewArticles() {
-    alert('Hello! I am an alert box!!');
+
+  viewArticles(reference: String) {
+    this.articleFamilyList = [];
+    this.articleFamilyService.readObservable(reference).subscribe(
+      data => {
+        console.log(data);
+        this.articleFamilyList = data;
+      },
+    );
+
   }
 }

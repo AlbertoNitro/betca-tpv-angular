@@ -24,7 +24,7 @@
     </mat-card>
 
     <mat-card *ngFor="let family of articleFamilyList.listArticleFamily" fxFlex="auto" fxFlexOffset="1">
-      <button mat-button matSuffix color="accent" type="submit" (click)="viewArticles(family.useGlobal)">
+      <button mat-button matSuffix color="accent" type="submit" (click)="viewArticles(family.reference)">
         <img class="img-article" src="{{imagePathFamily}}" height="100" width="100" alt="Washed Out"
              [matTooltipPosition]="positionabove"
              matTooltip="{{family.reference}}"/>
