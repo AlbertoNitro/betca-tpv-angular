@@ -29,13 +29,18 @@ export class TicketsComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
   showEditDialog(ticket: Ticket) {
-    let dialogRef = this.dialog.open(EditTicketDialogComponent, {
+    const dialogRef = this.dialog.open(EditTicketDialogComponent, {
       height: '500px',
       width: '900px',
       data: { ticket: ticket }
     });
     dialogRef.afterClosed().subscribe(
-      result => this.findTicketsCreationDatesBetween()
+      result => {
+        if (result) {
+          this.findTicketsCreationDatesBetween();
+          this.showTicket(ticket.id);
+        }
+      }
     );
   }
   openPdf(blob: any) {
