@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Voucher } from './voucher.model';
-import { VoucherService } from './voucher.service';
+import { Voucher } from '../shared/voucher.model';
+import { VoucherService } from '../shared/voucher.service';
 
 @Component({
     templateUrl: 'voucher-creation-edit-dialog.component.html',
@@ -24,7 +24,7 @@ export class VoucherCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.voucherService.createObservable(this.voucher).subscribe(
+        this.voucherService.create(this.voucher).subscribe(
             blob => {
                 this.openPdf(blob);
             }
