@@ -12,10 +12,11 @@ import {TicketService} from '../shared/ticket.service';
 export class TicketsComponent {
   static URL = 'tickets';
   listTickets: Ticket[] = [];
+  listCreationDates: string[] = [];
   initialDateInput: Date = undefined;
   finalDateInput: Date = undefined;
   dataSource: MatTableDataSource<Ticket>;
-  displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
+  displayedColumns = ['numTicket', 'id', 'actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private ticketService: TicketService, public dialog: MatDialog, public snackBar: MatSnackBar) {
