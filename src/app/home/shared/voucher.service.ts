@@ -11,15 +11,11 @@ export class VoucherService {
     constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
     }
 
-    read(reference: string): Observable<Voucher> {
-        return this.httpService.authToken().get(VoucherService.END_POINT + '/' + reference);
-    }
-
     create(voucher: Voucher): Observable<any> {
         return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
     }
 
-    consume(reference: string): Observable<boolean> {
+    consume(reference: string): Observable<number> {
         return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference).map(
             data => {
                 this.successful();

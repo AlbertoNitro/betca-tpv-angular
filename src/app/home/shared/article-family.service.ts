@@ -10,12 +10,17 @@ import {HttpService} from '../../core/http.service';
 export class ArticleFamilyService {
 
   static END_POINT = '/articlesfamily';
+  static FAMILY = '/family';
 
 
   constructor(private httpService: HttpService) {
   }
 
-  readAll() {
+  readAllTwoListArticleAndFamilys() {
     return this.httpService.authToken().get(ArticleFamilyService.END_POINT);
+  }
+
+  readAllComonentOneListObjetc() {
+    return this.httpService.authToken().get(ArticleFamilyService.END_POINT + ArticleFamilyService.FAMILY);
   }
 }
