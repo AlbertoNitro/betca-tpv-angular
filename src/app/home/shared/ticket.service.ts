@@ -6,11 +6,12 @@ import { Ticket } from './ticket.model';
 import { TicketCreation } from './ticket-creation.model';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import {Subject} from 'rxjs/Subject';
+import {TicketUpdation} from "./ticket-updation.model";
 
 @Injectable()
 export class TicketService {
     static END_POINT = '/tickets';
-    static SEARCH_BY_ID_ARTICLE = '/search?';
+    static SEARCH_BY_ID_ARTICLE = '/searchByIdAndDates?';
     static SEARCH_BY_CREATION_DATES = '/searchByCreationDates?';
 
     constructor(private httpService: HttpService) {
@@ -23,6 +24,12 @@ export class TicketService {
         .param('finalDate', `${this.convertToString(finalDate)} 23:59:59`)
         .get(TicketService.END_POINT + TicketService.SEARCH_BY_CREATION_DATES);
     }
+
+    updateAmountAndStateTicket(id: string, listAmountsShoppings: number[], listCommitedsShoppings: boolean[]): Observable<any> {
+      const ticketUpdation: TicketUpdation = {listAmountsShoppings: listAmountsShoppings, listCommitedsShoppings: listCommitedsShoppings}
+      return this.httpService.authToken().patch(`${TicketService.END_POINT}/${id}`, ticketUpdation);
+    }
+
     create(ticketCreation: TicketCreation): Observable<any> {
         return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
     }

@@ -1,6 +1,6 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
 <mat-chip-list>
-  <mat-chip color="primary" selected="true">Id: {{ticketId}}</mat-chip>
+  <mat-chip color="primary" selected="true">Id: {{idTicket}}</mat-chip>
 </mat-chip-list>
 
 <mat-dialog-content>
@@ -65,5 +65,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary">Save changes</button>
+  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary" (click)="updateTicket()">Save changes</button>
 </mat-dialog-actions>
