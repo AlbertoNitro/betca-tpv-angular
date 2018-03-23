@@ -15,7 +15,7 @@ export class VouchersComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(public dialog: MatDialog, private voucherService: VoucherService) {
+    constructor(private dialog: MatDialog, private voucherService: VoucherService) {
     }
 
     ngOnInit(): void {

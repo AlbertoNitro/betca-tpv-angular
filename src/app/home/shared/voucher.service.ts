@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material';
 export class VoucherService {
     static END_POINT = '/vouchers';
 
-    constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
     }
 
     read(reference: string): Observable<Voucher> {

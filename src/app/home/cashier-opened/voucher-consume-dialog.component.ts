@@ -10,14 +10,11 @@ import { VoucherService } from '../shared/voucher.service';
         flex-direction: column;
     }`]
 })
-export class VoucherConsumeDialogComponent implements OnInit {
+export class VoucherConsumeDialogComponent {
     reference: string;
 
-    constructor(public dialogRef: MatDialogRef<VoucherConsumeDialogComponent>,
+    constructor(private dialogRef: MatDialogRef<VoucherConsumeDialogComponent>,
         private voucherService: VoucherService) {
-    }
-
-    ngOnInit(): void {
     }
 
     consume() {
