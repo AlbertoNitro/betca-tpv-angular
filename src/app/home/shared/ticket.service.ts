@@ -19,15 +19,19 @@ export class TicketService {
     private convertToString(date: Date): string {
       return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
     }
+
     readTicketsCreationDatesBetween(initialDate: Date, finalDate: Date): Observable<Ticket[]> {
       return this.httpService.authToken().param('initialDate', `${this.convertToString(initialDate)} 00:00:00`)
         .param('finalDate', `${this.convertToString(finalDate)} 23:59:59`)
         .get(TicketService.END_POINT + TicketService.SEARCH_BY_CREATION_DATES);
     }
 
-    updateAmountAndStateTicket(id: string, listAmountsShoppings: number[], listCommitedsShoppings: boolean[]): Observable<any> {
+    updateAmountAndStateTicket(id: string, listAmountsShoppings: number[], listCommitedsShoppings: boolean[]) {
       const ticketUpdation: TicketUpdation = {listAmountsShoppings: listAmountsShoppings, listCommitedsShoppings: listCommitedsShoppings}
-      return this.httpService.authToken().patch(`${TicketService.END_POINT}/${id}`, ticketUpdation);
+      this.httpService.authToken().patch(`${TicketService.END_POINT}/${id}`, ticketUpdation).subscribe(
+        () => true,
+        error => alert(error)
+      );
     }
 
     create(ticketCreation: TicketCreation): Observable<any> {
