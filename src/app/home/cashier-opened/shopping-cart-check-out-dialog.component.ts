@@ -150,7 +150,7 @@ export class ShoppingCartCheckOutDialogComponent {
         dialogRef.afterClosed().subscribe(
             result => {
                 this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher);
-                this.ticketCreation.voucher += (result === undefined ? 0 : result);
+                this.ticketCreation.voucher += (result > 0 ? result : 0);
             }
         );
     }
