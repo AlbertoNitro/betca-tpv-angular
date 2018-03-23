@@ -6,7 +6,7 @@
 <mat-dialog-content>
   <!-- DATATABLE SHOPPINGS -->
   <div class="mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSourceEdit" matSort>
+    <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="numLineShopping">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
         <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
@@ -18,14 +18,26 @@
       </ng-container>
 
       <ng-container matColumnDef="retailPrice">
-        <mat-header-cell *matHeaderCellDef> RetailPrice </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Retail Price </mat-header-cell>
         <mat-cell *matCellDef="let shopping"> {{shopping.retailPrice}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-        <mat-cell *matCellDef="let shopping">
-          <input type="number" matInput min="0" [max]="shopping.amount" [value]="shopping.amount"/>
+        <mat-cell *matCellDef="let i = index">
+          {{listAmountsShoppings[i]}}
+          <button *ngIf="!isMinAmountShopping(i)" mat-icon-button color="accent" (click)="decreaseAmount(i)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <button *ngIf="isMinAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <button *ngIf="!isMaxAmountShopping(i)" mat-icon-button color="accent" (click)="increaseAmount(i)">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+          <button *ngIf="isMaxAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
         </mat-cell>
       </ng-container>
 
@@ -37,8 +49,8 @@
       <ng-container matColumnDef="committed">
         <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
         <mat-cell *matCellDef="let shopping">
-          <mat-checkbox *ngIf="shopping.committed" [(ngModel)]="shopping.committed" disabled="true"></mat-checkbox>
-          <mat-checkbox *ngIf="!shopping.committed" [(ngModel)]="shopping.committed" disabled="false"></mat-checkbox>
+          <mat-checkbox *ngIf="shopping.committed" [checked]="true" [disabled]="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!shopping.committed" [(ngModel)]="listCommitedsShoppings[shopping.index]"></mat-checkbox>
         </mat-cell>
       </ng-container>
 
