@@ -16,17 +16,12 @@ export class VoucherService {
         return this.httpService.authToken().get(VoucherService.END_POINT + '/' + reference);
     }
 
-    createObservable(voucher: Voucher): Observable<boolean> {
-        return this.httpService.authToken().post(VoucherService.END_POINT, voucher).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    createObservable(voucher: Voucher): Observable<any> {
+        return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
     }
 
     patchObservable(reference: string): Observable<boolean> {
-        return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference ).map(
+        return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference).map(
             data => {
                 this.successful();
                 return data;
