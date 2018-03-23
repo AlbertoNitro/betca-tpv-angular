@@ -27,6 +27,10 @@ export class EditTicketDialogComponent implements OnInit  {
   decreaseAmount(indexShopping: number) {
     if (this.listAmountsShoppings[indexShopping] > 0) {
       this.listAmountsShoppings[indexShopping]--;
+      if (this.listAmountsShoppings[indexShopping] === 0 && !this.data.ticket.shoppingList[indexShopping].committed) {
+        alert("Es 0 y estaba no entregado");
+        this.listCommitedsShoppings[indexShopping] = true;
+      }
     }
   }
   increaseAmount(indexShopping: number) {
@@ -34,10 +38,10 @@ export class EditTicketDialogComponent implements OnInit  {
       this.listAmountsShoppings[indexShopping]++;
     }
   }
-  isMaxAmountShopping(indexShopping): boolean {
+  isMaxAmountShopping(indexShopping: number): boolean {
     return this.listAmountsShoppings[indexShopping] === this.data.ticket.shoppingList[indexShopping].amount;
   }
-  isMinAmountShopping(indexShopping): boolean {
+  isMinAmountShopping(indexShopping: number): boolean {
     return this.listAmountsShoppings[indexShopping] === 0;
   }
 }
