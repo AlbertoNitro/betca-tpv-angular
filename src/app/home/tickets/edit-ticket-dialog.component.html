@@ -1,10 +1,10 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
+
 <mat-chip-list>
   <mat-chip color="primary" selected="true">Id: {{idTicket}}</mat-chip>
 </mat-chip-list>
 
 <mat-dialog-content>
-  <!-- DATATABLE SHOPPINGS -->
   <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="numLineShopping">
@@ -59,8 +59,6 @@
       </mat-row>
     </mat-table>
   </div>
-  <!-- DATATABLE SHOPPINGS -->
-
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

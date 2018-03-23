@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {EditTicketDialogComponent} from './edit-ticket-dialog.component';
 import {MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar} from '@angular/material';
 import {Ticket} from '../shared/ticket.model';
@@ -9,7 +9,7 @@ import {TicketService} from '../shared/ticket.service';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent {
   static URL = 'tickets';
   listTickets: Ticket[] = [];
   initialDateInput: Date = undefined;
@@ -19,8 +19,6 @@ export class TicketsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   constructor(private ticketService: TicketService, public dialog: MatDialog, public snackBar: MatSnackBar) {
-  }
-  ngOnInit() {
   }
   showEditDialog(ticket: Ticket) {
     const dialogRef = this.dialog.open(EditTicketDialogComponent, {

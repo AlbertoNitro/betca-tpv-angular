@@ -4,9 +4,7 @@ import { NumProductSold } from './numProductSold.model';
 import { Observable } from 'rxjs/Observable';
 import { Ticket } from './ticket.model';
 import { TicketCreation } from './ticket-creation.model';
-import { URLSearchParams, RequestOptions } from '@angular/http';
-import {Subject} from 'rxjs/Subject';
-import {TicketUpdation} from "./ticket-updation.model";
+import { TicketUpdation } from './ticket-updation.model';
 
 @Injectable()
 export class TicketService {
