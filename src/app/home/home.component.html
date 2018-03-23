@@ -4,6 +4,10 @@
   <span class="toolbar-spacer"></span>
   <span>
     <app-date format="medium"></app-date>
+    <button mat-button (click)="powerOff()">
+      <mat-icon color="warn">power_settings_new</mat-icon>
+      <span>Power-off</span>
+    </button>
     <button mat-button (click)="logout()">
       <mat-icon>person</mat-icon>
       <span>Logout</span>
@@ -18,14 +22,9 @@
   </span>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
-
   <button *ngIf="tokensService.isAdmin()" mat-menu-item [matMenuTriggerFor]="settings">
     <mat-icon>settings</mat-icon>
     <span>Admin</span>
-  </button>
-  <button mat-menu-item [matMenuTriggerFor]="offers">
-    <mat-icon>euro_symbol</mat-icon>
-    <span>Offers</span>
   </button>
   <button mat-menu-item (click)="home()">
     <mat-icon>home</mat-icon>
@@ -34,6 +33,10 @@
   <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
     <mat-icon>work</mat-icon>
     <span>Close Cashier</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="offers">
+    <mat-icon>thumb_up</mat-icon>
+    <span>Offers</span>
   </button>
   <button mat-menu-item (click)="cashMovement()">
     <mat-icon>euro_symbol</mat-icon>
@@ -71,6 +74,10 @@
     <mat-icon>assessment</mat-icon>
     <span>Statistics2</span>
   </button>
+  <button mat-menu-item (click)="stockAlerts()">
+    <mat-icon>notifications</mat-icon>
+    <span>Stock alerts</span>
+  </button>
   <button mat-menu-item (click)="schedule()">
     <mat-icon>schedule</mat-icon>
     <span>Agenda</span>
@@ -90,7 +97,7 @@
   <button mat-menu-item (click)="roleManagement()">Role Management</button>
 </mat-menu>
 <mat-menu #offers="matMenu">
-  <button mat-menu-item (click)="addOffer()">Add offer</button>
-  <button mat-menu-item (click)="consultOffer()">Consult offer</button>
+  <button mat-menu-item (click)="searchOffer()">Search Offer</button>
+  <button mat-menu-item (click)="OffersManagment()">Managment Offer</button>
 </mat-menu>
 <router-outlet></router-outlet>

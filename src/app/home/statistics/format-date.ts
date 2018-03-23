@@ -1,26 +1,26 @@
 export class FormatDate {
 
     static yearTimeStart(dateI: number): Date {
-        const dateStart = new Date(dateI, 0, 1, 0, 0, 0);
+        const dateStart = new Date(Date.UTC(dateI, 0, 1, 0, 0, 0));
         return dateStart;
     }
 
     static yearTimeFinish(dateF: number): Date {
-        const dateEnd = new Date(dateF, 12, 31, 99, 99, 99);
+        const dateEnd = new Date(Date.UTC(dateF, 11, 31, 24, 0, 0));
         return dateEnd;
     }
 
     static monthsTimeStart(dateI: number): Date {
         const date = new Date();
-        const year = date.getFullYear();
-        const dateStart = new Date(year, dateI, 1, 0, 0, 0);
+        const yearInitial = date.getFullYear();
+        const dateStart = new Date(Date.UTC(yearInitial, dateI, 1, 0, 0, 0));
         return dateStart;
     }
 
     static monthsTimeFinish(dateF: number): Date {
         const date = new Date();
-        const year = date.getFullYear();
-        const dateEnd = new Date(year, dateF, 31, 11, 59, 59);
+        const yearFinish = date.getFullYear();
+        const dateEnd = new Date(Date.UTC(yearFinish, dateF, 31, 24, 0, 0));
         return dateEnd;
     }
 

@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
+import { InvoiceService } from '../shared/invoice.service';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
@@ -21,13 +23,13 @@ export class ShoppingCartService {
 
     private shoppingCart: Array<Shopping> = new Array();
     private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
-    private indexShoppingCart = 0;
+    private _indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, public snackBar: MatSnackBar) {
+        private budgetService: BudgetService, public snackBar: MatSnackBar, private invoiceService: InvoiceService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -35,6 +37,14 @@ export class ShoppingCartService {
 
     shoppingCartObservable(): Observable<Shopping[]> {
         return this.shoppingCartSubject.asObservable();
+    }
+
+    get indexShoppingCart(): number {
+        if (this._indexShoppingCart === 0) {
+            return undefined;
+        } else {
+            return this._indexShoppingCart + 1;
+        }
     }
 
     get total() {
@@ -91,9 +101,9 @@ export class ShoppingCartService {
     }
 
     exchange(): void {
-        this.shoppingCartList[this.indexShoppingCart++] = this.shoppingCart;
-        this.indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
-        this.shoppingCart = this.shoppingCartList[this.indexShoppingCart];
+        this.shoppingCartList[this._indexShoppingCart++] = this.shoppingCart;
+        this._indexShoppingCart %= ShoppingCartService.SHOPPING_CART_NUM;
+        this.shoppingCart = this.shoppingCartList[this._indexShoppingCart];
         this.synchronizeAll();
     }
 
@@ -115,6 +125,15 @@ export class ShoppingCartService {
             }
         );
     }
+    createInvoice(invoiceCreation: InvoiceCreation): void {
+        invoiceCreation.shoppingCart = this.shoppingCart;
+        this.invoiceService.create(invoiceCreation).subscribe(
+            blob => {
+                this.openPdf(blob);
+            }
+        );
+    }
+
 
     openPdf(blob: any) {
         this.shoppingCart = new Array();

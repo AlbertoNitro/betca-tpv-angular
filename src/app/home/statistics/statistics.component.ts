@@ -21,7 +21,7 @@ export class StatisticsComponent implements OnInit {
     }
     graficYearArea = new GraficYearAreaComponent(this.cashierService, this.snackBar);
     graficMonthColum = new GraficMonthsColumnComponent(this.cashierService, this.snackBar);
-    graficMonthArea = new GraficMonthsAreaComponent(this.ticketService);
+    graficMonthArea = new GraficMonthsAreaComponent(this.ticketService, this.snackBar);
 
     ngOnInit(): void {
         this.graficYearArea.init();
@@ -30,13 +30,13 @@ export class StatisticsComponent implements OnInit {
     }
 
     graficAreaYear(dateI: number, dateF: number) {
-        this.graficYearArea.create(dateI, dateF);
+        this.graficYearArea.search(dateI, dateF);
     }
 
     graficColumMonth(dateI: number, dateF: number) {
-        this.graficMonthColum.create(dateI, dateF);
+        this.graficMonthColum.search(dateI, dateF);
     }
     graficCode(code: string) {
-        this.graficMonthArea.create(code);
+        this.graficMonthArea.search(code);
     }
 }
