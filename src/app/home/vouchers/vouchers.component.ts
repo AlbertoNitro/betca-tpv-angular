@@ -18,7 +18,7 @@ export class VouchersComponent implements OnInit {
 
     constructor(public dialog: MatDialog, private voucherService: VoucherService) {
     }
-    
+
     ngOnInit(): void {
         this.synchronize();
     }
