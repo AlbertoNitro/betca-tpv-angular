@@ -28,7 +28,7 @@ import { VouchersComponent } from './home/vouchers/vouchers.component';
 import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
-import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
+import { VoucherConsumeDialogComponent } from './home/cashier-opened/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
 import { OfferSearchDialogComponent } from './home/offers/offer-search-dialog.component';
 import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-dialog.component';

@@ -1,17 +1,15 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
-<mat-dialog-content>
+<mat-chip-list>
+  <mat-chip color="primary" selected="true">Id: {{idTicket}}</mat-chip>
+</mat-chip-list>
 
+<mat-dialog-content>
   <!-- DATATABLE SHOPPINGS -->
   <div class="mat-elevation-z8">
-    <mat-table #table [dataSource]="dataSourceEdit" matSort>
+    <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="numLineShopping">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
         <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="code">
-        <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-        <mat-cell *matCellDef="let shopping"> {{shopping.code}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="description">
@@ -20,13 +18,27 @@
       </ng-container>
 
       <ng-container matColumnDef="retailPrice">
-        <mat-header-cell *matHeaderCellDef> RetailPrice </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Retail Price </mat-header-cell>
         <mat-cell *matCellDef="let shopping"> {{shopping.retailPrice}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-        <mat-cell *matCellDef="let shopping"> {{shopping.amount}} </mat-cell>
+        <mat-cell *matCellDef="let i = index">
+          {{listAmountsShoppings[i]}}
+          <button *ngIf="!isMinAmountShopping(i)" mat-icon-button color="accent" (click)="decreaseAmount(i)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <button *ngIf="isMinAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          <button *ngIf="!isMaxAmountShopping(i)" mat-icon-button color="accent" (click)="increaseAmount(i)">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+          <button *ngIf="isMaxAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="discount">
@@ -34,17 +46,11 @@
         <mat-cell *matCellDef="let shopping"> {{shopping.discount}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="total">
-        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-        <mat-cell *matCellDef="let shopping">
-            <input matInput min="0" [max]="shopping.total" type="number" [value]="shopping.total" [disabled]="shopping.total===0"/>
-        </mat-cell>
-      </ng-container>
-
       <ng-container matColumnDef="committed">
         <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
         <mat-cell *matCellDef="let shopping">
-          <mat-checkbox [(ngModel)]="shopping.committed"></mat-checkbox>
+          <mat-checkbox *ngIf="shopping.committed" [checked]="true" [disabled]="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!shopping.committed" [(ngModel)]="listCommitedsShoppings[shopping.index]"></mat-checkbox>
         </mat-cell>
       </ng-container>
 
@@ -59,5 +65,5 @@
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary">Save changes</button>
+  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary" (click)="updateTicket()">Save changes</button>
 </mat-dialog-actions>

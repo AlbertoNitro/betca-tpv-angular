@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpModule, JsonpModule} from '@angular/http';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule, JsonpModule } from '@angular/http';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {
   MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
   MatCardModule, MatCheckboxModule, MatChipsModule,
@@ -17,11 +17,11 @@ import {
   MatTabsModule, MatToolbarModule, MatTooltipModule,
   MatStepperModule,
 } from '@angular/material';
-import {CdkTableModule} from '@angular/cdk/table';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { CdkTableModule } from '@angular/cdk/table';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import {AppRoutingModule} from './app-routing.module';
-import {CoreModule} from './core/core.module';
+import { AppRoutingModule } from './app-routing.module';
+import { CoreModule } from './core/core.module';
 
 import { AdminsService } from './home/admin/admins.service';
 import { ArticleFamilyService } from './home/shared/article-family.service';
