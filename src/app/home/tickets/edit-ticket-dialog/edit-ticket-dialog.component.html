@@ -1,17 +1,15 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
-<mat-dialog-content>
+<mat-chip-list>
+  <mat-chip color="primary" selected="true">Id: {{ticketId}}</mat-chip>
+</mat-chip-list>
 
+<mat-dialog-content>
   <!-- DATATABLE SHOPPINGS -->
   <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSourceEdit" matSort>
       <ng-container matColumnDef="numLineShopping">
         <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
         <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="code">
-        <mat-header-cell *matHeaderCellDef> Code </mat-header-cell>
-        <mat-cell *matCellDef="let shopping"> {{shopping.code}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="description">
@@ -26,7 +24,9 @@
 
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-        <mat-cell *matCellDef="let shopping"> {{shopping.amount}} </mat-cell>
+        <mat-cell *matCellDef="let shopping">
+          <input type="number" matInput min="0" [max]="shopping.amount" [value]="shopping.amount"/>
+        </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="discount">
@@ -34,17 +34,11 @@
         <mat-cell *matCellDef="let shopping"> {{shopping.discount}} </mat-cell>
       </ng-container>
 
-      <ng-container matColumnDef="total">
-        <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-        <mat-cell *matCellDef="let shopping">
-            <input type="number" matInput min="0" [max]="shopping.total" [value]="shopping.total"/>
-        </mat-cell>
-      </ng-container>
-
       <ng-container matColumnDef="committed">
         <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
         <mat-cell *matCellDef="let shopping">
-          <mat-checkbox [(ngModel)]="shopping.committed"></mat-checkbox>
+          <mat-checkbox *ngIf="shopping.committed" [(ngModel)]="shopping.committed" disabled="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!shopping.committed" [(ngModel)]="shopping.committed" disabled="false"></mat-checkbox>
         </mat-cell>
       </ng-container>
 
