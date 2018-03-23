@@ -11,18 +11,19 @@ import { Provider } from '../providers/provider.model';
   templateUrl: 'advanced-search.component.html'
 })
 export class AdvancedSearchComponent {
-  displayedColumns = ['id', 'reference', 'description', 'retailPrice', 'stock', 'provider', 'committed'];
+  displayedColumns = ['id', 'reference', 'description', 'retailPrice', 'stock', 'committed'];
   dataSource: MatTableDataSource<Article>;
   private code;
   articleForm: Article;
   listaProvider: Provider[];
+  alerta: string;
 
   constructor(private articleService: ArticleService, public shoppingCartService: ShoppingCartService,
     private providerService: ProviderService) {
-      this.providerService.readAll().subscribe(
-        data => {
-            this.listaProvider = data;
-        }
+    this.providerService.readAll().subscribe(
+      data => {
+        this.listaProvider = data;
+      }
     );
     this.articleForm = {
       code: '', reference: null, description: '', stock: 0,
@@ -34,17 +35,32 @@ export class AdvancedSearchComponent {
     this.shoppingCartService.add(code);
   }
   buscar() {
+    this.validar();
+    console.log(this.articleForm);
+    this.articleService.readAdvancedSearch(this.articleForm).subscribe(
+      data => {
+        this.dataSource = new MatTableDataSource<Article>(data);
+        if (data.length === 0) {
+          this.alerta = 'Products not found';
+        } else {
+          this.alerta = '';
+        }
+      },
+    );
+  }
+
+  validar() {
     this.articleForm.description = this.articleForm.description.trim();
     if (this.articleForm.reference != null) {
       if (!this.articleForm.reference.trim()) {
         this.articleForm.reference = null;
       }
     }
-    console.log(this.articleForm);
-    this.articleService.readAdvancedSearch(this.articleForm).subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource<Article>(data);
-      },
-    );
+    if (this.articleForm.retailPriceMin == null) {
+      this.articleForm.retailPriceMin = 0;
+    }
+    if (this.articleForm.retailPriceMax == null) {
+      this.articleForm.retailPriceMax = 0;
+    }
   }
 }
