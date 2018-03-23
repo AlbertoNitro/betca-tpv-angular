@@ -54,7 +54,7 @@
       <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
       <mat-cell *matCellDef="let ticket">
         <button mat-mini-fab color="primary" (click)="showTicket(ticket.id)"><mat-icon>info</mat-icon></button>
-        <button mat-mini-fab color="primary" (click)="showEditDialog()"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab color="primary" (click)="showEditDialog(ticket)"><mat-icon>edit</mat-icon></button>
       </mat-cell>
     </ng-container>
 

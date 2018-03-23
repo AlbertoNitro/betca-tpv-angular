@@ -28,10 +28,11 @@ export class TicketsComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
-  showEditDialog() {
+  showEditDialog(ticket: Ticket) {
     this.dialog.open(EditTicketDialogComponent, {
       height: '500px',
       width: '900px',
+      data: { ticket: ticket }
     });
   }
   openPdf(blob: any) {
