@@ -40,5 +40,4 @@ export class VoucherCreationEditDialogComponent implements OnInit {
     nonValidValue(): boolean {
         return this.voucher.value === undefined || this.voucher.value <= 0 || this.voucher.value.toString.length <= 0;
     }
-
 }
