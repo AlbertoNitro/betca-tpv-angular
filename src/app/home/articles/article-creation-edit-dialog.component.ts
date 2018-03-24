@@ -32,6 +32,10 @@ export class ArticleCreationEditDialogComponent implements OnInit {
         }
     }
 
+    isActionCompleted() {
+        return this.article.code && this.article.description && this.article.retailPrice && this.article.provider;
+    }
+
     create(): void {
         this.articleService.articleGenerateObservable(this.article).subscribe(
             data => this.dialogRef.close()

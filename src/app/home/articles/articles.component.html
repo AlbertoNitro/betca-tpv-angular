@@ -4,5 +4,5 @@
         <mat-checkbox [(ngModel)]="onlyIncomplete" (change)="synchronize()">Only Incomplete</mat-checkbox>
     </mat-card-content>
 </mat-card>
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [data]="data" 
-    (create)="create()" (read)="read($event)" (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data" 
+    (create)="create()" (edit)="edit($event)"></app-crud>
