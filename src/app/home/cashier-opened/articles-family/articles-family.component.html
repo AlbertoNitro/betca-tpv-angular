@@ -1,8 +1,12 @@
 <mat-card-header>
-  <div mat-card-avatar>
-    <mat-icon>view_quilt</mat-icon>
-  </div>
-  <strong>Articles Family</strong>
+
+  <button mat-raised-button color="accent" type="submit" (click)="getAllArticleFamily()">INICIO</button>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row fxFlex="auto">
+      <span>Articles Family / {{actualfamily}}</span>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
 </mat-card-header>
 <br>
 <mat-card-content>
@@ -11,7 +15,7 @@
     <mat-card *ngFor="let article of articleFamilyList.listArticles" fxFlex="auto" fxFlexOffset="1">
       <mat-card-actions>
         <button mat-mini-fab color="accent" type="submit" (click)="add(article.code)">
-              <span [matTooltipPosition]="positioncenter" matTooltip="Add Car"> <strong>
+              <span [matTooltipPosition]="positionabove" matTooltip="Add Car"> <strong>
               <mat-icon aria-label="addcar">add_shopping_cart</mat-icon>
               </strong></span>
         </button>
