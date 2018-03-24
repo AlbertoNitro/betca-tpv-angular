@@ -7,7 +7,7 @@ import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
 import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
-import { ArticleQuickDialogComponent } from './article-quick-generate-dialog.component';
+import { ArticleQuickCreationDialogComponent } from './article-quick-creation-dialog.component';
 import { Article } from '../shared/article.model';
 
 
@@ -38,7 +38,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     openDialog() {
-        const dialogRef = this.dialog.open(ArticleQuickDialogComponent, {
+        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent, {
             width: '600px',
             height: '600px',
             data: {code: this.code, article: this.fastArticle}

@@ -8,13 +8,13 @@ import { MatSnackBar } from '@angular/material';
 
 
 @Component({
-    templateUrl: 'article-quick-generate-dialog.component.html',
+    templateUrl: 'article-quick-creation-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
-export class ArticleQuickDialogComponent {
+export class ArticleQuickCreationDialogComponent {
 
     public code;
     public description: string;
@@ -22,7 +22,7 @@ export class ArticleQuickDialogComponent {
 
     constructor(
         public articleService: ArticleService,
-        public dialogRef: MatDialogRef<ArticleQuickDialogComponent>,
+        public dialogRef: MatDialogRef<ArticleQuickCreationDialogComponent>,
         public snackBar: MatSnackBar,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.code = data.code;
