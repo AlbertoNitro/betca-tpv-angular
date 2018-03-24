@@ -16,7 +16,7 @@ import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.compo
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { CashMovementDialogComponent } from './home/cash-movements/cash-movement-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
-import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
+import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/article-quick-creation-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
@@ -104,7 +104,7 @@ export class AppRoutingModule {
     ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
     ArticleCreationEditDialogComponent,
-    ArticleQuickDialogComponent,
+    ArticleQuickCreationDialogComponent,
     UserCreationEditDialogComponent,
     UserChangingPasswordDialogComponent,
     RoleManagementDialogComponent,

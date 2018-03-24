@@ -10,83 +10,55 @@ import { ArticleCreationEditDialogComponent } from './article-creation-edit-dial
   styleUrls: ['./articles.component.css']
 })
 
-
-
 export class ArticlesComponent implements OnInit {
   static URL = 'articles';
-  private articleList: Article[] = [];
-  dataSource: MatTableDataSource<Article>;
-  displayedColumns = ['code', 'description', 'reference', 'retailprice', 'stock', 'actions'];
-  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private articleService: ArticleService, public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource<Article>(this.articleList);
+  title = 'Articles management';
+  columns = ['code', 'description'];
+  data: Article[];
+
+  onlyIncomplete = true;
+
+  constructor(private dialog: MatDialog, private articleService: ArticleService) {
   }
 
-  ngOnInit() {
-  }
-
-  mostrarArticulos() {
-    this.articleList = [];
-    this.articleService.readAll().subscribe(
-      data => {
-        console.log(data);
-        this.articleList = data;
-        this.dataSource = new MatTableDataSource<Article>(this.articleList);
-
-      },
-    );
-  }
-
-  mostrarArticulosIncompletos() {
-    this.articleList = [];
-    this.articleService.readAllIncomplete().subscribe(
-      data => {
-        console.log(data);
-        this.articleList = data;
-        this.dataSource = new MatTableDataSource<Article>(this.articleList);
-
-      },
-    );
-
-  }
-
-  filtroAvanzado() {
-    // TODO Cargar vista filtro avanzado
-  }
-
-  create() {
-    const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent, {
-      width: '600px',
-      height: '600px'
-    }
-    );
-    dialogRef.afterClosed().subscribe(result => {
-      this.synchronize();
-    });
-
+  ngOnInit(): void {
+    this.synchronize();
   }
 
   synchronize() {
-    this.articleService.readAll().subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource<Article>(data);
-        this.dataSource.sort = this.sort;
-      }
+    if (this.onlyIncomplete) {
+      this.articleService.readAllIncomplete().subscribe(
+        data => this.data = data
+      );
+    } else {
+      this.articleService.readAll().subscribe(
+        data => this.data = data
+      );
+    }
+  }
+
+  create() {
+    this.dialog.open(ArticleCreationEditDialogComponent).afterClosed().subscribe(
+      result => this.synchronize()
     );
+  }
+
+  read(article: Article) {
+    console.log('read, in construction...' + article);
   }
 
   edit(article: Article) {
     this.articleService.readObservable(article.code).subscribe(
       data => {
-          const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
-          dialogRef.componentInstance.article = data;
-          dialogRef.componentInstance.edit = true;
-          dialogRef.afterClosed().subscribe(
-              result => this.synchronize()
-          );
+        const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
+        dialogRef.componentInstance.article = data;
+        dialogRef.componentInstance.edit = true;
+        dialogRef.afterClosed().subscribe(
+          result => this.synchronize()
+        );
       }
-  );
+    );
   }
 
 }

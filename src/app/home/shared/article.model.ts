@@ -1,9 +1,9 @@
 export interface Article {
     code: string;
-    reference: string;
+    reference?: string;
     description: string;
     retailPrice?: number;
-    stock: number;
+    stock?: number;
     retailPriceMin?: number;
     retailPriceMax?: number;
     provider?: string;

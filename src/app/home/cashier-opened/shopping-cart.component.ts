@@ -7,7 +7,7 @@ import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
 import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
-import { ArticleQuickDialogComponent } from './article-quick-generate-dialog.component';
+import { ArticleQuickCreationDialogComponent } from './article-quick-creation-dialog.component';
 import { Article } from '../shared/article.model';
 
 
@@ -19,37 +19,18 @@ import { Article } from '../shared/article.model';
 export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
-    private fastArticleControl;
-    private fastArticle: Article;
-    private code;
-    private subscription: Subscription;
+
+    private subscriptionDatasource: Subscription;
 
     constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
-        this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
+        this.subscriptionDatasource = this.shoppingCartService.shoppingCartObservable().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<Shopping>(data);
             }
         );
 
-        this.shoppingCartService.getArticleSearchObservable().subscribe( fastArticleControl => {
-            this.fastArticleControl = fastArticleControl;
-        });
-
     }
 
-    openDialog() {
-        const dialogRef = this.dialog.open(ArticleQuickDialogComponent, {
-            width: '600px',
-            height: '600px',
-            data: {code: this.code, article: this.fastArticle}
-        }
-        );
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-
-          });
-
-    }
 
     update(shopping: Shopping, event: any, column: string): void {
         shopping[column] = Number(event.target.value);
@@ -70,8 +51,22 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     add(code: string) {
-        this.code = code;
-        this.shoppingCartService.add(code);
+        this.shoppingCartService.add(code).subscribe(
+            article => article,
+            error => this.createArticle(code)
+        );
+    }
+
+    createArticle(code: string) {
+        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent);
+        dialogRef.componentInstance.article = { code: code, description: null, retailPrice: null };
+        dialogRef.afterClosed().subscribe(
+            isCreatedCode => {
+                if (isCreatedCode) {
+                    this.add(code);
+                }
+            }
+        );
     }
 
     checkOut() {
@@ -87,7 +82,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        this.subscriptionDatasource.unsubscribe();
     }
 
 }

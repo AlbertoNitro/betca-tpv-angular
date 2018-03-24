@@ -22,7 +22,6 @@ export class ShoppingCartService {
     private _total = 0;
 
     private shoppingCart: Array<Shopping> = new Array();
-    private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
     private _indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
@@ -64,10 +63,6 @@ export class ShoppingCartService {
         this.synchronizeTotal();
     }
 
-    getArticleSearchObservable(): Observable<String> {
-        return this.articleSearchObservable.asObservable();
-    }
-
     delete(shopping: Shopping): void {
         const index = this.shoppingCart.indexOf(shopping);
         if (index > -1) {
@@ -81,9 +76,9 @@ export class ShoppingCartService {
         this.synchronizeAll();
     }
 
-    add(code: string) {
-        this.articleService.readObservable(code).subscribe(
-            article => {
+    add(code: string): Observable<Article> {
+        return this.articleService.readObservable(code).map(
+            (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
                 if (article.code === '1') {
                     shopping.total = Number(code) / 100;
@@ -91,12 +86,8 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-                this.articleSearchObservable.next('0');
-
-            },
-            error => {
-                this.articleSearchObservable.next('1');
-            },
+                return article;
+            }
         );
     }
 

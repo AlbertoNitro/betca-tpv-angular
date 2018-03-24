@@ -3,8 +3,8 @@ import { MatTableDataSource } from '@angular/material';
 import { Article } from '../../shared/article.model';
 import { ArticleService } from '../../shared/article.service';
 import { ShoppingCartService } from '../shopping-cart.service';
-import { ProviderService } from '../../providers/provider.service';
-import { Provider } from '../../providers/provider.model';
+import { Provider } from '../../shared/provider.model';
+import { ProviderService } from '../../shared/provider.service';
 @Component({
   selector: 'app-advanced-search',
   styleUrls: ['advanced-search.component.css'],
