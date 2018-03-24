@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { Provider } from './provider.model';
-import { ProviderService } from './provider.service';
 import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
+import { Provider } from '../shared/provider.model';
+import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: `providers.component.html`

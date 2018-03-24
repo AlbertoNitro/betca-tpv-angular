@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Article } from '../shared/article.model';
 import { ArticleService } from '../shared/article.service';
+import { Provider } from '../shared/provider.model';
+import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: 'article-creation-edit-dialog.component.html',
@@ -11,16 +13,22 @@ import { ArticleService } from '../shared/article.service';
     }`]
 })
 export class ArticleCreationEditDialogComponent implements OnInit {
+
     edit: boolean;
     article: Article;
+    providers: Provider[];
 
-    constructor(public dialogRef: MatDialogRef<ArticleCreationEditDialogComponent>,
-        private articleService: ArticleService) {
+    constructor(private dialogRef: MatDialogRef<ArticleCreationEditDialogComponent>,
+        private articleService: ArticleService, private providerService: ProviderService) {
     }
 
     ngOnInit(): void {
+        this.providerService.readAll().subscribe(
+            (providers: Provider[]) => this.providers = providers
+        );
+
         if (!this.article) {
-            this.article = { code: '', description: '', reference: '', retailPrice: undefined, stock: undefined};
+            this.article = { code: '', description: '', retailPrice: undefined };
         }
     }
 

@@ -14,7 +14,7 @@ export class ArticlesComponent implements OnInit {
   static URL = 'articles';
 
   title = 'Articles management';
-  columns = ['code', 'description', 'reference', 'retailPrice', 'stock'];
+  columns = ['code', 'description'];
   data: Article[];
 
   onlyIncomplete = true;
