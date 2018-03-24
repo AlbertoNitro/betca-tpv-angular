@@ -12,7 +12,6 @@ import {TicketService} from '../shared/ticket.service';
 export class TicketsComponent {
   static URL = 'tickets';
   listTickets: Ticket[] = [];
-  listCreationDates: string[] = [];
   initialDateInput: Date = undefined;
   finalDateInput: Date = undefined;
   dataSource: MatTableDataSource<Ticket>;
