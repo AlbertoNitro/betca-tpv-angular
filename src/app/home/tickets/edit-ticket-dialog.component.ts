@@ -46,4 +46,7 @@ export class EditTicketDialogComponent {
   updateTicket() {
     this.ticketService.updateAmountAndStateTicket(this.idTicket, this.listAmountsShoppings, this.listCommitedsShoppings);
   }
+  isCommitted(indexShopping: number): boolean {
+    return this.listCommitedsShoppings[indexShopping];
+  }
 }

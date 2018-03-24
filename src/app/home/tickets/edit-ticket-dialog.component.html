@@ -48,9 +48,9 @@
 
       <ng-container matColumnDef="committed">
         <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
-        <mat-cell *matCellDef="let shopping">
-          <mat-checkbox *ngIf="shopping.committed" [checked]="true" [disabled]="true"></mat-checkbox>
-          <mat-checkbox *ngIf="!shopping.committed" [(ngModel)]="listCommitedsShoppings[shopping.index]"></mat-checkbox>
+        <mat-cell *matCellDef="let i = index">
+          <mat-checkbox *ngIf="isCommitted(i)" [checked]="true" [disabled]="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!isCommitted(i)" [(ngModel)]="listCommitedsShoppings[i]"></mat-checkbox>
         </mat-cell>
       </ng-container>
 
