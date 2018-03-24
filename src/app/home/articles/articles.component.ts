@@ -44,10 +44,6 @@ export class ArticlesComponent implements OnInit {
     );
   }
 
-  read(article: Article) {
-    console.log('read, in construction...' + article);
-  }
-
   edit(article: Article) {
     this.articleService.readObservable(article.code).subscribe(
       data => {
