@@ -1,21 +1,18 @@
-<h2 mat-dialog-title>Articulo: {{code}}</h2>
+<h2 mat-dialog-title>Articule Creation</h2>
 <mat-dialog-content>
-
     <mat-form-field>
-        <input matInput [(ngModel)]="code" type="number" placeholder="Code" [disabled]="edit" value="{{code}}" cdkFocusInitial/>
+        <input matInput type="text" placeholder="Code" [ngModel]="article.code" readonly/>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Description" [(ngModel)]="article.description" required cdkFocusInitial/>
         <mat-error>Field required</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input matInput [(ngModel)]="description" type="text" placeholder="Description" required  />
+        <input matInput type="number" placeholder="Retail Price" [(ngModel)]="article.retailPrice" required>
         <mat-error>Field required</mat-error>
     </mat-form-field>
-    <mat-form-field>
-        <input matInput [(ngModel)]="retailPrice" type="number" placeholder="Retailprice" required>
-        <mat-error>Field required</mat-error>
-    </mat-form-field>
-
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button (click)="sendData()" cdkFocusInitial>Ok</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button (click)="create()" [disabled]="!article.description || !article.retailPrice">Create</button>
 </mat-dialog-actions>

@@ -16,43 +16,14 @@ import { MatSnackBar } from '@angular/material';
 })
 export class ArticleQuickCreationDialogComponent {
 
-    public code;
-    public description: string;
-    public retailPrice: number;
+    article: Article;
 
-    constructor(
-        public articleService: ArticleService,
-        public dialogRef: MatDialogRef<ArticleQuickCreationDialogComponent>,
-        public snackBar: MatSnackBar,
-        @Inject(MAT_DIALOG_DATA) public data: any) {
-        this.code = data.code;
+    constructor(public articleService: ArticleService, private dialogRef: MatDialogRef<ArticleQuickCreationDialogComponent>) {
     }
 
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
-    sendData() {
-        const article: Article = { code: this.code, reference: null,
-             description: this.description, retailPrice: this.retailPrice, stock: null };
-        this.articleService.articleGenerateObservable(article).subscribe(
-            data => {
-                this.successful();
-                this.dialogRef.close();
-            },
-            error => {
-                this.unsuccessful();
-            }
+    create() {
+        this.articleService.articleGenerateObservable(this.article).subscribe(
+            data => this.dialogRef.close(true)
         );
-    }
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
-    }
-
-    private unsuccessful() {
-        this.snackBar.open('Unsuccessful', '', {
-            duration: 2000
-        });
     }
 }

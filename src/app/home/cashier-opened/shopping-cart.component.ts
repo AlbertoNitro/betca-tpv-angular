@@ -19,10 +19,11 @@ import { Article } from '../shared/article.model';
 export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
-    private subscription: Subscription;
+
+    private subscriptionDatasource: Subscription;
 
     constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
-        this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
+        this.subscriptionDatasource = this.shoppingCartService.shoppingCartObservable().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<Shopping>(data);
             }
@@ -57,11 +58,15 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     createArticle(code: string) {
-        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent, { data: { code: code } });
+        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent);
+        dialogRef.componentInstance.article = { code: code, description: null, retailPrice: null };
         dialogRef.afterClosed().subscribe(
-            result => {
-                console.log(result);
-            });
+            isCreatedCode => {
+                if (isCreatedCode) {
+                    this.add(code);
+                }
+            }
+        );
     }
 
     checkOut() {
@@ -77,7 +82,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.subscription.unsubscribe();
+        this.subscriptionDatasource.unsubscribe();
     }
 
 }
