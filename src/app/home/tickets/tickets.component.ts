@@ -1,6 +1,6 @@
-import {AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {EditTicketDialogComponent} from './edit-ticket-dialog/edit-ticket-dialog.component';
-import {MatPaginator, MatDialog, MatSort, MatTableDataSource} from '@angular/material';
+import {Component, ViewChild} from '@angular/core';
+import {EditTicketDialogComponent} from './edit-ticket-dialog.component';
+import {MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar} from '@angular/material';
 import {Ticket} from '../shared/ticket.model';
 import {TicketService} from '../shared/ticket.service';
 
@@ -9,31 +9,32 @@ import {TicketService} from '../shared/ticket.service';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit, AfterViewInit {
+export class TicketsComponent {
   static URL = 'tickets';
-  private listTickets: Ticket[] = [];
+  listTickets: Ticket[] = [];
+  listCreationDates: string[] = [];
   initialDateInput: Date = undefined;
   finalDateInput: Date = undefined;
   dataSource: MatTableDataSource<Ticket>;
-  displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
+  displayedColumns = ['numTicket', 'id', 'actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
-  constructor(private ticketService: TicketService, public dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
-  }
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+  constructor(private ticketService: TicketService, public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
   showEditDialog(ticket: Ticket) {
-    this.dialog.open(EditTicketDialogComponent, {
+    const dialogRef = this.dialog.open(EditTicketDialogComponent, {
       height: '500px',
-      width: '900px',
+      width: '800px',
       data: { ticket: ticket }
     });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.findTicketsCreationDatesBetween();
+          this.showTicket(ticket.id);
+        }
+      }
+    );
   }
   openPdf(blob: any) {
     const url = window.URL.createObjectURL(blob);
@@ -44,14 +45,17 @@ export class TicketsComponent implements OnInit, AfterViewInit {
       blob => this.openPdf(blob)
     );
   }
-
   findTicketsCreationDatesBetween() {
     this.ticketService.readTicketsCreationDatesBetween(this.initialDateInput, this.finalDateInput).subscribe(
       (listTickets: Ticket[]) => {
         this.listTickets = listTickets;
-        this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        if (this.listTickets.length === 0) {
+          this.snackBar.open('There aren\'t tickets between the selected dates !');
+        } else {
+          this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        }
       }
     );
   }

@@ -1,72 +1,64 @@
-<h2><mat-icon>receipt</mat-icon> Tickets Management</h2>
 <mat-card>
-  <mat-card-content>
-    <h2 class="example-h2"><mat-icon>search</mat-icon> Search by:</h2>
+  <mat-card-title>
+    <mat-icon color="primary">receipt</mat-icon> Tickets Management
+  </mat-card-title>
+
+    <h3 class="example-h2"><mat-icon>search</mat-icon> Search by:</h3>
     <mat-tab-group>
-      <!-- SEARCH BY RANGE DAYS -->
       <mat-tab label="Date ranges">
         <div>
-          <!-- DATEPICKER 1 -->
           <mat-form-field class="date">
             <input [(ngModel)]="initialDateInput" required matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
             <mat-datepicker-toggle matSuffix [for]="initialDate"></mat-datepicker-toggle>
             <mat-datepicker #initialDate></mat-datepicker>
           </mat-form-field>
-          <!-- DATEPICKER 1 -->
-          <!-- DATEPICKER 2 -->
           <mat-form-field class="date margin-left-2em">
             <input [(ngModel)]="finalDateInput" required matInput [matDatepicker]="finalDate" placeholder="Choose a final date">
             <mat-datepicker-toggle matSuffix [for]="finalDate"></mat-datepicker-toggle>
             <mat-datepicker #finalDate></mat-datepicker>
           </mat-form-field>
-          <!-- DATEPICKER 2 -->
-          <!-- BUTTON SEARCH -->
           <button mat-mini-fab color="primary" class="margin-left-2em" (click)="findTicketsCreationDatesBetween()"><mat-icon>search</mat-icon></button>
-          <!-- BUTTON SEARCH -->
         </div>
       </mat-tab>
-      <!-- SEARCH BY RANGE DAYS -->
-
     </mat-tab-group>
+
+  <mat-card-content>
+    <div *ngIf="listTickets.length!==0">
+      <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="numTicket">
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+          <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+          <mat-cell *matCellDef="let ticket"> {{ticket.id}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+          <mat-cell *matCellDef="let ticket">
+            <button mat-icon-button color="warn" (click)="showTicket(ticket.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="showEditDialog(ticket)">
+              <mat-icon>mode_edit</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let ticket; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
+      </mat-paginator>
+    </div>
   </mat-card-content>
+
+
+
 </mat-card>
-
-<!-- DATATABLE TICKETS -->
-<div class="mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource" matSort>
-
-    <ng-container matColumnDef="numTicket">
-      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="creationDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> creationDate </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.creationDate}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="id">
-      <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-      <mat-cell *matCellDef="let ticket"> {{ticket.id}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-      <mat-cell *matCellDef="let ticket">
-        <button mat-mini-fab color="primary" (click)="showTicket(ticket.id)"><mat-icon>info</mat-icon></button>
-        <button mat-mini-fab color="primary" (click)="showEditDialog(ticket)"><mat-icon>edit</mat-icon></button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let ticket; columns: displayedColumns;">
-    </mat-row>
-  </mat-table>
-
-  <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
-  </mat-paginator>
-</div>
-<!-- DATATABLE TICKETS -->
-
 
 

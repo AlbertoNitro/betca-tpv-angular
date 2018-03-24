@@ -15,7 +15,7 @@ export class VoucherService {
         return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
     }
 
-    consume(reference: string): Observable<boolean> {
+    consume(reference: string): Observable<number> {
         return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference).map(
             data => {
                 this.successful();

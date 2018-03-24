@@ -1,10 +1,10 @@
 <h3 mat-dialog-title><mat-icon>edit</mat-icon> Edit Ticket</h3>
+
 <mat-chip-list>
-  <mat-chip color="primary" selected="true">Id: {{ticketId}}</mat-chip>
+  <mat-chip color="primary" selected="true">Id: {{idTicket}}</mat-chip>
 </mat-chip-list>
 
 <mat-dialog-content>
-  <!-- DATATABLE SHOPPINGS -->
   <div class="mat-elevation-z8">
     <mat-table #table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="numLineShopping">
@@ -32,10 +32,10 @@
           <button *ngIf="isMinAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
             <mat-icon>remove_circle_outline</mat-icon>
           </button>
-          <button *ngIf="!isMaxAmountShopping(i)" mat-icon-button color="accent" (click)="increaseAmount(i)">
+          <button class="btnIncreaseAmount" *ngIf="!isMaxAmountShopping(i)" mat-icon-button color="accent" (click)="increaseAmount(i)">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
-          <button *ngIf="isMaxAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
+          <button class="btnIncreaseAmount" *ngIf="isMaxAmountShopping(i)" mat-icon-button color="accent" [disabled]="true">
             <mat-icon>add_circle_outline</mat-icon>
           </button>
         </mat-cell>
@@ -48,9 +48,9 @@
 
       <ng-container matColumnDef="committed">
         <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
-        <mat-cell *matCellDef="let shopping">
-          <mat-checkbox *ngIf="shopping.committed" [checked]="true" [disabled]="true"></mat-checkbox>
-          <mat-checkbox *ngIf="!shopping.committed" [(ngModel)]="listCommitedsShoppings[shopping.index]"></mat-checkbox>
+        <mat-cell *matCellDef="let i = index">
+          <mat-checkbox *ngIf="isCommitted(i)" [checked]="true" [disabled]="true"></mat-checkbox>
+          <mat-checkbox *ngIf="!isCommitted(i)" [(ngModel)]="listCommitedsShoppings[i]"></mat-checkbox>
         </mat-cell>
       </ng-container>
 
@@ -59,11 +59,9 @@
       </mat-row>
     </mat-table>
   </div>
-  <!-- DATATABLE SHOPPINGS -->
-
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary">Save changes</button>
+  <button mat-button [mat-dialog-close]="this" cdkFocusInitial color="primary" (click)="updateTicket()">Save changes</button>
 </mat-dialog-actions>

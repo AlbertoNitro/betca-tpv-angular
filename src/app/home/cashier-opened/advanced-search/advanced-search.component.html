@@ -16,7 +16,7 @@
         <mat-form-field fxFlex="25%">
           <mat-select placeholder="Provider" [(ngModel)]="articleForm.provider">
             <mat-option value="">Select Provider</mat-option>
-            <mat-option *ngFor="let item of listaProvider" value="item.id">{{item.company}}</mat-option>
+            <mat-option *ngFor="let item of listaProvider" [value]="item.id">{{item.company}}</mat-option>
           </mat-select>
         </mat-form-field>
         <button fxFlex="10%" mat-raised-button color="accent" (click)="buscar()">Buscar</button>
@@ -38,26 +38,20 @@
         <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="reference">
-        <mat-header-cell *matHeaderCellDef> reference </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Reference </mat-header-cell>
         <mat-cell *matCellDef="let item"> {{item.reference}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> description </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
         <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="retailPrice">
-        <mat-header-cell *matHeaderCellDef> retailPrice </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
         <mat-cell *matCellDef="let item"> {{item.retailPrice}} </mat-cell>
       </ng-container>
       <ng-container matColumnDef="stock">
-        <mat-header-cell *matHeaderCellDef> stock</mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Stock</mat-header-cell>
         <mat-cell *matCellDef="let item"> {{item.stock}} </mat-cell>
-      </ng-container>
-      <ng-container matColumnDef="provider">
-        <mat-header-cell *matHeaderCellDef> provider </mat-header-cell>
-        <mat-cell *matCellDef="let item">
-
-        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="committed">
         <mat-header-cell *matHeaderCellDef> </mat-header-cell>
@@ -72,5 +66,6 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
     </mat-table>
+    <p class="mensaje">{{alerta}}</p>
   </mat-card-content>
 </mat-card>
