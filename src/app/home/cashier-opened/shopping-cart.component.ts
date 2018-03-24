@@ -19,9 +19,6 @@ import { Article } from '../shared/article.model';
 export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
-    private fastArticleControl;
-    private fastArticle: Article;
-    private code;
     private subscription: Subscription;
 
     constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
@@ -31,25 +28,8 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
-        this.shoppingCartService.getArticleSearchObservable().subscribe( fastArticleControl => {
-            this.fastArticleControl = fastArticleControl;
-        });
-
     }
 
-    openDialog() {
-        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent, {
-            width: '600px',
-            height: '600px',
-            data: {code: this.code, article: this.fastArticle}
-        }
-        );
-        dialogRef.afterClosed().subscribe(result => {
-            console.log(result);
-
-          });
-
-    }
 
     update(shopping: Shopping, event: any, column: string): void {
         shopping[column] = Number(event.target.value);
@@ -70,8 +50,18 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     add(code: string) {
-        this.code = code;
-        this.shoppingCartService.add(code);
+        this.shoppingCartService.add(code).subscribe(
+            article => article,
+            error => this.createArticle(code)
+        );
+    }
+
+    createArticle(code: string) {
+        const dialogRef = this.dialog.open(ArticleQuickCreationDialogComponent, { data: { code: code } });
+        dialogRef.afterClosed().subscribe(
+            result => {
+                console.log(result);
+            });
     }
 
     checkOut() {
