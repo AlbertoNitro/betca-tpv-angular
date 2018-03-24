@@ -28,7 +28,7 @@ export class ArticlesFamilyComponent implements OnInit {
   private imagePathFamily = '../../../assets/img/articles/folder-blue.png';
   private code;
   private subscription: Subscription;
-
+  private actualfamily: String;
   private articleList: Article[] = [];
   private articleFamilyList: Object[] = [];
 
@@ -36,7 +36,7 @@ export class ArticlesFamilyComponent implements OnInit {
   constructor(public shoppingCartService: ShoppingCartService,
               public articleService: ArticleService,
               public articleFamilyService: ArticleFamilyService) {
-
+    this.actualfamily = 'Inicio';
     this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
       data => {
         this.dataSource = new MatTableDataSource<Shopping>(data);
@@ -46,22 +46,13 @@ export class ArticlesFamilyComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getAllArticles();
     this.getAllArticleFamily();
 
   }
 
-  getAllArticles() {
-    this.articleList = [];
-    this.articleService.readAll().subscribe(
-      data => {
-        console.log(data);
-        this.articleList = data;
-      },
-    );
-  }
 
   getAllArticleFamily() {
+    this.actualfamily = 'Inicio';
     this.articleFamilyList = [];
     this.articleFamilyService.readAllTwoListArticleAndFamilys().subscribe(
       data => {
@@ -76,7 +67,16 @@ export class ArticlesFamilyComponent implements OnInit {
     this.shoppingCartService.add(code);
   }
 
-  viewArticles() {
-    alert('Hello! I am an alert box!!');
+
+  viewArticles(reference: String) {
+    this.actualfamily = reference;
+    this.articleFamilyList = [];
+    this.articleFamilyService.readObservable(reference).subscribe(
+      data => {
+        console.log(data);
+        this.articleFamilyList = data;
+      },
+    );
+
   }
 }
