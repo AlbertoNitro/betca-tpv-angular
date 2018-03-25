@@ -12,14 +12,12 @@ export class RoleManagementDialogComponent implements OnInit {
   user: User;
   edit: boolean;
   roleKeys = Object.keys(Role); // ["ADMIN", "MANAGER", "OPERATOR", "CUSTOMER"]
-  roleValues = this.roleKeys.map(k => Role[k as any]); // [0, 1, 2, 3]
+  roleValues = this.roleKeys.map(k => Role[k as any]); // [ADMIN, MANAGER, OPERATOR, CUSTOMER]
+  roleModels = [false, false, false, false];
+  selected = [];
 
-  // user: User = {mobile: 686573341, username: 'Karlos'};
   items = this.roleKeys;
   userRoles: Array<Role>;
-
-
-  selected = [];
 
   constructor(public dialogRef: MatDialogRef<RoleManagementDialogComponent>,
     private userService: UserService) {
@@ -29,34 +27,35 @@ export class RoleManagementDialogComponent implements OnInit {
     if (!this.user) {
       this.user = { mobile: undefined, username: '' };
     }
+
+    this.selected = this.user.address.split(',', 4);
+    this.initialChecking(this.selected);
+    // console.log(this.selected);
   }
 
-  changeUserRoles() {
-    this.userRoles = [Role.ADMIN];
-  }
-
-  toggle(item: string, list: string[]): void {
-    const idx = list.indexOf(item);
-    if (idx > -1) {
-      list.splice(idx, 1);
-    } else {
-      list.push(item);
+  checking(): void {
+    this.selected = [];
+    for (const roleValue in this.roleValues) {
+      if (this.roleModels[roleValue]) {
+        this.selected.push(this.roleKeys[roleValue]);
+      }
     }
   }
 
-  exists(item, list): boolean {
-    return list.indexOf(item) > -1;
-  }
-
-  create(): void {
-    this.userService.createObservable(this.user).subscribe(
-      data => this.dialogRef.close()
-    );
+  initialChecking(roleModels: string[]): void {
+    for (const roleKey in this.roleKeys) {
+      if (this.selected.indexOf(this.roleKeys[roleKey]) > -1) {
+        const idx = this.roleKeys.indexOf(this.roleKeys[roleKey]);
+        this.roleModels[idx] = true;
+      }
+    }
   }
 
   save(): void {
+    this.user.address = this.selected.toString();
     this.userService.putObservable(this.user).subscribe(
       data => this.dialogRef.close()
     );
   }
+
 }
