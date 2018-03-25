@@ -20,7 +20,7 @@
         <input matInput type="number" placeholder="stock" [(ngModel)]="article.stock">
     </mat-form-field>
     <mat-form-field>
-        <mat-select placeholder="Provider" [(value)]="article.provider" required>
+        <mat-select placeholder="Provider" [(ngModel)]="article.provider" required>
             <mat-option *ngFor="let provider of providers" [value]="provider.id" >{{provider.company}}</mat-option>
         </mat-select>
     </mat-form-field>
