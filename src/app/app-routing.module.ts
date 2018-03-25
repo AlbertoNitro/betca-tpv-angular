@@ -5,18 +5,18 @@ import { CancelYesDialogComponent } from './core/cancel-yes-dialog.component';
 import { DbSeedDialogComponent } from './home/admin/db-seed-dialog.component';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search.component';
+import { AdvancedSearchComponent } from './home/cashier-opened/advanced-search/advanced-search.component';
 import { BudgetsComponent } from './home/budgets/budgets.component';
 import { CashierClosedComponent } from './home/cashier-closed/cashier-closed.component';
 import { CashierOpenedComponent } from './home/cashier-opened/cashier-opened.component';
-import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog/edit-ticket-dialog.component';
+import { EditTicketDialogComponent } from './home/tickets/edit-ticket-dialog.component';
 import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { CashMovementDialogComponent } from './home/cash-movements/cash-movement-dialog.component';
 import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
-import { ArticleQuickDialogComponent } from './home/cashier-opened/article-quick-generate-dialog.component';
+import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/article-quick-creation-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
@@ -28,13 +28,16 @@ import { VouchersComponent } from './home/vouchers/vouchers.component';
 import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
-import { VoucherConsumeDialogComponent } from './home/vouchers/voucher-consume-dialog.component';
+import { VoucherConsumeDialogComponent } from './home/cashier-opened/voucher-consume-dialog.component';
 import { ScheduleComponent } from './home/schedule/schedule.component';
 import { OfferSearchDialogComponent } from './home/offers/offer-search-dialog.component';
 import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
+import { RoleManagementComponent } from './home/role-management/role-management.component';
+import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
+import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -49,15 +52,16 @@ const appRoutes: Routes = [
       { path: CashMovementDialogComponent.URL, component: CashMovementDialogComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
-      { path: StockAlertComponent.URL, component: StockAlertComponent},
+      { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
+      { path: RoleManagementComponent.URL, component: RoleManagementComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
-      { path: OrdersComponent.URL , component: OrdersComponent},
-      { path: OffersComponent.URL , component: OffersComponent}
+      { path: OrdersComponent.URL, component: OrdersComponent },
+      { path: OffersComponent.URL, component: OffersComponent }
     ]
   }
 ];
@@ -85,7 +89,8 @@ export class AppRoutingModule {
     Statistics2Component,
     ScheduleComponent,
     OrdersComponent,
-    OffersComponent
+    OffersComponent,
+    RoleManagementComponent
   ];
 
   static COMPONENT_FACTORY = [
@@ -99,12 +104,13 @@ export class AppRoutingModule {
     ProviderCreationEditDialogComponent,
     ShoppingCartCheckOutDialogComponent,
     ArticleCreationEditDialogComponent,
-    ArticleQuickDialogComponent,
+    ArticleQuickCreationDialogComponent,
     UserCreationEditDialogComponent,
+    UserChangingPasswordDialogComponent,
+    RoleManagementDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
     VoucherCreationEditDialogComponent,
     VoucherConsumeDialogComponent
   ];
 }
- 

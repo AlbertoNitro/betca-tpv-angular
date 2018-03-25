@@ -6,6 +6,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
+import { InvoiceService } from '../shared/invoice.service';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
@@ -20,14 +22,13 @@ export class ShoppingCartService {
     private _total = 0;
 
     private shoppingCart: Array<Shopping> = new Array();
-    private articleSearchObservable: Subject<String> = new BehaviorSubject(undefined);
     private _indexShoppingCart = 0;
     private shoppingCartList: Array<Array<Shopping>> = new Array();
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, public snackBar: MatSnackBar) {
+        private budgetService: BudgetService, public snackBar: MatSnackBar, private invoiceService: InvoiceService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -62,10 +63,6 @@ export class ShoppingCartService {
         this.synchronizeTotal();
     }
 
-    getArticleSearchObservable(): Observable<String> {
-        return this.articleSearchObservable.asObservable();
-    }
-
     delete(shopping: Shopping): void {
         const index = this.shoppingCart.indexOf(shopping);
         if (index > -1) {
@@ -79,9 +76,9 @@ export class ShoppingCartService {
         this.synchronizeAll();
     }
 
-    add(code: string) {
-        this.articleService.readObservable(code).subscribe(
-            article => {
+    add(code: string): Observable<Article> {
+        return this.articleService.readObservable(code).map(
+            (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
                 if (article.code === '1') {
                     shopping.total = Number(code) / 100;
@@ -89,12 +86,8 @@ export class ShoppingCartService {
                 }
                 this.shoppingCart.push(shopping);
                 this.synchronizeAll();
-                this.articleSearchObservable.next('0');
-
-            },
-            error => {
-                this.articleSearchObservable.next('1');
-            },
+                return article;
+            }
         );
     }
 
@@ -123,6 +116,15 @@ export class ShoppingCartService {
             }
         );
     }
+    createInvoice(invoiceCreation: InvoiceCreation): void {
+        invoiceCreation.shoppingCart = this.shoppingCart;
+        this.invoiceService.create(invoiceCreation).subscribe(
+            blob => {
+                this.openPdf(blob);
+            }
+        );
+    }
+
 
     openPdf(blob: any) {
         this.shoppingCart = new Array();

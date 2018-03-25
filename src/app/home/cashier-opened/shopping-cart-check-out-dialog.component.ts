@@ -9,7 +9,8 @@ import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { User } from '../shared/user.model';
-import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
+import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Component({
     templateUrl: 'shopping-cart-check-out-dialog.component.html',
@@ -22,6 +23,7 @@ export class ShoppingCartCheckOutDialogComponent {
 
     @Input() total: number;
     ticketCreation: TicketCreation;
+    ivoiceCreation: InvoiceCreation;
     foundMobile = false;
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
@@ -37,6 +39,10 @@ export class ShoppingCartCheckOutDialogComponent {
 
     invalidInvoice(): boolean {
         return !((this.foundMobile) && (this.return() >= 0));
+    }
+
+    invalidReservation(): boolean {
+        return !(this.return() * -1 <= this.total - this.total * 0.1);
     }
 
     number(value: number): number {
@@ -119,7 +125,13 @@ export class ShoppingCartCheckOutDialogComponent {
         this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
             data => {
                 if (data.username && data.dni && data.address) {
-                    console.log('LLamar al servicio para crear ticket y factura');
+                    this.ivoiceCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+                    this.ivoiceCreation.userMobile = this.ticketCreation.userMobile;
+                    this.ivoiceCreation.card = this.ticketCreation.card;
+                    this.ivoiceCreation.cash = this.ticketCreation.cash;
+                    this.ivoiceCreation.voucher = this.ticketCreation.voucher;
+                    this.shoppingCartService.createInvoice(this.ivoiceCreation);
+                    this.dialog.closeAll();
                 } else {
                     this.updateUserInvoice(data);
                 }
@@ -137,7 +149,8 @@ export class ShoppingCartCheckOutDialogComponent {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher) + result;
+                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher);
+                this.ticketCreation.voucher += (result > 0 ? result : 0);
             }
         );
     }

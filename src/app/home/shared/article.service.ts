@@ -9,7 +9,7 @@ export class ArticleService {
 
     static END_POINT = '/articles';
     static FILTRO = '/filter';
-    static INCOMPLETES = '/incompletos';
+    static INCOMPLETES = '/incompletes';
     constructor(private httpService: HttpService) {
     }
 

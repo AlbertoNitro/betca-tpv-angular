@@ -1,9 +1,7 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {EditTicketDialogComponent} from './edit-ticket-dialog/edit-ticket-dialog.component';
-import {MatPaginator, MatDialog, MatSort, MatTableDataSource} from '@angular/material';
-import {Shopping} from '../shared/shopping.model';
+import {Component, ViewChild} from '@angular/core';
+import {EditTicketDialogComponent} from './edit-ticket-dialog.component';
+import {MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar} from '@angular/material';
 import {Ticket} from '../shared/ticket.model';
-import {TicketCreation} from '../shared/ticket-creation.model';
 import {TicketService} from '../shared/ticket.service';
 
 @Component({
@@ -11,68 +9,52 @@ import {TicketService} from '../shared/ticket.service';
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit, AfterViewInit {
+export class TicketsComponent {
   static URL = 'tickets';
-  dataSource: MatTableDataSource<Ticket>;
-  displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
   listTickets: Ticket[] = [];
+  initialDateInput: Date = undefined;
+  finalDateInput: Date = undefined;
+  dataSource: MatTableDataSource<Ticket>;
+  displayedColumns = ['numTicket', 'id', 'actions'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+  constructor(private ticketService: TicketService, public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
-  constructor(private ticketService: TicketService, public dialog: MatDialog) {
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '20', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '9999', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '0', cashDeposited: 10.0, shoppingList: null });
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '20', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '55', cashDeposited: 10.0, shoppingList: null });
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '20', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '70', cashDeposited: 10.0, shoppingList: null });
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '90', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '9999', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '0', cashDeposited: 10.0, shoppingList: null });
-    this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
-  }
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  showEditDialog() {
-    this.dialog.open(EditTicketDialogComponent, {
+  showEditDialog(ticket: Ticket) {
+    const dialogRef = this.dialog.open(EditTicketDialogComponent, {
       height: '500px',
-      width: '900px',
+      width: '800px',
+      data: { ticket: ticket }
     });
+    dialogRef.afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.findTicketsCreationDatesBetween();
+          this.showTicket(ticket.id);
+        }
+      }
+    );
   }
-  private generateShoppingMock(): Array<Shopping> {
-    let listShopping = new Array<Shopping>();
-    let shopping0 = new Shopping('abc', 'vacio', 45);
-    let shopping1 = new Shopping('def', 'vacio', 25);
-    let shopping2 = new Shopping('ghi', 'vacio', 5);
-    let shopping3 = new Shopping('jkl', 'vacio', 65);
-    listShopping.push(shopping0);
-    listShopping.push(shopping1);
-    listShopping.push(shopping2);
-    listShopping.push(shopping3);
-    return listShopping;
+  openPdf(blob: any) {
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
   }
-  showTicket() {
-    let listShopping = this.generateShoppingMock();
-    let ticketCreation: TicketCreation = {userMobile: 123, cash: 0, card: 0, voucher: 0, shoppingCart: listShopping};
-    this.ticketService.create(ticketCreation).subscribe(
-      blob => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
+  showTicket(id: string) {
+    this.ticketService.read(id).subscribe(
+      blob => this.openPdf(blob)
+    );
+  }
+  findTicketsCreationDatesBetween() {
+    this.ticketService.readTicketsCreationDatesBetween(this.initialDateInput, this.finalDateInput).subscribe(
+      (listTickets: Ticket[]) => {
+        this.listTickets = listTickets;
+        if (this.listTickets.length === 0) {
+          this.snackBar.open('There aren\'t tickets between the selected dates !');
+        } else {
+          this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        }
       }
     );
   }

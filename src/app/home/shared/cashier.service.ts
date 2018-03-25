@@ -43,12 +43,11 @@ export class CashierService {
         );
     }
 
-    readAllBetweenDates(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
-        const cpParams = new URLSearchParams();
-        cpParams.append('dateStart', dateStart.toISOString());
-        cpParams.append('dateFinish', dateFinish.toISOString());
-        const options = new RequestOptions({ params: cpParams });
-        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + options.search);
+    readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
+        return this.httpService.authToken()
+        .param('dateStart', dateStart.toISOString())
+        .param('dateFinish', dateFinish.toISOString())
+        .get(CashierService.END_POINT +  CashierService.SEARCH);
     }
 
     readTotalsObservable(): Observable<CashierClosure> {
