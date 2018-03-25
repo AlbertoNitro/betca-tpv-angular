@@ -14,9 +14,7 @@ export class RoleManagementDialogComponent implements OnInit {
   roleKeys = Object.keys(Role); // ["ADMIN", "MANAGER", "OPERATOR", "CUSTOMER"]
   roleValues = this.roleKeys.map(k => Role[k as any]); // [ADMIN, MANAGER, OPERATOR, CUSTOMER]
   roleModels = [false, false, false, false];
-  // selected = [];
-  selected = ['ADMIN', 'MANAGER'];
-  // selected = this.user.address.split(',', 4);
+  selected = [];
 
   items = this.roleKeys;
   userRoles: Array<Role>;
@@ -29,7 +27,10 @@ export class RoleManagementDialogComponent implements OnInit {
     if (!this.user) {
       this.user = { mobile: undefined, username: '' };
     }
+
+    this.selected = this.user.address.split(',', 4);
     this.initialChecking(this.selected);
+    // console.log(this.selected);
   }
 
   checking(): void {
@@ -56,4 +57,5 @@ export class RoleManagementDialogComponent implements OnInit {
       data => this.dialogRef.close()
     );
   }
+
 }
