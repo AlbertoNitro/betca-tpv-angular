@@ -2,7 +2,7 @@
 <h2 mat-dialog-title *ngIf="edit">Edit Article</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" [disabled]="edit" cdkFocusInitial/>
+        <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" required [disabled]="edit" />
         <mat-error>Field required</mat-error>
     </mat-form-field>
     <mat-form-field>
@@ -10,7 +10,7 @@
         <mat-error>Field required</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="text" placeholder="Reference" [(ngModel)]="article.reference">
+        <input matInput type="text" placeholder="Reference" [(ngModel)]="article.reference" cdkFocusInitial>
     </mat-form-field>
     <mat-form-field>
         <input matInput type="number" placeholder="Retail Price" required [(ngModel)]="article.retailPrice">
@@ -19,9 +19,14 @@
     <mat-form-field>
         <input matInput type="number" placeholder="stock" [(ngModel)]="article.stock">
     </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Provider" [(ngModel)]="article.provider" required>
+            <mat-option *ngFor="let provider of providers" [value]="provider.id" >{{provider.company}}</mat-option>
+        </mat-select>
+    </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button *ngIf="edit" (click)="save()">Save</button>
-    <button mat-raised-button *ngIf="!edit" (click)="create()">Create</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()"  [disabled]="!isActionCompleted()">Save</button>
+    <button mat-raised-button *ngIf="!edit" (click)="create()" [disabled]="!isActionCompleted()">Create</button>
 </mat-dialog-actions>
