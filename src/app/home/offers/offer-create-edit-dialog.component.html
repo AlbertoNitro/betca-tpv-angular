@@ -10,7 +10,7 @@
         <mat-error>Field required</mat-error>
     </mat-form-field>    
     <mat-form-field class="date">
-         <input matInput [matDatepicker]="expiration" placeholder="Choose a expiration date" [(ngModel)]="offer.expiration">
+         <input matInput [matDatepicker]="expiration" placeholder="Choose a expiration date" required [(ngModel)]="offer.expiration">
          <mat-datepicker-toggle matSuffix [for]="expiration"></mat-datepicker-toggle>
          <mat-datepicker #expiration ></mat-datepicker>
     </mat-form-field>          
@@ -23,5 +23,5 @@
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>  
     <button mat-raised-button *ngIf="!edit" (click)="create()" [disabled]="!offer.code" >Create</button>
-    <button mat-raised-button *ngIf="edit" (click)="save()" [disabled]="!offer.code" >Save</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()" [disabled]="!offer.code || !offer.expiration || !offer.percetange" >Save</button>
 </mat-dialog-actions>
