@@ -9,4 +9,6 @@ export interface Article {
     retailPriceMin?: number;
     retailPriceMax?: number;
     provider?: string;
+    discontinued?: boolean;
+    registrationDate?: Date;
 }

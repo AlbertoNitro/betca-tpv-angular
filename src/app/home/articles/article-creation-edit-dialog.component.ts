@@ -26,7 +26,6 @@ export class ArticleCreationEditDialogComponent implements OnInit {
         this.providerService.readAll().subscribe(
             (providers: Provider[]) => this.providers = providers
         );
-
         if (!this.article) {
             this.article = { code: '', description: '', retailPrice: undefined };
         }
@@ -37,13 +36,13 @@ export class ArticleCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.articleService.articleGenerateObservable(this.article).subscribe(
+        this.articleService.create(this.article).subscribe(
             data => this.dialogRef.close()
         );
     }
 
     save(): void {
-        this.articleService.putObservable(this.article).subscribe(
+        this.articleService.update(this.article).subscribe(
             data => this.dialogRef.close()
         );
     }

@@ -25,12 +25,12 @@ export class ArticleService {
         return this.httpService.authToken().get(ArticleService.END_POINT + ArticleService.INCOMPLETES);
     }
 
-    articleGenerateObservable(article: Article): Observable<Article> {
+    create(article: Article): Observable<Article> {
         return this.httpService.authToken().post(ArticleService.END_POINT, article);
 
     }
 
-    putObservable(article: Article): Observable<Article> {
+    update(article: Article): Observable<Article> {
         return this.httpService.authToken().put(ArticleService.END_POINT + '/' + article.code, article);
     }
 
