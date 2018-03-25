@@ -1,4 +1,5 @@
 .mat-dialog-content {
+    display: inline-flex;
     flex-direction: column;
 }
 

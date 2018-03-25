@@ -4,12 +4,33 @@
         <input matInput type="number" placeholder="Mobile" [(ngModel)]="user.mobile" [disabled]="edit" cdkFocusInitial/>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="text" placeholder="Username" required [(ngModel)]="user.username" [disabled]="edit" />
+        <input matInput type="text" placeholder="Username" required [(ngModel)]="user.username" [disabled]="!edit" />
     </mat-form-field>
 
+    <mat-form-field>
+        <input matInput type="text" placeholder="Address for Role" required [(ngModel)]="user.address" [disabled]="!edit" />
+    </mat-form-field>
+    <!--
     <section class="roles-section" *ngFor="let item of items">
-        <mat-checkbox [value]="item" (checked)="exists(item, selected)" (click)="toggle(item, selected)">
+        <mat-checkbox [name]="item" [value]="item" (checked)="exists(item, selected)" (click)="toggle(item, selected)">
             <span>{{ item }}</span>
+        </mat-checkbox>
+    </section> 
+ ["ADMIN", "MANAGER", "OPERATOR", "CUSTOMER"]
+-->
+
+    <section>
+        <mat-checkbox [(ngModel)]="roleModels[0]" (change)="checking()">
+            <span>{{roleKeys[0]}}</span>
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="roleModels[1]" (change)="checking()">
+            <span>{{roleKeys[1]}}</span>
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="roleModels[2]" (change)="checking()">
+            <span>{{roleKeys[2]}}</span>
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="roleModels[3]" (change)="checking()">
+            <span>{{roleKeys[3]}}</span>
         </mat-checkbox>
     </section>
 
