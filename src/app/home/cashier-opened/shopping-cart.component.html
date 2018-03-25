@@ -63,7 +63,11 @@
             </button>
         </form>
         <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="shoppingCartService.total===0">
-            <mat-icon mat-icon-button>credit_card</mat-icon> Check out <mat-icon>euro_symbol</mat-icon></button>
-        <button mat-raised-button color="accent" (click)="createBudget()" [disabled]="shoppingCartService.total===0">Budget</button>
+            <mat-icon mat-icon-button>credit_card</mat-icon> Check out
+            <mat-icon>euro_symbol</mat-icon>
+        </button>
+        <button mat-raised-button color="primary" (click)="createBudget()" [disabled]="shoppingCartService.total===0">
+            <mat-icon>receipt</mat-icon> Budget
+        </button>
     </mat-card-content>
 </mat-card>

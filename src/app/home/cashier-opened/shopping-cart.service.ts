@@ -108,14 +108,14 @@ export class ShoppingCartService {
     }
 
     createBudget(): void {
-        let budget: Budget;
-        budget = { shoppingCart: this.shoppingCart };
+        const budget: Budget = { shoppingCart: this.shoppingCart };
         this.budgetService.create(budget).subscribe(
             blob => {
                 this.openPdf(blob);
             }
         );
     }
+
     createInvoice(invoiceCreation: InvoiceCreation): void {
         invoiceCreation.shoppingCart = this.shoppingCart;
         this.invoiceService.create(invoiceCreation).subscribe(
@@ -126,7 +126,7 @@ export class ShoppingCartService {
     }
 
 
-    openPdf(blob: any) {
+    private openPdf(blob: any) {
         this.shoppingCart = new Array();
         this.synchronizeAll();
         const url = window.URL.createObjectURL(blob);
