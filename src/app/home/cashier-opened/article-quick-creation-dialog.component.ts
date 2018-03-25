@@ -22,7 +22,7 @@ export class ArticleQuickCreationDialogComponent {
     }
 
     create() {
-        this.articleService.articleGenerateObservable(this.article).subscribe(
+        this.articleService.create(this.article).subscribe(
             data => this.dialogRef.close(true)
         );
     }

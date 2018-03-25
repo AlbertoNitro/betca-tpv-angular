@@ -6,10 +6,11 @@ import { HttpService } from '../../core/http.service';
 
 @Injectable()
 export class ArticleService {
-
     static END_POINT = '/articles';
-    static FILTRO = '/filter';
+
     static INCOMPLETES = '/incompletes';
+    static FILTRO = '/filter';
+
     constructor(private httpService: HttpService) {
     }
 
@@ -21,17 +22,17 @@ export class ArticleService {
         return this.httpService.authToken().get(ArticleService.END_POINT);
     }
 
-    readAllIncomplete() {
+    readAllIncompletes() {
         return this.httpService.authToken().get(ArticleService.END_POINT + ArticleService.INCOMPLETES);
     }
 
     create(article: Article): Observable<Article> {
-        return this.httpService.authToken().post(ArticleService.END_POINT, article);
+        return this.httpService.authToken().successful().post(ArticleService.END_POINT, article);
 
     }
 
     update(article: Article): Observable<Article> {
-        return this.httpService.authToken().put(ArticleService.END_POINT + '/' + article.code, article);
+        return this.httpService.authToken().successful().put(ArticleService.END_POINT + '/' + article.code, article);
     }
 
     readAdvancedSearch(article: Article): Observable<Article[]> {

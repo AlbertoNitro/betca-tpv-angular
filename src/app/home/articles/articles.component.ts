@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Article } from '../shared/article.model';
 import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
+
+import { Article } from '../shared/article.model';
 import { ArticleService } from '../shared/article.service';
 import { ArticleCreationEditDialogComponent } from './article-creation-edit-dialog.component';
 
@@ -28,7 +29,7 @@ export class ArticlesComponent implements OnInit {
 
   synchronize() {
     if (this.onlyIncomplete) {
-      this.articleService.readAllIncomplete().subscribe(
+      this.articleService.readAllIncompletes().subscribe(
         data => this.data = data
       );
     } else {

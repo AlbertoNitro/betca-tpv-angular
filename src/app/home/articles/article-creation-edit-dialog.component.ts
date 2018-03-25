@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { Article } from '../shared/article.model';
-import { ArticleService } from '../shared/article.service';
 import { Provider } from '../shared/provider.model';
+
+import { ArticleService } from '../shared/article.service';
 import { ProviderService } from '../shared/provider.service';
 
 @Component({
