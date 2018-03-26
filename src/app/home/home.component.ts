@@ -26,6 +26,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
 import { OffersComponent } from './offers/offers.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
+import { TokenManagementComponent } from './token-management/token-management.component';
 import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 
 @Component({
@@ -149,6 +150,10 @@ export class HomeComponent implements OnDestroy {
 
   roleManagement() {
     this.router.navigate([HomeComponent.URL, RoleManagementComponent.URL]);
+  }
+
+  tokenManagement() {
+    this.router.navigate([HomeComponent.URL, TokenManagementComponent.URL]);
   }
 
 }
