@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material';
 export class VoucherService {
     static END_POINT = '/vouchers';
 
+    static VALID = '/valid';
+
     constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
     }
 
@@ -22,6 +24,10 @@ export class VoucherService {
 
     readAll(): Observable<Voucher[]> {
         return this.httpService.authToken().get(VoucherService.END_POINT);
+    }
+
+    readAllValid(): Observable<Voucher[]> {
+        return this.httpService.authToken().get(VoucherService.END_POINT + VoucherService.VALID);
     }
 
 }
