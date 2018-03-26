@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Edit Voucher</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Reference" [(ngModel)]="voucher.reference" disabled="true" />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="Value" [(ngModel)]="voucher.value" disabled="true" />
+    </mat-form-field>
+    <div>Creation Date: {{voucher.creationDate | date: 'medium'}}</div>
+    <div *ngIf="voucher.dateOfUse">Date of use: {{voucher.dateOfUse | date: 'medium'}}</div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>Cancel</button>
+    <button mat-raised-button (click)="consume()" [disabled]="voucher.dateOfUse">Consume</button>
+</mat-dialog-actions>

@@ -25,7 +25,7 @@ import { UserQuickUpdateInvoiceDialogComponent } from './home/cashier-opened/use
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
-import { VoucherCreationEditDialogComponent } from './home/vouchers/voucher-creation-edit-dialog.component';
+import { VoucherCreationDialogComponent } from './home/vouchers/voucher-creation-dialog.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/cashier-opened/voucher-consume-dialog.component';
@@ -38,6 +38,7 @@ import { OffersComponent } from './home/offers/offers.component';
 import { RoleManagementComponent } from './home/role-management/role-management.component';
 import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
 import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
+import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -110,7 +111,8 @@ export class AppRoutingModule {
     RoleManagementDialogComponent,
     UserQuickCreationDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
-    VoucherCreationEditDialogComponent,
+    VoucherCreationDialogComponent,
+    VoucherEditDialogComponent,
     VoucherConsumeDialogComponent
   ];
 }

@@ -2,7 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { Voucher } from '../shared/voucher.model';
 import { VoucherService } from '../shared/voucher.service';
-import { VoucherCreationEditDialogComponent } from './voucher-creation-edit-dialog.component';
+import { VoucherCreationDialogComponent } from './voucher-creation-dialog.component';
+import { VoucherEditDialogComponent } from './voucher-edit-dialog.component';
 
 @Component({
     templateUrl: `vouchers.component.html`
@@ -11,7 +12,7 @@ export class VouchersComponent implements OnInit {
     static URL = 'vouchers';
 
     title = 'Vouchers management';
-    columns = ['reference', 'value', 'dateOfUse'];
+    columns = ['reference', 'value'];
     data: Voucher[];
 
     validVoucher = true;
@@ -53,17 +54,17 @@ export class VouchersComponent implements OnInit {
     }
 
     create() {
-        const dialogRef = this.dialog.open(VoucherCreationEditDialogComponent);
+        const dialogRef = this.dialog.open(VoucherCreationDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
     }
 
     edit(voucher: Voucher) {
-        if (!voucher.dateOfUse) {
-            this.voucherService.consume(voucher.reference).subscribe(
-                data => this.synchronize()
-            );
-        }
+        const dialogRef = this.dialog.open(VoucherEditDialogComponent);
+        dialogRef.componentInstance.voucher = voucher;
+        dialogRef.afterClosed().subscribe(
+            data => this.synchronize()
+        );
     }
 }
