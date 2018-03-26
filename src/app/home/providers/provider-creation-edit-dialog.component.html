@@ -10,13 +10,16 @@
         <mat-error>Field required</mat-error>
     </mat-form-field>
     <mat-form-field>
+        <input matInput type="text" placeholder="Nif" [(ngModel)]="provider.nif">
+    </mat-form-field>
+    <mat-form-field>
         <input matInput type="text" placeholder="Address" [(ngModel)]="provider.address">
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="text" placeholder="Mobile" [(ngModel)]="provider.mobile">
+        <input matInput type="text" placeholder="Phone" [(ngModel)]="provider.phone">
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="text" placeholder="Phone" [(ngModel)]="provider.phone">
+        <input matInput type="text" placeholder="Email" [(ngModel)]="provider.email">
     </mat-form-field>
     <mat-form-field>
         <input matInput type="text" placeholder="Note" [(ngModel)]="provider.note">
