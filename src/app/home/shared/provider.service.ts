@@ -12,36 +12,19 @@ export class ProviderService {
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
 
-    readObservable(id: string): Observable<Provider> {
+    read(id: string): Observable<Provider> {
         return this.httpService.authToken().get(ProviderService.END_POINT + '/' + id);
     }
 
-    createObservable(provider: Provider): Observable<boolean> {
-        return this.httpService.authToken().post(ProviderService.END_POINT, provider).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    create(provider: Provider) {
+        return this.httpService.authToken().successful().post(ProviderService.END_POINT, provider);
     }
 
-    putObservable(provider: Provider): Observable<boolean> {
-        return this.httpService.authToken().put(ProviderService.END_POINT + '/' + provider.id, provider).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    update(provider: Provider) {
+        return this.httpService.authToken().successful().put(ProviderService.END_POINT + '/' + provider.id, provider);
     }
 
     readAll(): Observable<Provider[]> {
         return this.httpService.authToken().get(ProviderService.END_POINT);
     }
-
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
-    }
-
 }
