@@ -15,7 +15,7 @@ import { ProviderCreationEditDialogComponent } from './home/providers/provider-c
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
 import { CashMovementDialogComponent } from './home/cash-movements/cash-movement-dialog.component';
-import { ShoppingCartCheckOutDialogComponent } from './home/cashier-opened/shopping-cart-check-out-dialog.component';
+import { CheckOutDialogComponent } from './home/cashier-opened/check-out-dialog.component';
 import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/article-quick-creation-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
@@ -102,7 +102,7 @@ export class AppRoutingModule {
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
-    ShoppingCartCheckOutDialogComponent,
+    CheckOutDialogComponent,
     ArticleCreationEditDialogComponent,
     ArticleQuickCreationDialogComponent,
     UserCreationEditDialogComponent,

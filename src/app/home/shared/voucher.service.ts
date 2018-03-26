@@ -16,21 +16,12 @@ export class VoucherService {
     }
 
     consume(reference: string): Observable<number> {
-        return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+        return this.httpService.authToken().successful('Voucher was consumed')
+            .patch(VoucherService.END_POINT + '/' + reference);
     }
 
     readAll(): Observable<Voucher[]> {
         return this.httpService.authToken().get(VoucherService.END_POINT);
     }
 
-    private successful() {
-        this.snackBar.open('The voucher was consumed successfully', '', {
-            duration: 2000
-        });
-    }
 }

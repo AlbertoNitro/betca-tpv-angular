@@ -13,13 +13,13 @@ import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.componen
 import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Component({
-    templateUrl: 'shopping-cart-check-out-dialog.component.html',
+    templateUrl: 'check-out-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
-export class ShoppingCartCheckOutDialogComponent {
+export class CheckOutDialogComponent {
 
     @Input() total: number;
     ticketCreation: TicketCreation;

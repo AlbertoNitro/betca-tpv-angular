@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>Consume Voucher</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="text" placeholder="Reference" [(ngModel)]="reference" cdkFocusInitial/>
+        <input matInput type="text" placeholder="Reference" [(ngModel)]="reference" required cdkFocusInitial/>
         <mat-error>Field required</mat-error>
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button (click)="consume()">Consume</button>
+    <button mat-raised-button (click)="consume()" [disabled]="!reference">Consume</button>
 </mat-dialog-actions>
