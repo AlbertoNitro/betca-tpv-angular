@@ -1,5 +1,5 @@
 .mat-dialog-content {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
 }
 
@@ -8,10 +8,9 @@
     flex-direction: column;
   }
   
-  .roles-radio-button {
-    margin: 5px;
-  }
+.roles-section {
+    display: flex;
+    flex-direction: column;
+}
   
-  .roles-selected-value {
-    margin: 15px 0;
-  }
+  

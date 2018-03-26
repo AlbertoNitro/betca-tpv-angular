@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpResponse } from '@angular/common/http/src/response';
+import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -7,12 +9,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 
+import { MatSnackBar, _MatOptgroupMixinBase } from '@angular/material';
+
 import { Token } from './token.model';
 import { Role } from './role.model';
 import { Error } from './error.model';
-import { HttpResponse } from '@angular/common/http/src/response';
-import { MatSnackBar, _MatOptgroupMixinBase } from '@angular/material';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
@@ -28,6 +29,8 @@ export class HttpService {
     private headers: Headers;
 
     private responseType: ResponseContentType;
+
+    private successfulNotification = undefined;
 
     constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
         this.resetOptions();
@@ -96,6 +99,15 @@ export class HttpService {
         return this;
     }
 
+    successful(notification?: String): HttpService {
+        if (notification) {
+            this.successfulNotification = notification;
+        } else {
+            this.successfulNotification = 'Successful';
+        }
+        return this;
+    }
+
     get(endpoint: string): Observable<any> {
         return this.http.get(HttpService.API_END_POINT + endpoint, this.createOptions()).map(
             response => this.extractData(response)).catch(
@@ -147,6 +159,12 @@ export class HttpService {
     }
 
     private extractData(response: Response): any {
+        if (this.successfulNotification) {
+            this.snackBar.open(this.successfulNotification, '', {
+                duration: 2000
+            });
+            this.successfulNotification = undefined;
+        }
         const contentType = response.headers.get('content-type');
         if (contentType) {
             if (contentType.indexOf('application/pdf') !== -1) {

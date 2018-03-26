@@ -4,6 +4,10 @@
   <span class="toolbar-spacer"></span>
   <span>
     <app-date format="medium"></app-date>
+    <button mat-button (click)="powerOff()">
+      <mat-icon color="warn">power_settings_new</mat-icon>
+      <span>Power-off</span>
+    </button>
     <button mat-button (click)="logout()">
       <mat-icon>person</mat-icon>
       <span>Logout</span>
@@ -30,7 +34,7 @@
     <mat-icon>work</mat-icon>
     <span>Close Cashier</span>
   </button>
-    <button mat-menu-item [matMenuTriggerFor]="offers">
+  <button mat-menu-item [matMenuTriggerFor]="offers">
     <mat-icon>thumb_up</mat-icon>
     <span>Offers</span>
   </button>
@@ -52,7 +56,7 @@
   </button>
   <button mat-menu-item (click)="article()">
     <mat-icon>view_list</mat-icon>
-    <span>Artículos</span>
+    <span>Articles</span>
   </button>
   <button mat-menu-item (click)="vouchers()">
     <mat-icon>local_offer</mat-icon>

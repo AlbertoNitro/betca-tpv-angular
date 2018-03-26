@@ -9,14 +9,15 @@ import { Role } from '../../core/role.model';
   styleUrls: [`role-management-dialog.component.css`]
 })
 export class RoleManagementDialogComponent implements OnInit {
-  edit: boolean;
   user: User;
-  favoriteUserRole: string;
-
-  roles = [this.capitalizeFirstLetter(Role['ADMIN']),
-  this.capitalizeFirstLetter(Role['MANAGER']),
-  this.capitalizeFirstLetter(Role['OPERATOR'])
-  ];
+  edit: boolean;
+  roleKeys = Object.keys(Role); // ["ADMIN", "MANAGER", "OPERATOR", "CUSTOMER"]
+  roleValues = this.roleKeys.map(k => Role[k as any]); // [ADMIN, MANAGER, OPERATOR, CUSTOMER]
+  items =  [0, 1, 2, 3];
+  roleModels = [false, false, false, false];
+  selected = [];
+  // items = this.roleKeys;
+  // userRoles: Array<Role>;
 
   constructor(public dialogRef: MatDialogRef<RoleManagementDialogComponent>,
     private userService: UserService) {
@@ -26,21 +27,37 @@ export class RoleManagementDialogComponent implements OnInit {
     if (!this.user) {
       this.user = { mobile: undefined, username: '' };
     }
+
+    // modificar por role
+    this.selected = this.user.address.split(',', 4);
+    this.initialChecking(this.selected);
+    // console.log(this.selected);
   }
 
-  capitalizeFirstLetter(name: string): string {
-    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  checking(): void {
+    this.selected = [];
+    for (const roleValue in this.roleValues) {
+      if (this.roleModels[roleValue]) {
+        this.selected.push(this.roleKeys[roleValue]);
+      }
+    }
+    this.user.address = this.selected.toString();
   }
 
-  create(): void {
-    this.userService.createObservable(this.user).subscribe(
-      data => this.dialogRef.close()
-    );
+  initialChecking(roleModels: string[]): void {
+    for (const roleKey in this.roleKeys) {
+      if (this.selected.indexOf(this.roleKeys[roleKey]) > -1) {
+        const idx = this.roleKeys.indexOf(this.roleKeys[roleKey]);
+        this.roleModels[idx] = true;
+      }
+    }
   }
 
   save(): void {
+    this.user.address = this.selected.toString();
     this.userService.putObservable(this.user).subscribe(
       data => this.dialogRef.close()
     );
   }
+
 }

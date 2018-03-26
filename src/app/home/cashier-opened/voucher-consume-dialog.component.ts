@@ -10,24 +10,22 @@ import { VoucherService } from '../shared/voucher.service';
         flex-direction: column;
     }`]
 })
-export class VoucherConsumeDialogComponent implements OnInit {
-    reference: string;
+export class VoucherConsumeDialogComponent {
+    id: string;
 
-    constructor(public dialogRef: MatDialogRef<VoucherConsumeDialogComponent>,
+    constructor(private dialogRef: MatDialogRef<VoucherConsumeDialogComponent>,
         private voucherService: VoucherService) {
     }
 
-    ngOnInit(): void {
-    }
-
-    consume(){
-
-        this.voucherService.patchObservable( this.reference ).subscribe(
-            data=>{
-                this.dialogRef.close( data );
+    consume() {
+        this.voucherService.consume(this.id).subscribe(
+            data => {
+                this.dialogRef.close(data);
+            },
+            error => {
+                this.dialogRef.close(0);
             }
         );
-
     }
 
 }

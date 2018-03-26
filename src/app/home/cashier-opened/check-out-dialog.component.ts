@@ -6,27 +6,26 @@ import { TicketCreation } from '../shared/ticket-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
-import { VoucherService } from '../shared/voucher.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { User } from '../shared/user.model';
-import { Voucher } from '../shared/voucher.model';
-import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
+import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Component({
-    templateUrl: 'shopping-cart-check-out-dialog.component.html',
+    templateUrl: 'check-out-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
-export class ShoppingCartCheckOutDialogComponent {
+export class CheckOutDialogComponent {
 
     @Input() total: number;
     ticketCreation: TicketCreation;
-    voucher: Voucher;
+    ivoiceCreation: InvoiceCreation;
     foundMobile = false;
-    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService, private voucherService: VoucherService) {
+    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
     }
 
@@ -85,15 +84,6 @@ export class ShoppingCartCheckOutDialogComponent {
         this.ticketCreation.cash = this.number(this.ticketCreation.cash);
         this.ticketCreation.card = this.number(this.ticketCreation.card);
         this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
-
-        if ( this.return() > 0 ){
-            this.voucher = { value: this.return() }
-
-            this.voucherService.createObservable(this.voucher).subscribe(
-
-            );
-        }
-
         this.shoppingCartService.checkOut(this.ticketCreation);
     }
 
@@ -135,7 +125,13 @@ export class ShoppingCartCheckOutDialogComponent {
         this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
             data => {
                 if (data.username && data.dni && data.address) {
-                    console.log('LLamar al servicio para crear ticket y factura');
+                    this.ivoiceCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+                    this.ivoiceCreation.userMobile = this.ticketCreation.userMobile;
+                    this.ivoiceCreation.card = this.ticketCreation.card;
+                    this.ivoiceCreation.cash = this.ticketCreation.cash;
+                    this.ivoiceCreation.voucher = this.ticketCreation.voucher;
+                    this.shoppingCartService.createInvoice(this.ivoiceCreation);
+                    this.dialog.closeAll();
                 } else {
                     this.updateUserInvoice(data);
                 }
@@ -153,7 +149,8 @@ export class ShoppingCartCheckOutDialogComponent {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher) + result;
+                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher);
+                this.ticketCreation.voucher += (result > 0 ? result : 0);
             }
         );
     }

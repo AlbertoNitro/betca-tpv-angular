@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Voucher } from './voucher.model';
-
 import { HttpService } from '../../core/http.service';
 import { Observable } from 'rxjs/Observable';
 import { MatSnackBar } from '@angular/material';
@@ -9,40 +8,30 @@ import { MatSnackBar } from '@angular/material';
 export class VoucherService {
     static END_POINT = '/vouchers';
 
-    constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
+    static VALID = '/valid';
+
+    constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
     }
 
-    readObservable(reference: string): Observable<Voucher> {
-        return this.httpService.authToken().get(VoucherService.END_POINT + '/' + reference);
+    create(voucher: Voucher): Observable<any> {
+        return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
     }
 
-    createObservable(voucher: Voucher): Observable<boolean> {
-        return this.httpService.authToken().post(VoucherService.END_POINT, voucher).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    read(id: String) {
+        return this.httpService.authToken().get(VoucherService.END_POINT + '/' + id);
     }
 
-    patchObservable(reference: string): Observable<boolean> {
-        return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference ).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    consume(id: string): Observable<number> {
+        return this.httpService.authToken().successful('Voucher was consumed')
+            .patch(VoucherService.END_POINT + '/' + id);
     }
 
     readAll(): Observable<Voucher[]> {
         return this.httpService.authToken().get(VoucherService.END_POINT);
     }
 
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
+    readAllValid(): Observable<Voucher[]> {
+        return this.httpService.authToken().get(VoucherService.END_POINT + VoucherService.VALID);
     }
-
 
 }

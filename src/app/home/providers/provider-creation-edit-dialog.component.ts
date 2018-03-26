@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Provider } from './provider.model';
-import { ProviderService } from './provider.service';
+import { Provider } from '../shared/provider.model';
+import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: 'provider-creation-edit-dialog.component.html',
@@ -25,13 +25,13 @@ export class ProviderCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.providerService.createObservable(this.provider).subscribe(
+        this.providerService.create(this.provider).subscribe(
             data => this.dialogRef.close()
         );
     }
 
     save(): void {
-        this.providerService.putObservable(this.provider).subscribe(
+        this.providerService.update(this.provider).subscribe(
             data => this.dialogRef.close()
         );
     }
