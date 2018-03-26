@@ -9,6 +9,8 @@ import { MatSnackBar } from '@angular/material';
 export class ProviderService {
     static END_POINT = '/providers';
 
+    static ACTIVES = '/actives';
+
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
 
@@ -26,5 +28,9 @@ export class ProviderService {
 
     readAll(): Observable<Provider[]> {
         return this.httpService.authToken().get(ProviderService.END_POINT);
+    }
+
+    readAllActives(): Observable<Provider[]> {
+        return this.httpService.authToken().get(ProviderService.END_POINT + ProviderService.ACTIVES);
     }
 }
