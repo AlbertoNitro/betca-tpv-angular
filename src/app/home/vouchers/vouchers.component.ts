@@ -12,7 +12,7 @@ export class VouchersComponent implements OnInit {
     static URL = 'vouchers';
 
     title = 'Vouchers management';
-    columns = ['reference', 'value'];
+    columns = ['id', 'value'];
     data: Voucher[];
 
     validVoucher = true;
@@ -61,10 +61,14 @@ export class VouchersComponent implements OnInit {
     }
 
     edit(voucher: Voucher) {
-        const dialogRef = this.dialog.open(VoucherEditDialogComponent);
-        dialogRef.componentInstance.voucher = voucher;
-        dialogRef.afterClosed().subscribe(
-            data => this.synchronize()
+        this.voucherService.read(voucher.id).subscribe(
+            (data: Voucher) => {
+                const dialogRef = this.dialog.open(VoucherEditDialogComponent);
+                dialogRef.componentInstance.voucher = data;
+                dialogRef.afterClosed().subscribe(
+                    result => this.synchronize()
+                );
+            }
         );
     }
 }

@@ -1,6 +1,6 @@
 export interface Voucher {
     value: number;
-    reference?: string;
+    id?: string;
     creationDate?: Date;
     dateOfUse?: Date;
 }

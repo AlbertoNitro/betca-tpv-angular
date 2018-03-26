@@ -17,9 +17,13 @@ export class VoucherService {
         return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
     }
 
-    consume(reference: string): Observable<number> {
+    read(id: String) {
+        return this.httpService.authToken().get(VoucherService.END_POINT + '/' + id);
+    }
+
+    consume(id: string): Observable<number> {
         return this.httpService.authToken().successful('Voucher was consumed')
-            .patch(VoucherService.END_POINT + '/' + reference);
+            .patch(VoucherService.END_POINT + '/' + id);
     }
 
     readAll(): Observable<Voucher[]> {

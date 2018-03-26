@@ -22,7 +22,7 @@ export class VoucherEditDialogComponent {
     }
 
     consume(): void {
-        this.voucherService.consume(this.voucher.reference).subscribe(
+        this.voucherService.consume(this.voucher.id).subscribe(
             () => this.dialogRef.close()
         );
     }
