@@ -6,7 +6,7 @@ import { MatTableDataSource, MatDialog } from '@angular/material';
 import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { TicketService } from '../shared/ticket.service';
-import { ShoppingCartCheckOutDialogComponent } from './shopping-cart-check-out-dialog.component';
+import { CheckOutDialogComponent } from './check-out-dialog.component';
 import { ArticleQuickCreationDialogComponent } from './article-quick-creation-dialog.component';
 import { Article } from '../shared/article.model';
 
@@ -70,7 +70,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     checkOut() {
-        this.dialog.open(ShoppingCartCheckOutDialogComponent).componentInstance.total = this.shoppingCartService.total;
+        this.dialog.open(CheckOutDialogComponent).componentInstance.total = this.shoppingCartService.total;
     }
 
     createBudget() {
