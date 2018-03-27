@@ -4,5 +4,5 @@ export interface Ticket {
   id: string;
   creationDate?: Date;
   shoppingList?: Shopping[];
-  user?: string;
+  userId?: string;
 }

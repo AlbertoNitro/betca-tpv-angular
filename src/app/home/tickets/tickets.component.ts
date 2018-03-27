@@ -41,6 +41,12 @@ export class TicketsComponent {
     );
   }
 
+  findByMobile(mobile: string) {
+    this.ticketService.findByMobile(mobile).subscribe(
+      (tickets: Ticket[]) => this.data = tickets
+    );
+  }
+
   edit(ticketId: Ticket) {
     this.ticketService.readOne(ticketId.id).subscribe(
       ticket => {
