@@ -11,7 +11,7 @@ export class RoleManagementComponent implements OnInit {
   static URL = 'role-management';
 
   title = 'Role Management';
-  columns = ['mobile', 'username', 'role'];
+  columns = ['mobile', 'username'];
   data: User[];
 
   constructor(private dialog: MatDialog, private userService: UserService) { }

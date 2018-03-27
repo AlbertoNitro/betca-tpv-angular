@@ -56,7 +56,7 @@ export class GraficYearAreaComponent {
 
 
             for (let i = 0; i < dataMap.length; i++) {
-                salesList[i] = [dataMap[i]['year'], dataMap[i]['salesCard'], dataMap[i]['salesCash']];
+                salesList[i] = ['' + dataMap[i]['year'] + '', dataMap[i]['salesCard'], dataMap[i]['salesCash']];
             }
             salesList.unshift(['Date', 'Sales Card', 'Sales Cash']);
             google.charts.setOnLoadCallback(draw);

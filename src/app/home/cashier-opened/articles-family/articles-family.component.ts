@@ -23,26 +23,20 @@ export class ArticlesFamilyComponent implements OnInit {
   dataSource: MatTableDataSource<Shopping>;
   private positionabove = 'above';
   private positionleft = 'left';
+  private positioncenter = 'center';
   private imagePathArticle = '../../../assets/img/articles/art-blue.jpg';
   private imagePathFamily = '../../../assets/img/articles/folder-blue.png';
   private code;
   private subscription: Subscription;
-
+  private actualfamily: String;
   private articleList: Article[] = [];
-  private articleFamilyList: Article[] = [];
+  private articleFamilyList: Object[] = [];
 
-  listArt: Article[] = [
-    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
-    {code: '211', reference: 'Article12', description: 'Article12 The titles of Washed', retailPrice: 26, stock: 28},
-    {code: '311', reference: 'Article13', description: 'Article13 The titles of Washed', retailPrice: 37, stock: 39},
-    {code: '411', reference: 'Article14', description: 'Article14 The titles of Washed', retailPrice: 51, stock: 16},
-    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156}
-  ];
 
   constructor(public shoppingCartService: ShoppingCartService,
               public articleService: ArticleService,
               public articleFamilyService: ArticleFamilyService) {
-
+    this.actualfamily = 'Inicio';
     this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
       data => {
         this.dataSource = new MatTableDataSource<Shopping>(data);
@@ -52,24 +46,15 @@ export class ArticlesFamilyComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getAllArticles();
     this.getAllArticleFamily();
 
   }
 
-  getAllArticles() {
-    this.articleList = [];
-    this.articleService.readAll().subscribe(
-      data => {
-        console.log(data);
-        this.articleList = data;
-      },
-    );
-  }
 
   getAllArticleFamily() {
+    this.actualfamily = 'Inicio';
     this.articleFamilyList = [];
-    this.articleFamilyService.readAll().subscribe(
+    this.articleFamilyService.readAllTwoListArticleAndFamilys().subscribe(
       data => {
         console.log(data);
         this.articleFamilyList = data;
@@ -80,5 +65,18 @@ export class ArticlesFamilyComponent implements OnInit {
   add(code: string) {
     this.code = code;
     this.shoppingCartService.add(code);
+  }
+
+
+  viewArticles(reference: String) {
+    this.actualfamily = reference;
+    this.articleFamilyList = [];
+    this.articleFamilyService.readObservable(reference).subscribe(
+      data => {
+        console.log(data);
+        this.articleFamilyList = data;
+      },
+    );
+
   }
 }

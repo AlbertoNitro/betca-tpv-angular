@@ -9,17 +9,17 @@ import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { User } from '../shared/user.model';
-import { VoucherConsumeDialogComponent } from '../vouchers/voucher-consume-dialog.component';
+import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
 import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Component({
-    templateUrl: 'shopping-cart-check-out-dialog.component.html',
+    templateUrl: 'check-out-dialog.component.html',
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
 })
-export class ShoppingCartCheckOutDialogComponent {
+export class CheckOutDialogComponent {
 
     @Input() total: number;
     ticketCreation: TicketCreation;
@@ -149,8 +149,8 @@ export class ShoppingCartCheckOutDialogComponent {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => {
-                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher)
-                this.ticketCreation.voucher += ( result === undefined ? 0 : result );
+                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher);
+                this.ticketCreation.voucher += (result > 0 ? result : 0);
             }
         );
     }
