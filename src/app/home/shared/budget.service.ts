@@ -13,9 +13,7 @@ export class BudgetService {
     }
 
     create(budget: Budget): Observable<any> {
-        return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budget).map(
-            blob => window.open(window.URL.createObjectURL(blob))
-        );
+        return this.httpService.authToken().pdf().post(BudgetService.END_POINT, budget);
     }
 
     readAll(): Observable<Budget[]> {

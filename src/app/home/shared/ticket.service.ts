@@ -19,9 +19,7 @@ export class TicketService {
   }
 
   create(ticketCreation: TicketCreation): Observable<any> {
-    return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation).map(
-      blob => window.open(window.URL.createObjectURL(blob))
-    );
+    return this.httpService.authToken().pdf().post(TicketService.END_POINT, ticketCreation);
   }
 
   readOne(id: string): Observable<Ticket> {
@@ -45,11 +43,7 @@ export class TicketService {
   }
 
   updateTicket(ticket: Ticket): Observable<any> {
-    return this.httpService.authToken().pdf().put(TicketService.END_POINT + '/' + ticket.id, ticket).map(
-      blob => {
-        window.open(window.URL.createObjectURL(blob));
-      }
-    );
+    return this.httpService.authToken().pdf().put(TicketService.END_POINT + '/' + ticket.id, ticket);
   }
 
   readNumProductsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
