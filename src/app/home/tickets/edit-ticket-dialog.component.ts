@@ -1,9 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MatTableDataSource, MatDialogRef } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
+
 import { Shopping } from '../shared/shopping.model';
-import { TicketService } from '../shared/ticket.service';
 import { Ticket } from '../shared/ticket.model';
+import { TicketService } from '../shared/ticket.service';
+import { VoucherService } from '../shared/voucher.service';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -18,38 +20,46 @@ export class EditTicketDialogComponent {
 
   totalReturn = 0;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any, private ticketService: TicketService,
-  private dialogRef: MatDialogRef<EditTicketDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
+    private ticketService: TicketService, private voucheService: VoucherService) {
     this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
     this.ticket = data.ticket;
-  }
-
-  decreaseAmount(shopping: Shopping) {
-    const totalOld = this.updateTotal(shopping);
-    shopping.amount -= 1;
-    if (shopping.amount === 0) {
-      shopping.committed = true;
-    }
-    this.totalReturn += totalOld - this.updateTotal(shopping);
-  }
-
-  changeCommitted(shopping: Shopping) {
-    shopping.committed = !shopping.committed;
   }
 
   private round(value: number) {
     return Math.round(value * 100) / 100;
   }
 
-  updateTotal(shopping: Shopping): number {
+  private updateTotal(shopping: Shopping): number {
     return this.round(shopping.retailPrice * shopping.amount * (1 - shopping.discount / 100));
   }
 
+  decreaseAmount(shopping: Shopping) {
+    const totalOld = shopping.total;
+    shopping.amount -= 1;
+    if (shopping.amount === 0) {
+      shopping.committed = true;
+    }
+    shopping.total = this.updateTotal(shopping);
+    this.totalReturn += totalOld - shopping.total;
+  }
+
+  changeCommitted(shopping: Shopping) {
+    shopping.committed = !shopping.committed;
+  }
+
   updateTicket() {
-    this.dialogRef.close(true);
-    // this.ticketService.updateAmountAndStateTicket(this.ticket);
-    // generar pdf del nuevo ticket
-    // generar vale de lo devuelto, si hay devolución
+    this.ticketService.updateTicket(this.ticket).subscribe(
+      () => {
+        if (this.totalReturn > 0) {
+          this.voucheService.create({ value: this.totalReturn }).subscribe(
+            () => this.dialogRef.close()
+          );
+        } else {
+          this.dialogRef.close();
+        }
+      }
+    );
   }
 
 }

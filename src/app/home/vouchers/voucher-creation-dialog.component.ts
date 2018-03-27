@@ -23,10 +23,7 @@ export class VoucherCreationDialogComponent {
 
     create(): void {
         this.voucherService.create(this.voucher).subscribe(
-            blob => {
-                this.dialogRef.close();
-                window.open(window.URL.createObjectURL(blob));
-            }
+            () => this.dialogRef.close()
         );
     }
 }

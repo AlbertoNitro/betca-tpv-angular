@@ -31,7 +31,7 @@
     </ng-container>
     <ng-container matColumnDef="total">
       <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
-      <mat-cell *matCellDef="let shopping">{{updateTotal(shopping)}}</mat-cell>
+      <mat-cell *matCellDef="let shopping">{{shopping.total}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="committed">
       <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>

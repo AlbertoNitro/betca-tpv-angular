@@ -2,15 +2,15 @@
   <mat-card-subtitle>Filter</mat-card-subtitle>
   <mat-card-content>
     <mat-form-field>
-      <input matInput type="text" placeholder="Today Tickets" readonly/>
-    </mat-form-field>
-    <button mat-mini-fab color="primary" (click)="todayTickets()">
-      <mat-icon>search</mat-icon>
-    </button>
-    <mat-form-field>
       <input matInput type="text" placeholder="Ticket Id" #ticketId cdkFocusInitial/>
     </mat-form-field>
     <button mat-mini-fab color="primary" (click)="findTicket(ticketId.value)" [disabled]="ticketId.value===''">
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Today Tickets" readonly/>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="todayTickets()">
       <mat-icon>search</mat-icon>
     </button>
     <mat-form-field class="date">
@@ -29,5 +29,5 @@
   </mat-card-content>
 </mat-card>
 
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [createAction]="false" [data]="data" 
-   (read)="read($event)" (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [createAction]="false" [readAction]="false" [data]="data"
+  (edit)="edit($event)"></app-crud>
