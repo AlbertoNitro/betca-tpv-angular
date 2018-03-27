@@ -4,18 +4,22 @@
         <mat-icon color="primary">shopping_cart</mat-icon>ORDERS 
     </mat-card-title>
     <mat-card-content>
-        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
+        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
             <ng-container matColumnDef="Id">
                 <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
                 <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="Id_provedor">
-                <mat-header-cell *matHeaderCellDef> Codigo </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{item.id_provedor}} </mat-cell>
+            <ng-container matColumnDef="Provider_id">
+                <mat-header-cell *matHeaderCellDef> Provider_id </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.Provider_id}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="Provedor">
-                <mat-header-cell *matHeaderCellDef> Provedor </mat-header-cell>
-                <mat-cell *matCellDef="let item"> {{item.nombre_provedor}} </mat-cell>
+            <ng-container matColumnDef="Provider_name">
+                <mat-header-cell *matHeaderCellDef> Provider_name </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.Provider_name}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Order_date">
+                <mat-header-cell *matHeaderCellDef> Order_date </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{item.Order_date}} </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
@@ -24,13 +28,10 @@
     <mat-card-content>
         <form>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Order By Code" type="text" #codigoProvedor>
+                <input matInput placeholder="Order By Code" type="text" #codigoOrder>
             </mat-form-field>
-            <button type="submit" mat-mini-fab color="primary" (click)="mostrar_cuerpo(codigoProvedor.value)">
+            <button type="submit" mat-mini-fab color="primary" (click)="readOrderBody(codigoOrder.value)">
                 <mat-icon>search</mat-icon>
-            </button>
-            <button type="submit" mat-mini-fab color="primary" (click)="agregar_si_existe(codigoProvedor.value)">
-                <i class="material-icons">add</i>
             </button>
         </form>
     </mat-card-content>
@@ -75,22 +76,23 @@
     <mat-card-content>
         <form>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Provedor por codigo" type="text" #code>
+                <input matInput placeholder="Numero de orden a crear" type="text" #idOrder>
             </mat-form-field>
-            <button type="submit" mat-mini-fab color="primary" (click)=alert(1)>
-                <mat-icon>search</mat-icon>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Provedor por codigo" type="text" #IdProvider>
+            </mat-form-field>
+            <button type="submit" mat-mini-fab color="primary" (click)=CreateOrder(idOrder.value,IdProvider.value)>
+                <mat-icon>add</mat-icon>
             </button>
         </form>
         <form>
             <mat-form-field class="example-full-width">
                 <input matInput placeholder="Producto por codigo" type="text" #code>
             </mat-form-field>
-            <button type="submit" mat-mini-fab color="primary" (click)=alert(1)>
-                <mat-icon>search</mat-icon>
-            </button>
             <button type="submit" mat-mini-fab color="primary" (click)=Alert(2)>
                 <i class="material-icons">add</i>
             </button>
         </form>
     </mat-card-content>
 </mat-card>
+
