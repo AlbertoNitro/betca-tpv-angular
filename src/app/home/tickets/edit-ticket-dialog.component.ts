@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogRef } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { Shopping } from '../shared/shopping.model';
 import { TicketService } from '../shared/ticket.service';
+import { Ticket } from '../shared/ticket.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -10,43 +11,45 @@ import { TicketService } from '../shared/ticket.service';
   styleUrls: ['./edit-ticket-dialog.component.css']
 })
 export class EditTicketDialogComponent {
-  idTicket: string = this.data.ticket.id;
-  displayedColumns = ['numLineShopping', 'description', 'retailPrice', 'amount', 'discount', 'committed'];
-  listAmountsShoppings: number[];
-  listCommitedsShoppings: boolean[];
+
+  displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private ticketService: TicketService) {
-    this.dataSource = new MatTableDataSource<Shopping>(this.data.ticket.shoppingList);
-    this.listAmountsShoppings = [];
-    this.listCommitedsShoppings = [];
-    for (const shopping of this.data.ticket.shoppingList) {
-      this.listAmountsShoppings.push(shopping.amount);
-      this.listCommitedsShoppings.push(shopping.committed);
+  ticket: Ticket;
+
+  totalReturn = 0;
+
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private ticketService: TicketService,
+  private dialogRef: MatDialogRef<EditTicketDialogComponent>) {
+    this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
+    this.ticket = data.ticket;
+  }
+
+  decreaseAmount(shopping: Shopping) {
+    const totalOld = this.updateTotal(shopping);
+    shopping.amount -= 1;
+    if (shopping.amount === 0) {
+      shopping.committed = true;
     }
+    this.totalReturn += totalOld - this.updateTotal(shopping);
   }
-  decreaseAmount(indexShopping: number) {
-    if (this.listAmountsShoppings[indexShopping] > 0) {
-      this.listAmountsShoppings[indexShopping]--;
-      if (this.listAmountsShoppings[indexShopping] === 0 && !this.data.ticket.shoppingList[indexShopping].committed) {
-        this.listCommitedsShoppings[indexShopping] = true;
-      }
-    }
+
+  changeCommitted(shopping: Shopping) {
+    shopping.committed = !shopping.committed;
   }
-  increaseAmount(indexShopping: number) {
-    if (this.listAmountsShoppings[indexShopping] < this.data.ticket.shoppingList[indexShopping].amount) {
-      this.listAmountsShoppings[indexShopping]++;
-    }
+
+  private round(value: number) {
+    return Math.round(value * 100) / 100;
   }
-  isMaxAmountShopping(indexShopping: number): boolean {
-    return this.listAmountsShoppings[indexShopping] === this.data.ticket.shoppingList[indexShopping].amount;
+
+  updateTotal(shopping: Shopping): number {
+    return this.round(shopping.retailPrice * shopping.amount * (1 - shopping.discount / 100));
   }
-  isMinAmountShopping(indexShopping: number): boolean {
-    return this.listAmountsShoppings[indexShopping] === 0;
-  }
+
   updateTicket() {
-    this.ticketService.updateAmountAndStateTicket(this.idTicket, this.listAmountsShoppings, this.listCommitedsShoppings);
+    this.dialogRef.close(true);
+    // this.ticketService.updateAmountAndStateTicket(this.ticket);
+    // generar pdf del nuevo ticket
+    // generar vale de lo devuelto, si hay devolución
   }
-  isCommitted(indexShopping: number): boolean {
-    return this.listCommitedsShoppings[indexShopping];
-  }
+
 }

@@ -1,68 +1,33 @@
-  <mat-card>
-    <mat-card-title>
-      <mat-icon color="primary">receipt</mat-icon> Tickets Management
-    </mat-card-title>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-content>
-      <h3 class="example-h2"><mat-icon>search</mat-icon> Search by:</h3>
-      <mat-tab-group>
-        <mat-tab label="Date ranges">
-          <div>
-            <mat-form-field class="date">
-              <input [(ngModel)]="initialDateInput" required matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
-              <mat-datepicker-toggle matSuffix [for]="initialDate"></mat-datepicker-toggle>
-              <mat-datepicker #initialDate></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="date margin-left-2em">
-              <input [(ngModel)]="finalDateInput" required matInput [matDatepicker]="finalDate" placeholder="Choose a final date">
-              <mat-datepicker-toggle matSuffix [for]="finalDate"></mat-datepicker-toggle>
-              <mat-datepicker #finalDate></mat-datepicker>
-            </mat-form-field>
-            <button mat-mini-fab color="primary" class="margin-left-2em" (click)="findTicketsCreationDatesBetween()"><mat-icon>search</mat-icon></button>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-card>
-    <mat-card-content>
-    <div *ngIf="listTickets.length!==0">
-      <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
-        <ng-container matColumnDef="numTicket">
-          <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-          <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-          <mat-cell *matCellDef="let ticket"> {{ticket.id}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-          <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
-          <mat-cell *matCellDef="let ticket">
-            <button mat-icon-button color="warn" (click)="showTicket(ticket.id)">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button color="warn" (click)="showEditDialog(ticket)">
-              <mat-icon>mode_edit</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let ticket; columns: displayedColumns;">
-        </mat-row>
-      </mat-table>
-
-      <mat-paginator #paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]">
-      </mat-paginator>
-    </div>
+<mat-card>
+  <mat-card-subtitle>Filter</mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Today Tickets" readonly/>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="todayTickets()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Ticket Id" #ticketId cdkFocusInitial/>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="findTicket(ticketId.value)" [disabled]="ticketId.value===''">
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field class="date">
+      <input [(ngModel)]="initialDateInput" matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
+      <mat-datepicker-toggle matSuffix [for]="initialDate"></mat-datepicker-toggle>
+      <mat-datepicker #initialDate></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input [(ngModel)]="finalDateInput" matInput [matDatepicker]="finalDate" placeholder="Choose a final date">
+      <mat-datepicker-toggle matSuffix [for]="finalDate"></mat-datepicker-toggle>
+      <mat-datepicker #finalDate></mat-datepicker>
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="findTicketsCreationDatesBetween()" [disabled]="!initialDateInput || !finalDateInput">
+      <mat-icon>search</mat-icon>
+    </button>
   </mat-card-content>
-  </mat-card>
+</mat-card>
 
-
-
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [createAction]="false" [data]="data" 
+   (read)="read($event)" (edit)="edit($event)"></app-crud>
