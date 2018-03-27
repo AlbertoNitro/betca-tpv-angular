@@ -147,7 +147,7 @@ export class CheckOutDialogComponent {
         this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
             data => {
                 if (data.email) {
-                    this.reservationCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, ticketNumber: undefined, reservationState: undefined};
+                    this.reservationCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, reservationState: undefined};
                     this.reservationCreation.userMobile = this.ticketCreation.userMobile;
                     this.reservationCreation.card = this.ticketCreation.card;
                     this.reservationCreation.cash = this.ticketCreation.cash;
