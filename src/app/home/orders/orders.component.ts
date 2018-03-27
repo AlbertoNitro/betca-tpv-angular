@@ -4,6 +4,7 @@ import { order } from '../shared/order.model';
 import { getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
 import { orderService } from './orders.service';
 import { orderBody } from '../shared/order-body.model';
+import { ProviderService } from '../providers/provider.service';
 @Component({
     templateUrl: `orders.component.html`
 })
@@ -11,6 +12,7 @@ export class OrdersComponent implements OnInit {
     static URL = 'orders';
     order : order;
     orderBodyElement : orderBody;
+    providerName : string;
     displayedColumns = [ 'Id' , 'Provider_id' , 'Provider_name','Order_date'];
     displayedColumnsCuerpo = [ 'Id' ,'id_order', 'id_provedor'  , 'id_articulo' , 'articulo' , 'cantidad' ]
     dataSource: MatTableDataSource<order>;
@@ -18,7 +20,8 @@ export class OrdersComponent implements OnInit {
 
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(public dialog: MatDialog,private orderService : orderService) {
+    constructor(public dialog: MatDialog,private orderService : orderService
+                , private providerService:ProviderService) {
     }
 
     ngOnInit(): void {   
@@ -33,12 +36,23 @@ export class OrdersComponent implements OnInit {
         );   
     }
 
-    readOrder(code:string){
-        alert(code);
+    readOrderBody(code:string){
+        this.orderService.readAllOrderBodyByIdOrder(code).subscribe(
+            data => {
+                this.dataSourceBody = new MatTableDataSource<orderBody>(data);
+            }
+        )
     }
 
-    mostrar_cuerpo(code : string){
-        alert("servicio y si existe el id, vamos a buscar el cuerpo")
+    CreateOrder( idOrder:string ,IdProvider:string){
+        this.providerService.readObservable(IdProvider).subscribe(
+            data => {
+                this.providerName = data.company;
+                alert(this.providerName);
+            }
+        )
+        this.order = { id: idOrder , Provider_id: IdProvider , Provider_name: this.providerName };
+        this.orderService.createOrder(this.order).subscribe();
     }
 
     agregar_si_existe(code : string){

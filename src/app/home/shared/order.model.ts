@@ -1,6 +1,6 @@
 export interface order{
-    id : String;
-    Provider_id : String;
+    id : string;
+    Provider_id : string;
     Provider_name : string;
     Order_date? : Date;
 }

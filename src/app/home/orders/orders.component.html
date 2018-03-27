@@ -28,13 +28,10 @@
     <mat-card-content>
         <form>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Order By Code" type="text" #codigoProvedor>
+                <input matInput placeholder="Order By Code" type="text" #codigoOrder>
             </mat-form-field>
-            <button type="submit" mat-mini-fab color="primary" (click)="readOrder(codigoProvedor.value)">
+            <button type="submit" mat-mini-fab color="primary" (click)="readOrderBody(codigoOrder.value)">
                 <mat-icon>search</mat-icon>
-            </button>
-            <button type="submit" mat-mini-fab color="primary" (click)="agregar_si_existe(codigoProvedor.value)">
-                <i class="material-icons">add</i>
             </button>
         </form>
     </mat-card-content>
@@ -79,10 +76,13 @@
     <mat-card-content>
         <form>
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Provedor por codigo" type="text" #code>
+                <input matInput placeholder="Numero de orden a crear" type="text" #idOrder>
             </mat-form-field>
-            <button type="submit" mat-mini-fab color="primary" (click)=alert(1)>
-                <mat-icon>search</mat-icon>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Provedor por codigo" type="text" #IdProvider>
+            </mat-form-field>
+            <button type="submit" mat-mini-fab color="primary" (click)=CreateOrder(idOrder.value,IdProvider.value)>
+                <mat-icon>add</mat-icon>
             </button>
         </form>
         <form>
