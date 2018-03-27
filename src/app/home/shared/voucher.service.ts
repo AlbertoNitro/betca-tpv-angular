@@ -14,7 +14,9 @@ export class VoucherService {
     }
 
     create(voucher: Voucher): Observable<any> {
-        return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
+        return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher).map(
+            blob => window.open(window.URL.createObjectURL(blob))
+        );
     }
 
     read(id: String) {

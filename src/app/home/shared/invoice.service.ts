@@ -12,7 +12,9 @@ export class InvoiceService {
     }
 
     create(invoiceCreation: InvoiceCreation): Observable<any> {
-        return this.httpService.authToken().pdf().post(InvoiceService.END_POINT, invoiceCreation);
+        return this.httpService.authToken().pdf().post(InvoiceService.END_POINT, invoiceCreation).map(
+            blob => window.open(window.URL.createObjectURL(blob))
+        );
     }
 
 }
