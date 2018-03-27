@@ -11,6 +11,7 @@ import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoi
 import { User } from '../shared/user.model';
 import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
 import { InvoiceCreation } from '../shared/invoice-creation.model';
+import { ReservationCreation } from '../shared/reservation-creation.model';
 
 @Component({
     templateUrl: 'check-out-dialog.component.html',
@@ -24,6 +25,7 @@ export class CheckOutDialogComponent {
     @Input() total: number;
     ticketCreation: TicketCreation;
     ivoiceCreation: InvoiceCreation;
+    reservationCreation: ReservationCreation;
     foundMobile = false;
     constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
         this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
@@ -42,7 +44,7 @@ export class CheckOutDialogComponent {
     }
 
     invalidReservation(): boolean {
-        return !(this.return() * -1 <= this.total - this.total * 0.1);
+        return !((this.checkEmail()) && (this.return() * -1 <= this.total - this.total * 0.1));
     }
 
     number(value: number): number {
@@ -89,6 +91,8 @@ export class CheckOutDialogComponent {
 
     reservation() {
         console.log('Se ha creado una reserva');
+        // this.shoppingCartService.createReservation(this.reservationCreation);
+        // this.dialog.closeAll();
     }
 
     findMobile() {
@@ -137,6 +141,26 @@ export class CheckOutDialogComponent {
                 }
             }
         );
+    }
+
+    checkEmail(): boolean {
+        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+            data => {
+                if (data.email) {
+                    this.reservationCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, ticketNumber: undefined, reservationState: undefined};
+                    this.reservationCreation.userMobile = this.ticketCreation.userMobile;
+                    this.reservationCreation.card = this.ticketCreation.card;
+                    this.reservationCreation.cash = this.ticketCreation.cash;
+                    this.reservationCreation.voucher = this.ticketCreation.voucher;
+                    this.reservationCreation.reservationState = 'OPEN';
+                    return true;
+                } else {
+                    console.log('Por favor, introduce el email del usuario');
+                    return false;
+                }
+            }
+        );
+        return false;
     }
 
     updateUserInvoice(data) {
