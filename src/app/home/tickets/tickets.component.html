@@ -8,6 +8,12 @@
       <mat-icon>search</mat-icon>
     </button>
     <mat-form-field>
+      <input matInput type="text" placeholder="Mobile" #mobile />
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="findByMobile(mobile.value)" [disabled]="mobile.value===''">
+      <mat-icon>search</mat-icon>
+    </button>
+    <mat-form-field>
       <input matInput type="text" placeholder="Today Tickets" readonly/>
     </mat-form-field>
     <button mat-mini-fab color="primary" (click)="todayTickets()">

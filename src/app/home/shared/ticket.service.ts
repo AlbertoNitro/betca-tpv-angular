@@ -11,6 +11,7 @@ import { HttpService } from '../../core/http.service';
 export class TicketService {
   static END_POINT = '/tickets';
   static SEARCH_DATE = '/search/date';
+  static SEARCH_MOBILE = '/search/mobile';
 
   static SEARCH_BY_ID_ARTICLE = '/searchByIdAndDates?';
 
@@ -32,6 +33,11 @@ export class TicketService {
     end.setHours(23, 59, 59, 0);
     return this.httpService.authToken().param('start', String(start.getTime()))
       .param('end', String(end.getTime())).get(TicketService.END_POINT + TicketService.SEARCH_DATE);
+  }
+
+  findByMobile(mobile: string): Observable<Ticket[]> {
+    return this.httpService.authToken().param('mobile', mobile)
+      .get(TicketService.END_POINT + TicketService.SEARCH_MOBILE);
   }
 
   readToday(): Observable<Ticket[]> {
