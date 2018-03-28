@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Update Customer</h2>
+<h2 mat-dialog-title>Complete customer for invoice</h2>
 <mat-dialog-content>
     <mat-form-field>
         <input matInput type="number" placeholder="Mobile" [value]="user.mobile" [disabled]="true" />
@@ -8,18 +8,16 @@
         <mat-error>Field required</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="text" placeholder="DNI" required cdkFocusInitial [(ngModel)]="user.dni">
+        <input matInput type="text" placeholder="DNI" required [(ngModel)]="user.dni">
         <mat-error>Field required</mat-error>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="text" placeholder="Address" required cdkFocusInitial [(ngModel)]="user.address">
+        <input matInput type="text" placeholder="Address" required [(ngModel)]="user.address">
         <mat-error>Field required</mat-error>
     </mat-form-field>
-
-
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button cdkFocusInitial  (click)="putUser()" [disabled]="!user.username || !user.dni || !user.address">Update
+    <button mat-raised-button color="accent" (click)="putUser()" [disabled]="!user.username || !user.dni || !user.address">Customer & Invoice
     </button>
 </mat-dialog-actions>

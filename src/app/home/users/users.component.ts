@@ -28,7 +28,7 @@ export class UsersComponent implements OnInit {
     }
 
     edit(user: User) {
-        this.userService.readObservable(user.mobile).subscribe(
+        this.userService.read(user.mobile).subscribe(
             data => {
                 const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
                 dialogRef.componentInstance.user = data;

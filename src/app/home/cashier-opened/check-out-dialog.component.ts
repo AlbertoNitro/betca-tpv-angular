@@ -1,17 +1,17 @@
-import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { Component, Input, Inject } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { TicketCreation } from '../shared/ticket-creation.model';
+import { User } from '../shared/user.model';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
+import { ReservationCreation } from '../shared/reservation-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
-import { User } from '../shared/user.model';
 import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
-import { ReservationCreation } from '../shared/reservation-creation.model';
 
 @Component({
     templateUrl: 'check-out-dialog.component.html',
@@ -22,25 +22,64 @@ import { ReservationCreation } from '../shared/reservation-creation.model';
 })
 export class CheckOutDialogComponent {
 
-    @Input() total: number;
+    total: number;
+
+    // foundMobile = false;
+    user: User;
+
     ticketCreation: TicketCreation;
     ivoiceCreation: InvoiceCreation;
     reservationCreation: ReservationCreation;
-    foundMobile = false;
-    constructor(public dialog: MatDialog, public shoppingCartService: ShoppingCartService, private userService: UserService) {
-        this.ticketCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+
+    constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, public shoppingCartService: ShoppingCartService,
+        private userService: UserService) {
+        this.total = data.total;
+        this.ticketCreation = data.ticketCreation;
     }
 
-    mobileSynchronize(): boolean {
-        return this.ticketCreation.userMobile && !this.foundMobile;
+    existUser(): boolean {
+        if (this.user) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    isMobileSynchronized(): boolean {
+        return !this.ticketCreation.userMobile || this.existUser();
+    }
+
+    findMobile() {
+        this.userService.read(this.ticketCreation.userMobile).subscribe(
+            user => this.user = user,
+            error => this.createUser()
+        );
+    }
+
+    checkUser() {
+        this.userService.read(this.ticketCreation.userMobile).subscribe(
+            data => {
+                if (data.username && data.dni && data.address) {
+                    this.ivoiceCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
+                    this.ivoiceCreation.userMobile = this.ticketCreation.userMobile;
+                    this.ivoiceCreation.card = this.ticketCreation.card;
+                    this.ivoiceCreation.cash = this.ticketCreation.cash;
+                    this.ivoiceCreation.voucher = this.ticketCreation.voucher;
+                    this.shoppingCartService.createInvoice(this.ivoiceCreation);
+                    this.dialog.closeAll();
+                } else {
+                    this.updateUserInvoice(data);
+                }
+            }
+        );
     }
 
     invalidCheckOut(): boolean {
-        return this.return() < 0 || this.mobileSynchronize();
+        return this.return() < 0 || !this.isMobileSynchronized();
     }
 
     invalidInvoice(): boolean {
-        return !((this.foundMobile) && (this.return() >= 0));
+        return !this.existUser() || this.return() < 0;
     }
 
     invalidReservation(): boolean {
@@ -95,16 +134,11 @@ export class CheckOutDialogComponent {
         // this.dialog.closeAll();
     }
 
-    findMobile() {
-        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
-            data => this.foundMobile = true,
-            error => this.createUser()
-        );
-    }
+
 
     deleteMobile() {
         this.ticketCreation.userMobile = undefined;
-        this.foundMobile = false;
+        this.user = null;
     }
 
     editMobile() {
@@ -112,42 +146,23 @@ export class CheckOutDialogComponent {
     }
 
     private createUser() {
-        const dialogRef = this.dialog.open(UserQuickCreationDialogComponent);
-        dialogRef.componentInstance.mobile = this.ticketCreation.userMobile;
-        dialogRef.afterClosed().subscribe(
+        this.dialog.open(UserQuickCreationDialogComponent, {
+            data: { mobile: this.ticketCreation.userMobile }
+        }).afterClosed().subscribe(
             result => {
                 if (result) {
-                    this.foundMobile = true;
-                } else {
-                    this.foundMobile = false;
+                    this.findMobile();
                 }
             }
         );
     }
 
-    checkUser() {
-        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
-            data => {
-                if (data.username && data.dni && data.address) {
-                    this.ivoiceCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
-                    this.ivoiceCreation.userMobile = this.ticketCreation.userMobile;
-                    this.ivoiceCreation.card = this.ticketCreation.card;
-                    this.ivoiceCreation.cash = this.ticketCreation.cash;
-                    this.ivoiceCreation.voucher = this.ticketCreation.voucher;
-                    this.shoppingCartService.createInvoice(this.ivoiceCreation);
-                    this.dialog.closeAll();
-                } else {
-                    this.updateUserInvoice(data);
-                }
-            }
-        );
-    }
 
     checkEmail(): boolean {
-        this.userService.readObservable(this.ticketCreation.userMobile).subscribe(
+        this.userService.read(this.ticketCreation.userMobile).subscribe(
             data => {
                 if (data.email) {
-                    this.reservationCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, reservationState: undefined};
+                    this.reservationCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, reservationState: undefined };
                     this.reservationCreation.userMobile = this.ticketCreation.userMobile;
                     this.reservationCreation.card = this.ticketCreation.card;
                     this.reservationCreation.cash = this.ticketCreation.cash;

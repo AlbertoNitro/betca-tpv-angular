@@ -70,7 +70,12 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     checkOut() {
-        this.dialog.open(CheckOutDialogComponent).componentInstance.total = this.shoppingCartService.total;
+        this.dialog.open(CheckOutDialogComponent, {
+            data: {
+                total: this.shoppingCartService.total,
+                ticketCreation: { cash: 0, card: 0, voucher: 0, shoppingCart: null }
+            }
+        });
     }
 
     createBudget() {
