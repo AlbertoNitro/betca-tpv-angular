@@ -40,6 +40,7 @@ import { RoleManagementDialogComponent } from './home/role-management/role-manag
 import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
 import { InvoicesComponent } from './home/invoices/invoices.component';
+import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -114,6 +115,7 @@ export class AppRoutingModule {
     RoleManagementDialogComponent,
     UserQuickCreationEditDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
+    ViewInvoiceDialogComponent,
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,
     VoucherConsumeDialogComponent

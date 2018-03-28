@@ -49,12 +49,11 @@ export class TicketsComponent {
 
   edit(ticketId: Ticket) {
     this.ticketService.readOne(ticketId.id).subscribe(
-      ticket => {
+      ticket =>
         this.dialog.open(EditTicketDialogComponent, {
           width: '800px',
           data: { ticket: ticket }
-        });
-      }
+        })
     );
   }
 

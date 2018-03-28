@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Invoice } from '../shared/invoice.model';
 import { MatDialog } from '@angular/material';
 import { InvoiceService } from '../shared/invoice.service';
+import { ViewInvoiceDialogComponent } from './view-invoice-dialog.component';
 
 @Component({
     templateUrl: `invoices.component.html`
@@ -45,7 +46,10 @@ export class InvoicesComponent {
 
     read(invoiceId: Invoice) {
         this.invoiceService.readOne(invoiceId.id).subscribe(
-            (invoice: Invoice) => console.log(invoice.id + '::' + invoice.ticket.id + '::' + invoice.ticket.user.mobile)
+            (invoice: Invoice) =>
+                this.dialog.open(ViewInvoiceDialogComponent, {
+                    data: { invoice: invoice }
+                })
         );
     }
 
