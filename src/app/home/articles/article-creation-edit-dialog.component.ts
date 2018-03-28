@@ -1,8 +1,10 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { Article } from '../shared/article.model';
-import { ArticleService } from '../shared/article.service';
 import { Provider } from '../shared/provider.model';
+
+import { ArticleService } from '../shared/article.service';
 import { ProviderService } from '../shared/provider.service';
 
 @Component({
@@ -26,7 +28,6 @@ export class ArticleCreationEditDialogComponent implements OnInit {
         this.providerService.readAll().subscribe(
             (providers: Provider[]) => this.providers = providers
         );
-
         if (!this.article) {
             this.article = { code: '', description: '', retailPrice: undefined };
         }
@@ -37,13 +38,13 @@ export class ArticleCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.articleService.articleGenerateObservable(this.article).subscribe(
+        this.articleService.create(this.article).subscribe(
             data => this.dialogRef.close()
         );
     }
 
     save(): void {
-        this.articleService.putObservable(this.article).subscribe(
+        this.articleService.update(this.article).subscribe(
             data => this.dialogRef.close()
         );
     }

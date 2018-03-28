@@ -13,6 +13,6 @@
     </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close tabindex="-1">Cancel</button>
     <button mat-button (click)="create()" [disabled]="!article.description || !article.retailPrice">Create</button>
 </mat-dialog-actions>

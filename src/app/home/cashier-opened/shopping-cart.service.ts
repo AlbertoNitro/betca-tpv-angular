@@ -101,36 +101,28 @@ export class ShoppingCartService {
     checkOut(ticketCreation: TicketCreation): void {
         ticketCreation.shoppingCart = this.shoppingCart;
         this.ticketService.create(ticketCreation).subscribe(
-            blob => {
-                this.openPdf(blob);
-            }
+            () => this.reset()
         );
     }
 
     createBudget(): void {
-        let budget: Budget;
-        budget = { shoppingCart: this.shoppingCart };
+        const budget: Budget = { shoppingCart: this.shoppingCart };
         this.budgetService.create(budget).subscribe(
-            blob => {
-                this.openPdf(blob);
-            }
-        );
-    }
-    createInvoice(invoiceCreation: InvoiceCreation): void {
-        invoiceCreation.shoppingCart = this.shoppingCart;
-        this.invoiceService.create(invoiceCreation).subscribe(
-            blob => {
-                this.openPdf(blob);
-            }
+            () => this.reset()
+
         );
     }
 
+    createInvoice(ticketCreation: TicketCreation) {
+        ticketCreation.shoppingCart = this.shoppingCart;
+        return this.invoiceService.create(ticketCreation).map(
+            () => this.reset()
+        );
+    }
 
-    openPdf(blob: any) {
+    private reset() {
         this.shoppingCart = new Array();
         this.synchronizeAll();
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
     }
 
 }

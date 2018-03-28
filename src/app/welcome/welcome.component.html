@@ -17,4 +17,5 @@
     <button type="submit" mat-mini-fab color="primary" (click)="trackArticles(code.value); code.value=''" [disabled]="code.value === ''">
         <mat-icon>search</mat-icon>
     </button>
+    <p>Button pressed with code: {{ codeValue }}</p>
 </form>

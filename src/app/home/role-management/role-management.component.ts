@@ -11,7 +11,7 @@ export class RoleManagementComponent implements OnInit {
   static URL = 'role-management';
 
   title = 'Role Management';
-  columns = ['mobile', 'username', 'role'];
+  columns = ['mobile', 'username'];
   data: User[];
 
   constructor(private dialog: MatDialog, private userService: UserService) { }
@@ -27,7 +27,7 @@ export class RoleManagementComponent implements OnInit {
   }
 
   edit(user: User) {
-    this.userService.readObservable(user.mobile).subscribe(
+    this.userService.read(user.mobile).subscribe(
       data => {
         const dialogRef = this.dialog.open(RoleManagementDialogComponent);
         dialogRef.componentInstance.user = data;

@@ -21,12 +21,16 @@
     </mat-form-field>
     <mat-form-field>
         <mat-select placeholder="Provider" [(ngModel)]="article.provider" required>
-            <mat-option *ngFor="let provider of providers" [value]="provider.id" >{{provider.company}}</mat-option>
+            <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
         </mat-select>
     </mat-form-field>
+    <mat-checkbox tabindex="-1" [(ngModel)]="article.discontinued" *ngIf="edit">Discontinued</mat-checkbox>
+    <div *ngIf="edit">
+        Registration Date: {{article.registrationDate | date: 'medium'}}
+    </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button *ngIf="edit" (click)="save()"  [disabled]="!isActionCompleted()">Save</button>
+    <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()" [disabled]="!isActionCompleted()">Save</button>
     <button mat-raised-button *ngIf="!edit" (click)="create()" [disabled]="!isActionCompleted()">Create</button>
 </mat-dialog-actions>

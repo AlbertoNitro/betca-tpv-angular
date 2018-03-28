@@ -22,7 +22,7 @@ export class OfferCreateEditDialogComponent implements OnInit{
     
     ngOnInit(): void {
         if (!this.offer) {
-            this.offer = { code: undefined, percentage: undefined, expiration: '' , description : ''};
+            this.offer = { code: undefined, percentage: undefined, expiration: undefined };
         }
     }
 

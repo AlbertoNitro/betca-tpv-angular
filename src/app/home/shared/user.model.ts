@@ -1,3 +1,5 @@
+import { Role } from '../../core/role.model';
+
 export interface User {
     mobile: number;
     username: string;
@@ -6,4 +8,6 @@ export interface User {
     address?: string;
     registrationDate?: Date;
     active?: boolean;
+    password?: string;
+    role?: string[];
 }
