@@ -8,10 +8,11 @@
     <div fxLayout="row">
       <div class="width20">
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date" type="datetime-local">
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+
+
       </div>
 
       <div class="marginLeft2 width30">
