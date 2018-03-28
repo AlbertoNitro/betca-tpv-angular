@@ -20,7 +20,7 @@ import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/artic
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
-import { UserQuickCreationDialogComponent } from './home/cashier-opened/user-quick-creation-dialog.component';
+import { UserQuickCreationEditDialogComponent } from './home/cashier-opened/user-quick-creation-edit-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './home/cashier-opened/user-quick-update-invoice-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
@@ -109,7 +109,7 @@ export class AppRoutingModule {
     UserCreationEditDialogComponent,
     UserChangingPasswordDialogComponent,
     RoleManagementDialogComponent,
-    UserQuickCreationDialogComponent,
+    UserQuickCreationEditDialogComponent,
     UserQuickUpdateInvoiceDialogComponent,
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,

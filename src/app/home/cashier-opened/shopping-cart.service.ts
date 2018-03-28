@@ -113,9 +113,9 @@ export class ShoppingCartService {
         );
     }
 
-    createInvoice(invoiceCreation: InvoiceCreation): void {
-        invoiceCreation.shoppingCart = this.shoppingCart;
-        this.invoiceService.create(invoiceCreation).subscribe(
+    createInvoice(ticketCreation: TicketCreation) {
+        ticketCreation.shoppingCart = this.shoppingCart;
+        return this.invoiceService.create(ticketCreation).map(
             () => this.reset()
         );
     }
