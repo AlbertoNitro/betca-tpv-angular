@@ -44,4 +44,10 @@ export class OffersComponent implements OnInit {
             result => this.synchronize()
         );
     }
+    
+    delete(offer : Offer ) {
+       this.offerService.deleteObservable(offer).subscribe(
+            result => this.synchronize()
+       );
+    }
 }
