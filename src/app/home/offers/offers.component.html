@@ -3,10 +3,9 @@
         Offer Management
     </mat-card-title>
     <mat-card-content>
-        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
-            <!-- Dynamic column -->
+    	<mat-table class="mat-elevation-z8" #table [dataSource]="dataSource" matSort>
             <ng-container *ngFor="let def of columns" [matColumnDef]="def">
-                <mat-header-cell *matHeaderCellDef>{{ def }}</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef>{{ titles[def] }}</mat-header-cell>
                 <ng-container *ngIf ="def != 'creationDate'">
                    <ng-container *ngIf ="def != 'expiration'">
                       <mat-cell  *matCellDef="let row">{{ row[def] }}</mat-cell>
@@ -34,7 +33,6 @@
                     </button>
                 </mat-cell>
             </ng-container>
-            
             <mat-header-row *matHeaderRowDef="columns.concat('actions')"></mat-header-row>
             <mat-row *matRowDef="let item; columns: columns.concat('actions');"></mat-row>
         </mat-table>

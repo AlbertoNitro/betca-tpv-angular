@@ -2,11 +2,11 @@
 <h2 mat-dialog-title *ngIf="edit">Edit Offer</h2>
 <mat-dialog-content>  
     <mat-form-field>
-        <input matInput type="text" placeholder="code" required [readonly]="edit" [(ngModel)]="offer.code" />
+        <input matInput type="text" placeholder="Code of offer" required [readonly]="edit" [(ngModel)]="offer.code" />
         <mat-error>Field required</mat-error>
     </mat-form-field>    
     <mat-form-field>
-        <input matInput type="text" placeholder="percentage" required  [(ngModel)]="offer.percentage" />
+        <input matInput type="text" placeholder="Percentage" required  [(ngModel)]="offer.percentage" />
         <mat-error>Field required</mat-error>
     </mat-form-field>    
     <mat-form-field class="date">
@@ -15,13 +15,11 @@
          <mat-datepicker #expiration></mat-datepicker>
     </mat-form-field>          
     <mat-form-field>
-        <input matInput type="text" placeholder="description" [(ngModel)]="offer.description" />
+        <input matInput type="text" placeholder="Description" [(ngModel)]="offer.description" />
     </mat-form-field>	
 </mat-dialog-content>
-
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close>Cancel</button>  
-    <button mat-raised-button *ngIf="!edit" (click)="create()" [disabled]="!offer.code || !offer.expiration || !offer.percentage" >Create</button>
-    <button mat-raised-button *ngIf="edit" (click)="save()" >Save</button>
-
+    <button mat-raised-button *ngIf="!edit" (click)="create()" [disabled]="!offer.code || !offer.expiration || !offer.percentage" >Create offer</button>
+    <button mat-raised-button *ngIf="edit" (click)="save()" >Save changes</button>
 </mat-dialog-actions>

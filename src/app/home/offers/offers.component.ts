@@ -11,8 +11,10 @@ import { MatTableDataSource, MatSort } from '@angular/material';
     
 export class OffersComponent implements OnInit {
     static URL = 'offers';
-
+    
     columns = ['code', 'percentage', 'creationDate', 'expiration', 'description'];
+    titles = {'code': 'Code of offer', 'percentage':'Percentage', 'creationDate' : 'Creation Date', 
+                'expiration': 'Expiration Date', 'description': 'Description'};
     dataSource: MatTableDataSource<Offer>;
      
     constructor(private dialog: MatDialog, private offerService: OfferService) {
