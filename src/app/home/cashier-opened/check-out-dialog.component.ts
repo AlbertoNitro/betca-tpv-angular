@@ -4,7 +4,6 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { CashierClosure } from '../shared/cashier-closure.model';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { User } from '../shared/user.model';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { ReservationCreation } from '../shared/reservation-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';

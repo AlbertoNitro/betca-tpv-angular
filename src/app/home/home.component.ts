@@ -27,6 +27,7 @@ import { OfferSearchDialogComponent } from './offers/offer-search-dialog.compone
 import { OffersComponent } from './offers/offers.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
+import { InvoicesComponent } from './invoices/invoices.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -102,6 +103,10 @@ export class HomeComponent implements OnDestroy {
 
   tickets() {
     this.router.navigate([HomeComponent.URL, TicketsComponent.URL]);
+  }
+
+  invoices() {
+    this.router.navigate([HomeComponent.URL, InvoicesComponent.URL]);
   }
 
   article() {

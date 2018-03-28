@@ -7,7 +7,6 @@ import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
 import { InvoiceService } from '../shared/invoice.service';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';

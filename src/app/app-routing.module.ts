@@ -39,6 +39,7 @@ import { RoleManagementComponent } from './home/role-management/role-management.
 import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
 import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
+import { InvoicesComponent } from './home/invoices/invoices.component';
 
 
 const appRoutes: Routes = [
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
+      { path: InvoicesComponent.URL, component: InvoicesComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: RoleManagementComponent.URL, component: RoleManagementComponent },
@@ -84,6 +86,7 @@ export class AppRoutingModule {
     StatisticsComponent,
     StockAlertComponent,
     TicketsComponent,
+    InvoicesComponent,
     UsersComponent,
     VouchersComponent,
     WelcomeComponent,
