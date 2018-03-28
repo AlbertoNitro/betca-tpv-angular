@@ -29,6 +29,12 @@ export class TicketsComponent {
     );
   }
 
+  findByMobile(mobile: string) {
+    this.ticketService.findByMobile(mobile).subscribe(
+      (tickets: Ticket[]) => this.data = tickets
+    );
+  }
+
   findTicketsCreationDatesBetween() {
     this.ticketService.findBetweenDates(this.initialDateInput, this.finalDateInput).subscribe(
       (listTickets: Ticket[]) => this.data = listTickets
@@ -37,12 +43,6 @@ export class TicketsComponent {
 
   todayTickets() {
     this.ticketService.readToday().subscribe(
-      (tickets: Ticket[]) => this.data = tickets
-    );
-  }
-
-  findByMobile(mobile: string) {
-    this.ticketService.findByMobile(mobile).subscribe(
       (tickets: Ticket[]) => this.data = tickets
     );
   }
