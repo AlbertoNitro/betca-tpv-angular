@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>View Invoice</h2>
+<mat-dialog-content>
+  <mat-list>
+    <mat-list-item>{{invoice.id}}</mat-list-item>
+    <mat-list-item> {{invoice.creationDate | date: 'medium'}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>User</h3>
+    <mat-list-item>{{invoice.ticket.user.mobile}}</mat-list-item>
+    <mat-list-item>{{invoice.ticket.user.dni}}</mat-list-item>
+    <mat-list-item>{{invoice.ticket.user.username}}</mat-list-item>
+    <mat-list-item>{{invoice.ticket.user.address}}</mat-list-item>
+    <mat-divider></mat-divider>
+    <h3 mat-subheader>Ticket</h3>
+    <mat-list-item>{{invoice.ticket.id}}</mat-list-item>
+    <mat-list-item>{{invoice.ticket.creationDate | date: 'medium'}}</mat-list-item>
+  </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="editTicket()">
+    <mat-icon>euro_symbol</mat-icon> {{invoice.ticket.id}}
+  </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>
