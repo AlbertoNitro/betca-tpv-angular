@@ -9,7 +9,7 @@ import { ReservationCreation } from '../shared/reservation-creation.model';
 import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
-import { UserQuickCreationDialogComponent } from './user-quick-creation-dialog.component';
+import { UserQuickCreationEditDialogComponent } from './user-quick-creation-edit-dialog.component';
 import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
 
@@ -23,16 +23,15 @@ import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.componen
 export class CheckOutDialogComponent {
 
     total: number;
-
-    // foundMobile = false;
     user: User;
 
     ticketCreation: TicketCreation;
-    ivoiceCreation: InvoiceCreation;
+
     reservationCreation: ReservationCreation;
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, public shoppingCartService: ShoppingCartService,
         private userService: UserService) {
+
         this.total = data.total;
         this.ticketCreation = data.ticketCreation;
     }
@@ -49,105 +48,12 @@ export class CheckOutDialogComponent {
         return !this.ticketCreation.userMobile || this.existUser();
     }
 
-    findMobile() {
-        this.userService.read(this.ticketCreation.userMobile).subscribe(
-            user => this.user = user,
-            error => this.createUser()
-        );
-    }
-
-    checkUser() {
-        this.userService.read(this.ticketCreation.userMobile).subscribe(
-            data => {
-                if (data.username && data.dni && data.address) {
-                    this.ivoiceCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, shoppingCart: null };
-                    this.ivoiceCreation.userMobile = this.ticketCreation.userMobile;
-                    this.ivoiceCreation.card = this.ticketCreation.card;
-                    this.ivoiceCreation.cash = this.ticketCreation.cash;
-                    this.ivoiceCreation.voucher = this.ticketCreation.voucher;
-                    this.shoppingCartService.createInvoice(this.ivoiceCreation);
-                    this.dialog.closeAll();
-                } else {
-                    this.updateUserInvoice(data);
-                }
-            }
-        );
-    }
-
-    invalidCheckOut(): boolean {
-        return this.return() < 0 || !this.isMobileSynchronized();
-    }
-
-    invalidInvoice(): boolean {
-        return !this.existUser() || this.return() < 0;
-    }
-
-    invalidReservation(): boolean {
-        return !((this.checkEmail()) && (this.return() * -1 <= this.total - this.total * 0.1));
-    }
-
-    number(value: number): number {
-        return ((value === undefined || value === null) ? 0 : value);
-    }
-
-    return(): number {
-        return Math.round(
-            (0 + this.number(this.ticketCreation.cash)
-                + this.number(this.ticketCreation.card)
-                + this.number(this.ticketCreation.voucher)
-                - this.total) * 100
-        ) / 100;
-    }
-
-    fillCard() {
-        if (this.return() < 0) {
-            this.ticketCreation.card = -this.return();
-        } else {
-            this.ticketCreation.card = this.total;
-            this.ticketCreation.cash = undefined;
-        }
-    }
-
-    fillCash() {
-        this.ticketCreation.cash = this.number(this.ticketCreation.cash);
-        if (this.return() < 0) {
-            this.ticketCreation.cash = -this.return();
-        } else if (this.ticketCreation.cash < 20) {
-            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
-        } else if (this.ticketCreation.cash < 50) {
-            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 10) + 1) * 10;
-        } else {
-            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 50) + 1) * 50;
-        }
-    }
-
-    checkOut() {
-        this.ticketCreation.cash = this.number(this.ticketCreation.cash);
-        this.ticketCreation.card = this.number(this.ticketCreation.card);
-        this.ticketCreation.voucher = this.number(this.ticketCreation.voucher);
-        this.shoppingCartService.checkOut(this.ticketCreation);
-    }
-
-    reservation() {
-        console.log('Se ha creado una reserva');
-        // this.shoppingCartService.createReservation(this.reservationCreation);
-        // this.dialog.closeAll();
-    }
-
-
-
-    deleteMobile() {
-        this.ticketCreation.userMobile = undefined;
-        this.user = null;
-    }
-
-    editMobile() {
-
-    }
-
     private createUser() {
-        this.dialog.open(UserQuickCreationDialogComponent, {
-            data: { mobile: this.ticketCreation.userMobile }
+        this.dialog.open(UserQuickCreationEditDialogComponent, {
+            data: {
+                user: { mobile: this.ticketCreation.userMobile, username: '' },
+                type: 'create'
+            }
         }).afterClosed().subscribe(
             result => {
                 if (result) {
@@ -157,6 +63,110 @@ export class CheckOutDialogComponent {
         );
     }
 
+    findMobile() {
+        this.userService.read(this.ticketCreation.userMobile).subscribe(
+            user => this.user = user,
+            error => this.createUser()
+        );
+    }
+
+    deleteMobile() {
+        this.ticketCreation.userMobile = undefined;
+        this.user = null;
+    }
+
+    editMobile() {
+        this.dialog.open(UserQuickCreationEditDialogComponent, {
+            data: {
+                user: this.user,
+                type: 'edit'
+            }
+        }).afterClosed().subscribe(
+            result => {
+                if (result) {
+                    this.findMobile();
+                }
+            }
+        );
+    }
+
+    private formatNumber(value: number): number {
+        return ((value === undefined || value === null) ? 0 : value);
+    }
+
+    private formatValues() {
+        this.ticketCreation.cash = this.formatNumber(this.ticketCreation.cash);
+        this.ticketCreation.card = this.formatNumber(this.ticketCreation.card);
+        this.ticketCreation.voucher = this.formatNumber(this.ticketCreation.voucher);
+    }
+
+    returnedCash(): number {
+        return Math.round(
+            (0 + this.formatNumber(this.ticketCreation.cash)
+                + this.formatNumber(this.ticketCreation.card)
+                + this.formatNumber(this.ticketCreation.voucher)
+                - this.total) * 100
+        ) / 100;
+    }
+
+    fillCard() {
+        if (this.returnedCash() < 0) {
+            this.ticketCreation.card = -this.returnedCash();
+        } else {
+            this.ticketCreation.card = this.total;
+            this.ticketCreation.cash = 0;
+        }
+    }
+
+    fillCash() {
+        this.ticketCreation.cash = this.formatNumber(this.ticketCreation.cash);
+        if (this.returnedCash() < 0) {
+            this.ticketCreation.cash = -this.returnedCash();
+        } else if (this.ticketCreation.cash < 20) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
+        } else if (this.ticketCreation.cash < 50) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 10) + 1) * 10;
+        } else {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 50) + 1) * 50;
+        }
+    }
+
+    consumeVoucher() {
+        const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
+        dialogRef.afterClosed().subscribe(
+            result => this.ticketCreation.voucher += (result > 0 ? result : 0)
+        );
+    }
+
+    invalidCheckOut(): boolean {
+        return this.returnedCash() < 0 || !this.isMobileSynchronized();
+    }
+
+    checkOut() {
+        this.formatValues();
+        this.shoppingCartService.checkOut(this.ticketCreation);
+    }
+
+    invalidInvoice(): boolean {
+        return !this.existUser() || this.returnedCash() < 0 || !this.user.dni || !this.user.address;
+    }
+
+    createInvoice() {
+        this.formatValues();
+        this.shoppingCartService.createInvoice(this.ticketCreation).subscribe(
+            () => this.dialog.closeAll()
+        );
+    }
+
+    invalidReservation(): boolean {
+        return !((this.checkEmail()) && (this.returnedCash() * -1 <= this.total - this.total * 0.1));
+    }
+
+    reservation() {
+        console.log('Se ha creado una reserva');
+        // this.shoppingCartService.createReservation(this.reservationCreation);
+        // this.dialog.closeAll();
+    }
 
     checkEmail(): boolean {
         this.userService.read(this.ticketCreation.userMobile).subscribe(
@@ -178,19 +188,4 @@ export class CheckOutDialogComponent {
         return false;
     }
 
-    updateUserInvoice(data) {
-        const dialogUpdateUserRef = this.dialog.open(UserQuickUpdateInvoiceDialogComponent);
-        dialogUpdateUserRef.componentInstance.mobile = this.ticketCreation.userMobile;
-        dialogUpdateUserRef.componentInstance.user = data;
-    }
-
-    consumeVoucher() {
-        const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
-        dialogRef.afterClosed().subscribe(
-            result => {
-                this.ticketCreation.voucher = (this.ticketCreation.voucher === undefined ? 0 : this.ticketCreation.voucher);
-                this.ticketCreation.voucher += (result > 0 ? result : 0);
-            }
-        );
-    }
 }
