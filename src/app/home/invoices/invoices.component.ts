@@ -20,9 +20,9 @@ export class InvoicesComponent {
     }
 
     findInvoice(invoiceId: string) {
-        //       this.ticketService.readOne(ticketId).subscribe(
-        //          (ticket: Ticket) => this.data = new Array(1).fill(ticket)
-        //       );
+        this.invoiceService.readOne(invoiceId).subscribe(
+            (invoice: Invoice) => this.data = new Array(1).fill(invoice)
+        );
     }
 
     findByMobile(mobile: string) {
