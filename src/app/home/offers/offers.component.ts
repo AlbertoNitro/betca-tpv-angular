@@ -31,6 +31,8 @@ export class OffersComponent implements OnInit {
     edit(offer: Offer) {
         const dialogRef = this.dialog.open(OfferCreateEditDialogComponent);
         dialogRef.componentInstance.edit = true;
+        console.log(typeof offer.expiration);
+        offer.expiration = new Date(offer.expiration);
         dialogRef.componentInstance.offer = offer;    
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()

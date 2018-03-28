@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Offer } from '../shared/offer.model';
 import { OfferService } from '../shared/offer.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
     templateUrl: 'offer-create-edit-dialog.component.html',
@@ -22,8 +23,8 @@ export class OfferCreateEditDialogComponent implements OnInit{
     
     ngOnInit(): void {
         if (!this.offer) {
-            this.offer = { code: undefined, percentage: undefined, expiration: undefined };
-        }
+            this.offer = { code: undefined, percentage: undefined, expiration:  undefined };
+        } 
     }
 
     create() {

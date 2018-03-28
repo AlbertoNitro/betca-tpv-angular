@@ -12,7 +12,7 @@
     <mat-form-field class="date">
          <input matInput [matDatepicker]="expiration" placeholder="Choose a expiration date" required [(ngModel)]="offer.expiration">
          <mat-datepicker-toggle matSuffix [for]="expiration"></mat-datepicker-toggle>
-         <mat-datepicker #expiration ></mat-datepicker>
+         <mat-datepicker #expiration></mat-datepicker>
     </mat-form-field>          
     <mat-form-field>
         <input matInput type="text" placeholder="description" [(ngModel)]="offer.description" />
