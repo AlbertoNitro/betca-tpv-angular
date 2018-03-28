@@ -26,22 +26,28 @@ export class InvoicesComponent {
     }
 
     findByMobile(mobile: string) {
-        // this.ticketService.findByMobile(mobile).subscribe(
-        //  (tickets: Ticket[]) => this.data = tickets
-        // );
+        this.invoiceService.findByMobile(mobile).subscribe(
+            (listInvoices: Invoice[]) => this.data = listInvoices
+        );
     }
 
     findInvoivesCreationDatesBetween() {
+        this.invoiceService.findBetweenDates(this.initialDateInput, this.finalDateInput).subscribe(
+            (listInvoices: Invoice[]) => this.data = listInvoices
+        );
     }
 
     thisYearInvoices() {
+        this.invoiceService.thisYearInvoices().subscribe(
+            (listInvoices: Invoice[]) => this.data = listInvoices
+        );
     }
 
-    edit(invoiceId: Invoice) {
+    read(invoiceId: Invoice) {
+        this.invoiceService.readOne(invoiceId.id).subscribe(
+            (invoice: Invoice) => console.log(invoice.id + '::' + invoice.ticket.id + '::' + invoice.ticket.user.mobile)
+        );
     }
 
-    create() {
-
-    }
 
 }
