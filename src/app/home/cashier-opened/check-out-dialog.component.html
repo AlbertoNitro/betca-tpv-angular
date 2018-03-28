@@ -31,10 +31,10 @@
         </button>
     </mat-form-field>
 </mat-dialog-content>
-<h4 mat-dialog-title>Return: {{return() | currency:'EUR':'symbol'}}</h4>
+<h4 mat-dialog-title>Return: {{returnedCash() | currency:'EUR':'symbol'}}</h4>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button mat-dialog-close color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
-    <button mat-raised-button color="accent" (click)="checkUser()" [disabled]="invalidInvoice()">Invioce</button>
+    <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
+    <button mat-raised-button color="accent" (click)="createInvoice()" [disabled]="invalidInvoice()">Invioce</button>
     <!-- ENTRA EN BUCLE Y TE SATURA EL EQUIPO!!!!! <button mat-raised-button mat-dialog-close (click)="reservation()" [disabled]="invalidReservation()">Reservation</button>-->
 </mat-dialog-actions>
