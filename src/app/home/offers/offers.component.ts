@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { Offer } from '../shared/offer.model';
 import { OfferService } from '../shared/offer.service';
 import { OfferCreateEditDialogComponent } from './offer-create-edit-dialog.component';
+import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
     templateUrl: `offers.component.html`
@@ -11,9 +12,8 @@ import { OfferCreateEditDialogComponent } from './offer-create-edit-dialog.compo
 export class OffersComponent implements OnInit {
     static URL = 'offers';
 
-    title = 'Offer management';
-    columns = ['code', 'percentage', 'expiration', 'description'];
-    data: Offer[];
+    columns = ['code', 'percentage', 'creationDate', 'expiration', 'description'];
+    dataSource: MatTableDataSource<Offer>;
      
     constructor(private dialog: MatDialog, private offerService: OfferService) {
     }
@@ -24,7 +24,7 @@ export class OffersComponent implements OnInit {
 
     synchronize() {   
         this.offerService.readAll().subscribe(
-            data => this.data = data
+             data => this.dataSource = new MatTableDataSource<Offer>(data)
         );
     }
 
