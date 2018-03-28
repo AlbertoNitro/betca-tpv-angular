@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
@@ -17,19 +17,18 @@ import { UserService } from '../shared/user.service';
     }
     `]
 })
-export class UserQuickCreationDialogComponent implements OnInit {
-    @Input() mobile: number;
+export class UserQuickCreationDialogComponent {
     user: User;
 
-    constructor(public dialogRef: MatDialogRef<UserQuickCreationDialogComponent>, private userService: UserService) {
+    constructor(@Inject(MAT_DIALOG_DATA) data: any, public dialogRef: MatDialogRef<UserQuickCreationDialogComponent>,
+        private userService: UserService) {
+
+        this.user = { mobile: data.mobile, username: '' };
     }
 
-    ngOnInit(): void {
-        this.user = { mobile: this.mobile, username: '' };
-    }
 
     create(): void {
-        this.userService.createObservable(this.user).subscribe(
+        this.userService.create(this.user).subscribe(
             data => this.dialogRef.close(true),
             error => this.dialogRef.close()
         );
