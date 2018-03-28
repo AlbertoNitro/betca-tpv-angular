@@ -1,5 +1,38 @@
 <mat-card>
-    <mat-card-title>
-        <mat-icon color="primary">shopping_cart</mat-icon> Schedule
-    </mat-card-title>
+  <mat-card-title>
+    <mat-icon color="primary">shopping_cart</mat-icon>
+    Schedule
+  </mat-card-title>
+
+  <mat-card-content>
+    <div fxLayout="row">
+      <div class="width20">
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="marginLeft2 width30">
+        <mat-form-field class="width80">
+          <input matInput placeholder="Title" value="">
+        </mat-form-field>
+      </div>
+
+      <div class="marginLeft2 width30">
+        <mat-form-field class="width80">
+            <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+                      matAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="marginLeft2">
+        <button mat-button matSuffix mat-icon-button aria-label="Clear">
+          <mat-icon color="warn">add_alarm</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </mat-card-content>
 </mat-card>
