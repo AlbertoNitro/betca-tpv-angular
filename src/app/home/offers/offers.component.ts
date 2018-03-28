@@ -11,8 +11,10 @@ import { MatTableDataSource, MatSort } from '@angular/material';
     
 export class OffersComponent implements OnInit {
     static URL = 'offers';
-
+    
     columns = ['code', 'percentage', 'creationDate', 'expiration', 'description'];
+    titles = {'code': 'Code of offer', 'percentage':'Percentage', 'creationDate' : 'Creation Date', 
+                'expiration': 'Expiration Date', 'description': 'Description'};
     dataSource: MatTableDataSource<Offer>;
      
     constructor(private dialog: MatDialog, private offerService: OfferService) {
@@ -31,6 +33,8 @@ export class OffersComponent implements OnInit {
     edit(offer: Offer) {
         const dialogRef = this.dialog.open(OfferCreateEditDialogComponent);
         dialogRef.componentInstance.edit = true;
+        console.log(typeof offer.expiration);
+        offer.expiration = new Date(offer.expiration);
         dialogRef.componentInstance.offer = offer;    
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
@@ -43,5 +47,11 @@ export class OffersComponent implements OnInit {
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
+    }
+    
+    delete(offer : Offer ) {
+       this.offerService.deleteObservable(offer).subscribe(
+            result => this.synchronize()
+       );
     }
 }
