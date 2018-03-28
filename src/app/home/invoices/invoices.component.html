@@ -35,5 +35,5 @@
         </mat-card-content>
       </mat-card>
 
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data" 
-   (create)="create()" (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [createAction]="false" [deleteAction]="false" [editAction]="false" [data]="data" 
+   (read)="read($event)"></app-crud>
