@@ -1,15 +1,14 @@
 <h2 mat-dialog-title>Total: {{total | currency:'EUR':'symbol'}}</h2>
 <mat-dialog-content>
-    <!--Input-->
     <mat-form-field>
-        <input matInput type="number" placeholder="Mobile" [(ngModel)]="ticketCreation.userMobile" [disabled]="foundMobile" />
+        <input matInput type="number" placeholder="Mobile" [(ngModel)]="ticketCreation.userMobile" [disabled]="existUser()" />
         <button mat-button matSuffix mat-icon-button (click)="findMobile()" *ngIf="ticketCreation.userMobile">
-            <mat-icon *ngIf="mobileSynchronize()" color="warn">search</mat-icon>
+            <mat-icon *ngIf="!isMobileSynchronized()" color="warn">search</mat-icon>
         </button>
-        <button mat-button matSuffix mat-icon-button *ngIf="foundMobile" (click)="editMobile()">
+        <button mat-button matSuffix mat-icon-button *ngIf="existUser()" (click)="editMobile()">
             <mat-icon color="warn">mode_edit</mat-icon>
         </button>
-        <button mat-button matSuffix mat-icon-button *ngIf="foundMobile" (click)="deleteMobile()">
+        <button mat-button matSuffix mat-icon-button *ngIf="existUser()" (click)="deleteMobile()">
             <mat-icon color="warn">close</mat-icon>
         </button>
     </mat-form-field>
@@ -31,11 +30,13 @@
             <mat-icon color="warn">local_offer</mat-icon>
         </button>
     </mat-form-field>
+    <mat-checkbox [(ngModel)]="requestedInvoice" [disabled]="invalidInvoice()">
+        <span> Invoice ({{ticketCreation.userMobile}})</span>
+    </mat-checkbox>
 </mat-dialog-content>
-<h4 mat-dialog-title>Return: {{return() | currency:'EUR':'symbol'}}</h4>
+<h4 mat-dialog-title>Return: {{returnedCash() | currency:'EUR':'symbol'}}</h4>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button mat-dialog-close (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
-    <button mat-raised-button (click)="checkUser()" [disabled]="invalidInvoice()">Invioce</button>
-    <button mat-raised-button mat-dialog-close (click)="reservation()" [disabled]="invalidReservation()">Reservation</button>
+    <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
+    <!-- ENTRA EN BUCLE Y TE SATURA EL EQUIPO!!!!! <button mat-raised-button mat-dialog-close (click)="reservation()" [disabled]="invalidReservation()">Reservation</button>-->
 </mat-dialog-actions>

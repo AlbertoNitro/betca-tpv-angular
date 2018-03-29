@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Offer } from '../shared/offer.model';
 import { OfferService } from '../shared/offer.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
     templateUrl: 'offer-create-edit-dialog.component.html',
@@ -12,7 +13,6 @@ import { OfferService } from '../shared/offer.service';
 })
     
 export class OfferCreateEditDialogComponent implements OnInit{
-        
     offer : Offer;
     edit : boolean;
     
@@ -22,19 +22,17 @@ export class OfferCreateEditDialogComponent implements OnInit{
     
     ngOnInit(): void {
         if (!this.offer) {
-            this.offer = { code: undefined, percentage: undefined, expiration: undefined };
-        }
+            this.offer = { code: undefined, percentage: undefined, expiration:  undefined };
+        } 
     }
 
     create() {
-        console.log("OfferCreatedEditDialogComponent:create()");
         this.userService.createObservable(this.offer).subscribe(
             data => this.dialogRef.close()
         );
     }
     
     save () {
-        console.log("OfferCreatedEditDialogComponent:save()");
         this.userService.putObservable(this.offer).subscribe(
             data => this.dialogRef.close()
         );

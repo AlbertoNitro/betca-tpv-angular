@@ -26,4 +26,10 @@ export class BudgetsComponent implements OnInit {
         );
     }
 
+    read(budget: Budget) {
+        this.budgetService.read(budget).subscribe(
+            blob => window.open(window.URL.createObjectURL(blob))
+        );
+    }
+
 }

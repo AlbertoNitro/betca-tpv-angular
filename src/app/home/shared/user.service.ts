@@ -12,11 +12,11 @@ export class UserService {
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
 
-    readObservable(mobile: number): Observable<User> {
+    read(mobile: number): Observable<User> {
         return this.httpService.authToken().get(UserService.END_POINT + '/' + mobile);
     }
 
-    createObservable(user: User): Observable<boolean> {
+    create(user: User): Observable<boolean> {
         return this.httpService.authToken().post(UserService.END_POINT, user).map(
             data => {
                 this.successful();

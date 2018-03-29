@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class OfferService {
-    static END_POINT = '/offer';
+    static END_POINT = '/offers';
 
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
@@ -16,9 +16,9 @@ export class OfferService {
     }
 
     createObservable(offer: Offer): Observable<boolean> {
+        console.log("Offer: " + offer);
         return this.httpService.authToken().post(OfferService.END_POINT, offer).map(
             data => {
-                this.successful();
                 return data;
             }
         );
@@ -27,10 +27,13 @@ export class OfferService {
     putObservable(offer: Offer): Observable<boolean> {
         return this.httpService.authToken().put(OfferService.END_POINT + '/' + offer.code, offer).map(
             data => {
-                this.successful();
                 return data;
             }
         );
+    }
+    
+    deleteObservable(offer: Offer): Observable<boolean> {
+        return this.httpService.authToken().delete(OfferService.END_POINT + '/' + offer.code);
     }
 
     readAll(): Observable<Offer[]> {

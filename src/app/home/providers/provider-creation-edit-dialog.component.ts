@@ -25,13 +25,13 @@ export class ProviderCreationEditDialogComponent implements OnInit {
     }
 
     create(): void {
-        this.providerService.createObservable(this.provider).subscribe(
+        this.providerService.create(this.provider).subscribe(
             data => this.dialogRef.close()
         );
     }
 
     save(): void {
-        this.providerService.putObservable(this.provider).subscribe(
+        this.providerService.update(this.provider).subscribe(
             data => this.dialogRef.close()
         );
     }

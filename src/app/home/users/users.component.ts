@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 import { UserCreationEditDialogComponent } from './user-creation-edit-dialog.component';
+import { UserChangingPasswordDialogComponent } from './user-changing-password-dialog.component';
 
 @Component({
     templateUrl: `users.component.html`
@@ -28,9 +29,22 @@ export class UsersComponent implements OnInit {
     }
 
     edit(user: User) {
-        this.userService.readObservable(user.mobile).subscribe(
+        this.userService.read(user.mobile).subscribe(
             data => {
                 const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
+                dialogRef.componentInstance.user = data;
+                dialogRef.componentInstance.edit = true;
+                dialogRef.afterClosed().subscribe(
+                    result => this.synchronize()
+                );
+            }
+        );
+    }
+
+    edit2(user: User) {
+        this.userService.readObservable(user.mobile).subscribe(
+            data => {
+                const dialogRef = this.dialog.open(UserChangingPasswordDialogComponent);
                 dialogRef.componentInstance.user = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
