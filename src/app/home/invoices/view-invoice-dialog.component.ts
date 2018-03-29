@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { Invoice } from '../shared/invoice.model';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+
+import { Invoice } from '../shared/invoice.model';
 import { TicketService } from '../shared/ticket.service';
 import { EditTicketDialogComponent } from '../tickets/edit-ticket-dialog.component';
 
@@ -11,17 +12,8 @@ export class ViewInvoiceDialogComponent {
 
     invoice: Invoice;
 
-    constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, private ticketService: TicketService) {
+    constructor(@Inject(MAT_DIALOG_DATA) data: any) {
         this.invoice = data.invoice;
     }
 
-    editTicket() {
-        this.ticketService.readOne(this.invoice.ticket.id).subscribe(
-            ticket =>
-                this.dialog.open(EditTicketDialogComponent, {
-                    width: '800px',
-                    data: { ticket: ticket }
-                })
-        );
-    }
 }

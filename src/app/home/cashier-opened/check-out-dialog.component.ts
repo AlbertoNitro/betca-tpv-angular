@@ -14,7 +14,11 @@ import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.componen
 
 @Component({
     templateUrl: 'check-out-dialog.component.html',
-    styles: [`.mat-dialog-content {
+    styles: [`
+    .mat-cell {
+        overflow: visible;
+      }
+      .mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
@@ -23,6 +27,8 @@ export class CheckOutDialogComponent {
 
     total: number;
     user: User;
+
+    requestedInvoice = false;
 
     ticketCreation: TicketCreation;
 
@@ -143,18 +149,21 @@ export class CheckOutDialogComponent {
 
     checkOut() {
         this.formatValues();
-        this.shoppingCartService.checkOut(this.ticketCreation);
+        this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
+            () => {
+                if (this.requestedInvoice) {
+                    this.shoppingCartService.createInvoice(this.ticketCreation.userMobile).subscribe(
+                        () => this.dialog.closeAll()
+                    );
+                } else {
+                    this.dialog.closeAll();
+                }
+            }
+        );
     }
 
     invalidInvoice(): boolean {
-        return !this.existUser() || this.returnedCash() < 0 || !this.user.dni || !this.user.address;
-    }
-
-    createInvoice() {
-        this.formatValues();
-        this.shoppingCartService.createInvoice(this.ticketCreation).subscribe(
-            () => this.dialog.closeAll()
-        );
+        return !this.existUser() || !this.user.dni || !this.user.address;
     }
 
     invalidReservation(): boolean {

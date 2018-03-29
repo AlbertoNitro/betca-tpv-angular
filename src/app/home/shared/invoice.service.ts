@@ -4,18 +4,20 @@ import { Observable } from 'rxjs/Observable';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import { TicketCreation } from './ticket-creation.model';
 import { Invoice } from './invoice.model';
+import { InvoiceCreation } from './invoice-creation.model';
 
 @Injectable()
 export class InvoiceService {
     static END_POINT = '/invoices';
     static SEARCH_DATE = '/search/date';
     static SEARCH_MOBILE = '/search/mobile';
+    static SEARCH_TICKET = '/search/ticket';
 
     constructor(private httpService: HttpService) {
     }
 
-    create(ticketCreation: TicketCreation): Observable<any> {
-        return this.httpService.authToken().pdf().post(InvoiceService.END_POINT, ticketCreation);
+    create(invoiceCreation: InvoiceCreation): Observable<any> {
+        return this.httpService.authToken().pdf().post(InvoiceService.END_POINT, invoiceCreation);
     }
 
     readOne(id: String): Observable<Invoice> {
@@ -41,5 +43,11 @@ export class InvoiceService {
         start.setHours(0, 0, 0, 0);
         return this.findBetweenDates(start, new Date());
     }
+
+    findByTicket(ticketId: string): Observable<Invoice> {
+        return this.httpService.authToken().param('ticketId', ticketId)
+            .get(InvoiceService.END_POINT + InvoiceService.SEARCH_TICKET);
+    }
+
 
 }

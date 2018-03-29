@@ -6,6 +6,9 @@ import { Shopping } from '../shared/shopping.model';
 import { Ticket } from '../shared/ticket.model';
 import { TicketService } from '../shared/ticket.service';
 import { VoucherService } from '../shared/voucher.service';
+import { InvoiceService } from '../shared/invoice.service';
+import { Invoice } from '../shared/invoice.model';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -14,16 +17,25 @@ import { VoucherService } from '../shared/voucher.service';
 })
 export class EditTicketDialogComponent {
 
+  totalReturn = 0;
+  ticket: Ticket;
+  invoice: Invoice;
   displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
-  ticket: Ticket;
-
-  totalReturn = 0;
+  mobile: number;
+  mobileSynchronized = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
-    private ticketService: TicketService, private voucheService: VoucherService) {
+    private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
+    private userService: UserService) {
+
     this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
     this.ticket = data.ticket;
+    this.invoice = data.invoice;
+    if (this.ticket.user) {
+      this.mobile = this.ticket.user.mobile;
+      this.mobileSynchronized = true;
+    }
   }
 
   private round(value: number) {
@@ -46,6 +58,30 @@ export class EditTicketDialogComponent {
 
   changeCommitted(shopping: Shopping) {
     shopping.committed = !shopping.committed;
+  }
+
+
+
+  invoiceId() {
+    if (this.invoice) {
+      return this.invoice.id;
+    }
+  }
+
+  findMobile() {
+    this.userService.read(this.mobile).subscribe(
+      user => {
+        this.mobile = user.mobile;
+        this.mobileSynchronized = true;
+        this.ticket.user = user;
+      }
+    );
+  }
+
+  deleteMobile() {
+    this.mobile = undefined;
+    this.mobileSynchronized = false;
+    this.ticket.user = null;
   }
 
   updateTicket() {

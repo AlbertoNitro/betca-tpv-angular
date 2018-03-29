@@ -3,6 +3,7 @@ import { Invoice } from '../shared/invoice.model';
 import { MatDialog } from '@angular/material';
 import { InvoiceService } from '../shared/invoice.service';
 import { ViewInvoiceDialogComponent } from './view-invoice-dialog.component';
+import { InvoiceCreationDialogComponent } from './invoice-creation-dialog.component';
 
 @Component({
     templateUrl: `invoices.component.html`
@@ -53,5 +54,8 @@ export class InvoicesComponent {
         );
     }
 
+    create() {
+        this.dialog.open(InvoiceCreationDialogComponent);
+    }
 
 }
