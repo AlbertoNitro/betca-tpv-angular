@@ -41,8 +41,8 @@ export class UsersComponent implements OnInit {
         );
     }
 
-    edit2(user: User) {
-        this.userService.readObservable(user.mobile).subscribe(
+    editPassword(user: User) {
+        this.userService.read(user.mobile).subscribe(
             data => {
                 const dialogRef = this.dialog.open(UserChangingPasswordDialogComponent);
                 dialogRef.componentInstance.user = data;
