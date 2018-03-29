@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { MatDialog } from '@angular/material';
@@ -28,21 +28,32 @@ import { OffersComponent } from './offers/offers.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
 import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 import { InvoicesComponent } from './invoices/invoices.component';
+import { User } from './shared/user.model';
+import { UserService } from './shared/user.service';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
   templateUrl: `home.component.html`
 })
-export class HomeComponent implements OnDestroy {
+export class HomeComponent implements OnDestroy, OnInit {
+
 
   static URL = 'home';
+  data: User[];
 
   cashierClosed: boolean;
 
   subscription: Subscription;
 
+  ngOnInit(): void {
+    this.synchronize();
+  }
+
+
+
   constructor(public dialog: MatDialog, public tokensService: TokensService,
-    private cashierService: CashierService, private router: Router, private adminsService: AdminsService) {
+    private cashierService: CashierService, private router: Router,
+    private adminsService: AdminsService, private userService: UserService) {
     this.subscription = this.cashierService.lastObservable().subscribe(
       data => {
         this.cashierClosed = data.closed;
@@ -50,6 +61,27 @@ export class HomeComponent implements OnDestroy {
       }
     );
   }
+
+  synchronize() {
+    this.userService.readAll().subscribe(
+      data => this.data = data
+    );
+  }
+
+
+  editPassword(user: User) {
+    this.userService.read(user.mobile).subscribe(
+      data => {
+        const dialogRef = this.dialog.open(UserChangingPasswordDialogComponent);
+        dialogRef.componentInstance.user = data;
+        dialogRef.componentInstance.edit = true;
+        dialogRef.afterClosed().subscribe(
+          result => this.synchronize()
+        );
+      }
+    );
+  }
+
 
   logout() {
     this.tokensService.logout();
@@ -149,7 +181,7 @@ export class HomeComponent implements OnDestroy {
   }
 
   password() {
-    this.dialog.open(UserChangingPasswordDialogComponent);
+    this.editPassword(this.data[1]);
   }
 
   roleManagement() {
