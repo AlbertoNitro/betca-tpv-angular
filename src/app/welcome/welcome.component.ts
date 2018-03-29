@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 })
 export class WelcomeComponent {
   static URL = 'welcome';
+  codeValue = '';
 
   constructor(public dialog: MatDialog, private tokensService: TokensService, private router: Router) {
   }
@@ -30,6 +31,7 @@ export class WelcomeComponent {
 
   trackArticles(code: string) {
     console.log('Article tracking button clicked: ' + code);
+    this.codeValue = code;
   }
 
 }

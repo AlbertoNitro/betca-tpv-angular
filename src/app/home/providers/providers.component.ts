@@ -14,27 +14,35 @@ export class ProvidersComponent implements OnInit {
     columns = ['company'];
     data: Provider[];
 
+    onlyActive = true;
+
     constructor(public dialog: MatDialog, private providerService: ProviderService) {
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this.synchronize();
     }
 
     synchronize() {
-        this.providerService.readAll().subscribe(
-            data => this.data = data
-        );
+        if (this.onlyActive) {
+            this.providerService.readAllActives().subscribe(
+                data => this.data = data
+            );
+        } else {
+            this.providerService.readAll().subscribe(
+                data => this.data = data
+            );
+        }
     }
 
     edit(provider: Provider) {
-        this.providerService.readObservable(provider.id).subscribe(
+        this.providerService.read(provider.id).subscribe(
             data => {
                 const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
                 dialogRef.componentInstance.provider = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
-                    result => this.synchronize()
+                    () => this.synchronize()
                 );
             }
         );
@@ -44,7 +52,7 @@ export class ProvidersComponent implements OnInit {
         const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
         dialogRef.componentInstance.edit = false;
         dialogRef.afterClosed().subscribe(
-            result => this.synchronize()
+            () => this.synchronize()
         );
     }
 

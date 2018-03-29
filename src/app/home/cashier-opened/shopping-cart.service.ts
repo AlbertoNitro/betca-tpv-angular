@@ -7,12 +7,12 @@ import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
 import { InvoiceService } from '../shared/invoice.service';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
 import { Article } from '../shared/article.model';
 import { MatSnackBar } from '@angular/material';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Injectable()
 export class ShoppingCartService {
@@ -98,39 +98,36 @@ export class ShoppingCartService {
         this.synchronizeAll();
     }
 
-    checkOut(ticketCreation: TicketCreation): void {
+    checkOut(ticketCreation: TicketCreation): Observable<any> {
         ticketCreation.shoppingCart = this.shoppingCart;
-        this.ticketService.create(ticketCreation).subscribe(
-            blob => {
-                this.openPdf(blob);
-            }
+        return this.ticketService.create(ticketCreation).map(
+            () => this.reset()
         );
     }
 
     createBudget(): void {
-        let budget: Budget;
-        budget = { shoppingCart: this.shoppingCart };
+        const budget: Budget = { shoppingCart: this.shoppingCart };
         this.budgetService.create(budget).subscribe(
-            blob => {
-                this.openPdf(blob);
-            }
+            () => this.reset()
+
         );
     }
-    createInvoice(invoiceCreation: InvoiceCreation): void {
-        invoiceCreation.shoppingCart = this.shoppingCart;
-        this.invoiceService.create(invoiceCreation).subscribe(
-            blob => {
-                this.openPdf(blob);
+
+    createInvoice(mobile: number): Observable<any> {
+        return this.ticketService.findLastByMobile(mobile).map(
+            ticket => {
+                this.invoiceService.create({ mobile: mobile, ticketId: ticket.id }).subscribe(
+                    () => {
+                        return null;
+                    }
+                );
             }
         );
     }
 
-
-    openPdf(blob: any) {
+    private reset() {
         this.shoppingCart = new Array();
         this.synchronizeAll();
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
     }
 
 }

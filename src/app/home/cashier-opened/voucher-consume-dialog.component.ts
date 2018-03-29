@@ -11,14 +11,14 @@ import { VoucherService } from '../shared/voucher.service';
     }`]
 })
 export class VoucherConsumeDialogComponent {
-    reference: string;
+    id: string;
 
     constructor(private dialogRef: MatDialogRef<VoucherConsumeDialogComponent>,
         private voucherService: VoucherService) {
     }
 
     consume() {
-        this.voucherService.consume(this.reference).subscribe(
+        this.voucherService.consume(this.id).subscribe(
             data => {
                 this.dialogRef.close(data);
             },

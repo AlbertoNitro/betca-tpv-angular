@@ -8,6 +8,8 @@ import { MatSnackBar } from '@angular/material';
 export class VoucherService {
     static END_POINT = '/vouchers';
 
+    static VALID = '/valid';
+
     constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
     }
 
@@ -15,22 +17,21 @@ export class VoucherService {
         return this.httpService.authToken().pdf().post(VoucherService.END_POINT, voucher);
     }
 
-    consume(reference: string): Observable<number> {
-        return this.httpService.authToken().patch(VoucherService.END_POINT + '/' + reference).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    read(id: String) {
+        return this.httpService.authToken().get(VoucherService.END_POINT + '/' + id);
+    }
+
+    consume(id: string): Observable<number> {
+        return this.httpService.authToken().successful('Voucher was consumed')
+            .patch(VoucherService.END_POINT + '/' + id);
     }
 
     readAll(): Observable<Voucher[]> {
         return this.httpService.authToken().get(VoucherService.END_POINT);
     }
 
-    private successful() {
-        this.snackBar.open('The voucher was consumed successfully', '', {
-            duration: 2000
-        });
+    readAllValid(): Observable<Voucher[]> {
+        return this.httpService.authToken().get(VoucherService.END_POINT + VoucherService.VALID);
     }
+
 }
