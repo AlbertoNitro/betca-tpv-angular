@@ -4,7 +4,8 @@
     Schedule
   </mat-card-title>
 
-  <mat-card-content>
+  <!--
+
     <div fxLayout="row">
       <div class="width20">
         <mat-form-field>
@@ -28,41 +29,51 @@
 
       <div class="marginLeft2">
         <button mat-button matSuffix mat-icon-button aria-label="Clear">
-          <mat-icon color="warn">add_alarm</mat-icon> <!-- -->
+          <mat-icon color="warn">add_alarm</mat-icon>
         </button>
       </div>
     </div>
 
+-->
 
+  <mat-card-content>
     <div fxLayout="row" class="width100">
       <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8 width100" matSort>
 
         <ng-container matColumnDef="dateTime">
-          <mat-header-cell *matHeaderCellDef > Date & Time </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.dateTime}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef> Date & Time</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.dateTime}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="title">
-          <mat-header-cell *matHeaderCellDef > Title </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.title}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.title}}</mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="description"  >
-          <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-          <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+        <ng-container matColumnDef="description">
+          <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
+          <mat-cell *matCellDef="let item"> {{item.description}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="actions">
           <mat-header-cell *matHeaderCellDef>
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="create()">
-              <mat-icon color="warn">person_add</mat-icon>
+              <mat-icon color="warn">add_alarm</mat-icon>
             </button>
           </mat-header-cell>
+
+
           <mat-cell *matCellDef="let item">
             <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="edit(item)">
               <mat-icon color="warn">mode_edit</mat-icon>
             </button>
+
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="delete(item)">
+              <mat-icon color="warn">delete</mat-icon>
+            </button>
           </mat-cell>
+
+
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
