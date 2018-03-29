@@ -13,7 +13,7 @@ export class CrudComponent {
     @Input() createAction = true;
     @Input() editAction = true;
     @Input() deleteAction = true;
-    @Input() passwordAction = true;
+    @Input() passwordAction = false;
     @Input()
     set data(data: any[]) {
         this.dataSource = new MatTableDataSource<any>(data);
