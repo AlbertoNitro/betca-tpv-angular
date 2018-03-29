@@ -41,6 +41,7 @@ import { UserChangingPasswordDialogComponent } from './home/users/user-changing-
 import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
 import { InvoicesComponent } from './home/invoices/invoices.component';
 import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.component';
+import { InvoiceCreationDialogComponent } from './home/invoices/invoice-creation-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -108,6 +109,7 @@ export class AppRoutingModule {
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
     CheckOutDialogComponent,
+    InvoiceCreationDialogComponent,
     ArticleCreationEditDialogComponent,
     ArticleQuickCreationDialogComponent,
     UserCreationEditDialogComponent,

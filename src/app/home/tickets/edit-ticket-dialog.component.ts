@@ -6,6 +6,8 @@ import { Shopping } from '../shared/shopping.model';
 import { Ticket } from '../shared/ticket.model';
 import { TicketService } from '../shared/ticket.service';
 import { VoucherService } from '../shared/voucher.service';
+import { InvoiceService } from '../shared/invoice.service';
+import { Invoice } from '../shared/invoice.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -17,13 +19,15 @@ export class EditTicketDialogComponent {
   displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
   ticket: Ticket;
+  invoice: Invoice;
 
   totalReturn = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
-    private ticketService: TicketService, private voucheService: VoucherService) {
+    private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService) {
     this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
     this.ticket = data.ticket;
+    this.invoice = data.invoice;
   }
 
   private round(value: number) {
@@ -60,6 +64,18 @@ export class EditTicketDialogComponent {
         }
       }
     );
+  }
+
+  user() {
+    if (this.ticket.user) {
+      return this.ticket.user.mobile;
+    }
+  }
+
+  invoiceId() {
+    if (this.invoice) {
+      return this.invoice.id;
+    }
   }
 
 }

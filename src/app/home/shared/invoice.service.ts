@@ -11,6 +11,7 @@ export class InvoiceService {
     static END_POINT = '/invoices';
     static SEARCH_DATE = '/search/date';
     static SEARCH_MOBILE = '/search/mobile';
+    static SEARCH_TICKET = '/search/ticket';
 
     constructor(private httpService: HttpService) {
     }
@@ -42,5 +43,11 @@ export class InvoiceService {
         start.setHours(0, 0, 0, 0);
         return this.findBetweenDates(start, new Date());
     }
+
+    findByTicket(ticketId: string): Observable<Invoice> {
+        return this.httpService.authToken().param('ticketId', ticketId)
+            .get(InvoiceService.END_POINT + InvoiceService.SEARCH_TICKET);
+    }
+
 
 }
