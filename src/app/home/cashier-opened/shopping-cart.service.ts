@@ -12,6 +12,7 @@ import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
 import { Article } from '../shared/article.model';
 import { MatSnackBar } from '@angular/material';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Injectable()
 export class ShoppingCartService {
@@ -97,9 +98,9 @@ export class ShoppingCartService {
         this.synchronizeAll();
     }
 
-    checkOut(ticketCreation: TicketCreation): void {
+    checkOut(ticketCreation: TicketCreation): Observable<any> {
         ticketCreation.shoppingCart = this.shoppingCart;
-        this.ticketService.create(ticketCreation).subscribe(
+        return this.ticketService.create(ticketCreation).map(
             () => this.reset()
         );
     }
@@ -112,10 +113,15 @@ export class ShoppingCartService {
         );
     }
 
-    createInvoice(ticketCreation: TicketCreation) {
-        ticketCreation.shoppingCart = this.shoppingCart;
-        return this.invoiceService.create(ticketCreation).map(
-            () => this.reset()
+    createInvoice(mobile: number): Observable<any> {
+        return this.ticketService.findLastByMobile(mobile).map(
+            ticket => {
+                this.invoiceService.create({ mobile: mobile, ticketId: ticket.id }).subscribe(
+                    () => {
+                        return null;
+                    }
+                );
+            }
         );
     }
 

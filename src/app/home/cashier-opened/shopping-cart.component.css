@@ -5,7 +5,7 @@
     min-width: 300px;
   }
   
-  mat-cell {
+  .mat-cell {
     overflow: visible;
   }
   
