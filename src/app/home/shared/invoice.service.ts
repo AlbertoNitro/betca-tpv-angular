@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import { TicketCreation } from './ticket-creation.model';
 import { Invoice } from './invoice.model';
+import { InvoiceCreation } from './invoice-creation.model';
 
 @Injectable()
 export class InvoiceService {
@@ -14,8 +15,8 @@ export class InvoiceService {
     constructor(private httpService: HttpService) {
     }
 
-    create(ticketCreation: TicketCreation): Observable<any> {
-        return this.httpService.authToken().pdf().post(InvoiceService.END_POINT, ticketCreation);
+    create(invoiceCreation: InvoiceCreation): Observable<any> {
+        return this.httpService.authToken().pdf().post(InvoiceService.END_POINT, invoiceCreation);
     }
 
     readOne(id: String): Observable<Invoice> {

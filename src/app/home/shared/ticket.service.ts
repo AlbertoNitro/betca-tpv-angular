@@ -12,6 +12,7 @@ export class TicketService {
   static END_POINT = '/tickets';
   static SEARCH_DATE = '/search/date';
   static SEARCH_MOBILE = '/search/mobile';
+  static SEARCH_MOBILE_LAST = '/search/mobile/last';
 
   static SEARCH_BY_ID_ARTICLE = '/searchByIdAndDates?';
 
@@ -36,6 +37,11 @@ export class TicketService {
   findByMobile(mobile: string): Observable<Ticket[]> {
     return this.httpService.authToken().param('mobile', mobile)
       .get(TicketService.END_POINT + TicketService.SEARCH_MOBILE);
+  }
+
+  findLastByMobile(mobile: number): Observable<any> {
+    return this.httpService.authToken().param('mobile', '' + mobile)
+      .get(TicketService.END_POINT + TicketService.SEARCH_MOBILE_LAST);
   }
 
   readToday(): Observable<Ticket[]> {
@@ -64,4 +70,7 @@ export class TicketService {
       .param('dateFinish', year + '-12-31 23:59:59')
       .get(TicketService.END_POINT + TicketService.SEARCH_BY_ID_ARTICLE);
   }
+
+
+
 }
