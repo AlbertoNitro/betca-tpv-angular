@@ -5,15 +5,7 @@
   <span class="mat-raised-button" *ngIf="invoice">Invoice: {{invoiceId()}} </span>
 </h2>
 <mat-dialog-content>
-  <mat-form-field>
-    <input matInput type="number" placeholder="Mobile" [(ngModel)]="mobile" [disabled]="mobileSynchronized" />
-    <button mat-button matSuffix mat-icon-button (click)="findMobile()" *ngIf="mobile && !mobileSynchronized">
-      <mat-icon *ngIf="!mobileSynchronized" color="warn">search</mat-icon>
-    </button>
-    <button mat-button matSuffix mat-icon-button *ngIf="mobileSynchronized" (click)="deleteMobile()">
-      <mat-icon color="warn">close</mat-icon>
-    </button>
-  </mat-form-field>
+  <app-user-quick-crud [mobile]="mobile()" (change)="updateUser($event)"></app-user-quick-crud>
   <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
     <ng-container matColumnDef="ind">
       <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
