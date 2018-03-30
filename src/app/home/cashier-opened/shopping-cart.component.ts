@@ -5,11 +5,8 @@ import { MatTableDataSource, MatDialog } from '@angular/material';
 
 import { Shopping } from '../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
-import { TicketService } from '../shared/ticket.service';
 import { CheckOutDialogComponent } from './check-out-dialog.component';
 import { ArticleQuickCreationDialogComponent } from './article-quick-creation-dialog.component';
-import { Article } from '../shared/article.model';
-
 
 @Component({
     selector: 'app-shopping-cart',

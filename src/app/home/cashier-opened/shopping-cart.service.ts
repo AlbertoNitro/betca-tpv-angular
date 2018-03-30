@@ -11,7 +11,6 @@ import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
 import { Article } from '../shared/article.model';
-import { MatSnackBar } from '@angular/material';
 import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Injectable()
@@ -28,7 +27,7 @@ export class ShoppingCartService {
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, public snackBar: MatSnackBar, private invoiceService: InvoiceService) {
+        private budgetService: BudgetService, private invoiceService: InvoiceService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }

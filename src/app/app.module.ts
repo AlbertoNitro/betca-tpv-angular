@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, forwardRef } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import {
@@ -45,6 +45,7 @@ import { ArticlesFamilyComponent } from './home/cashier-opened/articles-family/a
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 import { InvoiceService } from './home/shared/invoice.service';
 import { ProviderService } from './home/shared/provider.service';
+import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
 
 @NgModule({
   imports: [

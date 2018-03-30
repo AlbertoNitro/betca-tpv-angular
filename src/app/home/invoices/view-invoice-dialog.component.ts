@@ -15,5 +15,4 @@ export class ViewInvoiceDialogComponent {
     constructor(@Inject(MAT_DIALOG_DATA) data: any) {
         this.invoice = data.invoice;
     }
-
 }
