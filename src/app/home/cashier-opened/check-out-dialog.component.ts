@@ -95,7 +95,7 @@ export class CheckOutDialogComponent {
     }
 
     invalidCheckOut(): boolean {
-        return this.returnedCash() < 0 || !this.user;
+        return this.returnedCash() < 0;
     }
 
     checkOut() {

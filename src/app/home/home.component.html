@@ -30,17 +30,13 @@
     <mat-icon>home</mat-icon>
     <span>Home</span>
   </button>
-  <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
+  <button mat-menu-item [matMenuTriggerFor]="cashiers">
     <mat-icon>account_balance</mat-icon>
-    <span>Close Cashier</span>
+    <span>Cashiers</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="receipts">
     <mat-icon>receipt</mat-icon>
     <span>Receipts</span>
-  </button>
-  <button mat-menu-item (click)="cashMovement()">
-    <mat-icon>account_balance_wallet</mat-icon>
-    <span>Cash Movements</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="products">
     <mat-icon>line_style</mat-icon>
@@ -75,6 +71,16 @@
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
   <button mat-menu-item (click)="deleteDb()">Delete Database</button>
   <button mat-menu-item (click)="roleManagement()">Role Management</button>
+</mat-menu>
+<mat-menu #cashiers="matMenu">
+  <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
+    <mat-icon>lock_outline</mat-icon>
+    <span>Close Cashier</span>
+  </button>
+  <button *ngIf="!cashierClosed" mat-menu-item (click)="cashMovement()">
+    <mat-icon>account_balance_wallet</mat-icon>
+    <span>Cashier Movement</span>
+  </button>
 </mat-menu>
 <mat-menu #receipts="matMenu">
   <button mat-menu-item (click)="tickets()">
