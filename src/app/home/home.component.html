@@ -31,40 +31,24 @@
     <span>Home</span>
   </button>
   <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
-    <mat-icon>work</mat-icon>
+    <mat-icon>account_balance</mat-icon>
     <span>Close Cashier</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="offers">
-    <mat-icon>thumb_up</mat-icon>
-    <span>Offers</span>
+  <button mat-menu-item [matMenuTriggerFor]="receipts">
+    <mat-icon>receipt</mat-icon>
+    <span>Receipts</span>
   </button>
   <button mat-menu-item (click)="cashMovement()">
-    <mat-icon>euro_symbol</mat-icon>
+    <mat-icon>account_balance_wallet</mat-icon>
     <span>Cash Movements</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="products">
+    <mat-icon>line_style</mat-icon>
+    <span>Products</span>
   </button>
   <button mat-menu-item (click)="customers()">
     <mat-icon>account_circle</mat-icon>
     <span>Customers</span>
-  </button>
-  <button mat-menu-item (click)="providers()">
-    <mat-icon>local_shipping</mat-icon>
-    <span>Providers</span>
-  </button>
-  <button mat-menu-item (click)="tickets()">
-    <mat-icon>receipt</mat-icon>
-    <span>Tickets</span>
-  </button>
-  <button mat-menu-item (click)="invoices()">
-    <mat-icon>receipt</mat-icon>
-    <span>Invoices</span>
-  </button>
-  <button mat-menu-item (click)="article()">
-    <mat-icon>view_list</mat-icon>
-    <span>Articles</span>
-  </button>
-  <button mat-menu-item (click)="vouchers()">
-    <mat-icon>local_offer</mat-icon>
-    <span>Vouchers</span>
   </button>
   <button mat-menu-item (click)="statistics()">
     <mat-icon>assessment</mat-icon>
@@ -78,27 +62,55 @@
     <mat-icon>assessment</mat-icon>
     <span>Statistics2</span>
   </button>
-  <button mat-menu-item (click)="stockAlerts()">
-    <mat-icon>notifications</mat-icon>
-    <span>Stock alerts</span>
-  </button>
   <button mat-menu-item (click)="schedule()">
     <mat-icon>schedule</mat-icon>
     <span>Schedule</span>
   </button>
-  <button mat-menu-item (click)="budgets()">
-    <mat-icon>description</mat-icon>
-    <span>Budgets</span>
-  </button>
-  <button mat-menu-item (click)="Orders()">
-    <mat-icon>local_shipping</mat-icon>
-    <span>Orders</span>
+  <button mat-menu-item [matMenuTriggerFor]="offers">
+    <mat-icon>thumb_up</mat-icon>
+    <span>Offers</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
   <button mat-menu-item (click)="deleteDb()">Delete Database</button>
   <button mat-menu-item (click)="roleManagement()">Role Management</button>
+</mat-menu>
+<mat-menu #receipts="matMenu">
+  <button mat-menu-item (click)="tickets()">
+    <mat-icon>euro_symbol</mat-icon>
+    <span>Tickets</span>
+  </button>
+  <button mat-menu-item (click)="invoices()">
+    <mat-icon>receipt</mat-icon>
+    <span>Invoices</span>
+  </button>
+  <button mat-menu-item (click)="budgets()">
+    <mat-icon>description</mat-icon>
+    <span>Budgets</span>
+  </button>
+  <button mat-menu-item (click)="vouchers()">
+    <mat-icon>local_offer</mat-icon>
+    <span>Vouchers</span>
+  </button>
+</mat-menu>
+<mat-menu #products="matMenu">
+  <button mat-menu-item (click)="article()">
+    <mat-icon>view_list</mat-icon>
+    <span>Articles</span>
+  </button>
+  <button mat-menu-item (click)="providers()">
+    <mat-icon>local_shipping</mat-icon>
+    <span>Providers</span>
+  </button>
+  <button mat-menu-item (click)="Orders()">
+    <mat-icon>storage</mat-icon>
+    <span>Orders</span>
+  </button>
+  <button mat-menu-item (click)="stockAlerts()">
+    <mat-icon>notifications</mat-icon>
+    <span>Stock alerts</span>
+  </button>
 </mat-menu>
 <mat-menu #offers="matMenu">
   <button mat-menu-item (click)="searchOffer()">Search Offer</button>
