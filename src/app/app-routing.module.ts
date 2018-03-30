@@ -42,6 +42,7 @@ import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.
 import { InvoiceCreationDialogComponent } from './home/invoices/invoice-creation-dialog.component';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
 import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-creation-edit-dialog.component';
+import {ScheduleCreationEditDialogComponent} from "./home/schedule/schedule-creation-edit-dialog.component";
 
 
 const appRoutes: Routes = [
@@ -120,6 +121,7 @@ export class AppRoutingModule {
     ViewInvoiceDialogComponent,
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,
-    VoucherConsumeDialogComponent
+    VoucherConsumeDialogComponent,
+    ScheduleCreationEditDialogComponent
   ];
 }
