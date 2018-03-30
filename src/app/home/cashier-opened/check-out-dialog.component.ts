@@ -1,11 +1,9 @@
 import { Component, Input, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
-import { CashierClosure } from '../shared/cashier-closure.model';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { User } from '../shared/user.model';
 import { ReservationCreation } from '../shared/reservation-creation.model';
-import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
 import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';

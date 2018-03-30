@@ -68,6 +68,7 @@ export class EditTicketDialogComponent {
       return null;
     }
   }
+
   updateUser(user: User) {
     this.ticket.user = user;
   }
