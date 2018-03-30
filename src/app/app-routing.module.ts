@@ -20,8 +20,6 @@ import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/artic
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
-import { UserQuickCreationEditDialogComponent } from './home/cashier-opened/user-quick-creation-edit-dialog.component';
-import { UserQuickUpdateInvoiceDialogComponent } from './home/cashier-opened/user-quick-update-invoice-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
@@ -42,6 +40,8 @@ import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.
 import { InvoicesComponent } from './home/invoices/invoices.component';
 import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.component';
 import { InvoiceCreationDialogComponent } from './home/invoices/invoice-creation-dialog.component';
+import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
+import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-creation-edit-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -94,6 +94,7 @@ export class AppRoutingModule {
     WelcomeComponent,
     Statistics2Component,
     ScheduleComponent,
+    UserQuickCrudComponent,
     OrdersComponent,
     OffersComponent,
     RoleManagementComponent
@@ -116,7 +117,6 @@ export class AppRoutingModule {
     UserChangingPasswordDialogComponent,
     RoleManagementDialogComponent,
     UserQuickCreationEditDialogComponent,
-    UserQuickUpdateInvoiceDialogComponent,
     ViewInvoiceDialogComponent,
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,
