@@ -46,6 +46,7 @@ import { HistoricChartComponent } from './home/statistics2/historicChart.compone
 import { InvoiceService } from './home/shared/invoice.service';
 import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
+import {SchedulerService} from "./home/shared/scheduler.service";
 
 @NgModule({
   imports: [
@@ -119,7 +120,8 @@ import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component'
     UserService,
     VoucherService,
     orderService,
-    OfferService
+    OfferService,
+    SchedulerService
   ]
 })
 export class AppModule {
