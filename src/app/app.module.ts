@@ -29,7 +29,7 @@ import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
-import { CashMovementService } from './home/cash-movements/cash-movement.service';
+import { CashierMovementService } from './home/cashier-movements/cashier-movement.service';
 import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
@@ -112,7 +112,7 @@ import {SchedulerService} from "./home/shared/scheduler.service";
     ArticleFamilyService,
     BudgetService,
     CashierService,
-    CashMovementService,
+    CashierMovementService,
     InvoiceService,
     ProviderService,
     ShoppingCartService,

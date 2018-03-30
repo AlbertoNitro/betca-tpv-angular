@@ -12,7 +12,7 @@ import { CashierOpenedComponent } from './cashier-opened/cashier-opened.componen
 import { AdminsService } from './admin/admins.service';
 import { BudgetsComponent } from './budgets/budgets.component';
 import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './cash-movements/cash-movement-dialog.component';
+import { CashierMovementDialogComponent } from './cashier-movements/cashier-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -118,7 +118,7 @@ export class HomeComponent implements OnDestroy, OnInit {
   }
 
   cashMovement() {
-    this.dialog.open(CashMovementDialogComponent);
+    this.dialog.open(CashierMovementDialogComponent);
   }
 
   customers() {

@@ -7,6 +7,7 @@ import { CashierLast } from './cashier-last.model';
 import { CashierClosure } from './cashier-closure.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
+import { CashierMovement } from '../cashier-movements/cashier-movement.model';
 
 @Injectable()
 export class CashierService {
@@ -14,6 +15,8 @@ export class CashierService {
     static LAST = '/last';
     static SEARCH = '/search?';
     static TOTALS = '/totals';
+    static MOVEMENTS = '/movements';
+
 
     private cashierLast: Subject<CashierLast> = new Subject();
 
@@ -45,12 +48,18 @@ export class CashierService {
 
     readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
         return this.httpService.authToken()
-        .param('dateStart', dateStart.toISOString())
-        .param('dateFinish', dateFinish.toISOString())
-        .get(CashierService.END_POINT +  CashierService.SEARCH);
+            .param('dateStart', dateStart.toISOString())
+            .param('dateFinish', dateFinish.toISOString())
+            .get(CashierService.END_POINT + CashierService.SEARCH);
     }
 
     readTotalsObservable(): Observable<CashierClosure> {
         return this.httpService.authToken().get(CashierService.END_POINT + CashierService.TOTALS);
+    }
+
+    public create(cashMovement: CashierMovement): Observable<any> {
+        cashMovement.authorMobile = this.httpService.getMobile();
+        return this.httpService.authToken().successful().post(
+            CashierService.END_POINT + CashierService.LAST + CashierService.MOVEMENTS, cashMovement);
     }
 }

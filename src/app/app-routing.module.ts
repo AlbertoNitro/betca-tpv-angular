@@ -14,7 +14,7 @@ import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './home/cash-movements/cash-movement-dialog.component';
+import { CashierMovementDialogComponent } from './home/cashier-movements/cashier-movement-dialog.component';
 import { CheckOutDialogComponent } from './home/cashier-opened/check-out-dialog.component';
 import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/article-quick-creation-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
@@ -54,7 +54,7 @@ const appRoutes: Routes = [
       { path: BudgetsComponent.URL, component: BudgetsComponent },
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
-      { path: CashMovementDialogComponent.URL, component: CashMovementDialogComponent },
+      { path: CashierMovementDialogComponent.URL, component: CashierMovementDialogComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
@@ -82,7 +82,7 @@ export class AppRoutingModule {
     BudgetsComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
-    CashMovementDialogComponent,
+    CashierMovementDialogComponent,
     HomeComponent,
     ProvidersComponent,
     ShoppingCartComponent,
@@ -104,7 +104,7 @@ export class AppRoutingModule {
   static COMPONENT_FACTORY = [
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
-    CashMovementDialogComponent,
+    CashierMovementDialogComponent,
     OfferSearchDialogComponent,
     OfferCreateEditDialogComponent,
     DbSeedDialogComponent,
