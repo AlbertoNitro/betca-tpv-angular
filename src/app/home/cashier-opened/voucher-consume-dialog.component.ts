@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Voucher } from '../shared/voucher.model';
+
 import { VoucherService } from '../shared/voucher.service';
 
 @Component({

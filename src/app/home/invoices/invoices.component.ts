@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Invoice } from '../shared/invoice.model';
 import { MatDialog } from '@angular/material';
+
+import { Invoice } from '../shared/invoice.model';
 import { InvoiceService } from '../shared/invoice.service';
 import { ViewInvoiceDialogComponent } from './view-invoice-dialog.component';
 import { InvoiceCreationDialogComponent } from './invoice-creation-dialog.component';
