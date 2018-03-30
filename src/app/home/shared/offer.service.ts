@@ -12,7 +12,11 @@ export class OfferService {
     }
 
     readObservable(code : string): Observable<Offer> {
-        return this.httpService.authToken().get(OfferService.END_POINT + '/' + code);
+        return this.httpService.authToken().get(OfferService.END_POINT + '/' + code).map(
+            data => {
+                return data;
+            }
+        );
     }
 
     createObservable(offer: Offer): Observable<boolean> {
