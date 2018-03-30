@@ -13,7 +13,7 @@ import {ScheduleCreationEditDialogComponent} from "../schedule/schedule-creation
 export class ScheduleComponent implements OnInit {
   static URL = 'schedule';
   title = 'Scheduler Events';
-  columns = ['dateTime', 'Title'];
+  columns = ['dateTime', 'Title', 'Description'];
   data: Scheduler[];
 
   constructor(public dialog: MatDialog, private schedulerService: SchedulerService) {
