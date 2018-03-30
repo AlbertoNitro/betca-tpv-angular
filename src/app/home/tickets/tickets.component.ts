@@ -4,6 +4,7 @@ import { MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar } fro
 import { Ticket } from '../shared/ticket.model';
 import { TicketService } from '../shared/ticket.service';
 import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
+import { InvoiceService } from '../shared/invoice.service';
 
 @Component({
   selector: 'app-tickets',
@@ -20,12 +21,18 @@ export class TicketsComponent {
   initialDateInput: Date = undefined;
   finalDateInput: Date = new Date();
 
-  constructor(private dialog: MatDialog, private ticketService: TicketService) {
+  constructor(private dialog: MatDialog, private ticketService: TicketService, private invoiceService: InvoiceService) {
   }
 
   findTicket(ticketId: string) {
     this.ticketService.readOne(ticketId).subscribe(
       (ticket: Ticket) => this.data = new Array(1).fill(ticket)
+    );
+  }
+
+  findByMobile(mobile: string) {
+    this.ticketService.findByMobile(mobile).subscribe(
+      (tickets: Ticket[]) => this.data = tickets
     );
   }
 
@@ -41,19 +48,23 @@ export class TicketsComponent {
     );
   }
 
-  findByMobile(mobile: string) {
-    this.ticketService.findByMobile(mobile).subscribe(
-      (tickets: Ticket[]) => this.data = tickets
-    );
-  }
-
   edit(ticketId: Ticket) {
-    this.ticketService.readOne(ticketId.id).subscribe(
-      ticket => {
-        this.dialog.open(EditTicketDialogComponent, {
-          width: '800px',
-          data: { ticket: ticket }
-        });
+    this.invoiceService.findByTicket(ticketId.id).subscribe(
+      invoice => {
+        if (invoice.id) {
+          this.dialog.open(EditTicketDialogComponent, {
+            width: '900px',
+            data: { ticket: invoice.ticket, invoice: invoice }
+          });
+        } else {
+          this.ticketService.readOne(ticketId.id).subscribe(
+            ticket =>
+              this.dialog.open(EditTicketDialogComponent, {
+                width: '900px',
+                data: { ticket: ticket, invoice: null }
+              })
+          );
+        }
       }
     );
   }

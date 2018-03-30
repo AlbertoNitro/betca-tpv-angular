@@ -1,9 +1,7 @@
-import { Shopping } from './shopping.model';
+import { Ticket } from './ticket.model';
+import { User } from './user.model';
 
 export interface InvoiceCreation {
-    userMobile: number;
-    cash: number;
-    card: number;
-    voucher: number;
-    shoppingCart: Shopping[];
+    mobile: number;
+    ticketId: string;
 }

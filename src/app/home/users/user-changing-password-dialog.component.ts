@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../shared/user.model';
-import { MatDialogRef } from '@angular/material';
 import { UserService } from '../shared/user.service';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-user-changing-password-dialog',
   templateUrl: './user-changing-password-dialog.component.html',
   styleUrls: ['./user-changing-password-dialog.component.css']
 })
 export class UserChangingPasswordDialogComponent implements OnInit {
   edit: boolean;
   user: User;
-  newPassword: string;
-  repeatPassword: string;
+  password: string;
+  confirmPassword: string;
+  passwordError: string;
 
   constructor(public dialogRef: MatDialogRef<UserChangingPasswordDialogComponent>,
     private userService: UserService) {
@@ -24,7 +25,12 @@ export class UserChangingPasswordDialogComponent implements OnInit {
     }
   }
 
+  isPasswordInvalid(): boolean {
+    return ((this.password !== this.confirmPassword));
+  }
+
   save(): void {
+
     this.userService.putObservable(this.user).subscribe(
       data => this.dialogRef.close()
     );

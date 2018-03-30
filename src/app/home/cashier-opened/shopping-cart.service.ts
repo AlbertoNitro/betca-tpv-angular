@@ -7,12 +7,11 @@ import { Shopping } from '../shared/shopping.model';
 import { ArticleService } from '../shared/article.service';
 import { BudgetService } from '../shared/budget.service';
 import { InvoiceService } from '../shared/invoice.service';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { TicketService } from '../shared/ticket.service';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { Budget } from '../shared/budget.model';
 import { Article } from '../shared/article.model';
-import { MatSnackBar } from '@angular/material';
+import { InvoiceCreation } from '../shared/invoice-creation.model';
 
 @Injectable()
 export class ShoppingCartService {
@@ -28,7 +27,7 @@ export class ShoppingCartService {
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, public snackBar: MatSnackBar, private invoiceService: InvoiceService) {
+        private budgetService: BudgetService, private invoiceService: InvoiceService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -98,9 +97,9 @@ export class ShoppingCartService {
         this.synchronizeAll();
     }
 
-    checkOut(ticketCreation: TicketCreation): void {
+    checkOut(ticketCreation: TicketCreation): Observable<any> {
         ticketCreation.shoppingCart = this.shoppingCart;
-        this.ticketService.create(ticketCreation).subscribe(
+        return this.ticketService.create(ticketCreation).map(
             () => this.reset()
         );
     }
@@ -113,10 +112,15 @@ export class ShoppingCartService {
         );
     }
 
-    createInvoice(ticketCreation: TicketCreation) {
-        ticketCreation.shoppingCart = this.shoppingCart;
-        return this.invoiceService.create(ticketCreation).map(
-            () => this.reset()
+    createInvoice(mobile: number): Observable<any> {
+        return this.ticketService.findLastByMobile(mobile).map(
+            ticket => {
+                this.invoiceService.create({ mobile: mobile, ticketId: ticket.id }).subscribe(
+                    () => {
+                        return null;
+                    }
+                );
+            }
         );
     }
 

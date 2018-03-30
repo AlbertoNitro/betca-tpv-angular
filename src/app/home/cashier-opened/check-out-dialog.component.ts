@@ -1,21 +1,20 @@
 import { Component, Input, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
-import { CashierClosure } from '../shared/cashier-closure.model';
 import { TicketCreation } from '../shared/ticket-creation.model';
 import { User } from '../shared/user.model';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
 import { ReservationCreation } from '../shared/reservation-creation.model';
-import { CashierService } from '../shared/cashier.service';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../shared/user.service';
-import { UserQuickCreationEditDialogComponent } from './user-quick-creation-edit-dialog.component';
-import { UserQuickUpdateInvoiceDialogComponent } from './user-quick-update-invoice-dialog.component';
 import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
 
 @Component({
     templateUrl: 'check-out-dialog.component.html',
-    styles: [`.mat-dialog-content {
+    styles: [`
+    .mat-cell {
+        overflow: visible;
+      }
+      .mat-dialog-content {
         display: flex;
         flex-direction: column;
     }`]
@@ -24,6 +23,8 @@ export class CheckOutDialogComponent {
 
     total: number;
     user: User;
+
+    requestedInvoice = false;
 
     ticketCreation: TicketCreation;
 
@@ -36,58 +37,13 @@ export class CheckOutDialogComponent {
         this.ticketCreation = data.ticketCreation;
     }
 
-    existUser(): boolean {
+    updateUser(user: User) {
+        this.user = user;
         if (this.user) {
-            return true;
+            this.ticketCreation.userMobile = user.mobile;
         } else {
-            return false;
+            this.ticketCreation.userMobile = null;
         }
-    }
-
-    isMobileSynchronized(): boolean {
-        return !this.ticketCreation.userMobile || this.existUser();
-    }
-
-    private createUser() {
-        this.dialog.open(UserQuickCreationEditDialogComponent, {
-            data: {
-                user: { mobile: this.ticketCreation.userMobile, username: '' },
-                type: 'create'
-            }
-        }).afterClosed().subscribe(
-            result => {
-                if (result) {
-                    this.findMobile();
-                }
-            }
-        );
-    }
-
-    findMobile() {
-        this.userService.read(this.ticketCreation.userMobile).subscribe(
-            user => this.user = user,
-            error => this.createUser()
-        );
-    }
-
-    deleteMobile() {
-        this.ticketCreation.userMobile = undefined;
-        this.user = null;
-    }
-
-    editMobile() {
-        this.dialog.open(UserQuickCreationEditDialogComponent, {
-            data: {
-                user: this.user,
-                type: 'edit'
-            }
-        }).afterClosed().subscribe(
-            result => {
-                if (result) {
-                    this.findMobile();
-                }
-            }
-        );
     }
 
     private formatNumber(value: number): number {
@@ -139,23 +95,26 @@ export class CheckOutDialogComponent {
     }
 
     invalidCheckOut(): boolean {
-        return this.returnedCash() < 0 || !this.isMobileSynchronized();
+        return this.returnedCash() < 0;
     }
 
     checkOut() {
         this.formatValues();
-        this.shoppingCartService.checkOut(this.ticketCreation);
+        this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
+            () => {
+                if (this.requestedInvoice) {
+                    this.shoppingCartService.createInvoice(this.ticketCreation.userMobile).subscribe(
+                        () => this.dialog.closeAll()
+                    );
+                } else {
+                    this.dialog.closeAll();
+                }
+            }
+        );
     }
 
     invalidInvoice(): boolean {
-        return !this.existUser() || this.returnedCash() < 0 || !this.user.dni || !this.user.address;
-    }
-
-    createInvoice() {
-        this.formatValues();
-        this.shoppingCartService.createInvoice(this.ticketCreation).subscribe(
-            () => this.dialog.closeAll()
-        );
+        return !this.user || !this.user.dni || !this.user.address;
     }
 
     invalidReservation(): boolean {
@@ -168,6 +127,7 @@ export class CheckOutDialogComponent {
         // this.dialog.closeAll();
     }
 
+    // LO DEBES CHEQUEAR DE UNA MANERA PARECIDA A COMO SE CHEQUEA ---INVOICE---!!!!!!!!!!!!
     checkEmail(): boolean {
         this.userService.read(this.ticketCreation.userMobile).subscribe(
             data => {

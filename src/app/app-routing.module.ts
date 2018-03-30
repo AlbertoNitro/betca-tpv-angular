@@ -14,14 +14,12 @@ import { ProvidersComponent } from './home/providers/providers.component';
 import { ProviderCreationEditDialogComponent } from './home/providers/provider-creation-edit-dialog.component';
 import { ShoppingCartComponent } from './home/cashier-opened/shopping-cart.component';
 import { CashierCloseDialogComponent } from './home/cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './home/cash-movements/cash-movement-dialog.component';
+import { CashierMovementDialogComponent } from './home/cashier-movements/cashier-movement-dialog.component';
 import { CheckOutDialogComponent } from './home/cashier-opened/check-out-dialog.component';
 import { ArticleQuickCreationDialogComponent } from './home/cashier-opened/article-quick-creation-dialog.component';
 import { StatisticsComponent } from './home/statistics/statistics.component';
 import { StockAlertComponent } from './home/stock-alert/stock-alert.component';
 import { TicketsComponent } from './home/tickets/tickets.component';
-import { UserQuickCreationEditDialogComponent } from './home/cashier-opened/user-quick-creation-edit-dialog.component';
-import { UserQuickUpdateInvoiceDialogComponent } from './home/cashier-opened/user-quick-update-invoice-dialog.component';
 import { UsersComponent } from './home/users/users.component';
 import { UserCreationEditDialogComponent } from './home/users/user-creation-edit-dialog.component';
 import { VouchersComponent } from './home/vouchers/vouchers.component';
@@ -39,6 +37,12 @@ import { RoleManagementComponent } from './home/role-management/role-management.
 import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
 import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
+import { InvoicesComponent } from './home/invoices/invoices.component';
+import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.component';
+import { InvoiceCreationDialogComponent } from './home/invoices/invoice-creation-dialog.component';
+import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
+import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-creation-edit-dialog.component';
+import {ScheduleCreationEditDialogComponent} from "./home/schedule/schedule-creation-edit-dialog.component";
 
 
 const appRoutes: Routes = [
@@ -50,11 +54,12 @@ const appRoutes: Routes = [
       { path: BudgetsComponent.URL, component: BudgetsComponent },
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
-      { path: CashMovementDialogComponent.URL, component: CashMovementDialogComponent },
+      { path: CashierMovementDialogComponent.URL, component: CashierMovementDialogComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
+      { path: InvoicesComponent.URL, component: InvoicesComponent },
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: RoleManagementComponent.URL, component: RoleManagementComponent },
@@ -77,18 +82,20 @@ export class AppRoutingModule {
     BudgetsComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
-    CashMovementDialogComponent,
+    CashierMovementDialogComponent,
     HomeComponent,
     ProvidersComponent,
     ShoppingCartComponent,
     StatisticsComponent,
     StockAlertComponent,
     TicketsComponent,
+    InvoicesComponent,
     UsersComponent,
     VouchersComponent,
     WelcomeComponent,
     Statistics2Component,
     ScheduleComponent,
+    UserQuickCrudComponent,
     OrdersComponent,
     OffersComponent,
     RoleManagementComponent
@@ -97,22 +104,24 @@ export class AppRoutingModule {
   static COMPONENT_FACTORY = [
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
-    CashMovementDialogComponent,
+    CashierMovementDialogComponent,
     OfferSearchDialogComponent,
     OfferCreateEditDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     ProviderCreationEditDialogComponent,
     CheckOutDialogComponent,
+    InvoiceCreationDialogComponent,
     ArticleCreationEditDialogComponent,
     ArticleQuickCreationDialogComponent,
     UserCreationEditDialogComponent,
     UserChangingPasswordDialogComponent,
     RoleManagementDialogComponent,
     UserQuickCreationEditDialogComponent,
-    UserQuickUpdateInvoiceDialogComponent,
+    ViewInvoiceDialogComponent,
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,
-    VoucherConsumeDialogComponent
+    VoucherConsumeDialogComponent,
+    ScheduleCreationEditDialogComponent
   ];
 }

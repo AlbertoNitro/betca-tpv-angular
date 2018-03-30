@@ -24,6 +24,8 @@ export class HttpService {
 
     private token: Token;
 
+    private mobile: number;
+
     private params: URLSearchParams;
 
     private headers: Headers;
@@ -56,15 +58,22 @@ export class HttpService {
             return undefined;
         }
     }
+    getMobile(): number {
+        return this.mobile;
+    }
 
     logout(): void {
         this.token = undefined;
+        this.mobile = undefined;
         this.router.navigate(['']);
     }
 
     login(mobile: number, password: string, endPoint: string): Observable<any> {
         return this.authBasic(mobile, password).post(endPoint).map(
-            token => this.token = token,
+            token => {
+                this.token = token;
+                this.mobile = mobile;
+            },
             error => this.logout()
         );
     }
