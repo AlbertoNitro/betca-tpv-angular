@@ -1,7 +1,7 @@
 <h2 mat-dialog-title >Search Offer</h2>
 <mat-dialog-content>  
 	<mat-form-field class="date">
-         <input matInput readonly="true" [matDatepicker]="creationDate" placeholder="Creation date" required [(ngModel)]="offer.creationDate">
+         <input matInput disabled [matDatepicker]="creationDate" placeholder="Creation date" required [(ngModel)]="offer.creationDate">
          <mat-datepicker-toggle matSuffix [for]="expiration"></mat-datepicker-toggle>
          <mat-datepicker #creationDate></mat-datepicker>
     </mat-form-field> 
@@ -10,7 +10,7 @@
      	<mat-error>Field required</mat-error>
     </mat-form-field>  
 	<mat-form-field class="date">
-        <input matInput readonly="true" [matDatepicker]="expiration" placeholder="Expiration date" required [(ngModel)]="offer.expiration">
+        <input matInput disabled [matDatepicker]="expiration" placeholder="Expiration date" required [(ngModel)]="offer.expiration">
         <mat-datepicker-toggle matSuffix [for]="expiration"></mat-datepicker-toggle>
         <mat-datepicker #expiration></mat-datepicker>
     </mat-form-field> 
