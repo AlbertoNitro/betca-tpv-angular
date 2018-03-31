@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CashierMovement } from './cashier-movement.model';
 import { CashierMovementService } from './cashier-movement.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { CashierService } from '../shared/cashier.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class CashierMovementDialogComponent {
     cashierMovement: CashierMovement = { value: undefined, comment: '', authorMobile: 0 };
     selectedOperation = '';
 
-    constructor(private dialog: MatDialog, private cashierService: CashierService) {
+    constructor(private dialogRef: MatDialogRef<CashierMovementDialogComponent>, private cashierService: CashierService) {
     }
 
     createMovement() {
@@ -27,7 +27,7 @@ export class CashierMovementDialogComponent {
             this.cashierMovement.value *= -1;
         }
         this.cashierService.create(this.cashierMovement).subscribe(
-            () => this.dialog.closeAll()
+            () => this.dialogRef.close()
         );
     }
 

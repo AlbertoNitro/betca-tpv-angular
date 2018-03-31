@@ -4,4 +4,5 @@ export interface CashierClosure {
     comment?: string;
     totalCard?: number;
     totalCash?: number;
+    totalVoucher?: number;
 }

@@ -30,6 +30,7 @@ import { UserChangingPasswordDialogComponent } from './users/user-changing-passw
 import { InvoicesComponent } from './invoices/invoices.component';
 import { User } from './shared/user.model';
 import { UserService } from './shared/user.service';
+import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -119,6 +120,10 @@ export class HomeComponent implements OnDestroy, OnInit {
 
   cashMovement() {
     this.dialog.open(CashierMovementDialogComponent);
+  }
+
+  cashierClosure() {
+    this.router.navigate([HomeComponent.URL, CashierClosuresComponent.URL]);
   }
 
   customers() {
