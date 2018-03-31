@@ -1,10 +1,15 @@
-<h2 id="page-title">Cashier Closed</h2>
 <div fxLayoutAlign="space-around center">
-	<mat-card fxLayout="column" fxLayoutAlign="space-around ">
-	  	<p>
-	  		<span *ngIf="cashierLastClosedDate"> The cashier was closed at {{cashierLastClosedDate | date: 'medium'}}</span>
-	  		<span *ngIf="!cashierLastClosedDate"> Doesn’t Cashier</span>
-	  	</p>
-		<button mat-raised-button color="primary" (click)="open()">Open cashier</button>
-	</mat-card> 
+	<mat-card>
+		<mat-card-title>
+			<mat-icon>account_balance</mat-icon>
+			<mat-icon>lock_outline</mat-icon> Cashier Closed
+		</mat-card-title>
+		<mat-card-content>
+			<h3> The cashier was closed: {{cashierLast.closureDate | date: 'medium'}} </h3>
+			<h3> The initial cash is: {{cashierLast.finalCash}} €</h3>
+			<button mat-raised-button color="accent" (click)="open()">
+				<mat-icon>lock_open</mat-icon> Open cashier
+			</button>
+		</mat-card-content>
+	</mat-card>
 </div>

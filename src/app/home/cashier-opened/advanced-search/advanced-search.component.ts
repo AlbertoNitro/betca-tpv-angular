@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Article } from '../../shared/article.model';
 import { ArticleService } from '../../shared/article.service';
-import { ShoppingCartService } from '../shopping-cart.service';
+import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 import { Provider } from '../../shared/provider.model';
 import { ProviderService } from '../../shared/provider.service';
 @Component({

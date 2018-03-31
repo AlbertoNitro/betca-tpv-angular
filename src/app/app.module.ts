@@ -29,8 +29,8 @@ import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
 import { CashierService } from './home/shared/cashier.service';
-import { CashierMovementService } from './home/cashier-movements/cashier-movement.service';
-import { ShoppingCartService } from './home/cashier-opened/shopping-cart.service';
+import { CashierMovementService } from './home/cashier-opened/cashier-opened/cashier-movement.service';
+import { ShoppingCartService } from './home/cashier-opened/shopping-cart/shopping-cart.service';
 import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
@@ -46,7 +46,7 @@ import { HistoricChartComponent } from './home/statistics2/historicChart.compone
 import { InvoiceService } from './home/shared/invoice.service';
 import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
-import {SchedulerService} from "./home/shared/scheduler.service";
+import {SchedulerService} from './home/shared/scheduler.service';
 
 @NgModule({
   imports: [

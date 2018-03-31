@@ -7,7 +7,7 @@ import { CashierLast } from './cashier-last.model';
 import { CashierClosure } from './cashier-closure.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
-import { CashierMovement } from '../cashier-movements/cashier-movement.model';
+import { CashierMovement } from './cashier-movement.model';
 import { CashierClosureClosed } from '../cashier-closures/cashier-closure-closed.model';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class CashierService {
         );
     }
 
-    lastObservable(): Observable<CashierLast> {
+    last(): Observable<CashierLast> {
         this.synchronizeLast();
         return this.cashierLast.asObservable();
     }

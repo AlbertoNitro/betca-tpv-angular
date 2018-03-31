@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { MatTableDataSource, MatDialog } from '@angular/material';
 
-import { Shopping } from '../shared/shopping.model';
+import { Shopping } from '../../shared/shopping.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { CheckOutDialogComponent } from './check-out-dialog.component';
 import { ArticleQuickCreationDialogComponent } from './article-quick-creation-dialog.component';

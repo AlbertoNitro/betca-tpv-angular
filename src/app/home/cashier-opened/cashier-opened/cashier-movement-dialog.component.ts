@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { CashierMovement } from './cashier-movement.model';
+import { CashierMovement } from '../../shared/cashier-movement.model';
 import { CashierMovementService } from './cashier-movement.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { CashierService } from '../shared/cashier.service';
+import { CashierService } from '../../shared/cashier.service';
 
 @Component({
     templateUrl: 'cashier-movement-dialog.component.html',
