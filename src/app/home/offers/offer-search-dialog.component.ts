@@ -19,7 +19,7 @@ export class OfferSearchDialogComponent implements OnInit{
     
     ngOnInit(): void {
         if (!this.offer) {
-            this.offer = {percentage: undefined, expiration: undefined , description : undefined, creationDate : undefined};
+            this.offer = {code: undefined, percentage: undefined, expiration: undefined , description : undefined, creationDate : undefined};
         }
     }
 
@@ -29,6 +29,6 @@ export class OfferSearchDialogComponent implements OnInit{
                       data.creationDate = new Date (data.creationDate);
                       this.offer = data;
             },
-            error => this.offer = {creationDate : undefined, percentage: undefined, expiration: undefined , description : undefined});
+            error => this.offer = {code: undefined, creationDate : undefined, percentage: undefined, expiration: undefined , description : undefined});
     }
 }
