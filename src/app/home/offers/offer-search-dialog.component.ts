@@ -9,26 +9,30 @@ import { OfferService } from '../shared/offer.service';
         flex-direction: column;
     }`]
 })
-    
-export class OfferSearchDialogComponent implements OnInit{      
-    offer : Offer;
-    code : String;
-    
-    constructor(  private offerService: OfferService ) {
+
+export class OfferSearchDialogComponent implements OnInit {
+    offer: Offer;
+    code: string;
+
+    constructor(private offerService: OfferService) {
     }
-    
+
     ngOnInit(): void {
         if (!this.offer) {
-            this.offer = {percentage: undefined, expiration: undefined , description : undefined, creationDate : undefined};
+            this.offer = { code: undefined, percentage: undefined, expiration: undefined, description: undefined, creationDate: undefined };
         }
     }
 
-    searchOffer() : void {
+    searchOffer(): void {
         this.offerService.readObservable(this.code).subscribe(
-            data => { data.expiration = new Date(data.expiration);
-                      data.creationDate = new Date (data.creationDate);
-                      this.offer = data;
+            data => {
+                data.expiration = new Date(data.expiration);
+                data.creationDate = new Date(data.creationDate);
+                this.offer = data;
             },
-            error => this.offer = {creationDate : undefined, percentage: undefined, expiration: undefined , description : undefined});
+            error => this.offer = {
+                code: undefined, creationDate: undefined, percentage: undefined,
+                expiration: undefined, description: undefined
+            });
     }
 }

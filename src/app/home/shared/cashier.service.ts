@@ -8,14 +8,16 @@ import { CashierClosure } from './cashier-closure.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
 import { CashierMovement } from '../cashier-movements/cashier-movement.model';
+import { CashierClosureClosed } from '../cashier-closures/cashier-closure-closed.model';
 
 @Injectable()
 export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
-    static SEARCH = '/search?';
+    static SEARCH = '/search';
     static TOTALS = '/totals';
     static MOVEMENTS = '/movements';
+    static DATE = '/date';
 
 
     private cashierLast: Subject<CashierLast> = new Subject();
@@ -40,8 +42,8 @@ export class CashierService {
         );
     }
 
-    close(cashierClosure: CashierClosure): void {
-        this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure).subscribe(
+    close(cashierClosure: CashierClosure) {
+        return this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure).map(
             () => this.synchronizeLast()
         );
     }
@@ -53,13 +55,22 @@ export class CashierService {
             .get(CashierService.END_POINT + CashierService.SEARCH);
     }
 
-    readTotalsObservable(): Observable<CashierClosure> {
-        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.TOTALS);
+    readTotals(): Observable<CashierClosure> {
+        return this.httpService.authToken().get(
+            CashierService.END_POINT + CashierService.LAST + CashierService.TOTALS);
     }
 
-    public create(cashMovement: CashierMovement): Observable<any> {
+    create(cashMovement: CashierMovement): Observable<any> {
         cashMovement.authorMobile = this.httpService.getMobile();
         return this.httpService.authToken().successful().post(
             CashierService.END_POINT + CashierService.LAST + CashierService.MOVEMENTS, cashMovement);
     }
+
+    findBetweenDates(start: Date, end: Date): Observable<CashierClosureClosed[]> {
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 0);
+        return this.httpService.authToken().param('start', String(start.getTime()))
+            .param('end', String(end.getTime())).get(CashierService.END_POINT + CashierService.SEARCH + CashierService.DATE);
+    }
+
 }
