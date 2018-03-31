@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { CashierMovement } from './cashier-movement.model';
-import { HttpService } from '../../core/http.service';
+import { CashierMovement } from '../../shared/cashier-movement.model';
+import { HttpService } from '../../../core/http.service';
 import { MatSnackBar } from '@angular/material';
 
 @Injectable()

@@ -9,15 +9,11 @@ import { CashierService } from '../shared/cashier.service';
 export class CashierClosedComponent {
     static URL = 'cashier-closed';
 
-    cashierLastClosedDate: Date;
+    cashierLast: CashierLast = { closed: undefined };
 
     constructor(private cashierService: CashierService) {
-        this.cashierService.lastObservable().subscribe(
-            (date: CashierLast) => {
-                if (date !== undefined) {
-                    this.cashierLastClosedDate = date.closureDate;
-                }
-            }
+        this.cashierService.last().subscribe(
+            cashierLast => this.cashierLast = cashierLast
         );
     }
 

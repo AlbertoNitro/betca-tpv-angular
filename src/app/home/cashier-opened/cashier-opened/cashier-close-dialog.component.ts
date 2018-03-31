@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CashierClosure } from '../shared/cashier-closure.model';
-import { CashierService } from '../shared/cashier.service';
+import { CashierClosure } from '../../shared/cashier-closure.model';
+import { CashierService } from '../../shared/cashier.service';
 import { MatDialog } from '@angular/material';
-import { CashierMovementDialogComponent } from '../cashier-movements/cashier-movement-dialog.component';
+import { CashierMovementDialogComponent } from './cashier-movement-dialog.component';
 
 @Component({
     templateUrl: 'cashier-close-dialog.component.html',

@@ -9,7 +9,7 @@ import {Shopping} from '../../shared/shopping.model';
 import {MatTableDataSource} from '@angular/material';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
-import {ShoppingCartService} from '../../cashier-opened/shopping-cart.service';
+import {ShoppingCartService} from '../../cashier-opened/shopping-cart/shopping-cart.service';
 
 
 @Component({

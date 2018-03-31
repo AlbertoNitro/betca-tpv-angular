@@ -8,11 +8,11 @@ import { TokensService } from '../core/tokens.service';
 import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
 import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
-import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
+import { CashierOpenedComponent } from './cashier-opened/cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
 import { BudgetsComponent } from './budgets/budgets.component';
-import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CashierMovementDialogComponent } from './cashier-movements/cashier-movement-dialog.component';
+import { CashierCloseDialogComponent } from './cashier-opened/cashier-opened/cashier-close-dialog.component';
+import { CashierMovementDialogComponent } from './cashier-opened/cashier-opened/cashier-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -37,9 +37,8 @@ import { CashierClosuresComponent } from './cashier-closures/cashier-closures.co
   templateUrl: `home.component.html`
 })
 export class HomeComponent implements OnDestroy, OnInit {
-
-
   static URL = 'home';
+
   data: User[];
 
   cashierClosed: boolean;
@@ -55,7 +54,7 @@ export class HomeComponent implements OnDestroy, OnInit {
   constructor(public dialog: MatDialog, public tokensService: TokensService,
     private cashierService: CashierService, private router: Router,
     private adminsService: AdminsService, private userService: UserService) {
-    this.subscription = this.cashierService.lastObservable().subscribe(
+    this.subscription = this.cashierService.last().subscribe(
       data => {
         this.cashierClosed = data.closed;
         this.home();
