@@ -42,7 +42,8 @@ import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.
 import { InvoiceCreationDialogComponent } from './home/invoices/invoice-creation-dialog.component';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
 import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-creation-edit-dialog.component';
-import {ScheduleCreationEditDialogComponent} from "./home/schedule/schedule-creation-edit-dialog.component";
+import { ScheduleCreationEditDialogComponent } from './home/schedule/schedule-creation-edit-dialog.component';
+import { CashierClosuresComponent } from './home/cashier-closures/cashier-closures.component';
 
 
 const appRoutes: Routes = [
@@ -55,6 +56,7 @@ const appRoutes: Routes = [
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
       { path: CashierMovementDialogComponent.URL, component: CashierMovementDialogComponent },
+      { path: CashierClosuresComponent.URL, component: CashierClosuresComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
@@ -83,6 +85,7 @@ export class AppRoutingModule {
     CashierClosedComponent,
     CashierOpenedComponent,
     CashierMovementDialogComponent,
+    CashierClosuresComponent,
     HomeComponent,
     ProvidersComponent,
     ShoppingCartComponent,
