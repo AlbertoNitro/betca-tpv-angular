@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { UserService } from '../shared/user.service';
+
+import { User } from '../shared/user.model';
 import { TicketService } from '../shared/ticket.service';
 import { InvoiceService } from '../shared/invoice.service';
-import { UserQuickCreationEditDialogComponent } from '../cashier-opened/user-quick-creation-edit-dialog.component';
-import { User } from '../shared/user.model';
 
 @Component({
     templateUrl: './invoice-creation-dialog.component.html',
@@ -18,31 +17,17 @@ import { User } from '../shared/user.model';
     }`]
 })
 export class InvoiceCreationDialogComponent {
-    mobile: number;
-    mobileSynchronized = false;
 
+    user: User;
     ticketId: string;
     ticketIdSynchronized = false;
 
-    user: User;
-
-    constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private userService: UserService,
-        private ticketService: TicketService, private invoiceService: InvoiceService) {
+    constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private ticketService: TicketService,
+        private invoiceService: InvoiceService) {
     }
 
-    findMobile() {
-        this.userService.read(this.mobile).subscribe(
-            user => {
-                this.mobile = user.mobile;
-                this.mobileSynchronized = true;
-                this.user = user;
-            }
-        );
-    }
-
-    deleteMobile() {
-        this.mobile = undefined;
-        this.mobileSynchronized = false;
+    updateUser(user: User) {
+        this.user = user;
     }
 
     findTicket() {
@@ -69,36 +54,14 @@ export class InvoiceCreationDialogComponent {
         this.ticketIdSynchronized = false;
     }
 
-    invalidUser() {
-        return this.mobileSynchronized && (!this.user.dni || !this.user.address);
-    }
-
     invalidInvoice() {
-        return !this.ticketIdSynchronized || !this.mobileSynchronized || this.invalidUser();
+        return !this.ticketIdSynchronized || this.user && (!this.user.dni || !this.user.address);
     }
 
     createInvoice() {
-        this.invoiceService.create({ mobile: this.mobile, ticketId: this.ticketId }).subscribe(
+        this.invoiceService.create({ mobile: this.user.mobile, ticketId: this.ticketId }).subscribe(
             () => this.dialog.closeAll()
         );
     }
-
-    editMobile() {
-        this.dialog.open(UserQuickCreationEditDialogComponent, {
-            data: {
-                user: this.user,
-                type: 'edit'
-            }
-        }).afterClosed().subscribe(
-            result => {
-                if (result) {
-                    this.findMobile();
-                }
-            }
-        );
-    }
-
-
-
 
 }

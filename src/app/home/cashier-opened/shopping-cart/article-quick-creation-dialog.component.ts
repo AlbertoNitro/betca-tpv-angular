@@ -1,8 +1,8 @@
 import { Component, Input, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { ShoppingCartService } from './shopping-cart.service';
-import { Article } from '../shared/article.model';
-import { ArticleService } from '../shared/article.service';
+import { Article } from '../../shared/article.model';
+import { ArticleService } from '../../shared/article.service';
 import { MatSnackBar } from '@angular/material';
 
 

@@ -8,6 +8,8 @@ import { TicketService } from '../shared/ticket.service';
 import { VoucherService } from '../shared/voucher.service';
 import { InvoiceService } from '../shared/invoice.service';
 import { Invoice } from '../shared/invoice.model';
+import { UserService } from '../shared/user.service';
+import { User } from '../shared/user.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -16,15 +18,16 @@ import { Invoice } from '../shared/invoice.model';
 })
 export class EditTicketDialogComponent {
 
-  displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
-  dataSource: MatTableDataSource<Shopping>;
+  totalReturn = 0;
   ticket: Ticket;
   invoice: Invoice;
-
-  totalReturn = 0;
+  displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
+  dataSource: MatTableDataSource<Shopping>;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
-    private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService) {
+    private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
+    private userService: UserService) {
+
     this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
     this.ticket = data.ticket;
     this.invoice = data.invoice;
@@ -52,6 +55,24 @@ export class EditTicketDialogComponent {
     shopping.committed = !shopping.committed;
   }
 
+  invoiceId() {
+    if (this.invoice) {
+      return this.invoice.id;
+    }
+  }
+
+  mobile(): number {
+    if (this.ticket.user) {
+      return this.ticket.user.mobile;
+    } else {
+      return null;
+    }
+  }
+
+  updateUser(user: User) {
+    this.ticket.user = user;
+  }
+
   updateTicket() {
     this.ticketService.updateTicket(this.ticket).subscribe(
       () => {
@@ -64,18 +85,6 @@ export class EditTicketDialogComponent {
         }
       }
     );
-  }
-
-  user() {
-    if (this.ticket.user) {
-      return this.ticket.user.mobile;
-    }
-  }
-
-  invoiceId() {
-    if (this.invoice) {
-      return this.invoice.id;
-    }
   }
 
 }

@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>Customer manager</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="number" placeholder="Mobile" [value]="user.mobile" />
+        <input matInput type="number" placeholder="Mobile" [value]="user.mobile" [disabled]="true"/>
     </mat-form-field>
     <mat-form-field>
         <input matInput type="text" placeholder="Username" required cdkFocusInitial [(ngModel)]="user.username" />

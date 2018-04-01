@@ -1,0 +1,23 @@
+<h3 mat-dialog-title>Cashier Movement</h3>
+<mat-dialog-content>
+    <br />
+    <mat-radio-group class="radio-buttons-column" [(ngModel)]="selectedOperation">
+        <mat-radio-button value="add">Add to Cashier</mat-radio-button>
+        <mat-radio-button value="subtract">Remove to Cashier</mat-radio-button>
+    </mat-radio-group>
+    <br />
+    <mat-form-field>
+        <input matTooltip="> 0" matInput type="number" placeholder="Value" [(ngModel)]="cashierMovement.value" />
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Comment" [(ngModel)]="cashierMovement.comment" />
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+    <button mat-raised-button color="accent" (click)="createMovement()" [disabled]="isInvalid()">
+        <mat-icon>account_balance_wallet</mat-icon>
+        <mat-icon *ngIf="selectedOperation==='add'">add</mat-icon>
+        <mat-icon *ngIf="selectedOperation==='subtract'">remove</mat-icon> Cashier movement
+    </button>
+</mat-dialog-actions>
