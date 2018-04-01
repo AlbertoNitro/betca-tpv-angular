@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import { CashierLast } from './cashier-last.model';
-import { CashierClosure } from './cashier-closure.model';
+import { CashierClosing } from './cashier-closing.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
 import { CashierMovement } from './cashier-movement.model';
-import { CashierClosureClosed } from '../cashier-closures/cashier-closure-closed.model';
+import { ClosedCashier } from './closed-cashier.model';
 
 @Injectable()
 export class CashierService {
@@ -30,18 +30,18 @@ export class CashierService {
         return this.httpService.authToken().post(CashierService.END_POINT);
     }
 
-    close(cashierClosure: CashierClosure) {
+    close(cashierClosure: CashierClosing): Observable<any> {
         return this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure);
     }
 
-    readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
+    readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosing[]> {
         return this.httpService.authToken()
             .param('dateStart', dateStart.toISOString())
             .param('dateFinish', dateFinish.toISOString())
             .get(CashierService.END_POINT + CashierService.SEARCH);
     }
 
-    readTotals(): Observable<CashierClosure> {
+    readTotals(): Observable<CashierClosing> {
         return this.httpService.authToken().get(
             CashierService.END_POINT + CashierService.LAST + CashierService.TOTALS);
     }
@@ -52,7 +52,7 @@ export class CashierService {
             CashierService.END_POINT + CashierService.LAST + CashierService.MOVEMENTS, cashMovement);
     }
 
-    findBetweenDates(start: Date, end: Date): Observable<CashierClosureClosed[]> {
+    findBetweenDates(start: Date, end: Date): Observable<ClosedCashier[]> {
         start.setHours(0, 0, 0, 0);
         end.setHours(23, 59, 59, 0);
         return this.httpService.authToken().param('start', String(start.getTime()))

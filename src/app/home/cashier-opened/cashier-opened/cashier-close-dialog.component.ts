@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CashierClosure } from '../../shared/cashier-closure.model';
+import { CashierClosing } from '../../shared/cashier-closing.model';
 import { CashierService } from '../../shared/cashier.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { CashierMovementDialogComponent } from './cashier-movement-dialog.component';
@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
     }`]
 })
 export class CashierCloseDialogComponent {
-    cashierClosure: CashierClosure = { totalVoucher: undefined, finalCash: undefined, salesCard: undefined };
+    cashierClosure: CashierClosing = { totalVoucher: undefined, finalCash: undefined, salesCard: undefined };
     withdrawal: number;
 
     constructor(private dialog: MatDialog, private dialogRef: MatDialogRef<CashierCloseDialogComponent>,
