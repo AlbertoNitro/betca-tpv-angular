@@ -36,28 +36,33 @@ import { CashierClosuresComponent } from './cashier-closures/cashier-closures.co
   styles: [`mat-toolbar {justify-content: space-between;}`],
   templateUrl: `home.component.html`
 })
-export class HomeComponent implements OnDestroy, OnInit {
+export class HomeComponent implements OnInit {
   static URL = 'home';
 
+  cahierClosed: boolean;
+
   data: User[];
-
-  cashierClosed: boolean;
-
-  subscription: Subscription;
 
   ngOnInit(): void {
     this.synchronize();
   }
 
-
-
-  constructor(public dialog: MatDialog, public tokensService: TokensService,
+  constructor(private dialog: MatDialog, public tokensService: TokensService,
     private cashierService: CashierService, private router: Router,
     private adminsService: AdminsService, private userService: UserService) {
-    this.subscription = this.cashierService.last().subscribe(
-      data => {
-        this.cashierClosed = data.closed;
-        this.home();
+
+    this.home();
+  }
+
+  home() {
+    this.cashierService.last().subscribe(
+      cashierLast => {
+        this.cahierClosed = cashierLast.closed;
+        if (cashierLast.closed) {
+          this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
+        } else {
+          this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
+        }
       }
     );
   }
@@ -105,16 +110,16 @@ export class HomeComponent implements OnDestroy, OnInit {
       });
   }
 
-  home() {
-    if (this.cashierClosed) {
-      this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
-    } else {
-      this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
-    }
+  closeCashier() {
+    this.dialog.open(CashierCloseDialogComponent).afterClosed().subscribe(
+      () => this.home()
+    );
   }
 
-  closeCashier() {
-    this.dialog.open(CashierCloseDialogComponent);
+  openCashier() {
+    this.cashierService.open().subscribe(
+      () => this.home()
+    );
   }
 
   cashMovement() {
@@ -153,9 +158,6 @@ export class HomeComponent implements OnDestroy, OnInit {
     this.router.navigate([HomeComponent.URL, ProvidersComponent.URL]);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
   statistics2() {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }

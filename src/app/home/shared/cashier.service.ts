@@ -19,33 +19,19 @@ export class CashierService {
     static MOVEMENTS = '/movements';
     static DATE = '/date';
 
-
-    private cashierLast: Subject<CashierLast> = new Subject();
-
     constructor(private httpService: HttpService) {
     }
 
-    private synchronizeLast(): void {
-        this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST).subscribe(
-            data => this.cashierLast.next(data)
-        );
-    }
-
     last(): Observable<CashierLast> {
-        this.synchronizeLast();
-        return this.cashierLast.asObservable();
+        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST);
     }
 
-    open(): void {
-        this.httpService.authToken().post(CashierService.END_POINT).subscribe(
-            () => this.synchronizeLast()
-        );
+    open(): Observable<any> {
+        return this.httpService.authToken().post(CashierService.END_POINT);
     }
 
     close(cashierClosure: CashierClosure) {
-        return this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure).map(
-            () => this.synchronizeLast()
-        );
+        return this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure);
     }
 
     readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
