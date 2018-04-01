@@ -17,9 +17,13 @@ export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
     dataSource: MatTableDataSource<Shopping>;
 
+    stockLabel: string;
+    stock: number;
+
     private subscriptionDatasource: Subscription;
 
     constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
+        this.resetStock();
         this.subscriptionDatasource = this.shoppingCartService.shoppingCartObservable().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<Shopping>(data);
@@ -28,6 +32,10 @@ export class ShoppingCartComponent implements OnDestroy {
 
     }
 
+    resetStock() {
+        this.stockLabel = 'Stock';
+        this.stock = null;
+    }
 
     update(shopping: Shopping, event: any, column: string): void {
         shopping[column] = Number(event.target.value);
@@ -49,8 +57,14 @@ export class ShoppingCartComponent implements OnDestroy {
 
     add(code: string) {
         this.shoppingCartService.add(code).subscribe(
-            article => article,
-            error => this.createArticle(code)
+            article => {
+                this.stockLabel = `Stock of ${article.description} (code: ${article.code})`;
+                this.stock = article.stock;
+            },
+            error => {
+                this.createArticle(code);
+                this.stock = null;
+            }
         );
     }
 
@@ -67,6 +81,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     checkOut() {
+        this.resetStock();
         this.dialog.open(CheckOutDialogComponent, {
             data: {
                 total: this.shoppingCartService.total,
@@ -76,6 +91,7 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     createBudget() {
+        this.resetStock();
         this.shoppingCartService.createBudget();
     }
 
