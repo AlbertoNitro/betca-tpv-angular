@@ -44,6 +44,7 @@ import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component'
 import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-creation-edit-dialog.component';
 import { ScheduleCreationEditDialogComponent } from './home/schedule/schedule-creation-edit-dialog.component';
 import { CashierClosuresComponent } from './home/cashier-closures/cashier-closures.component';
+import { ArticlesFamilySizesDialogComponent } from './home/cashier-opened/articles-family/articles-family-sizes-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -105,6 +106,7 @@ export class AppRoutingModule {
   ];
 
   static COMPONENT_FACTORY = [
+    ArticlesFamilySizesDialogComponent,
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashierMovementDialogComponent,

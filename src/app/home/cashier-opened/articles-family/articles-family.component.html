@@ -1,40 +1,12 @@
-<mat-card-header>
-
-  <button mat-raised-button color="accent" type="submit" (click)="getAllArticleFamily()">INICIO</button>
-  <mat-toolbar color="primary">
-    <mat-toolbar-row fxFlex="auto">
-      <span>Articles Family / {{actualfamily}}</span>
-
-    </mat-toolbar-row>
-  </mat-toolbar>
-</mat-card-header>
-<br>
-<mat-card-content>
-  <div class="container" fxLayout="row wrap">
-
-    <mat-card *ngFor="let article of articleFamilyList.listArticles" fxFlex="auto" fxFlexOffset="1">
-      <mat-card-actions>
-        <button mat-mini-fab color="accent" type="submit" (click)="add(article.code)">
-              <span [matTooltipPosition]="positionabove" matTooltip="Add Car"> <strong>
-              <mat-icon aria-label="addcar">add_shopping_cart</mat-icon>
-              </strong></span>
-        </button>
-      </mat-card-actions>
-      <img class="img-article" src="{{imagePathArticle}}" height="100" width="100" alt="Washed Out"
-           [matTooltipPosition]="positionabove"
-           matTooltip="{{article.description}}"/>
-      <br>
-      <strong>{{article.reference}}</strong> &nbsp;&nbsp;<strong> ${{article.retailPrice}}</strong>
-    </mat-card>
-
-    <mat-card *ngFor="let family of articleFamilyList.listArticleFamily" fxFlex="auto" fxFlexOffset="1">
-      <button mat-button matSuffix color="accent" type="submit" (click)="viewArticles(family.reference)">
-        <img class="img-article" src="{{imagePathFamily}}" height="100" width="100" alt="Washed Out"
-             [matTooltipPosition]="positionabove"
-             matTooltip="{{family.reference}}"/>
-      </button>
-      <br>
-      <strong>{{family.reference}}</strong>
-    </mat-card>
-  </div>
-</mat-card-content>
+<h3>Root
+  <mat-icon>arrow_forward</mat-icon> Uniformes > SJB</h3>
+<div fxLayout="row" fxLayoutWrap fxFill class="family-container" >
+  <mat-card class="mat-elevation-z8 family-card" *ngFor="let family of families">
+    <mat-card-content>
+      <p>{{family.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button [color]="color(family)" class="family-button" (click)="find(family)">{{family.reference}}</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
