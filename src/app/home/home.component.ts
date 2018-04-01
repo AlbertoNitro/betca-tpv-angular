@@ -26,6 +26,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
 import { OffersComponent } from './offers/offers.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
+import { TokenManagementComponent } from './token-management/token-management.component';
 import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { User } from './shared/user.model';
@@ -192,6 +193,10 @@ export class HomeComponent implements OnInit {
 
   roleManagement() {
     this.router.navigate([HomeComponent.URL, RoleManagementComponent.URL]);
+  }
+
+  tokenManagement() {
+    this.router.navigate([HomeComponent.URL, TokenManagementComponent.URL]);
   }
 
 }

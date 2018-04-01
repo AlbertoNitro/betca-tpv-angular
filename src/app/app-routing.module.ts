@@ -35,6 +35,7 @@ import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
 import { RoleManagementComponent } from './home/role-management/role-management.component';
 import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
+import { TokenManagementComponent } from './home/token-management/token-management.component';
 import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
 import { InvoicesComponent } from './home/invoices/invoices.component';
@@ -66,6 +67,7 @@ const appRoutes: Routes = [
       { path: ArticlesComponent.URL, component: ArticlesComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: RoleManagementComponent.URL, component: RoleManagementComponent },
+      { path: TokenManagementComponent.URL, component: TokenManagementComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
@@ -102,7 +104,8 @@ export class AppRoutingModule {
     UserQuickCrudComponent,
     OrdersComponent,
     OffersComponent,
-    RoleManagementComponent
+    RoleManagementComponent,
+    TokenManagementComponent
   ];
 
   static COMPONENT_FACTORY = [
