@@ -24,7 +24,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 
 import { AdminsService } from './home/admin/admins.service';
-import { ArticleFamilyService } from './home/shared/article-family.service';
+import { ArticlesFamilyService } from './home/shared/articles-family.service';
 import { BudgetService } from './home/shared/budget.service';
 import { HttpService } from './core/http.service';
 import { TokensService } from './core/tokens.service';
@@ -109,7 +109,7 @@ import {SchedulerService} from './home/shared/scheduler.service';
   providers: [
     AdminsService,
     ArticleService,
-    ArticleFamilyService,
+    ArticlesFamilyService,
     BudgetService,
     CashierService,
     CashierMovementService,
