@@ -1,3 +1,14 @@
-.btnIncreaseAmount {
-  transform: translate(-1rem, 0);
+.mat-cell {
+  overflow: visible;
 }
+
+.mat-table {
+  overflow: auto;
+  max-height: 700px;
+}
+
+.mat-column- {
+  display: flex;
+  justify-content: flex-end;
+}
+

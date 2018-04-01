@@ -27,7 +27,7 @@ export class RoleManagementComponent implements OnInit {
   }
 
   edit(user: User) {
-    this.userService.readObservable(user.mobile).subscribe(
+    this.userService.read(user.mobile).subscribe(
       data => {
         const dialogRef = this.dialog.open(RoleManagementDialogComponent);
         dialogRef.componentInstance.user = data;

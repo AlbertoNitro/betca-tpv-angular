@@ -24,13 +24,15 @@ export class HttpService {
 
     private token: Token;
 
+    private mobile: number;
+
     private params: URLSearchParams;
 
     private headers: Headers;
 
     private responseType: ResponseContentType;
 
-    private successfulNotification = false;
+    private successfulNotification = undefined;
 
     constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
         this.resetOptions();
@@ -56,15 +58,22 @@ export class HttpService {
             return undefined;
         }
     }
+    getMobile(): number {
+        return this.mobile;
+    }
 
     logout(): void {
         this.token = undefined;
+        this.mobile = undefined;
         this.router.navigate(['']);
     }
 
     login(mobile: number, password: string, endPoint: string): Observable<any> {
         return this.authBasic(mobile, password).post(endPoint).map(
-            token => this.token = token,
+            token => {
+                this.token = token;
+                this.mobile = mobile;
+            },
             error => this.logout()
         );
     }
@@ -99,8 +108,12 @@ export class HttpService {
         return this;
     }
 
-    successful(): HttpService {
-        this.successfulNotification = true;
+    successful(notification?: String): HttpService {
+        if (notification) {
+            this.successfulNotification = notification;
+        } else {
+            this.successfulNotification = 'Successful';
+        }
         return this;
     }
 
@@ -156,15 +169,16 @@ export class HttpService {
 
     private extractData(response: Response): any {
         if (this.successfulNotification) {
-            this.snackBar.open('Successful', '', {
+            this.snackBar.open(this.successfulNotification, '', {
                 duration: 2000
             });
-            this.successfulNotification = false;
+            this.successfulNotification = undefined;
         }
         const contentType = response.headers.get('content-type');
         if (contentType) {
             if (contentType.indexOf('application/pdf') !== -1) {
-                return new Blob([response.blob()], { type: 'application/pdf' });
+                const blob = new Blob([response.blob()], { type: 'application/pdf' });
+                window.open(window.URL.createObjectURL(blob));
             } else if (contentType.indexOf('application/json') !== -1) {
                 return response.json();
             }

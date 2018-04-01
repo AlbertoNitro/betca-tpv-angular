@@ -1,14 +1,12 @@
-mat-card-actions {
-  margin: 1px 1px 1px 55px !important;
+.family-card {
+  width: 130px;
+  height: 60px;
+  margin: 5px;
+}
+
+.family-button {
+  width: 100%;
   position: absolute;
+  bottom: 0;
+  left: 0;
 }
-
-.container {
-  display: flex;
-  height: 500px;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-}
-
-
-
