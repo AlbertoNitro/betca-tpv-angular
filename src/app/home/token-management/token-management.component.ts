@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-//import { TokenManagementDialogComponent } from './token-management-dialog.component';
+import { CancelYesDialogComponent } from '../../core/cancel-yes-dialog.component';
 
 @Component({
   templateUrl: './token-management.component.html'
@@ -14,39 +14,32 @@ export class TokenManagementComponent implements OnInit {
   columns = ['mobile', 'username'];
   data: User[];
 
-  constructor(private dialog: MatDialog, private userService: UserService) { }
+  constructor(private dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.synchronize();
   }
 
-  synchronize() {
-    this.userService.readAll().subscribe(
-      data => this.data = data
-    );
+  clearTokens() {
+    this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
+      result => {
+        if (result) {
+          //do stuff
+        }
+      });
   }
 
-  edit(user: User) {
-    /*this.userService.readObservable(user.mobile).subscribe(
-      data => {
-        const dialogRef = this.dialog.open(TokenManagementDialogComponent);
-        dialogRef.componentInstance.user = data;
-        dialogRef.componentInstance.edit = true;
-        dialogRef.afterClosed().subscribe(
-          result => this.synchronize()
-        );
-      }
-    );*/
-  }
+  private successful() {
+    this.snackBar.open('Configuration updated', 'OK', {
+        duration: 2000
+    });
+}
 
-  create() {
-    /*const dialogRef = this.dialog.open(TokenManagementDialogComponent);
-    dialogRef.componentInstance.edit = false;
-    dialogRef.afterClosed().subscribe(
-      result => this.synchronize()
-    );*/
-
-  }
+  lifetime = [
+    {value: '1', viewValue: '1 min'},
+    {value: '60', viewValue: '1 hour'},
+    {value: '720', viewValue: '12 hours'},
+    {value: '1440', viewValue: '24 hours'}
+  ];
 
 }
 
