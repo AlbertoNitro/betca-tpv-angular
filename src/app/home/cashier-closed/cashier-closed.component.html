@@ -7,9 +7,6 @@
 		<mat-card-content>
 			<h3> The cashier was closed: {{cashierLast.closureDate | date: 'medium'}} </h3>
 			<h3> The initial cash is: {{cashierLast.finalCash}} €</h3>
-			<button mat-raised-button color="accent" (click)="open()">
-				<mat-icon>lock_open</mat-icon> Open cashier
-			</button>
 		</mat-card-content>
 	</mat-card>
 </div>

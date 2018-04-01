@@ -73,9 +73,13 @@
   <button mat-menu-item (click)="roleManagement()">Role Management</button>
 </mat-menu>
 <mat-menu #cashiers="matMenu">
-  <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
+  <button *ngIf="!cahierClosed" mat-menu-item (click)="closeCashier()">
     <mat-icon>lock_outline</mat-icon>
     <span>Close Cashier</span>
+  </button>
+  <button *ngIf="cahierClosed" mat-menu-item (click)="openCashier()">
+    <mat-icon>lock_open</mat-icon>
+    <span>Open Cashier</span>
   </button>
   <button *ngIf="!cashierClosed" mat-menu-item (click)="cashMovement()">
     <mat-icon>account_balance_wallet</mat-icon>

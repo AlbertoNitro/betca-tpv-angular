@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { CashierClosureClosed } from './cashier-closure-closed.model';
+import { ClosedCashier } from '../shared/closed-cashier.model';
 import { CashierService } from '../shared/cashier.service';
 
 
@@ -12,7 +12,7 @@ export class CashierClosuresComponent {
 
     title = 'Cashier Closures management';
     columns = ['openingDateFormat', 'initialCash', 'salesCash', 'salesCard', 'deposit', 'withdrawal', 'comment'];
-    data: CashierClosureClosed[];
+    data: ClosedCashier[];
 
     initialDateInput: Date = undefined;
     finalDateInput: Date = new Date();
@@ -22,7 +22,7 @@ export class CashierClosuresComponent {
 
     findCashierCreationDatesBetween() {
         this.cashierService.findBetweenDates(this.initialDateInput, this.finalDateInput).subscribe(
-            (cashierClosureClosedList: CashierClosureClosed[]) => {
+            (cashierClosureClosedList: ClosedCashier[]) => {
                 this.data = cashierClosureClosedList;
                 this.data.forEach(element =>
                     element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 9)
