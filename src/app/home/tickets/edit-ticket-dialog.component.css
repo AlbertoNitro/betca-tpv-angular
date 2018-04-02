@@ -1,0 +1,14 @@
+.mat-cell {
+  overflow: visible;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 700px;
+}
+
+.mat-column- {
+  display: flex;
+  justify-content: flex-end;
+}
+

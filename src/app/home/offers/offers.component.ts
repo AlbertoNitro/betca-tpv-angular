@@ -2,7 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Offer } from '../shared/offer.model';
 import { OfferService } from '../shared/offer.service';
-import { CreateOfferDialogComponent } from './create-offer-dialog.component';
+import { OfferCreateEditDialogComponent } from './offer-create-edit-dialog.component';
+import { MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
     templateUrl: `offers.component.html`
@@ -10,11 +11,12 @@ import { CreateOfferDialogComponent } from './create-offer-dialog.component';
     
 export class OffersComponent implements OnInit {
     static URL = 'offers';
-
-    title = 'Offer management';
-    columns = ['code', 'percentage', 'expiration', 'description'];
-    data: Offer[];
- 
+    
+    columns = ['code', 'percentage', 'creationDate', 'expiration', 'description'];
+    titles = {'code': 'Code of offer', 'percentage':'Percentage', 'creationDate' : 'Creation Date', 
+                'expiration': 'Expiration Date', 'description': 'Description'};
+    dataSource: MatTableDataSource<Offer>;
+     
     constructor(private dialog: MatDialog, private offerService: OfferService) {
     }
 
@@ -23,25 +25,32 @@ export class OffersComponent implements OnInit {
     }
 
     synchronize() {   
-        /*
         this.offerService.readAll().subscribe(
-            data => this.data = data
+             data => this.dataSource = new MatTableDataSource<Offer>(data)
         );
-        */
-       this.data = [ { code: 1, percentage: 20 , expiration : "ddd", description: "ll"}]
     }
 
-    edit(/*offer: Offer*/) {
-    }
-
-    create() {
-        const dialogRef = this.dialog.open(CreateOfferDialogComponent);
-        //dialogRef.componentInstance.edit = false;
-        /*
+    edit(offer: Offer) {
+        const dialogRef = this.dialog.open(OfferCreateEditDialogComponent);
+        dialogRef.componentInstance.edit = true;
+        offer.expiration = new Date(offer.expiration);
+        dialogRef.componentInstance.offer = offer;    
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
-        */      
     }
 
+    create() {
+        const dialogRef = this.dialog.open(OfferCreateEditDialogComponent);
+        dialogRef.componentInstance.edit = false;
+        dialogRef.afterClosed().subscribe(
+            result => this.synchronize()
+        );
+    }
+    
+    delete(offer : Offer ) {
+       this.offerService.deleteObservable(offer).subscribe(
+            result => this.synchronize()
+       );
+    }
 }

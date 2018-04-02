@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, URLSearchParams, ResponseContentType } from '@angular/http';
+import { HttpResponse } from '@angular/common/http/src/response';
+import { Router } from '@angular/router';
 
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
@@ -7,12 +9,11 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/map';
 
+import { MatSnackBar, _MatOptgroupMixinBase } from '@angular/material';
+
 import { Token } from './token.model';
 import { Role } from './role.model';
 import { Error } from './error.model';
-import { HttpResponse } from '@angular/common/http/src/response';
-import { MatSnackBar, _MatOptgroupMixinBase } from '@angular/material';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpService {
@@ -23,11 +24,15 @@ export class HttpService {
 
     private token: Token;
 
+    private mobile: number;
+
     private params: URLSearchParams;
 
     private headers: Headers;
 
     private responseType: ResponseContentType;
+
+    private successfulNotification = undefined;
 
     constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
         this.resetOptions();
@@ -53,15 +58,22 @@ export class HttpService {
             return undefined;
         }
     }
+    getMobile(): number {
+        return this.mobile;
+    }
 
     logout(): void {
         this.token = undefined;
+        this.mobile = undefined;
         this.router.navigate(['']);
     }
 
     login(mobile: number, password: string, endPoint: string): Observable<any> {
         return this.authBasic(mobile, password).post(endPoint).map(
-            token => this.token = token,
+            token => {
+                this.token = token;
+                this.mobile = mobile;
+            },
             error => this.logout()
         );
     }
@@ -93,6 +105,15 @@ export class HttpService {
     pdf(): HttpService {
         this.responseType = ResponseContentType.Blob;
         this.headers.append('Accept', 'application/pdf');
+        return this;
+    }
+
+    successful(notification?: String): HttpService {
+        if (notification) {
+            this.successfulNotification = notification;
+        } else {
+            this.successfulNotification = 'Successful';
+        }
         return this;
     }
 
@@ -147,10 +168,17 @@ export class HttpService {
     }
 
     private extractData(response: Response): any {
+        if (this.successfulNotification) {
+            this.snackBar.open(this.successfulNotification, '', {
+                duration: 2000
+            });
+            this.successfulNotification = undefined;
+        }
         const contentType = response.headers.get('content-type');
         if (contentType) {
             if (contentType.indexOf('application/pdf') !== -1) {
-                return new Blob([response.blob()], { type: 'application/pdf' });
+                const blob = new Blob([response.blob()], { type: 'application/pdf' });
+                window.open(window.URL.createObjectURL(blob));
             } else if (contentType.indexOf('application/json') !== -1) {
                 return response.json();
             }

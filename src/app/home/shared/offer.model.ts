@@ -1,6 +1,7 @@
 export interface Offer {
     code: number;
     percentage: number;
-    expiration?: string;
+    expiration: Date;
+    creationDate?: Date;
     description?: string;
 }

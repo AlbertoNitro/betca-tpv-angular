@@ -1,15 +1,15 @@
-/**
- * Created by Moons on 11/3/2018.
- */
-import {Component, OnInit} from '@angular/core';
-import {Article} from '../../shared/article.model';
-import {ArticleService} from '../../shared/article.service';
-import {ArticleFamilyService} from '../../shared/article-family.service';
-import {Shopping} from '../../shared/shopping.model';
-import {MatTableDataSource} from '@angular/material';
-import {Observable} from 'rxjs/Observable';
-import {Subscription} from 'rxjs/Subscription';
-import {ShoppingCartService} from '../../cashier-opened/shopping-cart.service';
+import { Component, OnInit } from '@angular/core';
+import { Article } from '../../shared/article.model';
+import { ArticleService } from '../../shared/article.service';
+import { ArticlesFamilyService } from '../../shared/articles-family.service';
+import { Shopping } from '../../shared/shopping.model';
+import { MatTableDataSource, MatDialog } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
+import { ShoppingCartService } from '../../cashier-opened/shopping-cart/shopping-cart.service';
+import { ArticlesFamilySizesDialogComponent } from './articles-family-sizes-dialog.component';
+import { Family } from './family.model';
+import { FamilyType } from './family-type.model';
 
 
 @Component({
@@ -18,67 +18,51 @@ import {ShoppingCartService} from '../../cashier-opened/shopping-cart.service';
   styleUrls: ['./articles-family.component.css']
 })
 
-export class ArticlesFamilyComponent implements OnInit {
+export class ArticlesFamilyComponent {
   static URL = 'articlesfamily';
-  dataSource: MatTableDataSource<Shopping>;
-  private positionabove = 'above';
-  private positionleft = 'left';
-  private imagePathArticle = '../../../assets/img/articles/art-blue.jpg';
-  private imagePathFamily = '../../../assets/img/articles/folder-blue.png';
-  private code;
-  private subscription: Subscription;
 
-  private articleList: Article[] = [];
-  private articleFamilyList: Article[] = [];
+  families: Family[];
 
-  listArt: Article[] = [
-    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156},
-    {code: '211', reference: 'Article12', description: 'Article12 The titles of Washed', retailPrice: 26, stock: 28},
-    {code: '311', reference: 'Article13', description: 'Article13 The titles of Washed', retailPrice: 37, stock: 39},
-    {code: '411', reference: 'Article14', description: 'Article14 The titles of Washed', retailPrice: 51, stock: 16},
-    {code: '111', reference: 'Article11', description: 'Article11 The titles of Washed', retailPrice: 81, stock: 156}
-  ];
 
-  constructor(public shoppingCartService: ShoppingCartService,
-              public articleService: ArticleService,
-              public articleFamilyService: ArticleFamilyService) {
+  constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService,
+    private articlesFamilyService: ArticlesFamilyService) {
 
-    this.subscription = this.shoppingCartService.shoppingCartObservable().subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource<Shopping>(data);
-      }
-    );
+    this.nav('root');
   }
 
-  ngOnInit() {
-
-    this.getAllArticles();
-    this.getAllArticleFamily();
-
+  color(family: Family) {
+    if (family.composite === FamilyType.ARTICLES) {
+      return 'primary';
+    } else {
+      return 'accent';
+    }
   }
 
-  getAllArticles() {
-    this.articleList = [];
-    this.articleService.readAll().subscribe(
-      data => {
-        console.log(data);
-        this.articleList = data;
-      },
-    );
+  nav(id: string) {
+      this.articlesFamilyService.find(id).subscribe(
+        families => this.families = families
+      );
   }
 
-  getAllArticleFamily() {
-    this.articleFamilyList = [];
-    this.articleFamilyService.readAll().subscribe(
-      data => {
-        console.log(data);
-        this.articleFamilyList = data;
-      },
-    );
+  find(family: Family) {
+    if (family.composite === FamilyType.ARTICLE) {
+      this.shoppingCartService.add(family.id).subscribe(
+        () => true
+      );
+    } else {
+      this.articlesFamilyService.find(family.id).subscribe(
+        families => {
+          if (family.composite === FamilyType.ARTICLES) {
+            this.families = families;
+          } else if (family.composite === FamilyType.SIZES) {
+            this.dialog.open(ArticlesFamilySizesDialogComponent, {
+              width: '455px',
+              data: { families: families }
+            });
+          }
+        }
+      );
+    }
   }
 
-  add(code: string) {
-    this.code = code;
-    this.shoppingCartService.add(code);
-  }
 }

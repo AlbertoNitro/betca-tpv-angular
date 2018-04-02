@@ -4,56 +4,59 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { URLSearchParams, RequestOptions } from '@angular/http';
 import { CashierLast } from './cashier-last.model';
-import { CashierClosure } from './cashier-closure.model';
+import { CashierClosing } from './cashier-closing.model';
 import { HttpService } from '../../core/http.service';
 import { ArticleService } from './article.service';
+import { CashierMovement } from './cashier-movement.model';
+import { ClosedCashier } from './closed-cashier.model';
 
 @Injectable()
 export class CashierService {
     static END_POINT = '/cashier-closures';
     static LAST = '/last';
-    static SEARCH = '/search?';
-
-    private cashierLast: Subject<CashierLast> = new Subject();
-    private cashierClosure: CashierClosure = { finalCash: 0, salesCard: 0,
-                                                    totalCard: 120, totalCash: 20 };
+    static SEARCH = '/search';
+    static TOTALS = '/totals';
+    static MOVEMENTS = '/movements';
+    static DATE = '/date';
 
     constructor(private httpService: HttpService) {
     }
 
-    private synchronizeLast(): void {
-        this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST).subscribe(
-            data => this.cashierLast.next(data)
-        );
+    last(): Observable<CashierLast> {
+        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.LAST);
     }
 
-    lastObservable(): Observable<CashierLast> {
-        this.synchronizeLast();
-        return this.cashierLast.asObservable();
+    open(): Observable<any> {
+        return this.httpService.authToken().post(CashierService.END_POINT);
     }
 
-    open(): void {
-        this.httpService.authToken().post(CashierService.END_POINT).subscribe(
-            () => this.synchronizeLast()
-        );
+    close(cashierClosure: CashierClosing): Observable<any> {
+        return this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure);
     }
 
-    close(cashierClosure: CashierClosure): void {
-        this.httpService.authToken().patch(CashierService.END_POINT + CashierService.LAST, cashierClosure).subscribe(
-            () => this.synchronizeLast()
-        );
+    readAllDatesBetween(dateStart: Date, dateFinish: Date): Observable<CashierClosing[]> {
+        return this.httpService.authToken()
+            .param('dateStart', dateStart.toISOString())
+            .param('dateFinish', dateFinish.toISOString())
+            .get(CashierService.END_POINT + CashierService.SEARCH);
     }
 
-    readAllBetweenDates(dateStart: Date, dateFinish: Date): Observable<CashierClosure[]> {
-        const cpParams = new URLSearchParams();
-        cpParams.append('dateStart', dateStart.toISOString());
-        cpParams.append('dateFinish', dateFinish.toISOString());
-        const options = new RequestOptions({ params: cpParams });
-        return this.httpService.authToken().get(CashierService.END_POINT + CashierService.SEARCH + options.search);
+    readTotals(): Observable<CashierClosing> {
+        return this.httpService.authToken().get(
+            CashierService.END_POINT + CashierService.LAST + CashierService.TOTALS);
     }
 
-    getCashierClosureInfo(): CashierClosure {
-        // this will have the call to httpService to retrieve total Card and total Cash
-        return this.cashierClosure;
+    create(cashMovement: CashierMovement): Observable<any> {
+        cashMovement.authorMobile = this.httpService.getMobile();
+        return this.httpService.authToken().successful().post(
+            CashierService.END_POINT + CashierService.LAST + CashierService.MOVEMENTS, cashMovement);
     }
+
+    findBetweenDates(start: Date, end: Date): Observable<ClosedCashier[]> {
+        start.setHours(0, 0, 0, 0);
+        end.setHours(23, 59, 59, 0);
+        return this.httpService.authToken().param('start', String(start.getTime()))
+            .param('end', String(end.getTime())).get(CashierService.END_POINT + CashierService.SEARCH + CashierService.DATE);
+    }
+
 }
