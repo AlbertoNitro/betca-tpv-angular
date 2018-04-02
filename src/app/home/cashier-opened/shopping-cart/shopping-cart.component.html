@@ -55,12 +55,15 @@
 <mat-card>
     <mat-card-content>
         <form>
-            <mat-form-field class="example-full-width">
+            <mat-form-field>
                 <input matInput placeholder="Product by code" type="text" #code>
             </mat-form-field>
             <button type="submit" mat-mini-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
                 <mat-icon>search</mat-icon>
             </button>
+            <mat-form-field>
+                    <input matInput [placeholder]="stockLabel" type="text" [value]="stock" readonly>
+            </mat-form-field>
         </form>
         <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="shoppingCartService.total===0">
             <mat-icon mat-icon-button>credit_card</mat-icon> Check out

@@ -3,15 +3,15 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { Shopping } from '../shared/shopping.model';
-import { ArticleService } from '../shared/article.service';
-import { BudgetService } from '../shared/budget.service';
-import { InvoiceService } from '../shared/invoice.service';
-import { TicketService } from '../shared/ticket.service';
-import { TicketCreation } from '../shared/ticket-creation.model';
-import { Budget } from '../shared/budget.model';
-import { Article } from '../shared/article.model';
-import { InvoiceCreation } from '../shared/invoice-creation.model';
+import { Shopping } from '../../shared/shopping.model';
+import { ArticleService } from '../../shared/article.service';
+import { BudgetService } from '../../shared/budget.service';
+import { InvoiceService } from '../../shared/invoice.service';
+import { TicketService } from '../../shared/ticket.service';
+import { TicketCreation } from '../../shared/ticket-creation.model';
+import { Budget } from '../../shared/budget.model';
+import { Article } from '../../shared/article.model';
+import { InvoiceCreation } from '../../shared/invoice-creation.model';
 
 @Injectable()
 export class ShoppingCartService {
@@ -79,6 +79,9 @@ export class ShoppingCartService {
         return this.articleService.readObservable(code).map(
             (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
+                if (article.stock < 1) {
+                    shopping.committed = false;
+                }
                 if (article.code === '1') {
                     shopping.total = Number(code) / 100;
                     shopping.updateDiscount();

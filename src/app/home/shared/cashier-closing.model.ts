@@ -1,4 +1,4 @@
-export interface CashierClosure {
+export interface CashierClosing {
     finalCash: number;
     salesCard: number;
     comment?: string;

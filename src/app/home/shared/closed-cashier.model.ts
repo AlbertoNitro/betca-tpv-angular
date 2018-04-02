@@ -1,4 +1,4 @@
-export interface CashierClosureClosed {
+export interface ClosedCashier {
     id: string;
     openingDate: Date;
     openingDateFormat?: string;
