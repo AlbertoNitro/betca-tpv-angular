@@ -13,7 +13,7 @@ export class OrdersComponent implements OnInit {
     order : order;
     orderBodyElement : orderBody;
     providerName : string;
-    displayedColumns = [ 'Id' , 'Provider_id' , 'Provider_name','Order_date'];
+    displayedColumns = [ 'Id' , 'provider_id' , 'provider_name','Order_date'];
     displayedColumnsCuerpo = [ 'Id' ,'id_order' , 'id_article' , 'article_name' ]
     dataSource: MatTableDataSource<order>;
     dataSourceBody : MatTableDataSource<orderBody>;
@@ -45,13 +45,10 @@ export class OrdersComponent implements OnInit {
     }
 
     CreateOrder( idOrder:string ,IdProvider:string){
-        this.providerService.read(IdProvider).subscribe(
-            data => {
-                this.providerName = data.company;
-                this.order = { id: idOrder , Provider_id: IdProvider , Provider_name: this.providerName };
-                this.orderService.createOrder(this.order).subscribe();
-            }
-        )        
+
+        this.order = { id: idOrder , provider_id: IdProvider , provider_name: "" };
+        this.orderService.createOrder(this.order).subscribe();            
+             
     }
 
     addOrderBodyWithCodeOrder(idBodyOrder:string, idArticle:string , idOrder:string){
