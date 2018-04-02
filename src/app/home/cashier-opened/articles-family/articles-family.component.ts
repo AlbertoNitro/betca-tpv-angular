@@ -17,8 +17,7 @@ import { FamilyType } from './family-type.model';
   templateUrl: './articles-family.component.html',
   styleUrls: ['./articles-family.component.css']
 })
-
-export class ArticlesFamilyComponent {
+export class ArticlesFamilyViewComponent {
   static URL = 'articlesfamily';
 
   families: Family[];
