@@ -1,7 +1,7 @@
 <h2 mat-dialog-title >Search Offer</h2>
 <mat-dialog-content>  
 <mat-form-field>
-    <input matInput type="text" placeholder="Code of offer" required [readonly]="edit" [(ngModel)]="offer.code" />
+    <input matInput readonly="true" type="text" placeholder="Code of offer" required [readonly]="edit" [(ngModel)]="offer.code" />
         <mat-error>Field required</mat-error>
     </mat-form-field>  
 	<mat-form-field class="date">
