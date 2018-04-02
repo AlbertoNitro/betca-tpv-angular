@@ -25,16 +25,8 @@ export class ArticlesFamilyService {
   constructor(private httpService: HttpService) {
   }
 
-  findRoot(): Family[] {
-    return ArticlesFamilyService.ROOT;
-  }
-
   find(id: string): Observable<Family[]> {
-    return this.httpService.authToken().get(ArticleService.END_POINT + '/' + id).map(
-      families => {
-        return ArticlesFamilyService.ROOT;
-      }
-    );
+    return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + '/' + id);
   }
 
 

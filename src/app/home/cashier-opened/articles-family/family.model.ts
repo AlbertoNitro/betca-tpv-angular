@@ -4,5 +4,6 @@ export interface Family {
     id: string;
     reference: string;
     description: string;
+    stock?: number;
     composite: FamilyType;
 }
