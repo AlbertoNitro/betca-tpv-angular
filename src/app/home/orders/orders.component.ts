@@ -4,25 +4,24 @@ import { order } from '../shared/order.model';
 import { getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
 import { orderService } from './orders.service';
 import { orderBody } from '../shared/order-body.model';
+import { ProviderService } from '../shared/provider.service';
 @Component({
     templateUrl: `orders.component.html`
 })
 export class OrdersComponent implements OnInit {
-
-    private orderService : orderService
     static URL = 'orders';
-    Orders : order[]; 
     order : order;
     orderBodyElement : orderBody;
-    orderBody : orderBody[];
-    displayedColumns = [ 'Id' , 'Id_provedor' , 'Provedor'];
-    displayedColumnsCuerpo = [ 'Id' ,'id_order', 'id_provedor'  , 'id_articulo' , 'articulo' , 'cantidad' ]
+    providerName : string;
+    displayedColumns = [ 'Id' , 'Provider_id' , 'Provider_name','Order_date'];
+    displayedColumnsCuerpo = [ 'Id' ,'id_order' , 'id_article' , 'article_name' ]
     dataSource: MatTableDataSource<order>;
     dataSourceBody : MatTableDataSource<orderBody>;
 
     @ViewChild(MatSort) sort: MatSort;
 
-    constructor(public dialog: MatDialog) {
+    constructor(public dialog: MatDialog,private orderService : orderService
+                , private providerService:ProviderService) {
     }
 
     ngOnInit(): void {   
@@ -33,19 +32,31 @@ export class OrdersComponent implements OnInit {
         this.orderService.readAll().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<order>(data);
-                this.dataSource.sort = this.sort;
             }
         );   
     }
 
-    mostrar_cuerpo(code : string){
-        this.orderService.readBody(parseInt(code)).subscribe(
+    readOrderBody(code:string){
+        this.orderService.readAllOrderBodyByIdOrder(code).subscribe(
             data => {
                 this.dataSourceBody = new MatTableDataSource<orderBody>(data);
-                this.dataSourceBody.sort = this.sort;
             }
         )
-        alert("servicio y si existe el id, vamos a buscar el cuerpo")
+    }
+
+    CreateOrder( idOrder:string ,IdProvider:string){
+        this.providerService.read(IdProvider).subscribe(
+            data => {
+                this.providerName = data.company;
+                this.order = { id: idOrder , Provider_id: IdProvider , Provider_name: this.providerName };
+                this.orderService.createOrder(this.order).subscribe();
+            }
+        )        
+    }
+
+    addOrderBodyWithCodeOrder(idBodyOrder:string, idArticle:string , idOrder:string){
+        this.orderBodyElement = { id: idBodyOrder , id_article: idArticle , id_order : idOrder, article_name:""};
+        this.orderService.createOrderBodyByIdOrder(this.orderBodyElement).subscribe();
     }
 
     agregar_si_existe(code : string){
