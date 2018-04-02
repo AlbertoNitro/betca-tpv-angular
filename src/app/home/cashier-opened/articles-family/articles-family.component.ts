@@ -27,7 +27,7 @@ export class ArticlesFamilyComponent {
   constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService,
     private articlesFamilyService: ArticlesFamilyService) {
 
-    this.families = this.articlesFamilyService.findRoot();
+    this.nav('root');
   }
 
   color(family: Family) {
@@ -38,6 +38,12 @@ export class ArticlesFamilyComponent {
     }
   }
 
+  nav(id: string) {
+      this.articlesFamilyService.find(id).subscribe(
+        families => this.families = families
+      );
+  }
+
   find(family: Family) {
     if (family.composite === FamilyType.ARTICLE) {
       this.shoppingCartService.add(family.id).subscribe(
@@ -45,13 +51,18 @@ export class ArticlesFamilyComponent {
       );
     } else {
       this.articlesFamilyService.find(family.id).subscribe(
-        families => this.families = families
+        families => {
+          if (family.composite === FamilyType.ARTICLES) {
+            this.families = families;
+          } else if (family.composite === FamilyType.SIZES) {
+            this.dialog.open(ArticlesFamilySizesDialogComponent, {
+              width: '455px',
+              data: { families: families }
+            });
+          }
+        }
       );
     }
-  }
-
-  tallas() {
-    this.dialog.open(ArticlesFamilySizesDialogComponent, { width: '500px' });
   }
 
 }
