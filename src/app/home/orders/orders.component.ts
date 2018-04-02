@@ -14,7 +14,7 @@ export class OrdersComponent implements OnInit {
     orderBodyElement : orderBody;
     providerName : string;
     displayedColumns = [ 'Id' , 'Provider_id' , 'Provider_name','Order_date'];
-    displayedColumnsCuerpo = [ 'Id' ,'id_order', 'id_provedor'  , 'id_articulo' , 'articulo' , 'cantidad' ]
+    displayedColumnsCuerpo = [ 'Id' ,'id_order' , 'id_article' , 'article_name' ]
     dataSource: MatTableDataSource<order>;
     dataSourceBody : MatTableDataSource<orderBody>;
 
@@ -48,11 +48,15 @@ export class OrdersComponent implements OnInit {
         this.providerService.read(IdProvider).subscribe(
             data => {
                 this.providerName = data.company;
-                alert(this.providerName);
+                this.order = { id: idOrder , Provider_id: IdProvider , Provider_name: this.providerName };
+                this.orderService.createOrder(this.order).subscribe();
             }
-        )
-        this.order = { id: idOrder , Provider_id: IdProvider , Provider_name: this.providerName };
-        this.orderService.createOrder(this.order).subscribe();
+        )        
+    }
+
+    addOrderBodyWithCodeOrder(idBodyOrder:string, idArticle:string , idOrder:string){
+        this.orderBodyElement = { id: idBodyOrder , id_article: idArticle , id_order : idOrder, article_name:""};
+        this.orderService.createOrderBodyByIdOrder(this.orderBodyElement).subscribe();
     }
 
     agregar_si_existe(code : string){

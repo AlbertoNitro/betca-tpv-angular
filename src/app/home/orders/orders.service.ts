@@ -1,3 +1,5 @@
+
+
 import { Injectable } from "@angular/core";
 import { order } from "../shared/order.model";
 import { Observable } from 'rxjs/Observable';
@@ -18,13 +20,11 @@ export class orderService{
     readAllOrderBodyByIdOrder(code:String): Observable<orderBody[]>{
         return this.httpService.authToken().get(orderService.END_POINT_ORDERBODY +'/'+code);
     }
-    createOrder(order:order):Observable<boolean>{
-        return this.httpService.authToken().post(orderService.END_POINT , order).map(
-            data => {
-                this.successful();
-                return data;
-            }
-        );
+    createOrder(order:order):Observable<any>{
+        return this.httpService.authToken().successful().post(orderService.END_POINT , order);
+    }
+    createOrderBodyByIdOrder(orderbody:orderBody):Observable<any>{
+        return this.httpService.authToken().successful().post(orderService.END_POINT_ORDERBODY,orderbody);
     }
 
     private successful() {
