@@ -88,6 +88,14 @@
                     <mat-icon>add</mat-icon>
                 </button>
             </form>
+            <form>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Crear desde order existente" type="text" #IdOrderExist>
+                </mat-form-field>
+                <button type="submit" mat-mini-fab color="primary" (click)=CreatefromExistOrder(IdOrderExist.value,idOrder.value,IdProvider.value)>
+                    <mat-icon>add</mat-icon>
+                </button>
+            </form>
         </mat-card-content>
     </mat-card>
     

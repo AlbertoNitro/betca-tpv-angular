@@ -12,6 +12,8 @@ export class OrdersComponent implements OnInit {
     static URL = 'orders';
     order : order;
     orderBodyElement : orderBody;
+    orderBodyElements: orderBody[];
+    orderBodyElementsToPut:orderBody[];
     providerName : string;
     displayedColumns = [ 'Id' , 'provider_id' , 'provider_name','Order_date'];
     displayedColumnsCuerpo = [ 'Id' ,'id_order' , 'id_article' , 'article_name' ]
@@ -40,6 +42,7 @@ export class OrdersComponent implements OnInit {
         this.orderService.readAllOrderBodyByIdOrder(code).subscribe(
             data => {
                 this.dataSourceBody = new MatTableDataSource<orderBody>(data);
+                this.orderBodyElements = data;
             }
         )
     }
@@ -56,7 +59,14 @@ export class OrdersComponent implements OnInit {
         this.orderService.createOrderBodyByIdOrder(this.orderBodyElement).subscribe();
     }
 
-    agregar_si_existe(code : string){
-        alert("llamar al servicio, cno el codigo , en el servicio, consultar si existe ese id de order, si-> actualizar el order body, no->pues nada")
+    CreatefromExistOrder(IdOrderExist:string,idOrderNew:string,IdProvider:string){
+        this.CreateOrder(idOrderNew,IdProvider);
+        this.readOrderBody(IdOrderExist);
+        this.orderBodyElements.forEach(element =>{
+                this.orderBodyElement = { id:element.id , id_article: element.id_article
+                    ,id_order:element.id_order,article_name:element.article_name};
+                this.orderBodyElementsToPut.push(this.orderBodyElement);
+            }            
+        )        
     }
 }
