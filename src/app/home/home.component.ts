@@ -8,11 +8,11 @@ import { TokensService } from '../core/tokens.service';
 import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
 import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
-import { CashierOpenedComponent } from './cashier-opened/cashier-opened.component';
+import { CashierOpenedComponent } from './cashier-opened/cashier-opened/cashier-opened.component';
 import { AdminsService } from './admin/admins.service';
 import { BudgetsComponent } from './budgets/budgets.component';
-import { CashierCloseDialogComponent } from './cashier-opened/cashier-close-dialog.component';
-import { CashMovementDialogComponent } from './cash-movements/cash-movement-dialog.component';
+import { CashierCloseDialogComponent } from './cashier-opened/cashier-opened/cashier-close-dialog.component';
+import { CashierMovementDialogComponent } from './cashier-opened/cashier-opened/cashier-movement-dialog.component';
 import { UsersComponent } from './users/users.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
 import { StatisticsComponent } from './statistics/statistics.component';
@@ -26,38 +26,44 @@ import { OrdersComponent } from './orders/orders.component';
 import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
 import { OffersComponent } from './offers/offers.component';
 import { RoleManagementComponent } from './role-management/role-management.component';
+import { TokenManagementComponent } from './token-management/token-management.component';
 import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { User } from './shared/user.model';
 import { UserService } from './shared/user.service';
+import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
   templateUrl: `home.component.html`
 })
-export class HomeComponent implements OnDestroy, OnInit {
-
-
+export class HomeComponent implements OnInit {
   static URL = 'home';
+
+  cahierClosed: boolean;
+
   data: User[];
-
-  cashierClosed: boolean;
-
-  subscription: Subscription;
 
   ngOnInit(): void {
     this.synchronize();
   }
 
-
-
-  constructor(public dialog: MatDialog, public tokensService: TokensService,
+  constructor(private dialog: MatDialog, public tokensService: TokensService,
     private cashierService: CashierService, private router: Router,
     private adminsService: AdminsService, private userService: UserService) {
-    this.subscription = this.cashierService.lastObservable().subscribe(
-      data => {
-        this.cashierClosed = data.closed;
-        this.home();
+
+    this.home();
+  }
+
+  home() {
+    this.cashierService.last().subscribe(
+      cashierLast => {
+        this.cahierClosed = cashierLast.closed;
+        if (cashierLast.closed) {
+          this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
+        } else {
+          this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
+        }
       }
     );
   }
@@ -105,20 +111,24 @@ export class HomeComponent implements OnDestroy, OnInit {
       });
   }
 
-  home() {
-    if (this.cashierClosed) {
-      this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
-    } else {
-      this.router.navigate([HomeComponent.URL, CashierOpenedComponent.URL]);
-    }
+  closeCashier() {
+    this.dialog.open(CashierCloseDialogComponent).afterClosed().subscribe(
+      () => this.home()
+    );
   }
 
-  closeCashier() {
-    this.dialog.open(CashierCloseDialogComponent);
+  openCashier() {
+    this.cashierService.open().subscribe(
+      () => this.home()
+    );
   }
 
   cashMovement() {
-    this.dialog.open(CashMovementDialogComponent);
+    this.dialog.open(CashierMovementDialogComponent);
+  }
+
+  cashierClosure() {
+    this.router.navigate([HomeComponent.URL, CashierClosuresComponent.URL]);
   }
 
   customers() {
@@ -149,9 +159,6 @@ export class HomeComponent implements OnDestroy, OnInit {
     this.router.navigate([HomeComponent.URL, ProvidersComponent.URL]);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
   statistics2() {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
@@ -186,6 +193,10 @@ export class HomeComponent implements OnDestroy, OnInit {
 
   roleManagement() {
     this.router.navigate([HomeComponent.URL, RoleManagementComponent.URL]);
+  }
+
+  tokenManagement() {
+    this.router.navigate([HomeComponent.URL, TokenManagementComponent.URL]);
   }
 
 }

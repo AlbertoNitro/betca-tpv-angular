@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { CashierClosure } from '../shared/cashier-closure.model';
+import { CashierClosing } from '../shared/cashier-closing.model';
 import { CashierService } from '../shared/cashier.service';
 import { Grafic, FormatDate } from './format-date';
 import { MatSnackBar } from '@angular/material';
