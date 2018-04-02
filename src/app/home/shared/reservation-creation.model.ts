@@ -3,6 +3,5 @@ export interface ReservationCreation {
     cash: number;
     card: number;
     voucher: number;
-    ticketNumber: number;
     reservationState: string;
 }

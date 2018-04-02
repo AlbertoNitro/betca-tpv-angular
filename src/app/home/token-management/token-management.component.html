@@ -1,0 +1,22 @@
+<mat-card style="margin:1rem;">
+    <mat-card-title>Token expiration</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content style="margin:1rem;">
+        <mat-card-actions>
+                <h3>Token lifetime:</h3>
+                <mat-card-subtitle>Manage how much time will pass before the session token expires.</mat-card-subtitle>
+            <mat-form-field>
+                <mat-select placeholder="Token lifetime">
+                    <mat-option *ngFor="let time of lifetime" [value]="time.value">
+                        {{ time.viewValue }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-button color="primary" (click)="successful()"><mat-icon>save</mat-icon>&nbsp; Save</button>
+            <mat-divider></mat-divider>
+            <h3>Clear tokens: </h3>
+            <mat-card-subtitle>This action will clear all tokens!</mat-card-subtitle>
+            <button mat-button color="primary" (click)="clearTokens()"><mat-icon>warning</mat-icon>&nbsp; Clear all tokens</button>
+        </mat-card-actions>
+    </mat-card-content>
+</mat-card>

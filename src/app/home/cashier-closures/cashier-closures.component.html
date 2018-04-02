@@ -1,0 +1,20 @@
+<mat-card>
+    <mat-card-subtitle>Filter</mat-card-subtitle>
+    <mat-card-content>
+        <mat-form-field class="date">
+            <input [(ngModel)]="initialDateInput" matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
+            <mat-datepicker-toggle matSuffix [for]="initialDate"></mat-datepicker-toggle>
+            <mat-datepicker #initialDate></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="finalDateInput" matInput [matDatepicker]="finalDate" placeholder="Choose a final date">
+            <mat-datepicker-toggle matSuffix [for]="finalDate"></mat-datepicker-toggle>
+            <mat-datepicker #finalDate></mat-datepicker>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="findCashierCreationDatesBetween()" [disabled]="!initialDateInput || !finalDateInput">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-card-content>
+</mat-card>
+<app-crud [title]="title" [columns]="columns" [createAction]="false" [readAction]="false" [deleteAction]="false" [editAction]="false" [data]="data"
+    (read)="read($event)"></app-crud>
