@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { CashierLast } from '../shared/cashier-last.model';
 
 import { CashierService } from '../shared/cashier.service';
+import { Router } from '@angular/router';
+import { HomeComponent } from '../home.component';
+import { CashierOpenedComponent } from '../cashier-opened/cashier-opened/cashier-opened.component';
 
 @Component({
     templateUrl: `cashier-closed.component.html`
@@ -9,19 +12,12 @@ import { CashierService } from '../shared/cashier.service';
 export class CashierClosedComponent {
     static URL = 'cashier-closed';
 
-    cashierLastClosedDate: Date;
+    cashierLast: CashierLast = { closed: undefined };
 
-    constructor(private cashierService: CashierService) {
-        this.cashierService.lastObservable().subscribe(
-            (date: CashierLast) => {
-                if (date !== undefined) {
-                    this.cashierLastClosedDate = date.closureDate;
-                }
-            }
+    constructor(private router: Router, private cashierService: CashierService) {
+        this.cashierService.last().subscribe(
+            cashierLast => this.cashierLast = cashierLast
         );
     }
 
-    open(): void {
-        this.cashierService.open();
-    }
 }

@@ -1,9 +1,11 @@
-<h2 mat-dialog-title>
+<h2 mat-dialog-title color="primary">
   <span class="mat-raised-button">Return: {{totalReturn | currency:'EUR':'symbol'}} </span>
   <span class="mat-raised-button">Ticket: {{ticket.id}} </span>
   <span class="mat-raised-button">{{ticket.creationDate | date: 'medium'}} </span>
+  <span class="mat-raised-button" *ngIf="invoice">Invoice: {{invoiceId()}} </span>
 </h2>
 <mat-dialog-content>
+  <app-user-quick-crud [mobile]="mobile()" (change)="updateUser($event)"></app-user-quick-crud>
   <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
     <ng-container matColumnDef="ind">
       <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
@@ -45,8 +47,9 @@
   </mat-table>
 </mat-dialog-content>
 <mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button color="accent" (click)="updateTicket()">
     <mat-icon>euro_symbol</mat-icon> Return
-    <mat-icon>check_circle</mat-icon> Commit</button>
-  <button mat-button mat-dialog-close>Cancel</button>
+    <mat-icon>check_circle</mat-icon> Commit
+  </button>
 </mat-dialog-actions>
