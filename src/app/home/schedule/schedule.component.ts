@@ -38,4 +38,8 @@ export class ScheduleComponent implements OnInit {
       () => this.synchronize()
     );
   }
+
+  edit(){
+
+  }
 }
