@@ -1,8 +1,8 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Provider } from './provider.model';
-import { ProviderService } from './provider.service';
+import { MatDialog } from '@angular/material';
 import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
+import { Provider } from '../shared/provider.model';
+import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: `providers.component.html`
@@ -10,35 +10,39 @@ import { ProviderCreationEditDialogComponent } from './provider-creation-edit-di
 export class ProvidersComponent implements OnInit {
     static URL = 'providers';
 
-    displayedColumns = ['company', 'actions'];
-    dataSource: MatTableDataSource<Provider>;
+    title = 'Providers management';
+    columns = ['company'];
+    data: Provider[];
 
-    @ViewChild(MatSort) sort: MatSort;
+    onlyActive = true;
 
     constructor(public dialog: MatDialog, private providerService: ProviderService) {
     }
 
-    ngOnInit(): void { 
+    ngOnInit(): void {
         this.synchronize();
     }
 
     synchronize() {
-        this.providerService.readAll().subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<Provider>(data);
-                this.dataSource.sort = this.sort;
-            }
-        );
+        if (this.onlyActive) {
+            this.providerService.readAllActives().subscribe(
+                data => this.data = data
+            );
+        } else {
+            this.providerService.readAll().subscribe(
+                data => this.data = data
+            );
+        }
     }
 
     edit(provider: Provider) {
-        this.providerService.readObservable(provider.id).subscribe(
+        this.providerService.read(provider.id).subscribe(
             data => {
                 const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
                 dialogRef.componentInstance.provider = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
-                    result => this.synchronize()
+                    () => this.synchronize()
                 );
             }
         );
@@ -48,7 +52,7 @@ export class ProvidersComponent implements OnInit {
         const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
         dialogRef.componentInstance.edit = false;
         dialogRef.afterClosed().subscribe(
-            result => this.synchronize()
+            () => this.synchronize()
         );
     }
 

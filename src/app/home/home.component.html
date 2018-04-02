@@ -1,59 +1,50 @@
 <mat-toolbar color="primary">
-  <img src="../../assets/img/miw.png"/>
+  <img src="../../assets/img/miw.png" />
   <span>TPV</span>
   <span class="toolbar-spacer"></span>
   <span>
-        <app-date format="medium"></app-date>
-        <button mat-button (click)="logout()">
-            <mat-icon>person</mat-icon>
-            <span>Logout</span>
-        </button>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-        </button>
-    </span>
+    <app-date format="medium"></app-date>
+    <button mat-button (click)="powerOff()">
+      <mat-icon color="warn">power_settings_new</mat-icon>
+      <span>Power-off</span>
+    </button>
+    <button mat-button (click)="logout()">
+      <mat-icon>person</mat-icon>
+      <span>Logout</span>
+    </button>
+    <button mat-button (click)="password()">
+      <mat-icon>account_box</mat-icon>
+      <span>Profile</span>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  </span>
 </mat-toolbar>
 <mat-menu x-position="before" #menu="matMenu">
-
   <button *ngIf="tokensService.isAdmin()" mat-menu-item [matMenuTriggerFor]="settings">
     <mat-icon>settings</mat-icon>
     <span>Admin</span>
   </button>
-  <button mat-menu-item [matMenuTriggerFor]="offers">
-    <mat-icon>euro_symbol</mat-icon>
-    <span>Offers</span>
-  </button> 
   <button mat-menu-item (click)="home()">
     <mat-icon>home</mat-icon>
     <span>Home</span>
   </button>
-  <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
-    <mat-icon>work</mat-icon>
-    <span>Close Cashier</span>
+  <button mat-menu-item [matMenuTriggerFor]="cashiers">
+    <mat-icon>account_balance</mat-icon>
+    <span>Cashiers</span>
   </button>
-  <button mat-menu-item (click)="cashMovement()">
-    <mat-icon>euro_symbol</mat-icon>
-    <span>Cash Movements</span>
+  <button mat-menu-item [matMenuTriggerFor]="receipts">
+    <mat-icon>receipt</mat-icon>
+    <span>Receipts</span>
+  </button>
+  <button mat-menu-item [matMenuTriggerFor]="products">
+    <mat-icon>line_style</mat-icon>
+    <span>Products</span>
   </button>
   <button mat-menu-item (click)="customers()">
     <mat-icon>account_circle</mat-icon>
     <span>Customers</span>
-  </button>
-  <button mat-menu-item (click)="providers()">
-    <mat-icon>local_shipping</mat-icon>
-    <span>Providers</span>
-  </button>
-  <button mat-menu-item (click)="tickets()">
-    <mat-icon>receipt</mat-icon>
-    <span>Tickets</span>
-  </button>
-  <button mat-menu-item (click)="article()">
-      <mat-icon>view_list</mat-icon>
-      <span>Artículos</span>
-  </button>
-  <button mat-menu-item (click)="vouchers()">
-    <mat-icon>local_offer</mat-icon>
-    <span>Vouchers</span>
   </button>
   <button mat-menu-item (click)="statistics()">
     <mat-icon>assessment</mat-icon>
@@ -69,23 +60,75 @@
   </button>
   <button mat-menu-item (click)="schedule()">
     <mat-icon>schedule</mat-icon>
-    <span>Agenda</span>
+    <span>Schedule</span>
   </button>
-  <button mat-menu-item (click)="budgets()">
-    <mat-icon>receipt</mat-icon>
-    <span>Budgets</span>
-  </button>
-  <button mat-menu-item (click)="Orders()">
-    <mat-icon>local_shipping</mat-icon>
-    <span>Orders</span>
+  <button mat-menu-item [matMenuTriggerFor]="offers">
+    <mat-icon>thumb_up</mat-icon>
+    <span>Offers</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
   <button mat-menu-item (click)="deleteDb()">Delete Database</button>
+  <button mat-menu-item (click)="roleManagement()">Role Management</button>
+  <button mat-menu-item (click)="tokenManagement()">Token Management</button>
+</mat-menu>
+<mat-menu #cashiers="matMenu">
+  <button *ngIf="!cahierClosed" mat-menu-item (click)="closeCashier()">
+    <mat-icon>lock_outline</mat-icon>
+    <span>Close Cashier</span>
+  </button>
+  <button *ngIf="cahierClosed" mat-menu-item (click)="openCashier()">
+    <mat-icon>lock_open</mat-icon>
+    <span>Open Cashier</span>
+  </button>
+  <button *ngIf="!cashierClosed" mat-menu-item (click)="cashMovement()">
+    <mat-icon>account_balance_wallet</mat-icon>
+    <span>Cashier Movement</span>
+  </button>
+  <button mat-menu-item (click)="cashierClosure()">
+    <mat-icon>account_balance</mat-icon>
+    <span>Cashiers</span>
+  </button>
+</mat-menu>
+<mat-menu #receipts="matMenu">
+  <button mat-menu-item (click)="tickets()">
+    <mat-icon>euro_symbol</mat-icon>
+    <span>Tickets</span>
+  </button>
+  <button mat-menu-item (click)="invoices()">
+    <mat-icon>receipt</mat-icon>
+    <span>Invoices</span>
+  </button>
+  <button mat-menu-item (click)="budgets()">
+    <mat-icon>description</mat-icon>
+    <span>Budgets</span>
+  </button>
+  <button mat-menu-item (click)="vouchers()">
+    <mat-icon>local_offer</mat-icon>
+    <span>Vouchers</span>
+  </button>
+</mat-menu>
+<mat-menu #products="matMenu">
+  <button mat-menu-item (click)="article()">
+    <mat-icon>view_list</mat-icon>
+    <span>Articles</span>
+  </button>
+  <button mat-menu-item (click)="providers()">
+    <mat-icon>local_shipping</mat-icon>
+    <span>Providers</span>
+  </button>
+  <button mat-menu-item (click)="Orders()">
+    <mat-icon>storage</mat-icon>
+    <span>Orders</span>
+  </button>
+  <button mat-menu-item (click)="stockAlerts()">
+    <mat-icon>notifications</mat-icon>
+    <span>Stock alerts</span>
+  </button>
 </mat-menu>
 <mat-menu #offers="matMenu">
-  <button mat-menu-item (click)="addOffer()">Add offer</button>
-  <button mat-menu-item (click)="consultOffer()">Consult offer</button>
+  <button mat-menu-item (click)="searchOffer()">Search Offer</button>
+  <button mat-menu-item (click)="OffersManagment()">Managment Offer</button>
 </mat-menu>
 <router-outlet></router-outlet>

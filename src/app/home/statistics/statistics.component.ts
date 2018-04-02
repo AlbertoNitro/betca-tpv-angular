@@ -5,6 +5,7 @@ import { GraficMonthsAreaComponent } from './grafic-months-area.component';
 import { TicketService } from '../shared/ticket.service';
 import { CashierService } from '../shared/cashier.service';
 import { FormatDate } from './format-date';
+import { MatSnackBar } from '@angular/material';
 declare let google: any;
 
 @Component({
@@ -15,12 +16,12 @@ export class StatisticsComponent implements OnInit {
     static URL = 'statistics';
     date = FormatDate.months;
     years = FormatDate.years();
-    constructor(private cashierService: CashierService, private ticketService: TicketService) {
+    constructor(private cashierService: CashierService, private ticketService: TicketService, public snackBar: MatSnackBar) {
         google.charts.load('current', { 'packages': ['corechart'] });
     }
-    graficYearArea = new GraficYearAreaComponent(this.cashierService);
-    graficMonthColum = new GraficMonthsColumnComponent(this.cashierService);
-    graficMonthArea = new GraficMonthsAreaComponent(this.ticketService);
+    graficYearArea = new GraficYearAreaComponent(this.cashierService, this.snackBar);
+    graficMonthColum = new GraficMonthsColumnComponent(this.cashierService, this.snackBar);
+    graficMonthArea = new GraficMonthsAreaComponent(this.ticketService, this.snackBar);
 
     ngOnInit(): void {
         this.graficYearArea.init();
@@ -29,13 +30,13 @@ export class StatisticsComponent implements OnInit {
     }
 
     graficAreaYear(dateI: number, dateF: number) {
-        this.graficYearArea.create(dateI, dateF);
+        this.graficYearArea.search(dateI, dateF);
     }
 
     graficColumMonth(dateI: number, dateF: number) {
-        this.graficMonthColum.create(dateI, dateF);
+        this.graficMonthColum.search(dateI, dateF);
     }
     graficCode(code: string) {
-        this.graficMonthArea.create(code);
+        this.graficMonthArea.search(code);
     }
 }

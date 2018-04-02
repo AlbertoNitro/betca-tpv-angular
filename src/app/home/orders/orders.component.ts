@@ -4,7 +4,7 @@ import { order } from '../shared/order.model';
 import { getLocaleDateFormat, getLocaleDateTimeFormat } from '@angular/common';
 import { orderService } from './orders.service';
 import { orderBody } from '../shared/order-body.model';
-import { ProviderService } from '../providers/provider.service';
+import { ProviderService } from '../shared/provider.service';
 @Component({
     templateUrl: `orders.component.html`
 })
@@ -45,7 +45,7 @@ export class OrdersComponent implements OnInit {
     }
 
     CreateOrder( idOrder:string ,IdProvider:string){
-        this.providerService.readObservable(IdProvider).subscribe(
+        this.providerService.read(IdProvider).subscribe(
             data => {
                 this.providerName = data.company;
                 alert(this.providerName);

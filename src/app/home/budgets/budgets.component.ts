@@ -21,7 +21,15 @@ export class BudgetsComponent implements OnInit {
     }
 
     synchronize() {
-        this.data = this.budgetService.readAll();
+        this.budgetService.readAll().subscribe(
+            data => this.data = data
+        );
+    }
+
+    read(budget: Budget) {
+        this.budgetService.read(budget).subscribe(
+            blob => window.open(window.URL.createObjectURL(blob))
+        );
     }
 
 }

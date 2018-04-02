@@ -1,79 +1,72 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {EditTicketDialogComponent} from './edit-ticket-dialog/edit-ticket-dialog.component';
-import {MatPaginator, MatDialog, MatSort, MatTableDataSource} from '@angular/material';
-import {Shopping} from '../shared/shopping.model';
-import {Ticket} from '../shared/ticket.model';
-import {TicketCreation} from '../shared/ticket-creation.model';
-import {TicketService} from '../shared/ticket.service';
+import { Component, ViewChild } from '@angular/core';
+import { MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+
+import { Ticket } from '../shared/ticket.model';
+import { TicketService } from '../shared/ticket.service';
+import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
+import { InvoiceService } from '../shared/invoice.service';
 
 @Component({
   selector: 'app-tickets',
   templateUrl: './tickets.component.html',
   styleUrls: ['./tickets.component.css']
 })
-export class TicketsComponent implements OnInit, AfterViewInit {
+export class TicketsComponent {
   static URL = 'tickets';
-  dataSource: MatTableDataSource<Ticket>;
-  displayedColumns = ['numTicket', 'id', 'creationDate', 'actions'];
-  listTickets: Ticket[] = [];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+
+  title = 'Tickets management';
+  columns = ['id'];
+  data: Ticket[];
+
+  initialDateInput: Date = undefined;
+  finalDateInput: Date = new Date();
+
+  constructor(private dialog: MatDialog, private ticketService: TicketService, private invoiceService: InvoiceService) {
   }
-  constructor(private ticketService: TicketService, public dialog: MatDialog) {
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '20', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '9999', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '0', cashDeposited: 10.0, shoppingList: null });
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '20', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '55', cashDeposited: 10.0, shoppingList: null });
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '20', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '70', cashDeposited: 10.0, shoppingList: null });
-    this.listTickets.push({id: '667729965', creationDate: new Date(), reference: '0', cashDeposited: 0.0, shoppingList: null});
-    this.listTickets.push({id: '655129465', creationDate: new Date(), reference: '10', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '661449265', creationDate: new Date(), reference: '90', cashDeposited: 5.0, shoppingList: null });
-    this.listTickets.push({id: '666129115', creationDate: new Date(), reference: '9999', cashDeposited: 0.0, shoppingList: null });
-    this.listTickets.push({id: '666669215', creationDate: new Date(), reference: '0', cashDeposited: 10.0, shoppingList: null });
-    this.dataSource = new MatTableDataSource<Ticket>(this.listTickets);
+
+  findTicket(ticketId: string) {
+    this.ticketService.readOne(ticketId).subscribe(
+      (ticket: Ticket) => this.data = new Array(1).fill(ticket)
+    );
   }
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+
+  findByMobile(mobile: string) {
+    this.ticketService.findByMobile(mobile).subscribe(
+      (tickets: Ticket[]) => this.data = tickets
+    );
   }
-  showEditDialog() {
-    this.dialog.open(EditTicketDialogComponent, {
-      height: '500px',
-      width: '900px',
-    });
+
+  findTicketsCreationDatesBetween() {
+    this.ticketService.findBetweenDates(this.initialDateInput, this.finalDateInput).subscribe(
+      (listTickets: Ticket[]) => this.data = listTickets
+    );
   }
-  private generateShoppingMock(): Array<Shopping> {
-    let listShopping = new Array<Shopping>();
-    let shopping0 = new Shopping('abc', 'vacio', 45);
-    let shopping1 = new Shopping('def', 'vacio', 25);
-    let shopping2 = new Shopping('ghi', 'vacio', 5);
-    let shopping3 = new Shopping('jkl', 'vacio', 65);
-    listShopping.push(shopping0);
-    listShopping.push(shopping1);
-    listShopping.push(shopping2);
-    listShopping.push(shopping3);
-    return listShopping;
+
+  todayTickets() {
+    this.ticketService.readToday().subscribe(
+      (tickets: Ticket[]) => this.data = tickets
+    );
   }
-  showTicket() {
-    let listShopping = this.generateShoppingMock();
-    let ticketCreation: TicketCreation = {userMobile: 123, cash: 0, card: 0, voucher: 0, shoppingCart: listShopping};
-    this.ticketService.create(ticketCreation).subscribe(
-      blob => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
+
+  edit(ticketId: Ticket) {
+    this.invoiceService.findByTicket(ticketId.id).subscribe(
+      invoice => {
+        if (invoice.id) {
+          this.dialog.open(EditTicketDialogComponent, {
+            width: '900px',
+            data: { ticket: invoice.ticket, invoice: invoice }
+          });
+        } else {
+          this.ticketService.readOne(ticketId.id).subscribe(
+            ticket =>
+              this.dialog.open(EditTicketDialogComponent, {
+                width: '900px',
+                data: { ticket: ticket, invoice: null }
+              })
+          );
+        }
       }
     );
   }
+
 }

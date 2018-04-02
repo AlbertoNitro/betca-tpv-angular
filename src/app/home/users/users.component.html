@@ -1,2 +1,2 @@
-<app-crud [title]="title" [columns]="columns" deleteAction="false" [data]="data" 
-   (create)="create()" (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [passwordAction]="true" [data]="data" 
+   (create)="create()" (edit)="edit($event)" (password)=editPassword($event)></app-crud>

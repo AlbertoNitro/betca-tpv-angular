@@ -1,63 +1,74 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
-import { Voucher } from './voucher.model';
-import { VoucherService } from './voucher.service';
-import { VoucherCreationEditDialogComponent } from './voucher-creation-edit-dialog.component';
+import { Voucher } from '../shared/voucher.model';
+import { VoucherService } from '../shared/voucher.service';
+import { VoucherCreationDialogComponent } from './voucher-creation-dialog.component';
+import { VoucherEditDialogComponent } from './voucher-edit-dialog.component';
 
 @Component({
     templateUrl: `vouchers.component.html`
 })
 export class VouchersComponent implements OnInit {
     static URL = 'vouchers';
-    totalValueVouchers: number;
 
-    displayedColumns = ['reference', 'value', 'actions'];
-    dataSource: MatTableDataSource<Voucher>;
+    title = 'Vouchers management';
+    columns = ['id', 'value'];
+    data: Voucher[];
 
-    @ViewChild(MatSort) sort: MatSort;
+    validVoucher = true;
 
-    constructor(public dialog: MatDialog, private voucherService: VoucherService) {
+    constructor(private dialog: MatDialog, private voucherService: VoucherService) {
     }
-    
+
     ngOnInit(): void {
         this.synchronize();
     }
 
     synchronize() {
-        this.voucherService.readAll().subscribe(
-            data => {
-                this.dataSource = new MatTableDataSource<Voucher>(data);
-                this.dataSource.sort = this.sort;
-            
-                this.totalValueVouchers = 0;
-
-                for( var i=0; i< data.length; i++ ) {
-                    if ( data[i].used == false ){
-                        this.totalValueVouchers += data[i].value;
-                    }
+        if (this.validVoucher) {
+            this.voucherService.readAllValid().subscribe(
+                data => {
+                    this.data = data;
+                    this.title = 'Vouchers management. Total: ' + this.calculateTotal(data) + ' €';
                 }
+            );
+        } else {
+            this.voucherService.readAll().subscribe(
+                data => {
+                    this.data = data;
+                    this.title = 'Vouchers management';
+                }
+            );
+        }
+    }
 
+
+    calculateTotal(data): number {
+        let totalValueVouchers = 0;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].used === false) {
+                totalValueVouchers += data[i].value;
             }
-        );
-
-        
+        }
+        return totalValueVouchers;
     }
 
     create() {
-        const dialogRef = this.dialog.open(VoucherCreationEditDialogComponent);
+        const dialogRef = this.dialog.open(VoucherCreationDialogComponent);
         dialogRef.afterClosed().subscribe(
             result => this.synchronize()
         );
     }
 
-    consume( voucher: Voucher ){
-
-        this.voucherService.patchObservable(voucher.reference).subscribe(
-            data => {
-                this.synchronize();
+    edit(voucher: Voucher) {
+        this.voucherService.read(voucher.id).subscribe(
+            (data: Voucher) => {
+                const dialogRef = this.dialog.open(VoucherEditDialogComponent);
+                dialogRef.componentInstance.voucher = data;
+                dialogRef.afterClosed().subscribe(
+                    result => this.synchronize()
+                );
             }
         );
-
     }
-
 }

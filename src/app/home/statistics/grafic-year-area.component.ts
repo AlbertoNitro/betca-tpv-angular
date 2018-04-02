@@ -1,18 +1,14 @@
 import { OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material'
-import { CashierClosure } from '../shared/cashier-closure.model';
+import { CashierClosing } from '../shared/cashier-closing.model';
 import { CashierService } from '../shared/cashier.service';
 import { Grafic, FormatDate } from './format-date';
-
+import { MatSnackBar } from '@angular/material';
 declare let google: any;
 let chart: any;
-let totalsalesCash: number;
-let totalsalesCard: number;
-let controlDates: number;
+let salesList = [];
 export class GraficYearAreaComponent {
 
-    constructor(private cashierService: CashierService) {
-        google.charts.load('current', { 'packages': ['corechart'] });
+    constructor(private cashierService: CashierService, public snackBar: MatSnackBar) {
     }
 
     init() {
@@ -24,44 +20,53 @@ export class GraficYearAreaComponent {
         }
     }
 
-    create(dateI, dateF) {
-        this.cashierService.readAll(FormatDate.yearTimeInit(dateI)).subscribe(
+    search(dateStart, dateFinish) {
+        this.cashierService.readAllDatesBetween(FormatDate.yearTimeStart(dateStart), FormatDate.yearTimeFinish(dateFinish)).subscribe(
             data => {
-                read(data);
+                if (data.length === 0) {
+                    this.snackBar.open('There is not information, check the periods', 'X', {
+                        duration: 2000,
+                    });
+                } else {
+                    salesList = [];
+                    read(data);
+                }
             }
         );
 
         function read(data: any) {
-            totalsalesCash = 0;
-            totalsalesCard = 0;
-            controlDates = 2;
-            let yearInitial;
-            let yearFinal;
-            let salesList;
-            data[controlDates]['closureDate'] = new Date();
-            yearFinal = data[controlDates]['closureDate'].getFullYear();
+            const mapper = give => {
+                const years = new Date(give.closureDate).getFullYear();
+                const sales_Card = Number(give.salesCard);
+                const sales_Cash = Number(give.salesCash);
+                return { year: years, salesCard: sales_Card, salesCash: sales_Cash };
+            };
 
-            for (let i = 1; i < data.length; i++) {
-                data[i]['closureDate'] = new Date();
-                yearInitial = data[i]['closureDate'].getFullYear();
-                if (yearInitial === yearFinal) {
-                    salesList = ['' + yearFinal + '', data[i]['salesCard'], data[i]['salesCash']];
-                    controlDates++;
-                } else {
-                    totalsalesCard += data[i]['salesCard'];
-                    totalsalesCash += data[i]['salesCash'];
-                    salesList = ['' + yearInitial + '', totalsalesCard, totalsalesCash];
+            const reducer = (group, all) => {
+                const i = group.findIndex(give => (give.year === all.year));
+                if (i === -1) {
+                    return [...group, all];
                 }
+
+                group[i].salesCard += all.salesCard;
+                group[i].salesCash += all.salesCash;
+                return group;
+            };
+            const dataMap = data.map(mapper).reduce(reducer, []);
+
+
+            for (let i = 0; i < dataMap.length; i++) {
+                salesList[i] = ['' + dataMap[i]['year'] + '', dataMap[i]['salesCard'], dataMap[i]['salesCash']];
             }
-            google.charts.setOnLoadCallback(draw(salesList));
+            salesList.unshift(['Date', 'Sales Card', 'Sales Cash']);
+            google.charts.setOnLoadCallback(draw);
         }
 
-        function draw(salesList) {
-            const dataAPI = google.visualization.arrayToDataTable([
-                ['Date', 'Sales Card', 'Sales Cash'], salesList]);
+        function draw() {
+            const dataAPI = google.visualization.arrayToDataTable(salesList);
             const options = {
-                hAxis: { title: 'Años', titleTextStyle: { color: '#333' } },
-                vAxis: { title: 'Ventas', minValue: 0 }
+                hAxis: { title: 'Years', titleTextStyle: { color: '#333' } },
+                vAxis: { title: 'Sales', minValue: 0 }
             };
             chart = new google.visualization.AreaChart(document.getElementById(Grafic.AREA_YEAR));
             chart.draw(dataAPI, options);

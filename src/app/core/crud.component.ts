@@ -9,19 +9,27 @@ export class CrudComponent {
 
     @Input() title = 'Management';
     @Input() columns: Array<String>;
+    @Input() readAction = true;
     @Input() createAction = true;
     @Input() editAction = true;
     @Input() deleteAction = true;
+    @Input() passwordAction = false;
     @Input()
     set data(data: any[]) {
         this.dataSource = new MatTableDataSource<any>(data);
     }
 
+    @Output() read = new EventEmitter<any>();
     @Output() create = new EventEmitter<any>();
     @Output() edit = new EventEmitter<any>();
     @Output() delete = new EventEmitter<any>();
+    @Output() password = new EventEmitter<any>();
 
     dataSource: MatTableDataSource<any>;
+
+    onRead(item) {
+        this.read.emit(item);
+    }
 
     onCreate() {
         this.create.emit();
@@ -33,5 +41,9 @@ export class CrudComponent {
 
     onDelete(item) {
         this.delete.emit(item);
+    }
+
+    onPassword(item) {
+        this.password.emit(item);
     }
 }
