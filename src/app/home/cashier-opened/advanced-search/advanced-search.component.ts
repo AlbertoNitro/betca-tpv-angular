@@ -1,66 +1,47 @@
 import { Component } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+
+import { Provider } from '../../shared/provider.model';
 import { Article } from '../../shared/article.model';
 import { ArticleService } from '../../shared/article.service';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
-import { Provider } from '../../shared/provider.model';
 import { ProviderService } from '../../shared/provider.service';
+
 @Component({
   selector: 'app-advanced-search',
-  styleUrls: ['advanced-search.component.css'],
   templateUrl: 'advanced-search.component.html'
 })
 export class AdvancedSearchComponent {
-  displayedColumns = ['id', 'reference', 'description', 'retailPrice', 'stock', 'committed'];
+
+  displayedColumns = ['reference', 'description', 'provider', 'stock', 'actions'];
   dataSource: MatTableDataSource<Article>;
-  private code;
-  articleForm: Article;
-  listaProvider: Provider[];
-  alerta: string;
 
-  constructor(private articleService: ArticleService, public shoppingCartService: ShoppingCartService,
+  article: Article;
+  providers: Provider[];
+
+  constructor(private articleService: ArticleService, private shoppingCartService: ShoppingCartService,
     private providerService: ProviderService) {
+
     this.providerService.readAll().subscribe(
-      data => {
-        this.listaProvider = data;
-      }
+      data => this.providers = data
     );
-    this.articleForm = {
-      code: '', reference: null, description: '', stock: 0,
-      retailPriceMin: 0, retailPriceMax: 0, provider: ''
-    };
+    this.reset();
   }
-  add(code: string) {
-    this.code = code;
-    this.shoppingCartService.add(code);
+
+  add(article: Article) {
+    this.shoppingCartService.add(article.code);
   }
-  buscar() {
-    this.validar();
-    console.log(this.articleForm);
-    this.articleService.readAdvancedSearch(this.articleForm).subscribe(
-      data => {
-        this.dataSource = new MatTableDataSource<Article>(data);
-        if (data.length === 0) {
-          this.alerta = 'Products not found';
-        } else {
-          this.alerta = '';
-        }
-      },
+
+  find() {
+    this.article.description = this.article.description.trim();
+    this.article.reference = this.article.reference.trim();
+    this.articleService.readAdvancedSearch(this.article).subscribe(
+      data => this.dataSource = new MatTableDataSource<Article>(data)
     );
   }
 
-  validar() {
-    this.articleForm.description = this.articleForm.description.trim();
-    if (this.articleForm.reference != null) {
-      if (!this.articleForm.reference.trim()) {
-        this.articleForm.reference = null;
-      }
-    }
-    if (this.articleForm.retailPriceMin == null) {
-      this.articleForm.retailPriceMin = 0;
-    }
-    if (this.articleForm.retailPriceMax == null) {
-      this.articleForm.retailPriceMax = 0;
-    }
+  reset() {
+    this.article = { code: null, reference: null, description: null, provider: null };
   }
+
 }

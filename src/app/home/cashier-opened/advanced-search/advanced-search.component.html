@@ -1,71 +1,57 @@
-<mat-card class="example-card">
-  <mat-card-title>
-    <mat-icon color="primary">search</mat-icon> Advanced Search Product
-  </mat-card-title>
+<mat-card>
   <mat-card-content>
-
-    <div class="example-container">
-      <mat-checkbox class="example-margin" [(ngModel)]="showPrice">By Price</mat-checkbox>
-      <div class="container" fxLayout fxLayout.xs="column" fxLayoutAlign="space-around" fxLayoutGap="10px" fxLayoutGap.xs="0">  
-        <mat-form-field fxFlex="25%">
-          <input matInput placeholder="Reference" [(ngModel)]="articleForm.reference" >
-        </mat-form-field>
-        <mat-form-field fxFlex="25%">
-          <input matInput placeholder="Description" [(ngModel)]="articleForm.description">
-        </mat-form-field>
-        <mat-form-field fxFlex="25%">
-          <mat-select placeholder="Provider" [(ngModel)]="articleForm.provider">
-            <mat-option value="">Select Provider</mat-option>
-            <mat-option *ngFor="let item of listaProvider" [value]="item.id">{{item.company}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button fxFlex="10%" mat-raised-button color="accent" (click)="buscar()">Buscar</button>
-      </div>
-      <section class="example-section" *ngIf="showPrice">
-        <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Min Price" [(ngModel)]="articleForm.retailPriceMin">
-        </mat-form-field>
-        <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Max Price" [(ngModel)]="articleForm.retailPriceMax">
-        </mat-form-field>
-      </section>
-    </div>
-
-
     <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-        <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
-      </ng-container>
+
       <ng-container matColumnDef="reference">
-        <mat-header-cell *matHeaderCellDef> Reference </mat-header-cell>
-        <mat-cell *matCellDef="let item"> {{item.reference}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef fxFlex="20%">
+          <mat-form-field>
+            <input matInput placeholder="Reference" [(ngModel)]="article.reference">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%"> {{item.reference}} </mat-cell>
       </ng-container>
+
       <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-        <mat-cell *matCellDef="let item"> {{item.description}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef fxFlex="30%">
+          <mat-form-field>
+            <input matInput placeholder="Description" [(ngModel)]="article.description">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="30%"> {{item.description}} </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="retailPrice">
-        <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-        <mat-cell *matCellDef="let item"> {{item.retailPrice}} </mat-cell>
+
+      <ng-container matColumnDef="provider">
+        <mat-header-cell *matHeaderCellDef fxFlex="20%">
+          <mat-form-field>
+            <input matInput placeholder="Provider" [(ngModel)]="article.provider">
+          </mat-form-field>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%"> {{item.provider}} </mat-cell>
       </ng-container>
+
       <ng-container matColumnDef="stock">
-        <mat-header-cell *matHeaderCellDef> Stock</mat-header-cell>
-        <mat-cell *matCellDef="let item"> {{item.stock}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef fxFlex="10%"> Stock</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="10%"> {{item.stock}} </mat-cell>
       </ng-container>
-      <ng-container matColumnDef="committed">
-        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-        <mat-cell *matCellDef="let item">
-          <button mat-mini-fab color="accent" (click)="add(item.code)">
-            <strong>
-              <mat-icon aria-label="addcar">add_shopping_cart</mat-icon>
-            </strong>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef  fxFlex="20%">
+          <button type="submit" mat-button matSuffix mat-icon-button color="primary" (click)="find()">
+            <mat-icon>search</mat-icon>
+          </button>
+          <button type="submit" mat-button matSuffix mat-icon-button color="primary" (click)="reset()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%">
+          <button mat-button matSuffix mat-icon-button color="accent" (click)="add(item)">
+            <mat-icon>add_shopping_cart</mat-icon>
           </button>
         </mat-cell>
       </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
     </mat-table>
-    <p class="mensaje">{{alerta}}</p>
   </mat-card-content>
 </mat-card>
