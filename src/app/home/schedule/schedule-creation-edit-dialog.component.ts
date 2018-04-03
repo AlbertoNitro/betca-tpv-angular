@@ -22,7 +22,7 @@ export class ScheduleCreationEditDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.scheduler) {
-      this.scheduler = { id: undefined, dateTime: '', title: '', description: ''}
+      this.scheduler = { id: undefined, dateTime: undefined, title: ''}
     }
   }
 

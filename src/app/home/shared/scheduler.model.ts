@@ -1,6 +1,6 @@
 export interface Scheduler {
-    id: number;
-    dateTime: string;
+    id: string;
+    dateTime: Date;
     title: string;
-    description: string;
+    description?: string;
 }
