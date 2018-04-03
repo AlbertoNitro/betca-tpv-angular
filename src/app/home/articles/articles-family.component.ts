@@ -36,4 +36,10 @@ export class ArticlesFamilyComponent {
             result => this.synchronize()
         );
     }
+
+    delete(family: Family) {
+        this.articlesFamilyService.delete(this.familyId, family.id).subscribe(
+            () => this.synchronize()
+        );
+    }
 }

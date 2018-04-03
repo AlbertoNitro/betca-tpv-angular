@@ -35,4 +35,9 @@ export class ArticlesFamilyService {
     return this.httpService.authToken().post(ArticlesFamilyService.END_POINT + `/${familyId}` + ArticlesFamilyService.LIST, childId);
   }
 
+  delete(familyId: string, childId: string): Observable<any> {
+    return this.httpService.authToken().delete(
+      ArticlesFamilyService.END_POINT + `/${familyId}` + ArticlesFamilyService.LIST + `/${childId}`);
+  }
+
 }
