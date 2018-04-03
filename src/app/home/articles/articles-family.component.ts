@@ -3,6 +3,7 @@ import { Family } from '../cashier-opened/articles-family/family.model';
 import { MatDialog } from '@angular/material';
 import { ArticlesFamilyService } from '../shared/articles-family.service';
 import { FamilyAdditionDialogComponent } from './family-addition-dialog.component';
+import { FamilyCreationDialogComponent } from './family-creation-dialog.component';
 
 @Component({
     templateUrl: './articles-family.component.html'
@@ -15,14 +16,23 @@ export class ArticlesFamilyComponent {
     columns = ['description'];
     data: Family[];
 
-    familyId = 'root';
+    breadcrumbs: string;
+
+    family: Family;
 
     constructor(private dialog: MatDialog, private articlesFamilyService: ArticlesFamilyService) {
+        this.root();
+        this.synchronize();
+    }
+
+    root() {
+        this.breadcrumbs = '';
+        this.family = { id: 'root', description: 'Root' };
         this.synchronize();
     }
 
     synchronize() {
-        this.articlesFamilyService.findList(this.familyId).subscribe(
+        this.articlesFamilyService.findList(this.family.id).subscribe(
             data => this.data = data
         );
     }
@@ -30,7 +40,7 @@ export class ArticlesFamilyComponent {
     add() {
         this.dialog.open(FamilyAdditionDialogComponent,
             {
-                data: { familyId: this.familyId }
+                data: { familyId: this.family.id }
             }
         ).afterClosed().subscribe(
             result => this.synchronize()
@@ -38,8 +48,25 @@ export class ArticlesFamilyComponent {
     }
 
     delete(family: Family) {
-        this.articlesFamilyService.delete(this.familyId, family.id).subscribe(
+        this.articlesFamilyService.delete(this.family.id, family.id).subscribe(
             () => this.synchronize()
+        );
+    }
+
+    read(family: Family) {
+        this.family = family;
+        this.breadcrumbs += ' > ' + family.reference;
+        this.synchronize();
+    }
+
+    edit(family: Family) {
+        this.dialog.open(FamilyCreationDialogComponent, {
+            data: {
+                edit: true,
+                family: family
+            }
+        }).afterClosed().subscribe(
+            result => this.synchronize()
         );
     }
 }

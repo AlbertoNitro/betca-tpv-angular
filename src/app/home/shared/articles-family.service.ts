@@ -5,12 +5,14 @@ import { HttpService } from '../../core/http.service';
 import { Family } from '../cashier-opened/articles-family/family.model';
 import { FamilyType } from '../cashier-opened/articles-family/family-type.model';
 import { ArticleService } from './article.service';
+import { Article } from './article.model';
 
 @Injectable()
 export class ArticlesFamilyService {
   static END_POINT = '/articles-family';
 
   static LIST = '/list';
+  static ARTICLE = '/article';
 
   constructor(private httpService: HttpService) {
   }
@@ -22,6 +24,12 @@ export class ArticlesFamilyService {
   find(id: string): Observable<Family> {
     return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + `/${id}`);
   }
+
+  findArticle(id: string): Observable<Article> {
+    console.log('findArticle: ' + ArticlesFamilyService.END_POINT + `/${id}` + ArticlesFamilyService.ARTICLE);
+    return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + `/${id}` + ArticlesFamilyService.ARTICLE);
+  }
+
 
   findAll(): Observable<Family[]> {
     return this.httpService.authToken().get(ArticlesFamilyService.END_POINT);

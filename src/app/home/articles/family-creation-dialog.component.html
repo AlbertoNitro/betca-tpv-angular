@@ -1,11 +1,12 @@
-<h2 mat-dialog-title>Creation Family</h2>
+<h2 mat-dialog-title *ngIf="!edit">Creation Family</h2>
+<h2 mat-dialog-title *ngIf="edit">Edit Family</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <mat-select [(ngModel)]="family.familyType" >
+        <mat-select [(ngModel)]="family.familyType" [disabled]="edit">
             <mat-option *ngFor="let option of familyTypeKeys" [value]="option">{{option}}</mat-option>
         </mat-select>
     </mat-form-field>
-    <mat-form-field *ngIf="family.familyType==='ARTICLE'">
+    <mat-form-field *ngIf="family.familyType==='ARTICLE'" >
         <input matInput type="text" placeholder="Article Id" [(ngModel)]="family.articleId" [disabled]="articleIdSynchronized" />
         <button mat-button matSuffix mat-icon-button (click)="findArticle()" *ngIf="family.articleId && !articleIdSynchronized">
             <mat-icon *ngIf="!articleIdSynchronized" color="warn">search</mat-icon>
@@ -23,5 +24,6 @@
 </mat-dialog-content>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
-    <button mat-raised-button (click)="create()" [disabled]="!isValidCreate()">Create</button>
+    <button mat-raised-button *ngIf="!edit" (click)="create()" [disabled]="!isValidCreate()">Create</button>
+    <button mat-raised-button *ngIf="edit" (click)="edit()" [disabled]="!isValidCreate()">Edit</button>
 </mat-dialog-actions>

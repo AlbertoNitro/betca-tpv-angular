@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ArticlesFamilyService } from '../shared/articles-family.service';
 import { Family } from '../cashier-opened/articles-family/family.model';
 import { ArticleService } from '../shared/article.service';
@@ -17,11 +17,26 @@ export class FamilyCreationDialogComponent {
     familyTypeKeys = Object.keys(FamilyType);
     family: Family;
     articleIdSynchronized = false;
+    edit: boolean;
 
-    constructor(private dialogRef: MatDialogRef<FamilyCreationDialogComponent>,
+    constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<FamilyCreationDialogComponent>,
         private articlesFamilyService: ArticlesFamilyService, private articleService: ArticleService) {
 
         this.family = { description: undefined };
+        this.edit = false;
+        if (data) {
+            if (data.edit) {
+                this.edit = data.edit;
+            }
+            if (data.family) {
+                this.family = data.family;
+                if (data.family.familyType === FamilyType.ARTICLE) {
+                    this.articlesFamilyService.findArticle(data.family.id).subscribe(
+                        article => this.family.articleId = article.code
+                    );
+                }
+            }
+        }
     }
 
     findArticle() {
