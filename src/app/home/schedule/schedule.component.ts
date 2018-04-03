@@ -4,7 +4,6 @@ import {Scheduler} from '../shared/scheduler.model';
 import {SchedulerService} from "../shared/scheduler.service";
 import {ScheduleCreationEditDialogComponent} from "../schedule/schedule-creation-edit-dialog.component";
 
-//import {ProviderCreationEditDialogComponent} from "../providers/provider-creation-edit-dialog.component";
 
 @Component({
   templateUrl: `schedule.component.html`,
@@ -36,6 +35,20 @@ export class ScheduleComponent implements OnInit {
     dialogRef.componentInstance.edit = false;
     dialogRef.afterClosed().subscribe(
       () => this.synchronize()
+    );
+  }
+
+  edit(scheduler: Scheduler){
+    console.log("entro en edit con scheduler " + scheduler.id);
+    this.schedulerService.read(scheduler.id).subscribe(
+      data => {
+        const dialogRef = this.dialog.open(ScheduleCreationEditDialogComponent);
+        dialogRef.componentInstance.scheduler = data;
+        dialogRef.componentInstance.edit = true;
+        dialogRef.afterClosed().subscribe(
+          () => this.synchronize()
+        );
+      }
     );
   }
 }
