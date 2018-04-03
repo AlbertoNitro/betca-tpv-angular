@@ -1,9 +1,10 @@
 import { FamilyType } from './family-type.model';
 
 export interface Family {
-    id: string;
-    reference: string;
+    id?: string;
+    reference?: string;
     description: string;
     stock?: number;
-    composite: FamilyType;
+    familyType?: FamilyType;
+    articleId?: string;
 }
