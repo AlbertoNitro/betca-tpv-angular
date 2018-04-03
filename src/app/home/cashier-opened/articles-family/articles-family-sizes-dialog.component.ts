@@ -19,7 +19,7 @@ export class ArticlesFamilySizesDialogComponent {
     }
 
     color(family: Family): string {
-        if (family.composite === FamilyType.ARTICLE && family.stock && family.stock > 0) {
+        if (family.familyType === FamilyType.ARTICLE && family.stock && family.stock > 0) {
             return 'accent';
         } else {
             return 'basic';
