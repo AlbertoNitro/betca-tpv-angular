@@ -26,7 +26,7 @@ export class OrdersComponent implements OnInit {
                 , private providerService:ProviderService) {
     }
 
-    ngOnInit(): void {   
+    ngOnInit(): void {  
         this.syncronize();          
     }
 
@@ -36,6 +36,10 @@ export class OrdersComponent implements OnInit {
                 this.dataSource = new MatTableDataSource<order>(data);
             }
         );   
+    }
+
+    refresh(){
+        this.syncronize();
     }
 
     readOrderBody(code:string){
@@ -50,23 +54,29 @@ export class OrdersComponent implements OnInit {
     CreateOrder( idOrder:string ,IdProvider:string){
 
         this.order = { id: idOrder , provider_id: IdProvider , provider_name: "" };
-        this.orderService.createOrder(this.order).subscribe();            
-             
+        this.orderService.createOrder(this.order).subscribe(
+            ()=> {
+                this.syncronize();
+            } );
+                        
     }
 
-    addOrderBodyWithCodeOrder(idBodyOrder:string, idArticle:string , idOrder:string){
-        this.orderBodyElement = { id: idBodyOrder , id_article: idArticle , id_order : idOrder, article_name:""};
+    addOrderBodyWithCodeOrder( idArticle:string , idOrder:string){
+        var fecha = new Date();
+        this.orderBodyElement = { id: "".concat(fecha.getMinutes().toString())
+                                        .concat(fecha.getMilliseconds().toString()) 
+                                , id_article: idArticle 
+                                , id_order : idOrder, article_name:""};
         this.orderService.createOrderBodyByIdOrder(this.orderBodyElement).subscribe();
+        this.readOrderBody(idOrder);
     }
 
     CreatefromExistOrder(IdOrderExist:string,idOrderNew:string,IdProvider:string){
         this.CreateOrder(idOrderNew,IdProvider);
         this.readOrderBody(IdOrderExist);
-        this.orderBodyElements.forEach(element =>{
-                this.orderBodyElement = { id:element.id , id_article: element.id_article
-                    ,id_order:element.id_order,article_name:element.article_name};
-                this.orderBodyElementsToPut.push(this.orderBodyElement);
+        this.orderBodyElements.forEach(element =>{            
+            this.addOrderBodyWithCodeOrder(element.id_article,idOrderNew);
             }            
-        )        
+        ); 
     }
 }
