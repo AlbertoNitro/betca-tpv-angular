@@ -12,8 +12,10 @@ export class OrdersComponent implements OnInit {
     static URL = 'orders';
     order : order;
     orderBodyElement : orderBody;
+    orderBodyElements: orderBody[];
+    orderBodyElementsToPut:orderBody[];
     providerName : string;
-    displayedColumns = [ 'Id' , 'Provider_id' , 'Provider_name','Order_date'];
+    displayedColumns = [ 'Id' , 'provider_id' , 'provider_name','Order_date'];
     displayedColumnsCuerpo = [ 'Id' ,'id_order' , 'id_article' , 'article_name' ]
     dataSource: MatTableDataSource<order>;
     dataSourceBody : MatTableDataSource<orderBody>;
@@ -24,7 +26,7 @@ export class OrdersComponent implements OnInit {
                 , private providerService:ProviderService) {
     }
 
-    ngOnInit(): void {   
+    ngOnInit(): void {  
         this.syncronize();          
     }
 
@@ -36,30 +38,45 @@ export class OrdersComponent implements OnInit {
         );   
     }
 
+    refresh(){
+        this.syncronize();
+    }
+
     readOrderBody(code:string){
         this.orderService.readAllOrderBodyByIdOrder(code).subscribe(
             data => {
                 this.dataSourceBody = new MatTableDataSource<orderBody>(data);
+                this.orderBodyElements = data;
             }
         )
     }
 
     CreateOrder( idOrder:string ,IdProvider:string){
-        this.providerService.read(IdProvider).subscribe(
-            data => {
-                this.providerName = data.company;
-                this.order = { id: idOrder , Provider_id: IdProvider , Provider_name: this.providerName };
-                this.orderService.createOrder(this.order).subscribe();
-            }
-        )        
+
+        this.order = { id: idOrder , provider_id: IdProvider , provider_name: "" };
+        this.orderService.createOrder(this.order).subscribe(
+            ()=> {
+                this.syncronize();
+            } );
+                        
     }
 
-    addOrderBodyWithCodeOrder(idBodyOrder:string, idArticle:string , idOrder:string){
-        this.orderBodyElement = { id: idBodyOrder , id_article: idArticle , id_order : idOrder, article_name:""};
+    addOrderBodyWithCodeOrder( idArticle:string , idOrder:string){
+        var fecha = new Date();
+        this.orderBodyElement = { id: "".concat(fecha.getMinutes().toString())
+                                        .concat(fecha.getMilliseconds().toString()) 
+                                , id_article: idArticle 
+                                , id_order : idOrder, article_name:""};
         this.orderService.createOrderBodyByIdOrder(this.orderBodyElement).subscribe();
+        this.readOrderBody(idOrder);
     }
 
-    agregar_si_existe(code : string){
-        alert("llamar al servicio, cno el codigo , en el servicio, consultar si existe ese id de order, si-> actualizar el order body, no->pues nada")
+    CreatefromExistOrder(IdOrderExist:string,idOrderNew:string,IdProvider:string){
+        this.CreateOrder(idOrderNew,IdProvider);
+        this.readOrderBody(IdOrderExist);
+        this.orderBodyElements.forEach(element =>{            
+            this.addOrderBodyWithCodeOrder(element.id_article,idOrderNew);
+            }            
+        ); 
     }
 }
