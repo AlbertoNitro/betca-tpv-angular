@@ -48,6 +48,8 @@ import { CashierClosuresComponent } from './home/cashier-closures/cashier-closur
 import { ArticlesFamilySizesDialogComponent } from './home/cashier-opened/articles-family/articles-family-sizes-dialog.component';
 import { ArticlesFamilyComponent } from './home/articles/articles-family.component';
 import { ArticlesFamilyViewComponent } from './home/cashier-opened/articles-family/articles-family.component';
+import { FamilyAdditionDialogComponent } from './home/articles/family-addition-dialog.component';
+import { FamilyCreationDialogComponent } from './home/articles/family-creation-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -65,7 +67,7 @@ const appRoutes: Routes = [
       { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
       { path: InvoicesComponent.URL, component: InvoicesComponent },
       { path: OrdersComponent.URL, component: OrdersComponent },
-      { path: OffersComponent.URL, component: OffersComponent }
+      { path: OffersComponent.URL, component: OffersComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
       { path: RoleManagementComponent.URL, component: RoleManagementComponent },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
@@ -123,6 +125,8 @@ export class AppRoutingModule {
     OfferCreateEditDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
+    FamilyAdditionDialogComponent,
+    FamilyCreationDialogComponent,
     ProviderCreationEditDialogComponent,
     CheckOutDialogComponent,
     InvoiceCreationDialogComponent,

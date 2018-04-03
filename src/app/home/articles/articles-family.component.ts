@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Family } from '../cashier-opened/articles-family/family.model';
 import { MatDialog } from '@angular/material';
 import { ArticlesFamilyService } from '../shared/articles-family.service';
+import { FamilyAdditionDialogComponent } from './family-addition-dialog.component';
 
 @Component({
     templateUrl: './articles-family.component.html'
@@ -14,9 +15,25 @@ export class ArticlesFamilyComponent {
     columns = ['description'];
     data: Family[];
 
+    familyId = 'root';
+
     constructor(private dialog: MatDialog, private articlesFamilyService: ArticlesFamilyService) {
-        this.articlesFamilyService.find('root').subscribe(
+        this.synchronize();
+    }
+
+    synchronize() {
+        this.articlesFamilyService.findList(this.familyId).subscribe(
             data => this.data = data
+        );
+    }
+
+    add() {
+        this.dialog.open(FamilyAdditionDialogComponent,
+            {
+                data: { familyId: this.familyId }
+            }
+        ).afterClosed().subscribe(
+            result => this.synchronize()
         );
     }
 }

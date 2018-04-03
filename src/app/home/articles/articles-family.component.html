@@ -1,2 +1,3 @@
-<app-crud [title]="title" [columns]="columns" [readAction]="false" [data]="data" 
-  (create)="create()" (edit)="edit($event)" (delete)="delete($event)"></app-crud>
+<h3>{{root}}</h3>
+<app-crud [title]="title" [columns]="columns" [data]="data" 
+  (create)="add()" (edit)="edit($event)" (read)="read($event)" (delete)="delete($event)"></app-crud>

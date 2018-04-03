@@ -30,7 +30,7 @@ export class ArticlesFamilyViewComponent {
   }
 
   color(family: Family) {
-    if (family.composite === FamilyType.ARTICLES) {
+    if (family.familyType === FamilyType.ARTICLES) {
       return 'primary';
     } else {
       return 'accent';
@@ -38,22 +38,22 @@ export class ArticlesFamilyViewComponent {
   }
 
   nav(id: string) {
-      this.articlesFamilyService.find(id).subscribe(
+      this.articlesFamilyService.findList(id).subscribe(
         families => this.families = families
       );
   }
 
   find(family: Family) {
-    if (family.composite === FamilyType.ARTICLE) {
+    if (family.familyType === FamilyType.ARTICLE) {
       this.shoppingCartService.add(family.id).subscribe(
         () => true
       );
     } else {
-      this.articlesFamilyService.find(family.id).subscribe(
+      this.articlesFamilyService.findList(family.id).subscribe(
         families => {
-          if (family.composite === FamilyType.ARTICLES) {
+          if (family.familyType === FamilyType.ARTICLES) {
             this.families = families;
-          } else if (family.composite === FamilyType.SIZES) {
+          } else if (family.familyType === FamilyType.SIZES) {
             this.dialog.open(ArticlesFamilySizesDialogComponent, {
               width: '455px',
               data: { families: families }
