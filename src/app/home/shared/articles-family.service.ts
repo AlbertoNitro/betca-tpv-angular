@@ -8,26 +8,31 @@ import { ArticleService } from './article.service';
 
 @Injectable()
 export class ArticlesFamilyService {
-
   static END_POINT = '/articles-family';
-  static FAMILY = '/family';
-  static REFERENCE = '/reference';
 
-  static ROOT: Family[] = [
-    { id: '1', reference: 'SJB', description: 'San Juan Bosco', composite: FamilyType.ARTICLES },
-    { id: '2', reference: 'Media TU', description: 'YM. Media elastica talla única', composite: FamilyType.ARTICLE },
-    { id: '3', reference: 'SJB', description: 'San Juan Bosco', composite: FamilyType.ARTICLES },
-    { id: '4', reference: 'SJB', description: 'San Juan Bosco', composite: FamilyType.ARTICLES },
-    { id: '5', reference: 'SJB', description: 'San Juan Bosco', composite: FamilyType.ARTICLES },
-    { id: '6', reference: 'SJB', description: 'San Juan Bosco', composite: FamilyType.ARTICLES },
-  ];
+  static LIST = '/list';
 
   constructor(private httpService: HttpService) {
   }
 
-  find(id: string): Observable<Family[]> {
-    return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + '/' + id);
+  findList(id: string): Observable<Family[]> {
+    return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + `/${id}` + ArticlesFamilyService.LIST);
   }
 
+  find(id: string): Observable<Family> {
+    return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + `/${id}`);
+  }
+
+  findAll(): Observable<Family[]> {
+    return this.httpService.authToken().get(ArticlesFamilyService.END_POINT);
+  }
+
+  create(family: Family): Observable<any> {
+    return this.httpService.authToken().post(ArticlesFamilyService.END_POINT, family);
+  }
+
+  add(familyId: string, childId: string): Observable<any> {
+    return this.httpService.authToken().post(ArticlesFamilyService.END_POINT + `/${familyId}` + ArticlesFamilyService.LIST, childId);
+  }
 
 }
