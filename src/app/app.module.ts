@@ -42,7 +42,6 @@ import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
 import { ArticlesFamilyViewComponent } from './home/cashier-opened/articles-family/articles-family.component';
-import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 import { InvoiceService } from './home/shared/invoice.service';
 import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
@@ -99,8 +98,7 @@ import { SchedulerService } from './home/shared/scheduler.service';
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY,
-    HistoricChartComponent
+    AppRoutingModule.COMPONENT_FACTORY
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],

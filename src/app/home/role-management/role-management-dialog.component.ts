@@ -29,7 +29,8 @@ export class RoleManagementDialogComponent implements OnInit {
     }
 
     // modificar por role
-    this.selected = this.user.address.split(',', 4);
+    // this.selected = this.user.address.split(',', 4);
+    this.selected = this.user.role;
     this.initialChecking(this.selected);
     // console.log(this.selected);
   }
@@ -41,7 +42,9 @@ export class RoleManagementDialogComponent implements OnInit {
         this.selected.push(this.roleKeys[roleValue]);
       }
     }
-    this.user.address = this.selected.toString();
+    // modificar por role
+    this.user.role = this.selected;
+    // this.user.address = this.selected.toString();
   }
 
   initialChecking(roleModels: string[]): void {
@@ -54,7 +57,8 @@ export class RoleManagementDialogComponent implements OnInit {
   }
 
   save(): void {
-    this.user.address = this.selected.toString();
+    // this.user.address = this.selected.toString();
+    this.user.role = this.selected;
     this.userService.putObservable(this.user).subscribe(
       data => this.dialogRef.close()
     );
