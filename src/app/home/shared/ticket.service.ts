@@ -7,6 +7,7 @@ import { TicketUpdation } from './ticket-updation.model';
 import { NumProductSoldPerMonth } from './numProductSoldPerMonth.model';
 import { HttpService } from '../../core/http.service';
 import { NumProductSold } from './numProductSold.model';
+import { IncomeComparasion } from './IncomeComparasion.model';
 
 @Injectable()
 export class TicketService {
@@ -16,6 +17,7 @@ export class TicketService {
   static SEARCH_MOBILE_LAST = '/search/mobile/last';
   static NUM_PRODUCTS_SOLD = '/numProductsSold';
   static HISTORICAL_PRODUCTS = '/historicalProducts';
+  static COMPARISION_INCOME = '/comparisionIncome';
 
   static SEARCH_BY_ID_ARTICLE = '/searchByIdAndDates?';
 
@@ -77,6 +79,13 @@ export class TicketService {
       .param('initDate', dateStart.toISOString())
       .param('endDate', dateEnd.toISOString())
       .get(TicketService.END_POINT + TicketService.NUM_PRODUCTS_SOLD);
+  }
+
+  readComprisionIncome(dateStart: Date, dateEnd: Date): Observable<IncomeComparasion[]> {
+    return this.httpService.authToken()
+      .param('initDate', dateStart.toISOString())
+      .param('endDate', dateEnd.toISOString())
+      .get(TicketService.END_POINT + TicketService.COMPARISION_INCOME);
   }
 
 
