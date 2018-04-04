@@ -14,7 +14,7 @@ import { ArticleQuickCreationDialogComponent } from './article-quick-creation-di
     templateUrl: 'shopping-cart.component.html'
 })
 export class ShoppingCartComponent implements OnDestroy {
-    displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
+    displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
     dataSource: MatTableDataSource<Shopping>;
 
     stockLabel: string;
