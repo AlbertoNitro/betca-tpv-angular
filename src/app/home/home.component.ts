@@ -188,7 +188,7 @@ export class HomeComponent implements OnInit {
   }
 
   password() {
-    this.editPassword(this.data[1]);
+    this.editPassword(this.data[0]);
   }
 
   roleManagement() {

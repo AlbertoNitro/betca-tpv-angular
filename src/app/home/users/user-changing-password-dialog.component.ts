@@ -22,6 +22,7 @@ export class UserChangingPasswordDialogComponent implements OnInit {
     if (!this.user) {
       this.user = { mobile: undefined, username: '' };
     }
+    this.user.password = '';
   }
 
   isPasswordInvalid(): boolean {
