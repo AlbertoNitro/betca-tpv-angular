@@ -1,1 +1,32 @@
-<h2>Income comparation chart</h2>
+<mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <span>Price of the product</span>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-card>
+        <mat-card-content>
+            <div fxLayout fxLayout.xs="column" fxLayoutGap="0.5%">
+                <div fxFlex="75%">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="initDatePicker" placeholder="Choose a date" [formControl]="initDate">
+                        <mat-datepicker-toggle matSuffix [for]="initDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #initDatePicker></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="endDatePicker" placeholder="Choose a date" [formControl]="endDate">
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="25%" class="refreshBtnContainer">
+                    <button class="refresh" type="submit" disabled={{disabled}} mat-fab color="primary" (click)="refreshPercentageChart()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div style="display: block;">
+                <canvas baseChart #chartIncomeComparation="base-chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                    [chartType]="barChartType"></canvas>
+            </div>
+        </mat-card-content>
+    </mat-card>
