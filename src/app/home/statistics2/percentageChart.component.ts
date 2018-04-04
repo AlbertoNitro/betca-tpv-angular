@@ -26,18 +26,38 @@ export class PercentageChartComponent implements OnInit {
 
     ngOnInit(): void { }
 
-    refreshHistoricalProductsChart(): void {
+    refreshPercentageChart(): void {
         this.disabled = true;
-
         // hacer llamada al servicio
-        this.doughnutChartLabels = ['product1', 'product2', 'product3', 'product4', 'product5', 'product6'];
-        const aux = [350, 450, 100, 350, 450, 100];
-        this.doughnutChartData.length = 0;
-        aux.forEach(element => {
-            this.doughnutChartData.push(element);
-        });
+        this.ticketService.readNumProductSoldBetweenDates(
+            new Date(this.initDate.value),
+            new Date(this.endDate.value)
+        ).subscribe(
+            data => {
+                console.log('hola');
+                console.log(data);
+                if (data.length > 0) {
 
-        this.disabled = false;
+                    const auxLabels = [];
+                    this.doughnutChartData.length = 0;
+                    for (const item of data) {
+                        auxLabels.push(item.productName);
+                        this.doughnutChartData.push(item.quantity);
+                    }
+                    this.doughnutChartLabels = auxLabels;
+
+                } else {
+                    this.showError('No available data');
+                }
+            },
+            error => {
+                this.showError('Server not found, try again in a few minutes');
+                this.disabled = false;
+            },
+            () => {
+                this.disabled = false;
+            }
+        );
     }
 
     private showError(msg: string) {

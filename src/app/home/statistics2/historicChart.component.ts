@@ -79,6 +79,7 @@ export class HistoricChartComponent implements OnInit {
             },
             error => {
                 this.showError('Server not found, try again in a few minutes');
+                this.disabled = false;
             },
             () => {
                 this.disabled = false;
