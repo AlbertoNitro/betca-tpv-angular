@@ -22,7 +22,7 @@ export class HistoricChartComponent implements OnInit {
     public lineChartData: Array<any> = [
         { data: [], label: '' },
     ];
-    public lineChartLabels: Array<any> = [''];
+    public lineChartLabels: Array<any> = [];
 
     public lineChartLegend = true;
     public lineChartType = 'line';
@@ -34,7 +34,7 @@ export class HistoricChartComponent implements OnInit {
         this.disabled = true;
 
         // hacer llamada al servicio
-        this.ticketService.readNumProductsBetweenDates(
+        this.ticketService.readNumProductSoldPerMonthsBetweenDates(
             new Date(this.initDate.value),
             new Date(this.endDate.value)
         ).subscribe(
@@ -79,6 +79,7 @@ export class HistoricChartComponent implements OnInit {
             },
             error => {
                 this.showError('Server not found, try again in a few minutes');
+                this.disabled = false;
             },
             () => {
                 this.disabled = false;

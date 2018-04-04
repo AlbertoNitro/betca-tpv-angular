@@ -3,19 +3,22 @@
         <mat-card-title>
             <mat-icon color="primary">shopping_cart</mat-icon>ORDERS 
         </mat-card-title>
+        <button type="submit" mat-mini-fab color="primary" (click)="refresh()">
+            <mat-icon>refresh</mat-icon>
+        </button>
         <mat-card-content>
             <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
                 <ng-container matColumnDef="Id">
                     <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
                     <mat-cell *matCellDef="let item"> {{item.id}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="Provider_id">
+                <ng-container matColumnDef="provider_id">
                     <mat-header-cell *matHeaderCellDef> Provider_id </mat-header-cell>
-                    <mat-cell *matCellDef="let item"> {{item.Provider_id}} </mat-cell>
+                    <mat-cell *matCellDef="let item"> {{item.provider_id}} </mat-cell>
                 </ng-container>
-                <ng-container matColumnDef="Provider_name">
+                <ng-container matColumnDef="provider_name">
                     <mat-header-cell *matHeaderCellDef> Provider_name </mat-header-cell>
-                    <mat-cell *matCellDef="let item"> {{item.Provider_name}} </mat-cell>
+                    <mat-cell *matCellDef="let item"> {{item.provider_name}} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="Order_date">
                     <mat-header-cell *matHeaderCellDef> Order_date </mat-header-cell>
@@ -57,14 +60,19 @@
                 <mat-header-row *matHeaderRowDef="displayedColumnsCuerpo"></mat-header-row>
                 <mat-row *matRowDef="let elemento; columns: displayedColumnsCuerpo;"></mat-row>
             </mat-table>
+            <br>
+            <br>
             <form>
+                <mat-card-title>
+                    Add products to OrderBody
+                </mat-card-title>
                 <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Id OrderBody" type="text" #codeOrderBody>
-                    </mat-form-field>
+                    <input matInput placeholder="Code of exist order" type="text" #codeOrderPreviusExist>
+                </mat-form-field>
                 <mat-form-field class="example-full-width">
                     <input matInput placeholder="Id article" type="text" #codeArticle>
                 </mat-form-field>
-                <button type="submit" mat-mini-fab color="primary" (click)=addOrderBodyWithCodeOrder(codeOrderBody.value,codeArticle.value,codigoOrder.value)>
+                <button type="submit" mat-mini-fab color="primary" (click)=addOrderBodyWithCodeOrder(codeArticle.value,codeOrderPreviusExist.value)>
                     <i class="material-icons">add</i>
                 </button>
             </form>
@@ -87,6 +95,16 @@
                 <button type="submit" mat-mini-fab color="primary" (click)=CreateOrder(idOrder.value,IdProvider.value)>
                     <mat-icon>add</mat-icon>
                 </button>
+                Create new Order
+            </form>
+            <form>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Crear desde order existente" type="text" #IdOrderExist>
+                </mat-form-field>
+                <button type="submit" mat-mini-fab color="primary" (click)=CreatefromExistOrder(IdOrderExist.value,idOrder.value,IdProvider.value)>
+                    <mat-icon>add</mat-icon>
+                </button>
+                Create order From Exist Order
             </form>
         </mat-card-content>
     </mat-card>
