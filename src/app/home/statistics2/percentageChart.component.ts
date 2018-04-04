@@ -2,6 +2,7 @@ import { OnInit, ViewChild, Component, SimpleChanges } from '@angular/core';
 import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { BaseChartDirective } from 'ng2-charts';
 import { FormControl } from '@angular/forms';
+import { TicketService } from '../shared/ticket.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class PercentageChartComponent implements OnInit {
     @ViewChild('chartPercentage') chartPercentage: BaseChartDirective;
     initDate = new FormControl(new Date());
     endDate = new FormControl(new Date());
-    constructor(private snackBar: MatSnackBar) { }
+    constructor(private ticketService: TicketService, private snackBar: MatSnackBar) { }
     // Atributos gráfica percentage
     public disabled = false;
     public doughnutChartLabels: string[] = ['product1', 'product2', 'product3'];

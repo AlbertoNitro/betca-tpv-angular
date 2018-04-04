@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { Ticket } from './ticket.model';
 import { TicketCreation } from './ticket-creation.model';
 import { TicketUpdation } from './ticket-updation.model';
-import { NumProductSold } from './numProductSold.model';
+import { NumProductSoldPerMonth } from './numProductSoldPerMonth.model';
 import { HttpService } from '../../core/http.service';
 
 @Injectable()
@@ -52,7 +52,7 @@ export class TicketService {
     return this.httpService.authToken().pdf().put(TicketService.END_POINT + '/' + ticket.id, ticket);
   }
 
-  readNumProductsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
+  readNumProductSoldPerMonthsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSoldPerMonth[]> {
     const historicalProducts = '/historicalProducts';
     // return this.httpService.authToken().get(TicketService.END_POINT + historicalProducts );
     return this.httpService.authToken()

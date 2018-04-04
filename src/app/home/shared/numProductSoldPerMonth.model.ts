@@ -1,5 +1,5 @@
 
-export interface NumProductSold {
+export interface NumProductSoldPerMonth {
   productName: String;
   numProductsPerMonth: Array<number>;
 }
