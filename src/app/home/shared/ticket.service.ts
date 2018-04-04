@@ -4,8 +4,9 @@ import { Observable } from 'rxjs/Observable';
 import { Ticket } from './ticket.model';
 import { TicketCreation } from './ticket-creation.model';
 import { TicketUpdation } from './ticket-updation.model';
-import { NumProductSold } from './numProductSold.model';
+import { NumProductSoldPerMonth } from './numProductSoldPerMonth.model';
 import { HttpService } from '../../core/http.service';
+import { NumProductSold } from './numProductSold.model';
 
 @Injectable()
 export class TicketService {
@@ -13,6 +14,8 @@ export class TicketService {
   static SEARCH_DATE = '/search/date';
   static SEARCH_MOBILE = '/search/mobile';
   static SEARCH_MOBILE_LAST = '/search/mobile/last';
+  static NUM_PRODUCTS_SOLD = '/numProductsSold';
+  static HISTORICAL_PRODUCTS = '/historicalProducts';
 
   static SEARCH_BY_ID_ARTICLE = '/searchByIdAndDates?';
 
@@ -52,13 +55,11 @@ export class TicketService {
     return this.httpService.authToken().pdf().put(TicketService.END_POINT + '/' + ticket.id, ticket);
   }
 
-  readNumProductsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
-    const historicalProducts = '/historicalProducts';
-    // return this.httpService.authToken().get(TicketService.END_POINT + historicalProducts );
+  readNumProductSoldPerMonthsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSoldPerMonth[]> {
     return this.httpService.authToken()
       .param('initDate', dateStart.toISOString())
       .param('endDate', dateEnd.toISOString())
-      .get(TicketService.END_POINT + historicalProducts);
+      .get(TicketService.END_POINT + TicketService.HISTORICAL_PRODUCTS);
   }
 
   readIdArticleDatesBetween(id: string): Observable<TicketCreation[]> {
@@ -69,6 +70,13 @@ export class TicketService {
       .param('dateStart', year + '-01-01 00:00:00')
       .param('dateFinish', year + '-12-31 23:59:59')
       .get(TicketService.END_POINT + TicketService.SEARCH_BY_ID_ARTICLE);
+  }
+
+  readNumProductSoldBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSold[]> {
+    return this.httpService.authToken()
+      .param('initDate', dateStart.toISOString())
+      .param('endDate', dateEnd.toISOString())
+      .get(TicketService.END_POINT + TicketService.NUM_PRODUCTS_SOLD);
   }
 
 
