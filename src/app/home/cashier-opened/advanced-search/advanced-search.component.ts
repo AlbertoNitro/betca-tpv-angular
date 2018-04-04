@@ -29,12 +29,15 @@ export class AdvancedSearchComponent {
   }
 
   add(article: Article) {
-    this.shoppingCartService.add(article.code);
+    console.log(article.code);
+    this.shoppingCartService.add(article.code).subscribe(
+      () => true
+    );
   }
 
   find() {
-    this.article.description = this.article.description.trim();
-    this.article.reference = this.article.reference.trim();
+    this.article.description = this.trim(this.article.description);
+    this.article.reference = this.trim(this.article.reference);
     this.articleService.readAdvancedSearch(this.article).subscribe(
       data => this.dataSource = new MatTableDataSource<Article>(data)
     );
@@ -42,6 +45,15 @@ export class AdvancedSearchComponent {
 
   reset() {
     this.article = { code: null, reference: null, description: null, provider: null };
+    this.dataSource = undefined;
+  }
+
+  trim(str: string) {
+    if (str) {
+      return str.trim();
+    } else {
+      return null;
+    }
   }
 
 }
