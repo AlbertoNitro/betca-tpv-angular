@@ -5,15 +5,15 @@ import { FormControl } from '@angular/forms';
 
 
 @Component({
-    selector: 'app-income-comparation-chart',
-    templateUrl: 'incomeComparationChart.component.html',
+    selector: 'app-income-comparison-chart',
+    templateUrl: 'incomeComparisonChart.component.html',
     styleUrls: ['statistics2.component.css'],
     providers: []
 })
 
-export class IncomeComparationChartComponent implements OnInit {
+export class IncomeComparisonChartComponent implements OnInit {
 
-    @ViewChild('chartIncomeComparation') chartIncomeComparation: BaseChartDirective;
+    @ViewChild('chartIncomeComparison') chartIncomeComparison: BaseChartDirective;
     initDate = new FormControl(new Date());
     endDate = new FormControl(new Date());
     constructor(private snackBar: MatSnackBar) { }

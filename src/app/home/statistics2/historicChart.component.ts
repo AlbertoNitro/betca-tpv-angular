@@ -22,7 +22,7 @@ export class HistoricChartComponent implements OnInit {
     public lineChartData: Array<any> = [
         { data: [], label: '' },
     ];
-    public lineChartLabels: Array<any> = [''];
+    public lineChartLabels: Array<any> = [];
 
     public lineChartLegend = true;
     public lineChartType = 'line';

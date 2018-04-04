@@ -20,8 +20,8 @@ export class PercentageChartComponent implements OnInit {
     constructor(private ticketService: TicketService, private snackBar: MatSnackBar) { }
     // Atributos gráfica percentage
     public disabled = false;
-    public doughnutChartLabels: string[] = ['product1', 'product2', 'product3'];
-    public doughnutChartData: number[] = [350, 450, 100];
+    public doughnutChartLabels: string[] = [];
+    public doughnutChartData: number[] = [];
     public doughnutChartType = 'doughnut';
 
     ngOnInit(): void { }
@@ -34,8 +34,6 @@ export class PercentageChartComponent implements OnInit {
             new Date(this.endDate.value)
         ).subscribe(
             data => {
-                console.log('hola');
-                console.log(data);
                 if (data.length > 0) {
 
                     const auxLabels = [];
