@@ -17,8 +17,7 @@ import { FamilyType } from './family-type.model';
   templateUrl: './articles-family.component.html',
   styleUrls: ['./articles-family.component.css']
 })
-
-export class ArticlesFamilyComponent {
+export class ArticlesFamilyViewComponent {
   static URL = 'articlesfamily';
 
   families: Family[];
@@ -31,7 +30,7 @@ export class ArticlesFamilyComponent {
   }
 
   color(family: Family) {
-    if (family.composite === FamilyType.ARTICLES) {
+    if (family.familyType === FamilyType.ARTICLES) {
       return 'primary';
     } else {
       return 'accent';
@@ -39,22 +38,22 @@ export class ArticlesFamilyComponent {
   }
 
   nav(id: string) {
-      this.articlesFamilyService.find(id).subscribe(
+      this.articlesFamilyService.findList(id).subscribe(
         families => this.families = families
       );
   }
 
   find(family: Family) {
-    if (family.composite === FamilyType.ARTICLE) {
+    if (family.familyType === FamilyType.ARTICLE) {
       this.shoppingCartService.add(family.id).subscribe(
         () => true
       );
     } else {
-      this.articlesFamilyService.find(family.id).subscribe(
+      this.articlesFamilyService.findList(family.id).subscribe(
         families => {
-          if (family.composite === FamilyType.ARTICLES) {
+          if (family.familyType === FamilyType.ARTICLES) {
             this.families = families;
-          } else if (family.composite === FamilyType.SIZES) {
+          } else if (family.familyType === FamilyType.SIZES) {
             this.dialog.open(ArticlesFamilySizesDialogComponent, {
               width: '455px',
               data: { families: families }
