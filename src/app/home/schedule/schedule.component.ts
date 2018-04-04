@@ -12,7 +12,7 @@ import {ScheduleCreationEditDialogComponent} from "../schedule/schedule-creation
 export class ScheduleComponent implements OnInit {
   static URL = 'schedule';
   title = 'Scheduler Events';
-  columns = ['dateTime', 'Title', 'Description'];
+  columns = ['dateTime', 'title', 'description'];
   data: Scheduler[];
 
   constructor(public dialog: MatDialog, private schedulerService: SchedulerService) {
@@ -20,17 +20,14 @@ export class ScheduleComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('paso por ngOninit');
     this.synchronize();
   }
 
   synchronize() {
-    console.log('paso por synchornize');
     this.schedulerService.readAll().subscribe(data => this.data = data);
   }
 
   create() {
-    console.log('entro en create');
     const dialogRef = this.dialog.open(ScheduleCreationEditDialogComponent);
     dialogRef.componentInstance.edit = false;
     dialogRef.afterClosed().subscribe(
