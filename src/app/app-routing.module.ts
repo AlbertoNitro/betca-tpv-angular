@@ -52,6 +52,7 @@ import { FamilyAdditionDialogComponent } from './home/articles/family-addition-d
 import { FamilyCreationDialogComponent } from './home/articles/family-creation-dialog.component';
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 import { PercentageChartComponent} from './home/statistics2/percentageChart.component';
+import {IncomeComparationChartComponent} from './home/statistics2/incomeComparationChart.component';
 
 
 const appRoutes: Routes = [
@@ -117,7 +118,8 @@ export class AppRoutingModule {
     VouchersComponent,
     WelcomeComponent,
     HistoricChartComponent,
-    PercentageChartComponent
+    PercentageChartComponent,
+    IncomeComparationChartComponent
   ];
 
   static COMPONENT_FACTORY = [
