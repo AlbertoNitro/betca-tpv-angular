@@ -1,8 +1,6 @@
 export interface orderBody{
-    id : number;
-    id_order : number;
-    id_provedor: number;
-    id_articulo : number;
-    articulo : string;
-    cantidad : number;    
+    id : string;
+    id_order : string;
+    id_article : string;
+    article_name : string;
 }

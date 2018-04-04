@@ -79,6 +79,9 @@ export class ShoppingCartService {
         return this.articleService.readObservable(code).map(
             (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
+                if (article.stock < 1) {
+                    shopping.committed = false;
+                }
                 if (article.code === '1') {
                     shopping.total = Number(code) / 100;
                     shopping.updateDiscount();
