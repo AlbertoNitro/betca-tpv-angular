@@ -7,8 +7,7 @@ import { ArticleCreationEditDialogComponent } from './article-creation-edit-dial
 
 @Component({
   selector: 'app-articles',
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.css']
+  templateUrl: './articles.component.html'
 })
 
 export class ArticlesComponent implements OnInit {
@@ -46,7 +45,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   edit(article: Article) {
-    this.articleService.readObservable(article.code).subscribe(
+    this.articleService.readOne(article.code).subscribe(
       data => {
         const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
         dialogRef.componentInstance.article = data;

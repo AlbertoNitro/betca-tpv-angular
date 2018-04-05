@@ -11,7 +11,6 @@ import { AbstractControl } from '@angular/forms';
 export class UserChangingPasswordDialogComponent implements OnInit {
   edit: boolean;
   user: User;
-  password: string;
   confirmPassword: string;
   passwordError: string;
 
@@ -23,14 +22,15 @@ export class UserChangingPasswordDialogComponent implements OnInit {
     if (!this.user) {
       this.user = { mobile: undefined, username: '' };
     }
+    this.user.password = '';
   }
 
   isPasswordInvalid(): boolean {
-    return ((this.password !== this.confirmPassword));
+    return ((this.user.password !== this.confirmPassword));
   }
 
   save(): void {
-
+    // this.user.password = this.password;
     this.userService.putObservable(this.user).subscribe(
       data => this.dialogRef.close()
     );

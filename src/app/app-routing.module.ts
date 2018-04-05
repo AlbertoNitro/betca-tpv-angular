@@ -46,6 +46,14 @@ import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-c
 import { ScheduleCreationEditDialogComponent } from './home/schedule/schedule-creation-edit-dialog.component';
 import { CashierClosuresComponent } from './home/cashier-closures/cashier-closures.component';
 import { ArticlesFamilySizesDialogComponent } from './home/cashier-opened/articles-family/articles-family-sizes-dialog.component';
+import { ArticlesFamilyComponent } from './home/articles/articles-family.component';
+import { ArticlesFamilyViewComponent } from './home/cashier-opened/articles-family/articles-family.component';
+import { FamilyAdditionDialogComponent } from './home/articles/family-addition-dialog.component';
+import { FamilyCreationDialogComponent } from './home/articles/family-creation-dialog.component';
+import { HistoricChartComponent } from './home/statistics2/historicChart.component';
+import { PercentageChartComponent} from './home/statistics2/percentageChart.component';
+import {IncomeComparisonChartComponent} from './home/statistics2/incomeComparisonChart.component';
+import { ArticlesTrackingComponent } from './home/articles-tracking/articles-tracking.component';
 
 
 const appRoutes: Routes = [
@@ -54,25 +62,27 @@ const appRoutes: Routes = [
   {
     path: HomeComponent.URL, component: HomeComponent,
     children: [
+      { path: ArticlesComponent.URL, component: ArticlesComponent },
+      { path: ArticlesFamilyComponent.URL, component: ArticlesFamilyComponent },
       { path: BudgetsComponent.URL, component: BudgetsComponent },
       { path: CashierClosedComponent.URL, component: CashierClosedComponent },
-      { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
-      { path: CashierMovementDialogComponent.URL, component: CashierMovementDialogComponent },
       { path: CashierClosuresComponent.URL, component: CashierClosuresComponent },
+      { path: CashierMovementDialogComponent.URL, component: CashierMovementDialogComponent },
+      { path: CashierOpenedComponent.URL, component: CashierOpenedComponent },
+      { path: InvoicesComponent.URL, component: InvoicesComponent },
+      { path: OrdersComponent.URL, component: OrdersComponent },
+      { path: OffersComponent.URL, component: OffersComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
+      { path: RoleManagementComponent.URL, component: RoleManagementComponent },
+      { path: ScheduleComponent.URL, component: ScheduleComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
+      { path: Statistics2Component.URL, component: Statistics2Component },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
-      { path: InvoicesComponent.URL, component: InvoicesComponent },
-      { path: ArticlesComponent.URL, component: ArticlesComponent },
-      { path: UsersComponent.URL, component: UsersComponent },
-      { path: RoleManagementComponent.URL, component: RoleManagementComponent },
       { path: TokenManagementComponent.URL, component: TokenManagementComponent },
+      { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
-      { path: Statistics2Component.URL, component: Statistics2Component },
-      { path: ScheduleComponent.URL, component: ScheduleComponent },
-      { path: OrdersComponent.URL, component: OrdersComponent },
-      { path: OffersComponent.URL, component: OffersComponent }
+      { path: ArticlesTrackingComponent.URL, component: ArticlesTrackingComponent },
     ]
   }
 ];
@@ -84,28 +94,34 @@ const appRoutes: Routes = [
 export class AppRoutingModule {
   static COMPONENTS = [
     AdvancedSearchComponent,
+    ArticlesComponent,
+    ArticlesFamilyComponent,
+    ArticlesFamilyViewComponent,
     BudgetsComponent,
     CashierClosedComponent,
     CashierOpenedComponent,
     CashierMovementDialogComponent,
     CashierClosuresComponent,
     HomeComponent,
+    InvoicesComponent,
+    OrdersComponent,
+    OffersComponent,
     ProvidersComponent,
+    RoleManagementComponent,
+    ScheduleComponent,
     ShoppingCartComponent,
     StatisticsComponent,
+    Statistics2Component,
     StockAlertComponent,
     TicketsComponent,
-    InvoicesComponent,
+    TokenManagementComponent,
+    UserQuickCrudComponent,
     UsersComponent,
     VouchersComponent,
     WelcomeComponent,
-    Statistics2Component,
-    ScheduleComponent,
-    UserQuickCrudComponent,
-    OrdersComponent,
-    OffersComponent,
-    RoleManagementComponent,
-    TokenManagementComponent
+    HistoricChartComponent,
+    PercentageChartComponent,
+    IncomeComparisonChartComponent
   ];
 
   static COMPONENT_FACTORY = [
@@ -117,6 +133,8 @@ export class AppRoutingModule {
     OfferCreateEditDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
+    FamilyAdditionDialogComponent,
+    FamilyCreationDialogComponent,
     ProviderCreationEditDialogComponent,
     CheckOutDialogComponent,
     InvoiceCreationDialogComponent,
@@ -130,6 +148,7 @@ export class AppRoutingModule {
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,
     VoucherConsumeDialogComponent,
-    ScheduleCreationEditDialogComponent
+    ScheduleCreationEditDialogComponent,
+    ArticlesTrackingComponent
   ];
 }

@@ -17,8 +17,7 @@ import { FamilyType } from './family-type.model';
   templateUrl: './articles-family.component.html',
   styleUrls: ['./articles-family.component.css']
 })
-
-export class ArticlesFamilyComponent {
+export class ArticlesFamilyViewComponent {
   static URL = 'articlesfamily';
 
   families: Family[];
@@ -27,31 +26,44 @@ export class ArticlesFamilyComponent {
   constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService,
     private articlesFamilyService: ArticlesFamilyService) {
 
-    this.families = this.articlesFamilyService.findRoot();
+    this.nav('root');
   }
 
   color(family: Family) {
-    if (family.composite === FamilyType.ARTICLES) {
+    if (family.familyType === FamilyType.ARTICLES) {
       return 'primary';
     } else {
       return 'accent';
     }
   }
 
-  find(family: Family) {
-    if (family.composite === FamilyType.ARTICLE) {
-      this.shoppingCartService.add(family.id).subscribe(
-        () => true
-      );
-    } else {
-      this.articlesFamilyService.find(family.id).subscribe(
-        families => this.families = families
-      );
-    }
+  nav(id: string) {
+    this.articlesFamilyService.findList(id).subscribe(
+      families => this.families = families
+    );
   }
 
-  tallas() {
-    this.dialog.open(ArticlesFamilySizesDialogComponent, { width: '500px' });
+  find(family: Family) {
+    if (family.familyType === FamilyType.ARTICLE) {
+      this.articlesFamilyService.findArticle(family.id).subscribe(
+        article => this.shoppingCartService.add(family.id).subscribe(
+          () => true
+        )
+      );
+    } else {
+      this.articlesFamilyService.findList(family.id).subscribe(
+        families => {
+          if (family.familyType === FamilyType.ARTICLES) {
+            this.families = families;
+          } else if (family.familyType === FamilyType.SIZES) {
+            this.dialog.open(ArticlesFamilySizesDialogComponent, {
+              width: '455px',
+              data: { families: families, title: family.description }
+            });
+          }
+        }
+      );
+    }
   }
 
 }

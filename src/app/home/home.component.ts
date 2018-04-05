@@ -32,6 +32,8 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { User } from './shared/user.model';
 import { UserService } from './shared/user.service';
 import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
+import { ArticlesFamilyComponent } from './articles/articles-family.component';
+import { ArticlesTrackingComponent } from './articles-tracking/articles-tracking.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -155,6 +157,10 @@ export class HomeComponent implements OnInit {
     this.router.navigate([HomeComponent.URL, ArticlesComponent.URL]);
   }
 
+  articlesFamily() {
+    this.router.navigate([HomeComponent.URL, ArticlesFamilyComponent.URL]);
+  }
+
   providers() {
     this.router.navigate([HomeComponent.URL, ProvidersComponent.URL]);
   }
@@ -188,7 +194,7 @@ export class HomeComponent implements OnInit {
   }
 
   password() {
-    this.editPassword(this.data[1]);
+    this.editPassword(this.data[0]);
   }
 
   roleManagement() {
@@ -197,6 +203,10 @@ export class HomeComponent implements OnInit {
 
   tokenManagement() {
     this.router.navigate([HomeComponent.URL, TokenManagementComponent.URL]);
+  }
+
+  articleTracking() {
+    this.router.navigate([HomeComponent.URL, ArticlesTrackingComponent.URL]);
   }
 
 }

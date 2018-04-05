@@ -20,12 +20,9 @@ export class HistoricChartComponent implements OnInit {
     constructor(private ticketService: TicketService, private snackBar: MatSnackBar) { }
     // Atributos gráfica Historical products
     public lineChartData: Array<any> = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Producto A' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Producto B' },
-        { data: [18, 48, 77, 9, 100, 27, 40], label: 'Producto C' }
-
+        { data: [], label: '' },
     ];
-    public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    public lineChartLabels: Array<any> = [];
 
     public lineChartLegend = true;
     public lineChartType = 'line';
@@ -37,7 +34,7 @@ export class HistoricChartComponent implements OnInit {
         this.disabled = true;
 
         // hacer llamada al servicio
-        this.ticketService.readNumProductsBetweenDates(
+        this.ticketService.readNumProductSoldPerMonthsBetweenDates(
             new Date(this.initDate.value),
             new Date(this.endDate.value)
         ).subscribe(
@@ -82,6 +79,7 @@ export class HistoricChartComponent implements OnInit {
             },
             error => {
                 this.showError('Server not found, try again in a few minutes');
+                this.disabled = false;
             },
             () => {
                 this.disabled = false;

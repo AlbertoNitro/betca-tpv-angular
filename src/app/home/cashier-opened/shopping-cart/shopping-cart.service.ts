@@ -12,6 +12,8 @@ import { TicketCreation } from '../../shared/ticket-creation.model';
 import { Budget } from '../../shared/budget.model';
 import { Article } from '../../shared/article.model';
 import { InvoiceCreation } from '../../shared/invoice-creation.model';
+import { ReservationCreation } from '../../shared/reservation-creation.model';
+import { ReservationService } from '../../shared/reservation.service';
 
 @Injectable()
 export class ShoppingCartService {
@@ -27,7 +29,7 @@ export class ShoppingCartService {
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, private invoiceService: InvoiceService) {
+        private budgetService: BudgetService, private invoiceService: InvoiceService, private reservationService: ReservationService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -76,9 +78,12 @@ export class ShoppingCartService {
     }
 
     add(code: string): Observable<Article> {
-        return this.articleService.readObservable(code).map(
+        return this.articleService.readOne(code).map(
             (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
+                if (article.stock < 1) {
+                    shopping.committed = false;
+                }
                 if (article.code === '1') {
                     shopping.total = Number(code) / 100;
                     shopping.updateDiscount();
@@ -104,6 +109,13 @@ export class ShoppingCartService {
         );
     }
 
+    reservation(reservationCreation: ReservationCreation): Observable<any> {
+        reservationCreation.shoppingCart = this.shoppingCart;
+        return this.reservationService.create(reservationCreation).map(
+            () => this.reset()
+        );
+    }
+
     createBudget(): void {
         const budget: Budget = { shoppingCart: this.shoppingCart };
         this.budgetService.create(budget).subscribe(
@@ -113,6 +125,18 @@ export class ShoppingCartService {
     }
 
     createInvoice(mobile: number): Observable<any> {
+        return this.ticketService.findLastByMobile(mobile).map(
+            ticket => {
+                this.invoiceService.create({ mobile: mobile, ticketId: ticket.id }).subscribe(
+                    () => {
+                        return null;
+                    }
+                );
+            }
+        );
+    }
+
+    createReservation(mobile: number): Observable<any> {
         return this.ticketService.findLastByMobile(mobile).map(
             ticket => {
                 this.invoiceService.create({ mobile: mobile, ticketId: ticket.id }).subscribe(

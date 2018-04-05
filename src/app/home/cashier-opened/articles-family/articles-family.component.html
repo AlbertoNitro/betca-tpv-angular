@@ -1,12 +1,19 @@
-<h3>Root
-  <mat-icon>arrow_forward</mat-icon> Uniformes > SJB</h3>
-<div fxLayout="row" fxLayoutWrap fxFill class="family-container" >
-  <mat-card class="mat-elevation-z8 family-card" *ngFor="let family of families">
-    <mat-card-content>
-      <p>{{family.description}}</p>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button [color]="color(family)" class="family-button" (click)="find(family)">{{family.reference}}</button>
-    </mat-card-actions>
-  </mat-card>
-</div>
+<mat-card>
+  <mat-card-title>
+    <button mat-raised-button color="primary" (click)="nav('root')">Root</button>
+    <span class="mat-mini-fab mat-elevation-z0"></span>
+  </mat-card-title>
+  <mat-card-content>
+    <div fxLayout="row" fxLayoutWrap fxFill class="family-container">
+      <mat-card class="mat-elevation-z8 family-card" *ngFor="let family of families">
+        <mat-card-content>
+          <p>{{family.description}}</p>
+          <span class="mat-mini-fab family-stock" *ngIf="family.stock||family.stock===0">{{family.stock}}</span>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button [color]="color(family)" class="family-button" (click)="find(family)">{{family.reference}}</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-card-content>
+</mat-card>

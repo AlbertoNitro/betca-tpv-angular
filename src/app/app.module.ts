@@ -37,16 +37,18 @@ import { UserService } from './home/shared/user.service';
 import { VoucherService } from './home/shared/voucher.service';
 import { orderService } from '../app/home/orders/orders.service';
 import { OfferService } from './home/shared/offer.service';
+import { ReservationService } from './home/shared/reservation.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
-import { ArticlesFamilyComponent } from './home/cashier-opened/articles-family/articles-family.component';
-import { HistoricChartComponent } from './home/statistics2/historicChart.component';
+import { ArticlesFamilyViewComponent } from './home/cashier-opened/articles-family/articles-family.component';
 import { InvoiceService } from './home/shared/invoice.service';
 import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
-import {SchedulerService} from './home/shared/scheduler.service';
+import { SchedulerService } from './home/shared/scheduler.service';
+
+import { ArticleTrackingService } from './home/shared/articleTracking.service';
 
 @NgModule({
   imports: [
@@ -99,10 +101,7 @@ import {SchedulerService} from './home/shared/scheduler.service';
   declarations: [
     AppComponent,
     AppRoutingModule.COMPONENTS,
-    AppRoutingModule.COMPONENT_FACTORY,
-    ArticlesComponent,
-    ArticlesFamilyComponent,
-    HistoricChartComponent
+    AppRoutingModule.COMPONENT_FACTORY
   ],
   entryComponents: [AppRoutingModule.COMPONENT_FACTORY],
   bootstrap: [AppComponent],
@@ -114,14 +113,16 @@ import {SchedulerService} from './home/shared/scheduler.service';
     CashierService,
     CashierMovementService,
     InvoiceService,
+    orderService,
+    OfferService,
     ProviderService,
+    SchedulerService,
     ShoppingCartService,
     TicketService,
     UserService,
     VoucherService,
-    orderService,
-    OfferService,
-    SchedulerService
+    ArticleTrackingService,
+    ReservationService,
   ]
 })
 export class AppModule {
