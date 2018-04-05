@@ -34,6 +34,7 @@ export class HttpService {
 
     private successfulNotification = undefined;
 
+
     constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
         this.resetOptions();
     }
@@ -51,6 +52,11 @@ export class HttpService {
         );
     }
 
+    getToken(): Token {
+        if (this.token !== undefined) 
+            return this.token;
+    }
+
     getRoles(): Array<Role> {
         if (this.token !== undefined) {
             return this.token.roles;
@@ -58,6 +64,7 @@ export class HttpService {
             return undefined;
         }
     }
+    
     getMobile(): number {
         return this.mobile;
     }
