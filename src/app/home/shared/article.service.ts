@@ -14,7 +14,7 @@ export class ArticleService {
     constructor(private httpService: HttpService) {
     }
 
-    readObservable(code: String): Observable<Article> {
+    readOne(code: String): Observable<Article> {
         return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
     }
 

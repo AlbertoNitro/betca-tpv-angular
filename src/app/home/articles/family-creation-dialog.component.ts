@@ -40,7 +40,7 @@ export class FamilyCreationDialogComponent {
     }
 
     findArticle() {
-        this.articleService.readObservable(this.family.articleId).subscribe(
+        this.articleService.readOne(this.family.articleId).subscribe(
             article => this.articleIdSynchronized = true
         );
     }
@@ -67,6 +67,12 @@ export class FamilyCreationDialogComponent {
 
     create() {
         this.articlesFamilyService.create(this.family).subscribe(
+            () => this.dialogRef.close()
+        );
+    }
+
+    save() {
+        this.articlesFamilyService.update(this.family).subscribe(
             () => this.dialogRef.close()
         );
     }

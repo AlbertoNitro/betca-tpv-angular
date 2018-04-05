@@ -26,7 +26,6 @@ export class ArticlesFamilyService {
   }
 
   findArticle(id: string): Observable<Article> {
-    console.log('findArticle: ' + ArticlesFamilyService.END_POINT + `/${id}` + ArticlesFamilyService.ARTICLE);
     return this.httpService.authToken().get(ArticlesFamilyService.END_POINT + `/${id}` + ArticlesFamilyService.ARTICLE);
   }
 
@@ -47,5 +46,10 @@ export class ArticlesFamilyService {
     return this.httpService.authToken().delete(
       ArticlesFamilyService.END_POINT + `/${familyId}` + ArticlesFamilyService.LIST + `/${childId}`);
   }
+
+  update(family: Family): Observable<any> {
+    return this.httpService.authToken().patch(ArticlesFamilyService.END_POINT + `/${family.id}`, family);
+  }
+
 
 }

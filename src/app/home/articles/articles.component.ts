@@ -45,7 +45,7 @@ export class ArticlesComponent implements OnInit {
   }
 
   edit(article: Article) {
-    this.articleService.readObservable(article.code).subscribe(
+    this.articleService.readOne(article.code).subscribe(
       data => {
         const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
         dialogRef.componentInstance.article = data;
