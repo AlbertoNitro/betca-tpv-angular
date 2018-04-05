@@ -76,7 +76,7 @@ export class ShoppingCartService {
     }
 
     add(code: string): Observable<Article> {
-        return this.articleService.readObservable(code).map(
+        return this.articleService.readOne(code).map(
             (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
                 if (article.stock < 1) {
