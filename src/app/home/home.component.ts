@@ -33,6 +33,7 @@ import { User } from './shared/user.model';
 import { UserService } from './shared/user.service';
 import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
 import { ArticlesFamilyComponent } from './articles/articles-family.component';
+import { ArticlesTrackingComponent } from './articles-tracking/articles-tracking.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -202,6 +203,10 @@ export class HomeComponent implements OnInit {
 
   tokenManagement() {
     this.router.navigate([HomeComponent.URL, TokenManagementComponent.URL]);
+  }
+
+  articleTracking() {
+    this.router.navigate([HomeComponent.URL, ArticlesTrackingComponent.URL]);
   }
 
 }

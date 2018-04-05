@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { Family } from '../cashier-opened/articles-family/family.model';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { ArticlesFamilyService } from '../shared/articles-family.service';
 import { FamilyAdditionDialogComponent } from './family-addition-dialog.component';
 import { FamilyCreationDialogComponent } from './family-creation-dialog.component';
+import { FamilyType } from '../cashier-opened/articles-family/family-type.model';
 
 @Component({
     templateUrl: './articles-family.component.html'
@@ -20,7 +21,7 @@ export class ArticlesFamilyComponent {
 
     family: Family;
 
-    constructor(private dialog: MatDialog, private articlesFamilyService: ArticlesFamilyService) {
+    constructor(private dialog: MatDialog, private snackBar: MatSnackBar, private articlesFamilyService: ArticlesFamilyService) {
         this.root();
         this.synchronize();
     }
@@ -40,6 +41,7 @@ export class ArticlesFamilyComponent {
     add() {
         this.dialog.open(FamilyAdditionDialogComponent,
             {
+                width: '600px',
                 data: { familyId: this.family.id }
             }
         ).afterClosed().subscribe(
@@ -54,9 +56,15 @@ export class ArticlesFamilyComponent {
     }
 
     read(family: Family) {
-        this.family = family;
-        this.breadcrumbs += ' > ' + family.reference;
-        this.synchronize();
+        if (family.familyType === FamilyType.ARTICLE) {
+            this.snackBar.open('Ineffective operation', 'Error', {
+                duration: 3000
+            });
+        } else {
+            this.family = family;
+            this.breadcrumbs += ' > ' + family.reference;
+            this.synchronize();
+        }
     }
 
     edit(family: Family) {

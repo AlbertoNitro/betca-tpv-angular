@@ -50,10 +50,6 @@
     <mat-icon>assessment</mat-icon>
     <span>Statistics</span>
   </button>
-  <button mat-menu-item>
-    <mat-icon>account_circle</mat-icon>
-    <span>Busqueda avanzada</span>
-  </button>
   <button mat-menu-item (click)="statistics2()">
     <mat-icon>assessment</mat-icon>
     <span>Statistics2</span>
@@ -61,6 +57,10 @@
   <button mat-menu-item (click)="schedule()">
     <mat-icon>schedule</mat-icon>
     <span>Schedule</span>
+  </button>
+  <button mat-menu-item (click)="articleTracking()">
+    <mat-icon>search</mat-icon>
+    <span>Art. Tracking</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="offers">
     <mat-icon>thumb_up</mat-icon>

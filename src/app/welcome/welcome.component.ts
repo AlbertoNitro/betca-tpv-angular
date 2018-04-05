@@ -28,10 +28,4 @@ export class WelcomeComponent {
       }
     );
   }
-
-  trackArticles(code: string) {
-    console.log('Article tracking button clicked: ' + code);
-    this.codeValue = code;
-  }
-
 }

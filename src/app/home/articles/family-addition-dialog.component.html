@@ -1,8 +1,24 @@
 <h2 mat-dialog-title>Addition Family</h2>
+<mat-dialog-actions>
+    <button mat-raised-button (click)="synchronized()" color="primary">
+        <mat-icon>search</mat-icon>Find ALL
+    </button>
+    <button mat-raised-button (click)="delete('ARTICLES')" color="primary">
+        <mat-icon>close</mat-icon>ARTICLES
+    </button>
+    <button mat-raised-button (click)="delete('SIZES')" color="primary">
+        <mat-icon>close</mat-icon>SIZES
+    </button>
+    <button mat-raised-button (click)="delete('ARTICLE')" color="primary">
+        <mat-icon>close</mat-icon>ARTICLE
+    </button>
+</mat-dialog-actions>
 <mat-dialog-content>
     <mat-form-field>
         <mat-select placeholder="Family" [(ngModel)]="childId">
-            <mat-option *ngFor="let family of families" [value]="family.id">{{ family.description }}</mat-option>
+            <mat-option *ngFor="let family of families" [value]="family.id">
+                {{family.familyType}}: {{ family.description }}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 </mat-dialog-content>

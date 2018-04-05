@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Family } from './family.model';
 import { FamilyType } from './family-type.model';
 import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
+import { ArticlesFamilyService } from '../../shared/articles-family.service';
 
 @Component({
     templateUrl: './articles-family-sizes-dialog.component.html',
@@ -11,11 +12,13 @@ import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 })
 export class ArticlesFamilySizesDialogComponent {
 
+    title: string;
     families: Family[];
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<ArticlesFamilySizesDialogComponent>,
-        private shoppingCartService: ShoppingCartService) {
+        private articlesFamilyService: ArticlesFamilyService, private shoppingCartService: ShoppingCartService) {
         this.families = data.families;
+        this.title = data.title;
     }
 
     color(family: Family): string {
@@ -26,11 +29,15 @@ export class ArticlesFamilySizesDialogComponent {
         }
     }
 
+    extractSize(family: Family) {
+        return family.reference.substring(family.reference.indexOf('~'));
+    }
+
     add(family) {
-        if (family.composite === FamilyType.ARTICLE) {
-            this.shoppingCartService.add(family.id).subscribe(
+        this.articlesFamilyService.findArticle(family.id).subscribe(
+            article => this.shoppingCartService.add(article.code).subscribe(
                 () => this.dialogRef.close()
-            );
-        }
+            )
+        );
     }
 }
