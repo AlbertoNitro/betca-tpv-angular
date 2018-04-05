@@ -35,6 +35,7 @@ export class CheckOutDialogComponent {
 
         this.total = data.total;
         this.ticketCreation = data.ticketCreation;
+        this.reservationCreation = data.ticketCreation;
     }
 
     updateUser(user: User) {
@@ -55,6 +56,13 @@ export class CheckOutDialogComponent {
         this.ticketCreation.card = this.formatNumber(this.ticketCreation.card);
         this.ticketCreation.voucher = this.formatNumber(this.ticketCreation.voucher);
     }
+
+    private reservationValues() {
+        this.reservationCreation.cash = this.formatNumber(this.ticketCreation.cash);
+        this.reservationCreation.card = this.formatNumber(this.ticketCreation.card);
+        this.reservationCreation.voucher = this.formatNumber(this.ticketCreation.voucher);
+    }
+
 
     returnedCash(): number {
         return Math.round(
@@ -118,34 +126,24 @@ export class CheckOutDialogComponent {
     }
 
     invalidReservation(): boolean {
-        return !((this.checkEmail()) && (this.returnedCash() * -1 <= this.total - this.total * 0.1));
+        // return !((this.user.email) && (this.returnedCash() * -1 <= this.total - this.total * 0.1));
+        return !(this.returnedCash() * -1 <= this.total - this.total * 0.1);
     }
 
     reservation() {
         console.log('Se ha creado una reserva');
-        // this.shoppingCartService.createReservation(this.reservationCreation);
-        // this.dialog.closeAll();
-    }
-
-    // LO DEBES CHEQUEAR DE UNA MANERA PARECIDA A COMO SE CHEQUEA ---INVOICE---!!!!!!!!!!!!
-    checkEmail(): boolean {
-        this.userService.read(this.ticketCreation.userMobile).subscribe(
-            data => {
-                if (data.email) {
-                    this.reservationCreation = { userMobile: undefined, cash: 0, card: 0, voucher: 0, reservationState: undefined };
-                    this.reservationCreation.userMobile = this.ticketCreation.userMobile;
-                    this.reservationCreation.card = this.ticketCreation.card;
-                    this.reservationCreation.cash = this.ticketCreation.cash;
-                    this.reservationCreation.voucher = this.ticketCreation.voucher;
-                    this.reservationCreation.reservationState = 'OPEN';
-                    return true;
+        this.reservationValues();
+        this.shoppingCartService.reservation(this.reservationCreation).subscribe(
+            () => {
+                if (this.requestedInvoice) {
+                    this.shoppingCartService.createReservation(this.ticketCreation.userMobile).subscribe(
+                        () => this.dialog.closeAll()
+                    );
                 } else {
-                    console.log('Por favor, introduce el email del usuario');
-                    return false;
+                    this.dialog.closeAll();
                 }
             }
         );
-        return false;
     }
 
 }
