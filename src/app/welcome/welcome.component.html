@@ -10,12 +10,3 @@
 
 <h2>Bienvenido al TPV</h2>
 
-<form>
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="Articles tracking" type="text" #code>
-    </mat-form-field>
-    <button type="submit" mat-mini-fab color="primary" (click)="trackArticles(code.value); code.value=''" [disabled]="code.value === ''">
-        <mat-icon>search</mat-icon>
-    </button>
-    <p>Button pressed with code: {{ codeValue }}</p>
-</form>
