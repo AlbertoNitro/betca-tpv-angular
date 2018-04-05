@@ -1,5 +1,5 @@
-<h2 mat-dialog-title class="family-title">SJB. Polo manga corta de algodón</h2>
+<h2 mat-dialog-title class="family-title">{{title}}</h2>
 <span *ngFor="let family of families" >
     <button mat-raised-button [color]="color(family)" class="family-button" (click)="add(family)">
-        T{{family.id}} : {{family.stock}}</button>
+        {{extractSize(family)}} : {{family.stock}}</button>
 </span>
