@@ -1,5 +1,9 @@
 <h2 mat-dialog-title >Search Offer</h2>
 <mat-dialog-content>  
+<mat-form-field>
+    <input matInput readonly="true" type="text" placeholder="Code of offer" required [readonly]="edit" [(ngModel)]="offer.code" />
+        <mat-error>Field required</mat-error>
+    </mat-form-field>  
 	<mat-form-field class="date">
          <input matInput disabled [matDatepicker]="creationDate" placeholder="Creation date" required [(ngModel)]="offer.creationDate">
          <mat-datepicker-toggle matSuffix [for]="expiration"></mat-datepicker-toggle>
@@ -22,7 +26,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
 	<mat-form-field>
-   		<input matInput type="text"  cdkFocusInitial  placeholder="Code of Offer" required  [(ngModel)]="code" />
+   		<input matInput type="text"  cdkFocusInitial  placeholder="code" required  [(ngModel)]="code" />
     	<mat-error>Field required</mat-error>
 	</mat-form-field>  
 	<button mat-mini-fab color="primary" (click)="searchOffer()">

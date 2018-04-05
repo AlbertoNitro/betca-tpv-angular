@@ -9,12 +9,12 @@ export class ArticleService {
     static END_POINT = '/articles';
 
     static INCOMPLETES = '/incompletes';
-    static FILTRO = '/filter';
+    static SEARCH = '/search';
 
     constructor(private httpService: HttpService) {
     }
 
-    readObservable(code: String): Observable<Article> {
+    readOne(code: String): Observable<Article> {
         return this.httpService.authToken().get(ArticleService.END_POINT + '/' + code);
     }
 
@@ -36,11 +36,16 @@ export class ArticleService {
     }
 
     readAdvancedSearch(article: Article): Observable<Article[]> {
-        return this.httpService.authToken().post(ArticleService.END_POINT + ArticleService.FILTRO, article).map(
-            data => {
-                console.log(data);
-                return data;
-            }
-        );
+        let httpservice = this.httpService.authToken();
+        if (article.description) {
+            httpservice = httpservice.param('description', article.description);
+        }
+        if (article.reference) {
+            httpservice = httpservice.param('reference', article.reference);
+        }
+        if (article.provider) {
+            httpservice = httpservice.param('provider', article.provider);
+        }
+        return httpservice.get(ArticleService.END_POINT + ArticleService.SEARCH);
     }
 }
