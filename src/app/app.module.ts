@@ -37,6 +37,7 @@ import { UserService } from './home/shared/user.service';
 import { VoucherService } from './home/shared/voucher.service';
 import { orderService } from '../app/home/orders/orders.service';
 import { OfferService } from './home/shared/offer.service';
+import { ReservationService } from './home/shared/reservation.service';
 
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
@@ -120,7 +121,8 @@ import { ArticleTrackingService } from './home/shared/articleTracking.service';
     TicketService,
     UserService,
     VoucherService,
-    ArticleTrackingService
+    ArticleTrackingService,
+    ReservationService,
   ]
 })
 export class AppModule {
