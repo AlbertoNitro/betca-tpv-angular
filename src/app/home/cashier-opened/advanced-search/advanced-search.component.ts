@@ -43,6 +43,10 @@ export class AdvancedSearchComponent {
     );
   }
 
+  provider(id) {
+    return this.providers.find(provider => provider.id === id).company;
+  }
+
   reset() {
     this.article = { code: null, reference: null, description: null, provider: null };
     this.dataSource = undefined;

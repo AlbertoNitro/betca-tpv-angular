@@ -3,32 +3,32 @@
     <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
 
       <ng-container matColumnDef="reference">
-        <mat-header-cell *matHeaderCellDef fxFlex="15%">
+        <mat-header-cell *matHeaderCellDef fxFlex="20%">
           <mat-form-field>
             <input matInput placeholder="Reference" [(ngModel)]="article.reference">
           </mat-form-field>
         </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="15%"> {{item.reference}} </mat-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%"> {{item.reference}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef fxFlex="35%">
+        <mat-header-cell *matHeaderCellDef fxFlex="30%">
           <mat-form-field>
             <input matInput placeholder="Description" [(ngModel)]="article.description">
           </mat-form-field>
         </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="35%"> {{item.description}} </mat-cell>
+        <mat-cell *matCellDef="let item" fxFlex="30%"> {{item.description}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="provider">
         <mat-header-cell *matHeaderCellDef fxFlex="20%">
           <mat-form-field>
             <mat-select placeholder="Provider" [(ngModel)]="article.provider">
-              <mat-option *ngFor="let item of providers" [value]="item.id">{{item.company}}</mat-option>
+              <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
             </mat-select>
           </mat-form-field>
         </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="20%"> {{item.provider}} </mat-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%"> {{provider(item.provider)}} </mat-cell>
       </ng-container>
 
       <ng-container matColumnDef="stock">
