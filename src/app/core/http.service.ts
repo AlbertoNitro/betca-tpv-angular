@@ -93,10 +93,23 @@ export class HttpService {
         return this;
     }
 
+    isTokenExpired(): Boolean{
+        if (this.token !== undefined) {
+		    if(Date.now() > this.token.creationDate + this.token.lifetime) {
+                return true;
+            }
+		    else
+			    return false;
+        }
+    }
+
     authToken(): HttpService {
         let tokenValue = '';
         if (this.token !== undefined) {
-            tokenValue = this.token.token;
+            if(!this.isTokenExpired())
+                tokenValue = this.token.token;
+            else
+                this.logout;
         }
         this.headers.append('Authorization', 'Basic ' + btoa(tokenValue + ':' + ''));
         return this;
