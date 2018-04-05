@@ -53,6 +53,7 @@ import { FamilyCreationDialogComponent } from './home/articles/family-creation-d
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 import { PercentageChartComponent} from './home/statistics2/percentageChart.component';
 import {IncomeComparisonChartComponent} from './home/statistics2/incomeComparisonChart.component';
+import { ArticlesTrackingComponent } from './home/articles-tracking/articles-tracking.component';
 
 
 const appRoutes: Routes = [
@@ -81,6 +82,7 @@ const appRoutes: Routes = [
       { path: TokenManagementComponent.URL, component: TokenManagementComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
+      { path: ArticlesTrackingComponent.URL, component: ArticlesTrackingComponent },
     ]
   }
 ];
@@ -146,6 +148,7 @@ export class AppRoutingModule {
     VoucherCreationDialogComponent,
     VoucherEditDialogComponent,
     VoucherConsumeDialogComponent,
-    ScheduleCreationEditDialogComponent
+    ScheduleCreationEditDialogComponent,
+    ArticlesTrackingComponent
   ];
 }

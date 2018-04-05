@@ -47,6 +47,8 @@ import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
 import { SchedulerService } from './home/shared/scheduler.service';
 
+import { ArticleTrackingService } from './home/shared/articleTracking.service';
+
 @NgModule({
   imports: [
     FormsModule,
@@ -117,7 +119,8 @@ import { SchedulerService } from './home/shared/scheduler.service';
     ShoppingCartService,
     TicketService,
     UserService,
-    VoucherService
+    VoucherService,
+    ArticleTrackingService
   ]
 })
 export class AppModule {
