@@ -42,7 +42,7 @@
                 </mat-header-cell>
                 <mat-cell *matCellDef="let item"  fxFlex="15%">
                     <mat-checkbox [checked]="item.committed" (change)="changeCommitted(item)"></mat-checkbox>
-                    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="delete(item)">
+                    <button mat-button matSuffix mat-icon-button (click)="delete(item)">
                         <mat-icon color="warn">close</mat-icon>
                     </button>
                 </mat-cell>
