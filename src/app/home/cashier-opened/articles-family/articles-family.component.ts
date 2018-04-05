@@ -38,15 +38,17 @@ export class ArticlesFamilyViewComponent {
   }
 
   nav(id: string) {
-      this.articlesFamilyService.findList(id).subscribe(
-        families => this.families = families
-      );
+    this.articlesFamilyService.findList(id).subscribe(
+      families => this.families = families
+    );
   }
 
   find(family: Family) {
     if (family.familyType === FamilyType.ARTICLE) {
-      this.shoppingCartService.add(family.id).subscribe(
-        () => true
+      this.articlesFamilyService.findArticle(family.id).subscribe(
+        article => this.shoppingCartService.add(family.id).subscribe(
+          () => true
+        )
       );
     } else {
       this.articlesFamilyService.findList(family.id).subscribe(
@@ -56,7 +58,7 @@ export class ArticlesFamilyViewComponent {
           } else if (family.familyType === FamilyType.SIZES) {
             this.dialog.open(ArticlesFamilySizesDialogComponent, {
               width: '455px',
-              data: { families: families }
+              data: { families: families, title: family.description }
             });
           }
         }

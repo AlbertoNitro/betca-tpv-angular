@@ -9,7 +9,8 @@ import { FamilyCreationDialogComponent } from './family-creation-dialog.componen
     styles: [`.mat-dialog-content {
         display: flex;
         flex-direction: column;
-    }`]
+    }
+    `]
 })
 export class FamilyAdditionDialogComponent {
 

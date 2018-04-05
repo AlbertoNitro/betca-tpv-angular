@@ -2,7 +2,8 @@
 <mat-dialog-content>
     <mat-form-field>
         <mat-select placeholder="Family" [(ngModel)]="childId">
-            <mat-option *ngFor="let family of families" [value]="family.id">{{ family.description }}</mat-option>
+            <mat-option *ngFor="let family of families" [value]="family.id">
+                {{family.familyType}}: {{ family.description }}</mat-option>
         </mat-select>
     </mat-form-field>
 </mat-dialog-content>

@@ -9,8 +9,8 @@
                 <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description" >
-                <mat-header-cell *matHeaderCellDef fxFlex="55%"> Description </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="55%"> {{item.description}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="50%"> Description </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="50%"> {{item.description}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="retailPrice">
                 <mat-header-cell *matHeaderCellDef fxFlex="8%"> Price </mat-header-cell>
@@ -35,12 +35,12 @@
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef  fxFlex="10%">
+                <mat-header-cell *matHeaderCellDef  fxFlex="15%">
                     <button mat-button matSuffix mat-icon-button (click)="exchange()">
                         <mat-icon color="primary">autorenew</mat-icon>
                     </button>
                 </mat-header-cell>
-                <mat-cell *matCellDef="let item"  fxFlex="10%">
+                <mat-cell *matCellDef="let item"  fxFlex="15%">
                     <mat-checkbox [checked]="item.committed" (change)="changeCommitted(item)"></mat-checkbox>
                     <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="delete(item)">
                         <mat-icon color="warn">close</mat-icon>

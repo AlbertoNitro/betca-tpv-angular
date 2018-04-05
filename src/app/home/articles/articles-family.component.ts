@@ -40,6 +40,7 @@ export class ArticlesFamilyComponent {
     add() {
         this.dialog.open(FamilyAdditionDialogComponent,
             {
+                width: '500px',
                 data: { familyId: this.family.id }
             }
         ).afterClosed().subscribe(
