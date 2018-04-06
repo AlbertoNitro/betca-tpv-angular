@@ -3,6 +3,8 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 import { CancelYesDialogComponent } from '../../core/cancel-yes-dialog.component';
+import { Token } from '../../core/token.model';
+import { HttpService } from '../../core/http.service';
 
 @Component({
   templateUrl: './token-management.component.html'
@@ -14,7 +16,7 @@ export class TokenManagementComponent implements OnInit {
   columns = ['mobile', 'username'];
   data: User[];
 
-  constructor(private dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(private dialog: MatDialog, public snackBar: MatSnackBar, private httpService: HttpService) { }
 
   ngOnInit() {
   }
@@ -23,7 +25,10 @@ export class TokenManagementComponent implements OnInit {
     this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
       result => {
         if (result) {
-          //do stuff
+          this.httpService.getToken().lifetime = 0;
+          this.snackBar.open('Session token expired!', 'OK', {
+            duration: 2000
+          });
         }
       });
   }
@@ -35,10 +40,7 @@ export class TokenManagementComponent implements OnInit {
 }
 
   lifetime = [
-    {value: '1', viewValue: '1 min'},
-    {value: '60', viewValue: '1 hour'},
-    {value: '720', viewValue: '12 hours'},
-    {value: '1440', viewValue: '24 hours'}
+    {value: this.httpService.getToken().lifetime, viewValue: this.httpService.getToken().lifetime/3600000} //Displays the token lifetime in hours
   ];
 
 }

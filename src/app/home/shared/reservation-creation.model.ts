@@ -1,7 +1,9 @@
+import { Shopping } from './shopping.model';
+
 export interface ReservationCreation {
-    userMobile: number;
+    userMobile?: number;
     cash: number;
     card: number;
     voucher: number;
-    reservationState: string;
+    shoppingCart: Shopping[];
 }

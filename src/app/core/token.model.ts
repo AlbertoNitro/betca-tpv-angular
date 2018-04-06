@@ -3,4 +3,6 @@ import { Role } from './role.model';
 export interface Token {
     token: string;
     roles: Array<Role>;
+    lifetime: number;
+    creationDate: number;
 }
