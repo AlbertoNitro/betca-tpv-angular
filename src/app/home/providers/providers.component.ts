@@ -37,11 +37,11 @@ export class ProvidersComponent implements OnInit {
 
     edit(provider: Provider) {
         this.providerService.read(provider.id).subscribe(
-            data => {
-                const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
-                dialogRef.componentInstance.provider = data;
-                dialogRef.componentInstance.edit = true;
-                dialogRef.afterClosed().subscribe(
+            providerOne => {
+                const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent, {
+                    width: '500px',
+                    data: { provider: providerOne, edit: true }
+                }).afterClosed().subscribe(
                     () => this.synchronize()
                 );
             }

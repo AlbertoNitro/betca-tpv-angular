@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { Provider } from '../shared/provider.model';
 import { ProviderService } from '../shared/provider.service';
 
@@ -14,8 +15,11 @@ export class ProviderCreationEditDialogComponent implements OnInit {
     edit: boolean;
     provider: Provider;
 
-    constructor(public dialogRef: MatDialogRef<ProviderCreationEditDialogComponent>,
+    constructor(@Inject(MAT_DIALOG_DATA) data: any, public dialogRef: MatDialogRef<ProviderCreationEditDialogComponent>,
         private providerService: ProviderService) {
+
+        this.provider = data.provider;
+        this.edit = data.edit;
     }
 
     ngOnInit(): void {
