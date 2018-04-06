@@ -3,21 +3,27 @@ import { MatTableDataSource, MatSort, MatDialog } from '@angular/material';
 import { StockAlert } from '../shared/stock-alert.model';
 
 @Component({
-    templateUrl: `stock-alert.component.html`
+    templateUrl: 'stock-alert-dialog.component.html',
+    styles: [`.mat-dialog-content {
+        display: flex;
+        flex-direction: column;
+    }`]
 })
 
-export class StockAlertComponent implements OnInit {
-    static URL = 'stock-alert';
-
-    constructor(){  
-    }
+export class StockAlertDialogComponent implements OnInit {
+    detail: boolean;
+    stockAlert: StockAlert;
 
     ngOnInit(): void {
-        //this.synchronize();
+        
     }
 
-    synchronize() {
+    create(): void {
+        
+    }
 
+    save(): void {
+        
     }
 
     edit(StockAlert: StockAlert) {
@@ -28,9 +34,6 @@ export class StockAlertComponent implements OnInit {
 
     }
     read(StockAlert: StockAlert) {
-
-    }
-    create() {
 
     }
 }
