@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit {
   static URL = 'home';
 
   cahierClosed: boolean;
+  username: string;
 
   data: User[];
 
@@ -55,6 +56,9 @@ export class HomeComponent implements OnInit {
     private adminsService: AdminsService, private userService: UserService) {
 
     this.home();
+    this.userService.loggedInUsername().subscribe(
+      user => this.username = user.username
+    );
   }
 
   home() {

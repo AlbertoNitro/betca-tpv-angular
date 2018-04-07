@@ -9,11 +9,12 @@ import { Role } from './role.model';
 export class TokensService {
     static END_POINT = '/tokens';
     static AUTHENTICATED = '/authenticated';
+    static USERNAME = '/username';
 
     constructor(private httpService: HttpService) {
     }
 
-    login(mobile: number, password: string):  Observable<any> {
+    login(mobile: number, password: string): Observable<any> {
         return this.httpService.login(mobile, password, TokensService.END_POINT);
     }
 

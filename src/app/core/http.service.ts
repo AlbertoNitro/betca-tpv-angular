@@ -53,7 +53,7 @@ export class HttpService {
     }
 
     getToken(): Token {
-        if (this.token !== undefined) 
+        if (this.token !== undefined)
             return this.token;
     }
 
@@ -64,7 +64,7 @@ export class HttpService {
             return undefined;
         }
     }
-    
+
     getMobile(): number {
         return this.mobile;
     }
@@ -100,20 +100,20 @@ export class HttpService {
         return this;
     }
 
-    isTokenExpired(): Boolean{
+    isTokenExpired(): Boolean {
         if (this.token !== undefined) {
-		    if(Date.now() > this.token.creationDate + this.token.lifetime) {
+            if (Date.now() > this.token.creationDate + this.token.lifetime) {
                 return true;
             }
-		    else
-			    return false;
+            else
+                return false;
         }
     }
 
     authToken(): HttpService {
         let tokenValue = '';
         if (this.token !== undefined) {
-            if(!this.isTokenExpired())
+            if (!this.isTokenExpired())
                 tokenValue = this.token.token;
             else
                 this.logout;

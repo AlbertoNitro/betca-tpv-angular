@@ -4,6 +4,7 @@ import { User } from './user.model';
 import { HttpService } from '../../core/http.service';
 import { Observable } from 'rxjs/Observable';
 import { MatSnackBar } from '@angular/material';
+import { TokensService } from '../../core/tokens.service';
 
 @Injectable()
 export class UserService {
@@ -42,6 +43,10 @@ export class UserService {
         this.snackBar.open('Successful', '', {
             duration: 2000
         });
+    }
+
+    loggedInUsername(): Observable<User> {
+        return this.httpService.authToken().get(TokensService.END_POINT + TokensService.USERNAME);
     }
 
 }
