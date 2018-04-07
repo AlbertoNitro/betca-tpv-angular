@@ -9,12 +9,12 @@
                 <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description" >
-                <mat-header-cell *matHeaderCellDef fxFlex="50%"> Description </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="50%"> {{item.description}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="44%"> Description </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="44%"> {{item.description}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="retailPrice">
-                <mat-header-cell *matHeaderCellDef fxFlex="8%"> Price </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="8%"> {{item.retailPrice}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="10%"> Price </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="10%"> {{item.retailPrice}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="amount">
                 <mat-header-cell *matHeaderCellDef fxFlex="5%"> Nº </mat-header-cell>
@@ -23,14 +23,14 @@
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="discount" >
-                <mat-header-cell *matHeaderCellDef fxFlex="8%"> % </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="8%">
+                <mat-header-cell *matHeaderCellDef fxFlex="10%"> % </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="10%">
                     <input matInput type="number" [value]="item.discount" (blur)="update(item, $event, 'discount')" />
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="total">
-                <mat-header-cell *matHeaderCellDef fxFlex="8%"> Total </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="8%">
+                <mat-header-cell *matHeaderCellDef fxFlex="10%"> Total </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="10%">
                     <input matInput type="number" [value]="item.total" (blur)="update(item, $event, 'total')" />
                 </mat-cell>
             </ng-container>
