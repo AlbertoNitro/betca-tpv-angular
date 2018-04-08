@@ -1,36 +1,21 @@
-
-
-import { Injectable } from "@angular/core";
-import { order } from "../shared/order.model";
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpService } from '../../core/http.service';
 import { Subject } from 'rxjs/Subject';
-import { orderBody } from "../shared/order-body.model";
 import { MatSnackBar } from '@angular/material';
 
+import { HttpService } from '../../core/http.service';
+import { OrderBase } from './order.model';
+
+
 @Injectable()
-export class orderService{
-    static END_POINT = "/orders";
-    static END_POINT_ORDERBODY = '/orderbody'
-    constructor(private httpService:HttpService,public snackBar: MatSnackBar) {
-    }
-    readAll(): Observable<order[]> {
-        return this.httpService.authToken().get(orderService.END_POINT);
-    }
-    readAllOrderBodyByIdOrder(code:String): Observable<orderBody[]>{
-        return this.httpService.authToken().get(orderService.END_POINT_ORDERBODY +'/'+code);
-    }
-    createOrder(order:order):Observable<any>{
-        return this.httpService.authToken().successful().post(orderService.END_POINT , order);
-    }
-    createOrderBodyByIdOrder(orderbody:orderBody):Observable<any>{
-        return this.httpService.authToken().successful().post(orderService.END_POINT_ORDERBODY,orderbody);
+export class OrderService {
+    static END_POINT = '/orders';
+
+    constructor(private httpService: HttpService) {
     }
 
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
+    readAll(): Observable<OrderBase[]> {
+        return this.httpService.authToken().get(OrderService.END_POINT);
     }
 
 }

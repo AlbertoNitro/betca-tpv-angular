@@ -35,7 +35,7 @@ import { ArticleService } from './home/shared/article.service';
 import { TicketService } from './home/shared/ticket.service';
 import { UserService } from './home/shared/user.service';
 import { VoucherService } from './home/shared/voucher.service';
-import { orderService } from '../app/home/orders/orders.service';
+import { OrderService } from '../app/home/orders/orders.service';
 import { OfferService } from './home/shared/offer.service';
 import { ReservationService } from './home/shared/reservation.service';
 
@@ -113,7 +113,7 @@ import { ArticleTrackingService } from './home/shared/articleTracking.service';
     CashierService,
     CashierMovementService,
     InvoiceService,
-    orderService,
+    OrderService,
     OfferService,
     ProviderService,
     SchedulerService,
