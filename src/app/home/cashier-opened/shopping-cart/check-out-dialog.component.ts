@@ -74,7 +74,7 @@ export class CheckOutDialogComponent {
 
     fillCash() {
         this.ticketCreation.cash = this.formatNumber(this.ticketCreation.cash);
-        if (this.returnedCash() < 0) {
+        if (this.returnedCash() < 0 && this.ticketCreation.cash === 0) {
             this.ticketCreation.cash = -this.returnedCash();
         } else if (this.ticketCreation.cash < 20) {
             this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
@@ -93,7 +93,7 @@ export class CheckOutDialogComponent {
     }
 
     invalidCheckOut(): boolean {
-        return this.returnedCash() < 0 || this.ticketCreation.card < 0 || this.ticketCreation.cash < 0;
+        return (this.total + this.returnedCash()) < this.shoppingCartService.getTotalCommited();
     }
 
     checkOut() {
@@ -113,18 +113,11 @@ export class CheckOutDialogComponent {
     }
 
     invalidInvoice(): boolean {
-        return !this.user || !this.user.dni || !this.user.address;
+        return !this.user || !this.user.dni || !this.user.address || this.returnedCash() < 0;
     }
 
     invalidReservation(): boolean {
         return (this.total + this.returnedCash()) < this.shoppingCartService.getTotalCommited();
-    }
-
-    reservation() {
-        this.formatValues();
-        this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
-            () => this.dialog.closeAll()
-        );
     }
 
 }

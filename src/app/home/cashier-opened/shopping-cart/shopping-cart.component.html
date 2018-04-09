@@ -5,10 +5,10 @@
     <mat-card-content>
         <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
             <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef  fxFlex="5%">{{shoppingCartService.indexShoppingCart}} # </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="5%">{{shoppingCartService.indexShoppingCart}} # </mat-header-cell>
                 <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="description" >
+            <ng-container matColumnDef="description">
                 <mat-header-cell *matHeaderCellDef fxFlex="37%"> Description </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="37%"> {{item.description}} </mat-cell>
             </ng-container>
@@ -22,7 +22,7 @@
                     <input matInput type="number" step="1" min="1" [value]="item.amount" (blur)="updateAmount(item, $event)" />
                 </mat-cell>
             </ng-container>
-            <ng-container matColumnDef="discount" >
+            <ng-container matColumnDef="discount">
                 <mat-header-cell *matHeaderCellDef fxFlex="12%"> % </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="12%">
                     <input matInput type="number" [value]="item.discount" (blur)="updateDiscount(item, $event)" />
@@ -35,12 +35,12 @@
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef  fxFlex="15%">
+                <mat-header-cell *matHeaderCellDef fxFlex="15%">
                     <button mat-button matSuffix mat-icon-button (click)="exchange()">
                         <mat-icon color="primary">autorenew</mat-icon>
                     </button>
                 </mat-header-cell>
-                <mat-cell *matCellDef="let item"  fxFlex="15%">
+                <mat-cell *matCellDef="let item" fxFlex="15%">
                     <mat-checkbox [checked]="item.committed" (change)="changeCommitted(item)"></mat-checkbox>
                     <button mat-button matSuffix mat-icon-button (click)="delete(item)">
                         <mat-icon color="warn">close</mat-icon>
@@ -62,11 +62,11 @@
                 <mat-icon>search</mat-icon>
             </button>
             <mat-form-field>
-                    <input matInput [placeholder]="stockLabel" type="text" [value]="stock" readonly>
+                <input matInput [placeholder]="stockLabel" type="text" [value]="stock" readonly>
             </mat-form-field>
         </form>
         <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="shoppingCartService.total===0">
-            <mat-icon mat-icon-button>credit_card</mat-icon> Check out
+            <mat-icon mat-icon-button>credit_card</mat-icon> Pay
             <mat-icon>euro_symbol</mat-icon>
         </button>
         <button mat-raised-button color="primary" (click)="createBudget()" [disabled]="shoppingCartService.total===0">

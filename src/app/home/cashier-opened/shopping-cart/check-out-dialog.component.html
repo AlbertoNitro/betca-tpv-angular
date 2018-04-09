@@ -22,10 +22,11 @@
     <mat-checkbox [(ngModel)]="requestedInvoice" [disabled]="invalidInvoice()">
         <span> Invoice ({{ticketCreation.userMobile}})</span>
     </mat-checkbox>
+    <div class="mat-raised-button mat-primary" *ngIf="returnedCash()>0"> Return: {{returnedCash() | currency:'EUR':'symbol'}}</div>
 </mat-dialog-content>
-<h4 mat-dialog-title>Return: {{returnedCash() | currency:'EUR':'symbol'}}</h4>
 <mat-dialog-actions>
     <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Check Out</button>
-    <button mat-raised-button color="accent" (click)="reservation()" [disabled]="invalidReservation()">Reservation</button>
+    <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Pay
+        <span class="mat-suffix" *ngIf="shoppingCartService.getTotalCommited()<total">(+{{shoppingCartService.getTotalCommited()}})</span>
+    </button>
 </mat-dialog-actions>
