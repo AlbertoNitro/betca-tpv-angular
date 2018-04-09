@@ -103,7 +103,7 @@ export class CheckOutDialogComponent {
     }
 
     invalidCheckOut(): boolean {
-        return this.returnedCash() < 0;
+        return this.returnedCash() < 0 || this.ticketCreation.card < 0 || this.ticketCreation.cash < 0;
     }
 
     checkOut() {
