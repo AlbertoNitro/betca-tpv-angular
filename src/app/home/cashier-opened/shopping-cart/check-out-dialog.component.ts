@@ -28,14 +28,11 @@ export class CheckOutDialogComponent {
 
     ticketCreation: TicketCreation;
 
-    reservationCreation: ReservationCreation;
-
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, public shoppingCartService: ShoppingCartService,
         private userService: UserService) {
 
         this.total = data.total;
         this.ticketCreation = data.ticketCreation;
-        this.reservationCreation = data.ticketCreation;
     }
 
     updateUser(user: User) {
@@ -56,13 +53,6 @@ export class CheckOutDialogComponent {
         this.ticketCreation.card = this.formatNumber(this.ticketCreation.card);
         this.ticketCreation.voucher = this.formatNumber(this.ticketCreation.voucher);
     }
-
-    private reservationValues() {
-        this.reservationCreation.cash = this.formatNumber(this.ticketCreation.cash);
-        this.reservationCreation.card = this.formatNumber(this.ticketCreation.card);
-        this.reservationCreation.voucher = this.formatNumber(this.ticketCreation.voucher);
-    }
-
 
     returnedCash(): number {
         return Math.round(
@@ -127,23 +117,13 @@ export class CheckOutDialogComponent {
     }
 
     invalidReservation(): boolean {
-        // return !((this.user.email) && (this.returnedCash() * -1 <= this.total - this.total * 0.1));
-        return !(this.returnedCash() * -1 <= this.total - this.total * 0.1);
+        return (this.total + this.returnedCash()) < this.shoppingCartService.getTotalCommited();
     }
 
     reservation() {
-        console.log('Se ha creado una reserva');
-        this.reservationValues();
-        this.shoppingCartService.reservation(this.reservationCreation).subscribe(
-            () => {
-                if (this.requestedInvoice) {
-                    this.shoppingCartService.createReservation(this.ticketCreation.userMobile).subscribe(
-                        () => this.dialog.closeAll()
-                    );
-                } else {
-                    this.dialog.closeAll();
-                }
-            }
+        this.formatValues();
+        this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
+            () => this.dialog.closeAll()
         );
     }
 

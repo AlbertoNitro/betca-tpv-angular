@@ -59,6 +59,16 @@ export class ShoppingCartService {
         this._total = Math.round(total * 100) / 100;
     }
 
+    getTotalCommited(): number {
+        let total = 0;
+        for (const shopping of this.shoppingCart) {
+            if (shopping.committed) {
+                total += shopping.total;
+            }
+        }
+        return Math.round(total * 100) / 100;
+    }
+
     private synchronizeAll() {
         this.shoppingCartSubject.next(this.shoppingCart);
         this.synchronizeCartTotal();
@@ -109,9 +119,9 @@ export class ShoppingCartService {
         );
     }
 
-    reservation(reservationCreation: ReservationCreation): Observable<any> {
-        reservationCreation.shoppingCart = this.shoppingCart;
-        return this.reservationService.create(reservationCreation).map(
+    reservation(ticketCreation: TicketCreation): Observable<any> {
+        ticketCreation.shoppingCart = this.shoppingCart;
+        return this.reservationService.create(ticketCreation).map(
             () => this.reset()
         );
     }
