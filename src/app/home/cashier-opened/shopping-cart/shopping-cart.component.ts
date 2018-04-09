@@ -37,14 +37,34 @@ export class ShoppingCartComponent implements OnDestroy {
         this.stock = null;
     }
 
-    update(shopping: Shopping, event: any, column: string): void {
-        shopping[column] = Number(event.target.value);
-        if (column === 'total') {
-            shopping.updateDiscount();
-        } else {
-            shopping.updateTotal();
+    updateAmount(shopping: Shopping, event: any) {
+        shopping.amount = Number(event.target.value.replace(/[^0-9]/g, ''));
+        shopping.updateTotal();
+        this.shoppingCartService.synchronizeCartTotal();
+    }
+
+    updateDiscount(shopping: Shopping, event: any): void {
+        shopping.discount = Number(event.target.value);
+        if (shopping.discount < 0) {
+            shopping.discount = 0;
         }
-        this.shoppingCartService.synchronizeTotal();
+        if (shopping.discount > 100) {
+            shopping.discount = 100;
+        }
+        shopping.updateTotal();
+        this.shoppingCartService.synchronizeCartTotal();
+    }
+
+    updateTotal(shopping: Shopping, event: any): void {
+        shopping.total = Number(event.target.value);
+        if (shopping.total < 0) {
+            shopping.total = 0;
+        }
+        if (shopping.total > shopping.retailPrice) {
+            shopping.total = shopping.retailPrice;
+        }
+        shopping.updateDiscount();
+        this.shoppingCartService.synchronizeCartTotal();
     }
 
     changeCommitted(shopping: Shopping) {

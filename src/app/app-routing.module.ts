@@ -51,9 +51,10 @@ import { ArticlesFamilyViewComponent } from './home/cashier-opened/articles-fami
 import { FamilyAdditionDialogComponent } from './home/articles/family-addition-dialog.component';
 import { FamilyCreationDialogComponent } from './home/articles/family-creation-dialog.component';
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
-import { PercentageChartComponent} from './home/statistics2/percentageChart.component';
-import {IncomeComparisonChartComponent} from './home/statistics2/incomeComparisonChart.component';
+import { PercentageChartComponent } from './home/statistics2/percentageChart.component';
+import { IncomeComparisonChartComponent } from './home/statistics2/incomeComparisonChart.component';
 import { ArticlesTrackingComponent } from './home/articles-tracking/articles-tracking.component';
+import { OrderCreationEditDialogComponent } from './home/orders/order-creation-edit-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -125,30 +126,31 @@ export class AppRoutingModule {
   ];
 
   static COMPONENT_FACTORY = [
+    ArticleCreationEditDialogComponent,
     ArticlesFamilySizesDialogComponent,
+    ArticleQuickCreationDialogComponent,
+    ArticlesTrackingComponent,
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashierMovementDialogComponent,
-    OfferSearchDialogComponent,
-    OfferCreateEditDialogComponent,
+    CheckOutDialogComponent,
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     FamilyAdditionDialogComponent,
     FamilyCreationDialogComponent,
-    ProviderCreationEditDialogComponent,
-    CheckOutDialogComponent,
     InvoiceCreationDialogComponent,
-    ArticleCreationEditDialogComponent,
-    ArticleQuickCreationDialogComponent,
-    UserCreationEditDialogComponent,
-    UserChangingPasswordDialogComponent,
+    OfferCreateEditDialogComponent,
+    OfferSearchDialogComponent,
+    OrderCreationEditDialogComponent,
+    ProviderCreationEditDialogComponent,
     RoleManagementDialogComponent,
+    ScheduleCreationEditDialogComponent,
+    UserChangingPasswordDialogComponent,
+    UserCreationEditDialogComponent,
     UserQuickCreationEditDialogComponent,
     ViewInvoiceDialogComponent,
-    VoucherCreationDialogComponent,
-    VoucherEditDialogComponent,
     VoucherConsumeDialogComponent,
-    ScheduleCreationEditDialogComponent,
-    ArticlesTrackingComponent
+    VoucherCreationDialogComponent,
+    VoucherEditDialogComponent
   ];
 }

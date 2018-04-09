@@ -1,7 +1,8 @@
-export interface OrderBase {
-    id: string;
-    description: string;
-    providerCompany: string;
-    openingDate: Date;
-    openingDateFormat?: string;
+import { OrderBase } from './order-base.model';
+import { OrderLine } from './order-line.model';
+
+export interface Order extends OrderBase {
+    providerId?: string;
+    closingDate?: Date;
+    ordersLine: OrderLine[];
 }

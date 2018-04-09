@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Offer } from './offer.model';   
+import { Offer } from './offer.model';
 import { HttpService } from '../../core/http.service';
 import { Observable } from 'rxjs/Observable';
 import { MatSnackBar } from '@angular/material';
@@ -11,7 +11,7 @@ export class OfferService {
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
 
-    readObservable(code : string): Observable<Offer> {
+    readObservable(code: string): Observable<Offer> {
         return this.httpService.authToken().get(OfferService.END_POINT + '/' + code).map(
             data => {
                 return data;
@@ -20,7 +20,7 @@ export class OfferService {
     }
 
     createObservable(offer: Offer): Observable<boolean> {
-        console.log("Offer: " + offer);
+        console.log('Offer: ' + offer);
         return this.httpService.authToken().post(OfferService.END_POINT, offer).map(
             data => {
                 return data;
@@ -35,7 +35,7 @@ export class OfferService {
             }
         );
     }
-    
+
     deleteObservable(offer: Offer): Observable<boolean> {
         return this.httpService.authToken().delete(OfferService.END_POINT + '/' + offer.code);
     }

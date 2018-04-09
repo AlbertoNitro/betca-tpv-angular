@@ -25,7 +25,7 @@ export class CashierClosuresComponent {
             (cashierClosureClosedList: ClosedCashier[]) => {
                 this.data = cashierClosureClosedList;
                 this.data.forEach(element =>
-                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 9)
+                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10)
                 );
             }
         );

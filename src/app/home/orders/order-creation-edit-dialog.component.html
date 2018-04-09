@@ -1,0 +1,62 @@
+<h2 mat-dialog-title *ngIf="!edit">New Order</h2>
+<h2 mat-dialog-title *ngIf="edit">Edit Order</h2>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="text" placeholder="Description" required [(ngModel)]="order.description" [disabled]="order.closingDate"/>
+        <mat-error>Field required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Provider" [(ngModel)]="order.providerId" required [disabled]="edit">
+            <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef fxFlex="10%">#</mat-header-cell>
+            <mat-cell *matCellDef="let i = index" fxFlex="10%"> {{i+1}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="articleId">
+            <mat-header-cell *matHeaderCellDef fxFlex="40%">
+                <mat-form-field>
+                    <input matInput placeholder="Code" #code [disabled]="edit">
+                    <button mat-button matSuffix mat-icon-button (click)="findArticle(code.value); code.value=''" *ngIf="code.value">
+                        <mat-icon color="warn">search</mat-icon>
+                    </button>
+                </mat-form-field>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let item" fxFlex="40%">
+                <input matInput type="text" [value]="item.articleId" />
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="stock">
+            <mat-header-cell *matHeaderCellDef fxFlex="10%">Stock</mat-header-cell>
+            <mat-cell *matCellDef="let item" fxFlex="10%"> {{item.stock}} </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="requiredAmount">
+            <mat-header-cell *matHeaderCellDef fxFlex="20%"> Required Amount </mat-header-cell>
+            <mat-cell *matCellDef="let item" fxFlex="20%">
+                <input matInput type="number" step="1" min="1" [(ngModel)]="item.requiredAmount" [disabled]="edit" />
+            </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="finalAmount">
+            <mat-header-cell *matHeaderCellDef fxFlex="20%"> Final Amount </mat-header-cell>
+            <mat-cell *matCellDef="let item" fxFlex="20%">
+                <input matInput type="number" step="1" min="1" [(ngModel)]="item.finalAmount" [disabled]="!edit&&!order.closingDate" />
+            </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <div *ngIf="edit">
+        Registration Date: {{order.openingDate | date: 'medium'}}
+    </div>
+    <div *ngIf="edit&&order.closingDate">
+        Closing Date: {{order.closingDate | date: 'medium'}}
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
+    <button mat-raised-button color="accent" *ngIf="edit&&!order.closingDate" (click)="orderEntry()" [disabled]="!isActionCompleted()&&order.closingDate">Order Entry</button>
+    <button mat-raised-button color="accent" *ngIf="edit" (click)="createCopy()" [disabled]="!isActionCompleted()">Create copy</button>
+    <button mat-raised-button color="accent" *ngIf="!edit" (click)="create()" [disabled]="!isActionCompleted()">Create</button>
+</mat-dialog-actions>

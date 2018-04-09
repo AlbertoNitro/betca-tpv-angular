@@ -51,7 +51,7 @@ export class ShoppingCartService {
         return this._total;
     }
 
-    synchronizeTotal(): void {
+    synchronizeCartTotal(): void {
         let total = 0;
         for (const shopping of this.shoppingCart) {
             total = total + shopping.total;
@@ -61,7 +61,7 @@ export class ShoppingCartService {
 
     private synchronizeAll() {
         this.shoppingCartSubject.next(this.shoppingCart);
-        this.synchronizeTotal();
+        this.synchronizeCartTotal();
     }
 
     delete(shopping: Shopping): void {
