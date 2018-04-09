@@ -1,5 +1,5 @@
 <h2 mat-dialog-title color="primary">
-  <span class="mat-raised-button">Return: {{totalReturn | currency:'EUR':'symbol'}} </span>
+  <span class="mat-raised-button mat-primary">Debt: {{ticket.debt | currency:'EUR':'symbol'}} </span>
   <span class="mat-raised-button">Ticket: {{ticket.id}} </span>
   <span class="mat-raised-button">{{ticket.creationDate | date: 'medium'}} </span>
   <span class="mat-raised-button" *ngIf="invoice">Invoice: {{invoiceId()}} </span>
@@ -48,8 +48,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="accent" (click)="updateTicket()">
-    <mat-icon>euro_symbol</mat-icon> Return
-    <mat-icon>check_circle</mat-icon> Commit
+  <button mat-raised-button color="accent" (click)="acceptTicket()">
+    <mat-icon>check_circle</mat-icon> Ticket
   </button>
 </mat-dialog-actions>

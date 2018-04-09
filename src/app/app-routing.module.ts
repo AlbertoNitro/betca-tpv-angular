@@ -55,6 +55,8 @@ import { PercentageChartComponent } from './home/statistics2/percentageChart.com
 import { IncomeComparisonChartComponent } from './home/statistics2/incomeComparisonChart.component';
 import { ArticlesTrackingComponent } from './home/articles-tracking/articles-tracking.component';
 import { OrderCreationEditDialogComponent } from './home/orders/order-creation-edit-dialog.component';
+import { PaymentComponent } from './home/shared/payment.component';
+import { PaymentDialogComponent } from './home/tickets/payment-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -107,6 +109,7 @@ export class AppRoutingModule {
     InvoicesComponent,
     OrdersComponent,
     OffersComponent,
+    PaymentComponent,
     ProvidersComponent,
     RoleManagementComponent,
     ScheduleComponent,
@@ -142,6 +145,7 @@ export class AppRoutingModule {
     OfferCreateEditDialogComponent,
     OfferSearchDialogComponent,
     OrderCreationEditDialogComponent,
+    PaymentDialogComponent,
     ProviderCreationEditDialogComponent,
     RoleManagementDialogComponent,
     ScheduleCreationEditDialogComponent,

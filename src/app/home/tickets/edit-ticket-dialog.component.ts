@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatTableDataSource, MatDialogRef } from '@angular/material';
+import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 import { Shopping } from '../shared/shopping.model';
@@ -10,6 +10,7 @@ import { InvoiceService } from '../shared/invoice.service';
 import { Invoice } from '../shared/invoice.model';
 import { UserService } from '../shared/user.service';
 import { User } from '../shared/user.model';
+import { PaymentDialogComponent } from './payment-dialog.component';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -17,14 +18,12 @@ import { User } from '../shared/user.model';
   styleUrls: ['./edit-ticket-dialog.component.css']
 })
 export class EditTicketDialogComponent {
-
-  totalReturn = 0;
   ticket: Ticket;
   invoice: Invoice;
   displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
     private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
     private userService: UserService) {
 
@@ -48,7 +47,7 @@ export class EditTicketDialogComponent {
       shopping.committed = true;
     }
     shopping.total = this.updateTotal(shopping);
-    this.totalReturn += totalOld - shopping.total;
+    this.ticket.debt -= totalOld - shopping.total;
   }
 
   changeCommitted(shopping: Shopping) {
@@ -73,18 +72,46 @@ export class EditTicketDialogComponent {
     this.ticket.user = user;
   }
 
+  acceptTicket() {
+    if (this.ticket.debt < 0) {
+      this.voucheService.create({ value: -this.ticket.debt }).subscribe(
+        () => {
+          this.ticket.debt = 0;
+          this.updateTicket();
+        }
+      );
+    } else {
+      let notCommitValue = 0;
+      this.ticket.shoppingList.forEach(element => {
+        if (!element.committed) {
+          notCommitValue += element.total;
+        }
+      });
+      if (this.ticket.debt > notCommitValue) {
+        this.dialog.open(PaymentDialogComponent, {
+          data: {
+            debt: this.ticket.debt,
+            minimum: this.ticket.debt - notCommitValue
+          }
+        }).afterClosed().subscribe(
+          pay => {
+            if (pay) {
+              this.ticket.debt -= pay;
+              this.updateTicket();
+            }
+          }
+        );
+      } else {
+        this.updateTicket();
+      }
+    }
+  }
+
   updateTicket() {
     this.ticketService.updateTicket(this.ticket).subscribe(
-      () => {
-        if (this.totalReturn > 0) {
-          this.voucheService.create({ value: this.totalReturn }).subscribe(
-            () => this.dialogRef.close()
-          );
-        } else {
-          this.dialogRef.close();
-        }
-      }
+      () => this.dialogRef.close()
     );
   }
 
 }
+

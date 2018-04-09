@@ -36,8 +36,14 @@ export class InvoiceCreationDialogComponent {
                 if (!invoice.id) {
                     this.ticketService.readOne(this.ticketId).subscribe(
                         ticket => {
-                            this.ticketId = ticket.id;
-                            this.ticketIdSynchronized = true;
+                            if (ticket.debt > 0) {
+                                this.snackBar.open('Ticket not paid', 'Error', {
+                                    duration: 8000
+                                });
+                            } else {
+                                this.ticketId = ticket.id;
+                                this.ticketIdSynchronized = true;
+                            }
                         }
                     );
                 } else {
