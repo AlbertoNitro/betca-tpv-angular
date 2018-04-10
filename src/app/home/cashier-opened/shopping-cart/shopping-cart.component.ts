@@ -17,13 +17,9 @@ export class ShoppingCartComponent implements OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
     dataSource: MatTableDataSource<Shopping>;
 
-    stockLabel: string;
-    stock: number;
-
     private subscriptionDatasource: Subscription;
 
-    constructor(public shoppingCartService: ShoppingCartService, public dialog: MatDialog) {
-        this.resetStock();
+    constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
         this.subscriptionDatasource = this.shoppingCartService.shoppingCartObservable().subscribe(
             data => {
                 this.dataSource = new MatTableDataSource<Shopping>(data);
@@ -32,9 +28,8 @@ export class ShoppingCartComponent implements OnDestroy {
 
     }
 
-    resetStock() {
-        this.stockLabel = 'Stock';
-        this.stock = null;
+    indexShoppingCart(): number {
+        return this.shoppingCartService.indexShoppingCart;
     }
 
     updateAmount(shopping: Shopping, event: any) {
@@ -71,20 +66,18 @@ export class ShoppingCartComponent implements OnDestroy {
         shopping.committed = !shopping.committed;
     }
 
+    total(): number {
+        return this.shoppingCartService.total;
+    }
+
     delete(shopping: Shopping) {
         this.shoppingCartService.delete(shopping);
     }
 
     add(code: string) {
         this.shoppingCartService.add(code).subscribe(
-            article => {
-                this.stockLabel = `Stock of ${article.description} (code: ${article.code})`;
-                this.stock = article.stock;
-            },
-            error => {
-                this.createArticle(code);
-                this.stock = null;
-            }
+            article => { },
+            error => this.createArticle(code)
         );
     }
 
@@ -101,7 +94,6 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     checkOut() {
-        this.resetStock();
         this.dialog.open(CheckOutDialogComponent, {
             data: {
                 total: this.shoppingCartService.total,
@@ -111,12 +103,31 @@ export class ShoppingCartComponent implements OnDestroy {
     }
 
     createBudget() {
-        this.resetStock();
         this.shoppingCartService.createBudget();
     }
 
     exchange() {
         this.shoppingCartService.exchange();
+    }
+
+    stockLabel(): string {
+        if (this.shoppingCartService.lastArticle) {
+            return 'Stock of ' + this.shoppingCartService.lastArticle.description;
+        } else {
+            return 'Stock';
+        }
+    }
+
+    stockValue(): number {
+        if (this.shoppingCartService.lastArticle) {
+            return this.shoppingCartService.lastArticle.stock;
+        } else {
+            return null;
+        }
+    }
+
+    updateStock(stock: number) {
+        this.shoppingCartService.updateStock(stock);
     }
 
     ngOnDestroy(): void {

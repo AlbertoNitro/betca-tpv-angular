@@ -3,7 +3,7 @@ import { Provider } from './provider.model';
 export interface Article {
     code: string;
     reference?: string;
-    description: string;
+    description?: string;
     retailPrice?: number;
     stock?: number;
     provider?: string;

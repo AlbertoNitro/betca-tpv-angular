@@ -48,4 +48,12 @@ export class ArticleService {
         }
         return httpservice.get(ArticleService.END_POINT + ArticleService.SEARCH);
     }
+
+    updateStock(code: string, stock: number): void {
+        const article: Article = { code: code, stock: stock };
+        this.httpService.authToken().successful().patch(ArticleService.END_POINT + `/${code}`, article).subscribe(
+            () => true
+        );
+    }
+
 }

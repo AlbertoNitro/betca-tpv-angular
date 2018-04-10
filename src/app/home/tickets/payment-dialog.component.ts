@@ -20,8 +20,8 @@ export class PaymentDialogComponent {
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<PaymentDialogComponent>,
         private dialog: MatDialog) {
 
-        this.total = data.debt;
-        this.minimum = data.minimum;
+        this.total = Math.round(data.debt * 100) / 100;
+        this.minimum = Math.round(data.minimum * 100) / 100;
         this.cash = 0;
         this.card = 0;
         this.voucher = 0;

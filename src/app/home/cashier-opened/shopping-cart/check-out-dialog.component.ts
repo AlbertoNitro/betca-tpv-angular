@@ -98,7 +98,9 @@ export class CheckOutDialogComponent {
 
     checkOut() {
         this.formatValues();
-        this.ticketCreation.cash -= this.returnedCash();
+        if (this.returnedCash() > 0) {
+            this.ticketCreation.cash -= this.returnedCash();
+        }
         this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
             () => {
                 if (this.requestedInvoice) {

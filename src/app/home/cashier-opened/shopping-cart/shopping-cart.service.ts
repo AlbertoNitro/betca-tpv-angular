@@ -28,6 +28,8 @@ export class ShoppingCartService {
 
     private shoppingCartSubject: Subject<Shopping[]> = new BehaviorSubject(undefined); // subscripcion implica refresh auto
 
+    private _lastArticle: Article;
+
     constructor(private articleService: ArticleService, private ticketService: TicketService,
         private budgetService: BudgetService, private invoiceService: InvoiceService, private reservationService: ReservationService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
@@ -49,6 +51,10 @@ export class ShoppingCartService {
 
     get total() {
         return this._total;
+    }
+
+    get lastArticle(): Article {
+        return this._lastArticle;
     }
 
     synchronizeCartTotal(): void {
@@ -99,6 +105,7 @@ export class ShoppingCartService {
                     shopping.updateDiscount();
                 }
                 this.shoppingCart.push(shopping);
+                this._lastArticle = article;
                 this.synchronizeAll();
                 return article;
             }
@@ -162,5 +169,10 @@ export class ShoppingCartService {
         this.shoppingCart = new Array();
         this.synchronizeAll();
     }
+
+    updateStock(stock: number): void {
+        this.articleService.updateStock(this._lastArticle.code, stock);
+    }
+
 
 }
