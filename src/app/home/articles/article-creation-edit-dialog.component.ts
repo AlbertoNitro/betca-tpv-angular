@@ -20,8 +20,11 @@ export class ArticleCreationEditDialogComponent implements OnInit {
     article: Article;
     providers: Provider[];
 
-    constructor(private dialogRef: MatDialogRef<ArticleCreationEditDialogComponent>,
+    constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<ArticleCreationEditDialogComponent>,
         private articleService: ArticleService, private providerService: ProviderService) {
+
+        this.article = data.article;
+        this.edit = data.edit;
     }
 
     ngOnInit(): void {
@@ -47,5 +50,19 @@ export class ArticleCreationEditDialogComponent implements OnInit {
         this.articleService.update(this.article).subscribe(
             data => this.dialogRef.close()
         );
+    }
+
+    updateDescription() {
+        let prefix = this.providers.find(provider => provider.id === this.article.provider).company;
+        prefix = prefix.substring(prefix.indexOf('[') + 1, prefix.indexOf(']'));
+        if (prefix !== '') {
+            this.article.description = prefix + ' - ' + this.article.description;
+        }
+    }
+
+    updateReference() {
+        if (!this.article.reference) {
+            this.article.reference = this.article.description;
+        }
     }
 }

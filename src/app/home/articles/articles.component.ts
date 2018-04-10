@@ -47,10 +47,10 @@ export class ArticlesComponent implements OnInit {
   edit(article: Article) {
     this.articleService.readOne(article.code).subscribe(
       data => {
-        const dialogRef = this.dialog.open(ArticleCreationEditDialogComponent);
-        dialogRef.componentInstance.article = data;
-        dialogRef.componentInstance.edit = true;
-        dialogRef.afterClosed().subscribe(
+        this.dialog.open(ArticleCreationEditDialogComponent, {
+          width: '500px',
+          data: { article: data, edit: true }
+        }).afterClosed().subscribe(
           result => this.synchronize()
         );
       }
