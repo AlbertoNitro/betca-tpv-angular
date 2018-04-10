@@ -39,19 +39,13 @@ import { ArticlesTrackingComponent } from './articles-tracking/articles-tracking
   styles: [`mat-toolbar {justify-content: space-between;}`],
   templateUrl: `home.component.html`
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   static URL = 'home';
 
   cahierClosed: boolean;
   username: string;
 
-  data: User[];
-
-  ngOnInit(): void {
-    this.synchronize();
-  }
-
-  constructor(private dialog: MatDialog, public tokensService: TokensService,
+  constructor(private dialog: MatDialog, private tokensService: TokensService,
     private cashierService: CashierService, private router: Router,
     private adminsService: AdminsService, private userService: UserService) {
 
@@ -74,22 +68,12 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  synchronize() {
-    this.userService.readAll().subscribe(
-      data => this.data = data
-    );
-  }
-
-
-  editPassword(user: User) {
-    this.userService.read(user.mobile).subscribe(
-      data => {
-        const dialogRef = this.dialog.open(UserChangingPasswordDialogComponent);
-        dialogRef.componentInstance.user = data;
-        dialogRef.componentInstance.edit = true;
-        dialogRef.afterClosed().subscribe(
-          result => this.synchronize()
-        );
+  profile() {
+    this.adminsService.readProfile().subscribe(
+      user => {
+        this.dialog.open(UserChangingPasswordDialogComponent, {
+          data: { user: user }
+        });
       }
     );
   }
@@ -195,10 +179,6 @@ export class HomeComponent implements OnInit {
 
   Orders() {
     this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
-  }
-
-  password() {
-    this.editPassword(this.data[0]);
   }
 
   roleManagement() {

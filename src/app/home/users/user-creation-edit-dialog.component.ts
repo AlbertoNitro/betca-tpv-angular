@@ -31,7 +31,7 @@ export class UserCreationEditDialogComponent implements OnInit {
     }
 
     save(): void {
-        this.userService.putObservable(this.user).subscribe(
+        this.userService.put(this.user).subscribe(
             data => this.dialogRef.close()
         );
     }

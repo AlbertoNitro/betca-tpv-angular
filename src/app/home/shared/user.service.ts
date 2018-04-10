@@ -26,7 +26,7 @@ export class UserService {
         );
     }
 
-    putObservable(user: User): Observable<boolean> {
+    put(user: User): Observable<boolean> {
         return this.httpService.authToken().put(UserService.END_POINT + '/' + user.mobile, user).map(
             data => {
                 this.successful();

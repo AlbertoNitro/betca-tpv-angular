@@ -35,7 +35,7 @@ export class UserQuickCreationEditDialogComponent {
                 () => this.dialogRef.close(true)
             );
         } else if (this.type === 'edit') {
-            this.userService.putObservable(this.user).subscribe(
+            this.userService.put(this.user).subscribe(
                 () => this.dialogRef.close(true)
             );
         }

@@ -3,26 +3,22 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 import { AbstractControl } from '@angular/forms';
+import { AdminsService } from '../admin/admins.service';
 
 @Component({
   templateUrl: './user-changing-password-dialog.component.html',
   styleUrls: ['./user-changing-password-dialog.component.css']
 })
-export class UserChangingPasswordDialogComponent implements OnInit {
-  edit: boolean;
+export class UserChangingPasswordDialogComponent {
+
   user: User;
   confirmPassword: string;
-  passwordError: string;
 
-  constructor(public dialogRef: MatDialogRef<UserChangingPasswordDialogComponent>,
-    private userService: UserService) {
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, public dialogRef: MatDialogRef<UserChangingPasswordDialogComponent>,
+    private adminsService: AdminsService) {
 
-  ngOnInit(): void {
-    if (!this.user) {
-      this.user = { mobile: undefined, username: '' };
-    }
-    this.user.password = '';
+    this.user = data.user;
+    this.user.password = null;
   }
 
   isPasswordInvalid(): boolean {
@@ -30,8 +26,7 @@ export class UserChangingPasswordDialogComponent implements OnInit {
   }
 
   save(): void {
-    // this.user.password = this.password;
-    this.userService.putObservable(this.user).subscribe(
+    this.adminsService.updateProfile(this.user).subscribe(
       data => this.dialogRef.close()
     );
   }

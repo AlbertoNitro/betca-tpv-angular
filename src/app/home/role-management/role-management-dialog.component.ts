@@ -59,7 +59,7 @@ export class RoleManagementDialogComponent implements OnInit {
   save(): void {
     // this.user.address = this.selected.toString();
     this.user.role = this.selected;
-    this.userService.putObservable(this.user).subscribe(
+    this.userService.put(this.user).subscribe(
       data => this.dialogRef.close()
     );
   }
