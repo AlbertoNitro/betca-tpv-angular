@@ -65,7 +65,7 @@
             </form>
             <mat-form-field>
                 <input matInput [placeholder]="stockLabel()" type="number" [value]="stockValue()" #stock>
-                <button mat-button matSuffix mat-icon-button (click)="updateStock(stock.value)" *ngIf="stockValue()">
+                <button mat-button matSuffix mat-icon-button (click)="updateStock(stock.value)" *ngIf="stockValue()!=null">
                     <mat-icon color="warn">edit</mat-icon>
                 </button>
             </mat-form-field>
