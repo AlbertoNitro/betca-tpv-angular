@@ -70,7 +70,7 @@ export class ArticlesFamilyComponent {
     edit(family: Family) {
         this.dialog.open(FamilyCreationDialogComponent, {
             data: {
-                edit: true,
+                editable: true,
                 family: family
             }
         }).afterClosed().subscribe(

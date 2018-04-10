@@ -44,10 +44,9 @@ export class UsersComponent implements OnInit {
     editPassword(user: User) {
         this.userService.read(user.mobile).subscribe(
             data => {
-                const dialogRef = this.dialog.open(UserChangingPasswordDialogComponent);
-                dialogRef.componentInstance.user = data;
-                dialogRef.componentInstance.edit = true;
-                dialogRef.afterClosed().subscribe(
+                this.dialog.open(UserChangingPasswordDialogComponent, {
+                    data: { user: data }
+                }).afterClosed().subscribe(
                     result => this.synchronize()
                 );
             }

@@ -16,7 +16,7 @@ import { ProviderService } from '../shared/provider.service';
 })
 export class ArticleCreationEditDialogComponent implements OnInit {
 
-    edit: boolean;
+    editable: boolean;
     article: Article;
     providers: Provider[];
 
@@ -24,7 +24,7 @@ export class ArticleCreationEditDialogComponent implements OnInit {
         private articleService: ArticleService, private providerService: ProviderService) {
 
         this.article = data.article;
-        this.edit = data.edit;
+        this.editable = data.editable;
     }
 
     ngOnInit(): void {

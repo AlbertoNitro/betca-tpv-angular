@@ -10,7 +10,7 @@ import { ArticleCreationEditDialogComponent } from './article-creation-edit-dial
   templateUrl: './articles.component.html'
 })
 
-export class ArticlesComponent implements OnInit {
+export class ArticlesComponent {
   static URL = 'articles';
 
   title = 'Articles management';
@@ -20,20 +20,17 @@ export class ArticlesComponent implements OnInit {
   onlyIncomplete = true;
 
   constructor(private dialog: MatDialog, private articleService: ArticleService) {
-  }
-
-  ngOnInit(): void {
     this.synchronize();
   }
 
   synchronize() {
     if (this.onlyIncomplete) {
       this.articleService.readAllIncompletes().subscribe(
-        data => this.data = data
+        articles => this.data = articles
       );
     } else {
       this.articleService.readAll().subscribe(
-        data => this.data = data
+        articles => this.data = articles
       );
     }
   }
@@ -49,7 +46,7 @@ export class ArticlesComponent implements OnInit {
       data => {
         this.dialog.open(ArticleCreationEditDialogComponent, {
           width: '500px',
-          data: { article: data, edit: true }
+          data: { article: data, editable: true }
         }).afterClosed().subscribe(
           result => this.synchronize()
         );

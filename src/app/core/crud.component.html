@@ -25,9 +25,6 @@
                     <button mat-button matSuffix mat-icon-button *ngIf="deleteAction==true" (click)="onDelete(item)">
                         <mat-icon color="warn">close</mat-icon>
                     </button>
-                    <button mat-button matSuffix mat-icon-button *ngIf="passwordAction==true" (click)="onPassword(item)">
-                        <mat-icon color="warn">vpn_key</mat-icon>
-                    </button>
                 </mat-cell>
             </ng-container>
             <mat-header-row *matHeaderRowDef="columns.concat('actions')"></mat-header-row>

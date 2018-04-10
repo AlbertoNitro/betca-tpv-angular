@@ -13,7 +13,6 @@ export class CrudComponent {
     @Input() createAction = true;
     @Input() editAction = true;
     @Input() deleteAction = true;
-    @Input() passwordAction = false;
     @Input()
     set data(data: any[]) {
         this.dataSource = new MatTableDataSource<any>(data);
@@ -23,7 +22,6 @@ export class CrudComponent {
     @Output() create = new EventEmitter<any>();
     @Output() edit = new EventEmitter<any>();
     @Output() delete = new EventEmitter<any>();
-    @Output() password = new EventEmitter<any>();
 
     dataSource: MatTableDataSource<any>;
 
@@ -43,7 +41,4 @@ export class CrudComponent {
         this.delete.emit(item);
     }
 
-    onPassword(item) {
-        this.password.emit(item);
-    }
 }

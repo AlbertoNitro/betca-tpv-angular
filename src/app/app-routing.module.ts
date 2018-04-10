@@ -33,9 +33,6 @@ import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { OffersComponent } from './home/offers/offers.component';
-import { RoleManagementComponent } from './home/role-management/role-management.component';
-import { RoleManagementDialogComponent } from './home/role-management/role-management-dialog.component';
-import { TokenManagementComponent } from './home/token-management/token-management.component';
 import { UserChangingPasswordDialogComponent } from './home/users/user-changing-password-dialog.component';
 import { VoucherEditDialogComponent } from './home/vouchers/voucher-edit-dialog.component';
 import { InvoicesComponent } from './home/invoices/invoices.component';
@@ -76,13 +73,11 @@ const appRoutes: Routes = [
       { path: OrdersComponent.URL, component: OrdersComponent },
       { path: OffersComponent.URL, component: OffersComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
-      { path: RoleManagementComponent.URL, component: RoleManagementComponent },
       { path: ScheduleComponent.URL, component: ScheduleComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
-      { path: TokenManagementComponent.URL, component: TokenManagementComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: ArticlesTrackingComponent.URL, component: ArticlesTrackingComponent },
@@ -111,14 +106,12 @@ export class AppRoutingModule {
     OffersComponent,
     PaymentComponent,
     ProvidersComponent,
-    RoleManagementComponent,
     ScheduleComponent,
     ShoppingCartComponent,
     StatisticsComponent,
     Statistics2Component,
     StockAlertComponent,
     TicketsComponent,
-    TokenManagementComponent,
     UserQuickCrudComponent,
     UsersComponent,
     VouchersComponent,
@@ -147,7 +140,6 @@ export class AppRoutingModule {
     OrderCreationEditDialogComponent,
     PaymentDialogComponent,
     ProviderCreationEditDialogComponent,
-    RoleManagementDialogComponent,
     ScheduleCreationEditDialogComponent,
     UserChangingPasswordDialogComponent,
     UserCreationEditDialogComponent,

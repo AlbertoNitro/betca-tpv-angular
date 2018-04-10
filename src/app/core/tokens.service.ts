@@ -8,7 +8,6 @@ import { Role } from './role.model';
 @Injectable()
 export class TokensService {
     static END_POINT = '/tokens';
-    static AUTHENTICATED = '/authenticated';
     static USERNAME = '/username';
 
     constructor(private httpService: HttpService) {

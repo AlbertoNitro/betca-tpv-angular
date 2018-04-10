@@ -17,16 +17,16 @@ export class FamilyCreationDialogComponent {
     familyTypeKeys = Object.keys(FamilyType);
     family: Family;
     articleIdSynchronized = false;
-    edit: boolean;
+    editable: boolean;
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<FamilyCreationDialogComponent>,
         private articlesFamilyService: ArticlesFamilyService, private articleService: ArticleService) {
 
         this.family = { description: undefined };
-        this.edit = false;
+        this.editable = false;
         if (data) {
             if (data.edit) {
-                this.edit = data.edit;
+                this.editable = data.edit;
             }
             if (data.family) {
                 this.family = data.family;

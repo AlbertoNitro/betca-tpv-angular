@@ -52,11 +52,6 @@ export class HttpService {
         );
     }
 
-    getToken(): Token {
-        if (this.token !== undefined)
-            return this.token;
-    }
-
     getRoles(): Array<Role> {
         if (this.token !== undefined) {
             return this.token.roles;
@@ -100,23 +95,10 @@ export class HttpService {
         return this;
     }
 
-    isTokenExpired(): Boolean {
-        if (this.token !== undefined) {
-            if (Date.now() > this.token.creationDate + this.token.lifetime) {
-                return true;
-            }
-            else
-                return false;
-        }
-    }
-
     authToken(): HttpService {
         let tokenValue = '';
         if (this.token !== undefined) {
-            if (!this.isTokenExpired())
-                tokenValue = this.token.token;
-            else
-                this.logout;
+            tokenValue = this.token.token;
         }
         this.headers.append('Authorization', 'Basic ' + btoa(tokenValue + ':' + ''));
         return this;
