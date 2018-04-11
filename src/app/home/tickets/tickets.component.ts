@@ -26,7 +26,7 @@ export class TicketsComponent {
 
   findTicket(ticketId: string) {
     this.ticketService.readOne(ticketId).subscribe(
-      (ticket: Ticket) => this.data = new Array(1).fill(ticket)
+      (ticket: Ticket) => this.edit(ticket)
     );
   }
 
