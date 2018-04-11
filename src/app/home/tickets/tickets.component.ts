@@ -25,9 +25,7 @@ export class TicketsComponent {
   }
 
   findTicket(ticketId: string) {
-    this.ticketService.readOne(ticketId).subscribe(
-      (ticket: Ticket) => this.edit(ticket)
-    );
+    this.edit({ id: ticketId });
   }
 
   findByMobile(mobile: string) {
