@@ -38,16 +38,34 @@ export class ShoppingCartComponent implements OnDestroy {
         this.shoppingCartService.synchronizeCartTotal();
     }
 
+    priceLabel(shopping: Shopping) {
+        if (shopping.code === '1') {
+            return shopping.total;
+        } else {
+            return shopping.retailPrice;
+        }
+    }
+
+    discountLabel(shopping: Shopping): string {
+        if (shopping.code === '1') {
+            return '';
+        } else {
+            return '' + shopping.discount;
+        }
+    }
+
     updateDiscount(shopping: Shopping, event: any): void {
-        shopping.discount = Number(event.target.value);
-        if (shopping.discount < 0) {
-            shopping.discount = 0;
+        if (shopping.code !== '1') {
+            shopping.discount = Number(event.target.value);
+            if (shopping.discount < 0) {
+                shopping.discount = 0;
+            }
+            if (shopping.discount > 100) {
+                shopping.discount = 100;
+            }
+            shopping.updateTotal();
+            this.shoppingCartService.synchronizeCartTotal();
         }
-        if (shopping.discount > 100) {
-            shopping.discount = 100;
-        }
-        shopping.updateTotal();
-        this.shoppingCartService.synchronizeCartTotal();
     }
 
     updateTotal(shopping: Shopping, event: any): void {

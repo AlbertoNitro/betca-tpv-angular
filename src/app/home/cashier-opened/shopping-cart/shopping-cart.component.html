@@ -14,7 +14,7 @@
             </ng-container>
             <ng-container matColumnDef="retailPrice">
                 <mat-header-cell *matHeaderCellDef fxFlex="12%"> Price </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="12%"> {{item.retailPrice}} </mat-cell>
+                <mat-cell *matCellDef="let item" fxFlex="12%"> {{priceLabel(item)}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="amount">
                 <mat-header-cell *matHeaderCellDef fxFlex="10%"> Nº </mat-header-cell>
@@ -25,7 +25,7 @@
             <ng-container matColumnDef="discount">
                 <mat-header-cell *matHeaderCellDef fxFlex="12%"> % </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="12%">
-                    <input matInput type="number" [value]="item.discount" (blur)="updateDiscount(item, $event)" />
+                    <input matInput type="number" [value]="discountLabel(item)" (blur)="updateDiscount(item, $event)" [disabled]="item.code==='1'"/>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="total">
