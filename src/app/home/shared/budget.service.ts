@@ -20,8 +20,10 @@ export class BudgetService {
         return this.httpService.authToken().get(BudgetService.END_POINT);
     }
 
-    read(budget: Budget): Observable<any> {
-        return this.httpService.authToken().pdf().get(BudgetService.END_POINT + '/' + budget.id);
+    read(budget: Budget): void {
+        this.httpService.authToken().pdf().get(BudgetService.END_POINT + '/' + budget.id).subscribe(
+            () => { }
+        );
     }
 
 }
