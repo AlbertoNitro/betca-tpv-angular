@@ -180,7 +180,7 @@ export class HttpService {
         if (contentType) {
             if (contentType.indexOf('application/pdf') !== -1) {
                 const blob = new Blob([response.blob()], { type: 'application/pdf' });
-                window.open(window.URL.createObjectURL(blob));
+                window.open(window.URL.createObjectURL(blob)).print();
             } else if (contentType.indexOf('application/json') !== -1) {
                 return response.json();
             }
