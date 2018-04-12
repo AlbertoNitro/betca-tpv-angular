@@ -64,7 +64,7 @@
         <div class="container">
             <form>
                 <mat-form-field>
-                    <input matInput placeholder="Product by code" type="text" #code>
+                    <input matInput placeholder="Product by code" type="text" #code cdkFocusInitial>
                 </mat-form-field>
                 <button type="submit" mat-mini-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
                     <mat-icon>search</mat-icon>

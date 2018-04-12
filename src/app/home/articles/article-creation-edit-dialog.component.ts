@@ -23,9 +23,15 @@ export class ArticleCreationEditDialogComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<ArticleCreationEditDialogComponent>,
         private articleService: ArticleService, private providerService: ProviderService) {
 
-        this.article = data.article;
-        this.editable = data.editable;
+        if (data) {
+            this.article = data.article;
+            this.editable = data.editable;
+        } else {
+            this.editable = false;
+            this.article = { code: null, description: '', reference: '' };
+        }
     }
+
 
     ngOnInit(): void {
         this.providerService.readAll().subscribe(
