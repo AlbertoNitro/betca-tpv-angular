@@ -95,7 +95,7 @@ export class ShoppingCartService {
 
     add(code: string): Observable<Article> {
         const price = code;
-        if (code.length < 6) {
+        if (code.split('.')[0].length < 3) {
             code = '1';
         }
         return this.articleService.readOne(code).map(

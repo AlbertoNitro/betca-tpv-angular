@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { MatTableDataSource, MatDialog } from '@angular/material';
@@ -13,11 +13,12 @@ import { ArticleQuickCreationDialogComponent } from './article-quick-creation-di
     styleUrls: ['shopping-cart.component.css'],
     templateUrl: 'shopping-cart.component.html'
 })
-export class ShoppingCartComponent implements OnDestroy {
+export class ShoppingCartComponent implements OnInit, OnDestroy {
     displayedColumns = ['id', 'description', 'retailPrice', 'amount', 'discount', 'total', 'actions'];
     dataSource: MatTableDataSource<Shopping>;
 
     private subscriptionDatasource: Subscription;
+    @ViewChild('code') private elementRef: ElementRef;
 
     constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService) {
         this.subscriptionDatasource = this.shoppingCartService.shoppingCartObservable().subscribe(
@@ -26,6 +27,10 @@ export class ShoppingCartComponent implements OnDestroy {
             }
         );
 
+    }
+
+    ngOnInit() {
+        this.elementRef.nativeElement.focus();
     }
 
     indexShoppingCart(): number {
@@ -125,7 +130,9 @@ export class ShoppingCartComponent implements OnDestroy {
                 total: this.shoppingCartService.total,
                 ticketCreation: { cash: 0, card: 0, voucher: 0, shoppingCart: null }
             }
-        });
+        }).afterClosed().subscribe(
+            () => this.ngOnInit()
+        );
     }
 
     createBudget() {
