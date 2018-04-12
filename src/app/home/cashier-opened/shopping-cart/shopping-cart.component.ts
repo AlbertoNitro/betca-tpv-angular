@@ -32,15 +32,23 @@ export class ShoppingCartComponent implements OnDestroy {
         return this.shoppingCartService.indexShoppingCart;
     }
 
-    updateAmount(shopping: Shopping, event: any) {
-        shopping.amount = Number(event.target.value.replace(/[^0-9]/g, ''));
+    incrementAmount(shopping: Shopping) {
+        shopping.amount++;
+        shopping.updateTotal();
+        this.shoppingCartService.synchronizeCartTotal();
+    }
+
+    decreaseAmount(shopping: Shopping) {
+        if (shopping.amount > 1) {
+            shopping.amount--;
+        }
         shopping.updateTotal();
         this.shoppingCartService.synchronizeCartTotal();
     }
 
     priceLabel(shopping: Shopping) {
         if (shopping.code === '1') {
-            return shopping.total;
+            return Math.round(shopping.total / shopping.amount * 100) / 100;
         } else {
             return shopping.retailPrice;
         }

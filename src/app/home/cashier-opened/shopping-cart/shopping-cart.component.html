@@ -9,29 +9,36 @@
                 <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef fxFlex="37%"> Description </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="37%"> {{item.description}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="32%"> Description </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="32%"> {{item.description}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="retailPrice">
                 <mat-header-cell *matHeaderCellDef fxFlex="12%"> Price </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="12%"> {{priceLabel(item)}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="amount">
-                <mat-header-cell *matHeaderCellDef fxFlex="10%"> Nº </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="10%">
-                    <input matInput type="number" step="1" min="1" [value]="item.amount" (blur)="updateAmount(item, $event)" />
+                <mat-header-cell *matHeaderCellDef fxFlex="15%"> Nº </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="15%">
+                    <button mat-icon-button color="accent" (click)="decreaseAmount(item)" [disabled]="item.amount===1">
+                        <mat-icon>remove_circle_outline</mat-icon>
+                    </button>
+                    {{item.amount}}
+                    <button mat-icon-button color="accent" (click)="incrementAmount(item)">
+                        <mat-icon>add_circle_outline</mat-icon>
+                    </button>
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="discount">
                 <mat-header-cell *matHeaderCellDef fxFlex="12%"> % </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="12%">
-                    <input matInput type="number" [value]="discountLabel(item)" (blur)="updateDiscount(item, $event)" [disabled]="item.code==='1'"/>
+                    <input matInput type="number" [value]="discountLabel(item)" (blur)="updateDiscount(item, $event)" [disabled]="item.code==='1'"
+                    />
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="total">
                 <mat-header-cell *matHeaderCellDef fxFlex="12%"> Total </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="12%">
-                    <input matInput type="number" [value]="item.total" (blur)="updateTotal(item, $event)" />
+                    <input matInput type="number" [value]="item.total" (blur)="updateTotal(item, $event)" [disabled]="item.code==='1'" />
                 </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">

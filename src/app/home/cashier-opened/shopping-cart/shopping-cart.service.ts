@@ -94,6 +94,10 @@ export class ShoppingCartService {
     }
 
     add(code: string): Observable<Article> {
+        const price = code;
+        if (code.length < 6) {
+            code = '1';
+        }
         return this.articleService.readOne(code).map(
             (article: Article) => {
                 const shopping = new Shopping(article.code, article.description, article.retailPrice);
@@ -101,7 +105,7 @@ export class ShoppingCartService {
                     shopping.committed = false;
                 }
                 if (article.code === '1') {
-                    shopping.total = Number(code) / 100;
+                    shopping.total = Number(price);
                     shopping.updateDiscount();
                 }
                 this.shoppingCart.push(shopping);
