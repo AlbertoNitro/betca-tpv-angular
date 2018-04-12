@@ -18,8 +18,13 @@ export class ProviderCreationEditDialogComponent implements OnInit {
     constructor(@Inject(MAT_DIALOG_DATA) data: any, public dialogRef: MatDialogRef<ProviderCreationEditDialogComponent>,
         private providerService: ProviderService) {
 
-        this.provider = data.provider;
-        this.edit = data.edit;
+        if (data) {
+            this.provider = data.provider;
+            this.edit = data.edit;
+        } else {
+            this.edit = false;
+            this.provider = { id: null, company: null };
+        }
     }
 
     ngOnInit(): void {

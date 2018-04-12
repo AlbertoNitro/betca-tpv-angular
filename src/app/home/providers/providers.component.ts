@@ -49,9 +49,7 @@ export class ProvidersComponent implements OnInit {
     }
 
     create() {
-        const dialogRef = this.dialog.open(ProviderCreationEditDialogComponent);
-        dialogRef.componentInstance.edit = false;
-        dialogRef.afterClosed().subscribe(
+        this.dialog.open(ProviderCreationEditDialogComponent).afterClosed().subscribe(
             () => this.synchronize()
         );
     }
