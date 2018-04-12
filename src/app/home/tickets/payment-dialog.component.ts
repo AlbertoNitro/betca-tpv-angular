@@ -13,6 +13,7 @@ import { TicketCreation } from '../shared/ticket-creation.model';
 export class PaymentDialogComponent {
     total: number;
     minimum: number;
+    advised: number;
 
     ticketCreation: TicketCreation;
 
@@ -21,6 +22,7 @@ export class PaymentDialogComponent {
 
         this.total = Math.round(data.debt * 100) / 100;
         this.minimum = Math.round(data.minimum * 100) / 100;
+        this.advised = Math.round(data.advised * 100) / 100;
 
         this.ticketCreation = { card: 0, cash: 0, voucher: 0, note: '', shoppingCart: null };
     }

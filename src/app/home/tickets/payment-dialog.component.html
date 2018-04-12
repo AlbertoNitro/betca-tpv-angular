@@ -1,5 +1,5 @@
 <h2 mat-dialog-title>
-    Total: {{total | currency:'EUR':'symbol'}}</h2>
+    Total: {{total | currency:'EUR':'symbol'}}  (+{{advised}})</h2>
 <mat-dialog-content>
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
@@ -24,6 +24,6 @@
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-raised-button color="accent" (click)="pay()" [disabled]="!isValid()">
-        <mat-icon>euro_symbol</mat-icon> Pay <span class="mat-suffix" *ngIf="minimum<total">(+{{minimum}})</span> 
+        <mat-icon>euro_symbol</mat-icon> Pay <span class="mat-suffix" *ngIf="minimum>0">(+{{minimum}})</span> 
     </button>
 </mat-dialog-actions>

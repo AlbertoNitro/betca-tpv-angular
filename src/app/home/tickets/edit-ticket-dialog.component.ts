@@ -23,6 +23,8 @@ export class EditTicketDialogComponent {
   displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
 
+  reserva: number;
+
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
     private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
     private userService: UserService) {
@@ -30,6 +32,23 @@ export class EditTicketDialogComponent {
     this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
     this.ticket = data.ticket;
     this.invoice = data.invoice;
+    this.reserva = this.totalNotCommited() - this.ticket.debt;
+  }
+
+  private total(): number {
+    let total = 0;
+    this.ticket.shoppingList.forEach(element => total += element.total);
+    return total;
+  }
+
+  private totalNotCommited(): number {
+    let notCommitValue = 0;
+    this.ticket.shoppingList.forEach(element => {
+      if (!element.committed) {
+        notCommitValue += element.total;
+      }
+    });
+    return notCommitValue;
   }
 
   private round(value: number) {
@@ -81,17 +100,13 @@ export class EditTicketDialogComponent {
         }
       );
     } else {
-      let notCommitValue = 0;
-      this.ticket.shoppingList.forEach(element => {
-        if (!element.committed) {
-          notCommitValue += element.total;
-        }
-      });
-      if (this.ticket.debt > notCommitValue) {
+      if ((this.totalNotCommited() - this.ticket.debt) < this.reserva) {
+        const advised = this.ticket.debt - (this.totalNotCommited() - this.reserva);
         this.dialog.open(PaymentDialogComponent, {
           data: {
             debt: this.ticket.debt,
-            minimum: this.ticket.debt - notCommitValue
+            minimum: this.ticket.debt - this.totalNotCommited(),
+            advised: advised,
           }
         }).afterClosed().subscribe(
           ticketCreation => {

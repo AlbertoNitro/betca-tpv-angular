@@ -9,16 +9,16 @@
                 <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef fxFlex="32%"> Description </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="32%"> {{item.description}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="30%"> Description </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="30%"> {{item.description}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="retailPrice">
-                <mat-header-cell *matHeaderCellDef fxFlex="12%"> Price </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="12%"> {{priceLabel(item)}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef fxFlex="11%"> Price </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="11%"> {{priceLabel(item)}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="amount">
-                <mat-header-cell *matHeaderCellDef fxFlex="15%"> Nº </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="15%">
+                <mat-header-cell *matHeaderCellDef fxFlex="18%"> Nº </mat-header-cell>
+                <mat-cell *matCellDef="let item" fxFlex="18%">
                     <button mat-icon-button color="accent" (click)="decreaseAmount(item)" [disabled]="item.amount===1">
                         <mat-icon>remove_circle_outline</mat-icon>
                     </button>
