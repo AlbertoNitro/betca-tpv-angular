@@ -1,5 +1,9 @@
 <h2 mat-dialog-title>
-    Total: {{total | currency:'EUR':'symbol'}}  (+{{advised}})</h2>
+    Reserva: {{reserve | currency:'EUR':'symbol'}}</h2>
+<h2 mat-dialog-title>
+    Abonar ahora: {{payable | currency:'EUR':'symbol'}}</h2>
+<h2 mat-dialog-title>
+    Pendiente de abonar: {{unpaid | currency:'EUR':'symbol'}}</h2>
 <mat-dialog-content>
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
@@ -24,6 +28,7 @@
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <button mat-raised-button color="accent" (click)="pay()" [disabled]="!isValid()">
-        <mat-icon>euro_symbol</mat-icon> Pay <span class="mat-suffix" *ngIf="minimum>0">(+{{minimum}})</span> 
+        <mat-icon>euro_symbol</mat-icon> Pay
+        <span class="mat-suffix" *ngIf="minimum>0">(+{{minimum}})</span>
     </button>
 </mat-dialog-actions>

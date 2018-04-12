@@ -104,13 +104,13 @@ export class CheckOutDialogComponent {
         }
         this.ticketCreation.note = '';
         if (this.ticketCreation.card > 0) {
-            this.ticketCreation.note += ' Abonado con Tarjeta: ' + this.ticketCreation.card + '.';
+            this.ticketCreation.note += ' Abonado con Tarjeta: ' + Math.round(this.ticketCreation.card * 100) / 100 + '.';
         }
         if (this.ticketCreation.voucher > 0) {
-            this.ticketCreation.note += ' Abonado con vale: ' + this.ticketCreation.voucher + '.';
+            this.ticketCreation.note += ' Abonado con vale: ' + Math.round(this.ticketCreation.voucher * 100) / 100 + '.';
         }
         if (this.ticketCreation.cash > 0) {
-            this.ticketCreation.note += ' Abonado en efectivo: ' + this.ticketCreation.cash + '.';
+            this.ticketCreation.note += ' Abonado en efectivo: ' + Math.round(this.ticketCreation.cash * 100) / 100 + '.';
         }
         if (returned > 0) {
             this.ticketCreation.note += ' Devuelto: ' + returned + '.';

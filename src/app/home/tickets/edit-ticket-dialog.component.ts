@@ -104,9 +104,9 @@ export class EditTicketDialogComponent {
         const advised = this.ticket.debt - (this.totalNotCommited() - this.reserva);
         this.dialog.open(PaymentDialogComponent, {
           data: {
-            debt: this.ticket.debt,
-            minimum: this.ticket.debt - this.totalNotCommited(),
-            advised: advised,
+            reserve: this.reserva,
+            payable: advised,
+            unpaid: this.totalNotCommited(),
           }
         }).afterClosed().subscribe(
           ticketCreation => {
