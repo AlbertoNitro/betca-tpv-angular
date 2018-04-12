@@ -2,19 +2,19 @@
     Total: {{total | currency:'EUR':'symbol'}}</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="number" placeholder="Card" [(ngModel)]="card" />
+        <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />
         <button mat-button matSuffix mat-icon-button (click)="fillCard()">
             <mat-icon color="warn">credit_card</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="number" placeholder="Cash" [(ngModel)]="cash" />
+        <input matInput type="number" placeholder="Cash" [(ngModel)]="ticketCreation.cash" />
         <button mat-button matSuffix mat-icon-button (click)="fillCash()">
             <mat-icon color="warn">euro_symbol</mat-icon>
         </button>
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="number" placeholder="Voucher" [disabled]="true" [(ngModel)]="voucher" />
+        <input matInput type="number" placeholder="Voucher" [disabled]="true" [(ngModel)]="ticketCreation.voucher" />
         <button mat-button matSuffix mat-icon-button (click)="consumeVoucher()">
             <mat-icon color="warn">local_offer</mat-icon>
         </button>

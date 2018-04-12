@@ -5,6 +5,7 @@ export interface Ticket {
   id: string;
   creationDate?: Date;
   debt?: number;
+  note?: string;
   shoppingList?: Shopping[];
   user?: User;
 }

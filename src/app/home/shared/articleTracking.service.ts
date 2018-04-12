@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { Ticket } from './ticket.model';
-import { TicketCreation } from './ticket-creation.model';
 import { TicketUpdation } from './ticket-updation.model';
 import { Shopping } from './shopping.model';
 import { NumProductSold } from './numProductSold.model';

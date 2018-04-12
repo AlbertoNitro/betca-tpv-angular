@@ -97,9 +97,23 @@ export class CheckOutDialogComponent {
     }
 
     checkOut() {
+        const returned = this.returnedCash();
         this.formatValues();
-        if (this.returnedCash() > 0) {
-            this.ticketCreation.cash -= this.returnedCash();
+        if (returned > 0) {
+            this.ticketCreation.cash -= returned;
+        }
+        this.ticketCreation.note = '';
+        if (this.ticketCreation.card > 0) {
+            this.ticketCreation.note += ' Abonado con Tarjeta: ' + this.ticketCreation.card + '.';
+        }
+        if (this.ticketCreation.voucher > 0) {
+            this.ticketCreation.note += ' Abonado con vale: ' + this.ticketCreation.voucher + '.';
+        }
+        if (this.ticketCreation.cash > 0) {
+            this.ticketCreation.note += ' Abonado en efectivo: ' + this.ticketCreation.cash + '.';
+        }
+        if (returned > 0) {
+            this.ticketCreation.note += ' Devuelto: ' + returned + '.';
         }
         this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
             () => {

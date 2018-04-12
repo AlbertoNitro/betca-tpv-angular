@@ -180,7 +180,7 @@ export class HttpService {
         if (contentType) {
             if (contentType.indexOf('application/pdf') !== -1) {
                 const blob = new Blob([response.blob()], { type: 'application/pdf' });
-                //window.open(window.URL.createObjectURL(blob)).print();
+                // window.open(window.URL.createObjectURL(blob)).print();
                 const iFrame = document.createElement('iframe');
                 iFrame.src = URL.createObjectURL(blob);
                 iFrame.style.visibility = 'hidden';

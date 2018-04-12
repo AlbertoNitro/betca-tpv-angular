@@ -94,9 +94,10 @@ export class EditTicketDialogComponent {
             minimum: this.ticket.debt - notCommitValue
           }
         }).afterClosed().subscribe(
-          pay => {
-            if (pay) {
-              this.ticket.debt -= pay;
+          ticketCreation => {
+            if (ticketCreation) {
+              this.ticket.debt -= (ticketCreation.cash + ticketCreation.card + ticketCreation.voucher);
+              this.ticket.note = ticketCreation.note;
               this.updateTicket();
             }
           }

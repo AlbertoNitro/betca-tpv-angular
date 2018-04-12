@@ -5,5 +5,6 @@ export interface TicketCreation {
     cash: number;
     card: number;
     voucher: number;
+    note: String;
     shoppingCart: Shopping[];
 }

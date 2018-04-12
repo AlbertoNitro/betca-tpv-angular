@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { VoucherConsumeDialogComponent } from '../cashier-opened/shopping-cart/voucher-consume-dialog.component';
+import { TicketCreation } from '../shared/ticket-creation.model';
 
 @Component({
     templateUrl: './payment-dialog.component.html',
@@ -13,18 +14,15 @@ export class PaymentDialogComponent {
     total: number;
     minimum: number;
 
-    cash: number;
-    card: number;
-    voucher: number;
+    ticketCreation: TicketCreation;
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<PaymentDialogComponent>,
         private dialog: MatDialog) {
 
         this.total = Math.round(data.debt * 100) / 100;
         this.minimum = Math.round(data.minimum * 100) / 100;
-        this.cash = 0;
-        this.card = 0;
-        this.voucher = 0;
+
+        this.ticketCreation = { card: 0, cash: 0, voucher: 0, note: '', shoppingCart: null };
     }
 
     private format(value: number): number {
@@ -32,30 +30,30 @@ export class PaymentDialogComponent {
     }
 
     fillCard() {
-        if (this.card === this.total) {
-            this.card = 0;
+        if (this.ticketCreation.card === this.total) {
+            this.ticketCreation.card = 0;
         } else {
-            this.card = this.total;
+            this.ticketCreation.card = this.total;
         }
     }
 
     fillCash() {
-        this.cash = this.format(this.cash);
+        this.ticketCreation.cash = this.format(this.ticketCreation.cash);
         if (this.paid() < this.total) {
-            this.cash = this.total - this.card - this.voucher;
-        } else if (this.cash < 30) {
-            this.cash = (Math.round(this.cash / 5) + 1) * 5;
-        } else if (this.cash < 70) {
-            this.cash = (Math.round(this.cash / 10) + 1) * 10;
+            this.ticketCreation.cash = this.total - this.ticketCreation.card - this.ticketCreation.voucher;
+        } else if (this.ticketCreation.cash < 30) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
+        } else if (this.ticketCreation.cash < 70) {
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 10) + 1) * 10;
         } else {
-            this.cash = (Math.round(this.cash / 50) + 1) * 50;
+            this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 50) + 1) * 50;
         }
     }
 
     consumeVoucher() {
         const dialogRef = this.dialog.open(VoucherConsumeDialogComponent);
         dialogRef.afterClosed().subscribe(
-            result => this.voucher += (result > 0 ? result : 0)
+            result => this.ticketCreation.voucher += (result > 0 ? result : 0)
         );
     }
 
@@ -67,16 +65,36 @@ export class PaymentDialogComponent {
         return this.paid() - this.total;
     }
 
+    private formatValues() {
+        this.ticketCreation.cash = this.format(this.ticketCreation.cash);
+        this.ticketCreation.card = this.format(this.ticketCreation.card);
+        this.ticketCreation.voucher = this.format(this.ticketCreation.voucher);
+    }
+
     paid(): number {
-        return this.format(this.cash) + this.format(this.card) + this.voucher;
+        return this.format(this.ticketCreation.cash) + this.format(this.ticketCreation.card) + this.ticketCreation.voucher;
     }
 
     pay() {
-        if (this.paid() > this.total) {
-            this.dialogRef.close(this.total);
-        } else {
-            this.dialogRef.close(this.paid());
+        const returned = this.returnCash();
+        this.formatValues();
+        if (returned > 0) {
+            this.ticketCreation.cash -= returned;
         }
+        this.ticketCreation.note = '';
+        if (this.ticketCreation.card > 0) {
+            this.ticketCreation.note += ' Abonado con Tarjeta: ' + this.ticketCreation.card + '.';
+        }
+        if (this.ticketCreation.voucher > 0) {
+            this.ticketCreation.note += ' Abonado con vale: ' + this.ticketCreation.voucher + '.';
+        }
+        if (this.ticketCreation.cash > 0) {
+            this.ticketCreation.note += ' Abonado en efectivo: ' + this.ticketCreation.cash + '.';
+        }
+        if (returned > 0) {
+            this.ticketCreation.note += ' Devuelto: ' + returned + '.';
+        }
+        this.dialogRef.close(this.ticketCreation);
     }
 
 }
