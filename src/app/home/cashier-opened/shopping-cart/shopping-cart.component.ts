@@ -81,7 +81,7 @@ export class ShoppingCartComponent implements OnDestroy {
         if (shopping.total < 0) {
             shopping.total = 0;
         }
-        if (shopping.total > shopping.retailPrice) {
+        if (shopping.total > (shopping.retailPrice * shopping.amount)) {
             shopping.total = shopping.retailPrice;
         }
         shopping.updateDiscount();
