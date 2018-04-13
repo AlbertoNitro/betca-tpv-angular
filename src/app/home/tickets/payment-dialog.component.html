@@ -1,5 +1,9 @@
 <h2 mat-dialog-title>
-    Reserva: {{reserve | currency:'EUR':'symbol'}}</h2>
+    Reserva: {{reserve | currency:'EUR':'symbol'}}
+    <mat-checkbox [(ngModel)]="returnedReserve" [disabled]="reserve<=0">
+        <span> Devolver</span>
+    </mat-checkbox>
+</h2>
 <h2 mat-dialog-title>
     Abonar ahora: {{payable | currency:'EUR':'symbol'}}</h2>
 <h2 mat-dialog-title>
