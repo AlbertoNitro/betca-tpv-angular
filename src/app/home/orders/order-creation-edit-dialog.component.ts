@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
 
 import { Article } from '../shared/article.model';
 import { Provider } from '../shared/provider.model';
@@ -9,6 +9,7 @@ import { ProviderService } from '../shared/provider.service';
 import { Order } from './order.model';
 import { OrderService } from './orders.service';
 import { OrderLine } from './order-line.model';
+import { AdvancedSearchComponent } from '../cashier-opened/advanced-search/advanced-search.component';
 
 @Component({
     templateUrl: 'order-creation-edit-dialog.component.html',
@@ -23,13 +24,15 @@ export class OrderCreationEditDialogComponent {
     order: Order;
     providers: Provider[];
 
-    displayedColumns = ['id', 'articleId', 'stock', 'requiredAmount', 'finalAmount'];
+    displayedColumns = ['id', 'articleId', 'description', 'stock', 'requiredAmount', 'finalAmount', 'actions'];
     dataSource: MatTableDataSource<OrderLine>;
+
+    article: Article;
 
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<OrderCreationEditDialogComponent>,
-        private snackBar: MatSnackBar, private providerService: ProviderService, private orderService: OrderService,
-        private articleService: ArticleService) {
+        public dialog: MatDialog, private snackBar: MatSnackBar, private providerService: ProviderService,
+        private orderService: OrderService, private articleService: ArticleService) {
 
         this.order = data.order;
         this.edit = data.edit;
@@ -43,7 +46,9 @@ export class OrderCreationEditDialogComponent {
     }
 
     synchronize(): void {
-
+        this.article = { code: null, provider: this.order.providerId };
+        this.order.ordersLine = new Array();
+        this.dataSource = new MatTableDataSource<OrderLine>(this.order.ordersLine);
     }
 
     isActionCompleted() {
@@ -52,6 +57,12 @@ export class OrderCreationEditDialogComponent {
 
     create(): void {
         this.orderService.create(this.order).subscribe(
+            () => this.dialogRef.close()
+        );
+    }
+
+    update(): void {
+        this.orderService.update(this.order).subscribe(
             () => this.dialogRef.close()
         );
     }
@@ -83,5 +94,22 @@ export class OrderCreationEditDialogComponent {
                 }
             }
         );
+    }
+
+    add(article: Article) {
+        this.order.ordersLine.push(
+            {
+                articleId: article.code, articleDescription: article.description, stock: article.stock,
+                requiredAmount: 1, finalAmount: 1
+            });
+        this.dataSource = new MatTableDataSource<OrderLine>(this.order.ordersLine);
+    }
+
+    onDelete(orderLine: OrderLine) {
+        const index = this.order.ordersLine.indexOf(orderLine);
+        if (index > -1) {
+            this.order.ordersLine.splice(index, 1);
+        }
+        this.dataSource = new MatTableDataSource<OrderLine>(this.order.ordersLine);
     }
 }

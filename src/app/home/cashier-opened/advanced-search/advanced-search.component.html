@@ -1,59 +1,55 @@
-<mat-card>
-  <mat-card-content>
-    <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
+<mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
 
-      <ng-container matColumnDef="reference">
-        <mat-header-cell *matHeaderCellDef fxFlex="20%">
-          <mat-form-field>
-            <input matInput placeholder="Reference" [(ngModel)]="article.reference">
-          </mat-form-field>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="20%"> {{item.reference}} </mat-cell>
-      </ng-container>
+  <ng-container matColumnDef="reference">
+    <mat-header-cell *matHeaderCellDef fxFlex="20%">
+      <mat-form-field>
+        <input matInput placeholder="Reference" [(ngModel)]="article.reference">
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" fxFlex="20%"> {{item.reference}} </mat-cell>
+  </ng-container>
 
-      <ng-container matColumnDef="description">
-        <mat-header-cell *matHeaderCellDef fxFlex="30%">
-          <mat-form-field>
-            <input matInput placeholder="Description" [(ngModel)]="article.description">
-          </mat-form-field>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="30%"> {{item.description}} </mat-cell>
-      </ng-container>
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef fxFlex="30%">
+      <mat-form-field>
+        <input matInput placeholder="Description" [(ngModel)]="article.description">
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" fxFlex="30%"> {{item.description}} </mat-cell>
+  </ng-container>
 
-      <ng-container matColumnDef="provider">
-        <mat-header-cell *matHeaderCellDef fxFlex="20%">
-          <mat-form-field>
-            <mat-select placeholder="Provider" [(ngModel)]="article.provider">
-              <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="20%"> {{provider(item.provider)}} </mat-cell>
-      </ng-container>
+  <ng-container matColumnDef="provider">
+    <mat-header-cell *matHeaderCellDef fxFlex="20%">
+      <mat-form-field>
+        <mat-select placeholder="Provider" [(ngModel)]="article.provider">
+          <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" fxFlex="20%"> {{provider(item.provider)}} </mat-cell>
+  </ng-container>
 
-      <ng-container matColumnDef="stock">
-        <mat-header-cell *matHeaderCellDef fxFlex="10%"> Stock</mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="10%"> {{item.stock}} </mat-cell>
-      </ng-container>
+  <ng-container matColumnDef="stock">
+    <mat-header-cell *matHeaderCellDef fxFlex="10%"> Stock</mat-header-cell>
+    <mat-cell *matCellDef="let item" fxFlex="10%"> {{item.stock}} </mat-cell>
+  </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef fxFlex="20%">
-          <button type="submit" mat-button matSuffix mat-icon-button color="primary" (click)="find()">
-            <mat-icon>search</mat-icon>
-          </button>
-          <button type="submit" mat-button matSuffix mat-icon-button color="primary" (click)="reset()">
-            <mat-icon>close</mat-icon>
-          </button>
-        </mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="20%">
-          <button mat-button matSuffix mat-icon-button color="accent" (click)="add(item)">
-            <mat-icon>add_shopping_cart</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef fxFlex="20%">
+      <button type="submit" mat-button matSuffix mat-icon-button color="primary" (click)="find()">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button type="submit" mat-button matSuffix mat-icon-button color="primary" (click)="reset()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let item" fxFlex="20%">
+      <button mat-button matSuffix mat-icon-button color="accent" (click)="onAdd(item)">
+        <mat-icon>add</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
 
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
-    </mat-table>
-  </mat-card-content>
-</mat-card>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+</mat-table>

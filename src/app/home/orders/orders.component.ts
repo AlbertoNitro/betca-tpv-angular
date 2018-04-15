@@ -37,7 +37,7 @@ export class OrdersComponent {
         }
         this.dialog.open(OrderCreationEditDialogComponent,
             {
-                width: '600px',
+                width: '1000px',
                 data: { edit: edit, order: order }
             }
         ).afterClosed().subscribe(
@@ -49,16 +49,23 @@ export class OrdersComponent {
         this.orderService.readOne(orderBase.id).subscribe(
             order => this.dialog.open(OrderCreationEditDialogComponent,
                 {
-                    width: '600px',
+                    width: '1000px',
                     data: { edit: true, order: order }
                 }
             ).afterClosed().subscribe(
                 orderCopy => {
                     if (orderCopy) {
+                        orderCopy.closingDate = null;
                         this.create(orderCopy, false);
                     }
                 }
             )
+        );
+    }
+
+    delete(orderBase: OrderBase) {
+        this.orderService.delete(orderBase.id).subscribe(
+            () => this.synchronize()
         );
     }
 }

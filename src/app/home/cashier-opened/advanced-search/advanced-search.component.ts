@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 
 import { Provider } from '../../shared/provider.model';
@@ -19,6 +19,16 @@ export class AdvancedSearchComponent {
   article: Article;
   providers: Provider[];
 
+  _initialProvider: string;
+
+  @Input()
+  set initialProvider(initialProvider) {
+    this._initialProvider = initialProvider;
+    this.reset();
+  }
+
+  @Output() add = new EventEmitter<any>();
+
   constructor(private articleService: ArticleService, private shoppingCartService: ShoppingCartService,
     private providerService: ProviderService) {
 
@@ -26,13 +36,6 @@ export class AdvancedSearchComponent {
       data => this.providers = data
     );
     this.reset();
-  }
-
-  add(article: Article) {
-    console.log(article.code);
-    this.shoppingCartService.add(article.code).subscribe(
-      () => true
-    );
   }
 
   find() {
@@ -48,7 +51,7 @@ export class AdvancedSearchComponent {
   }
 
   reset() {
-    this.article = { code: null, reference: null, description: null, provider: null };
+    this.article = { code: null, reference: null, description: null, provider: this._initialProvider };
     this.dataSource = undefined;
   }
 
@@ -59,5 +62,10 @@ export class AdvancedSearchComponent {
       return null;
     }
   }
+
+  onAdd(item) {
+    this.add.emit(item);
+  }
+
 
 }
