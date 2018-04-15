@@ -17,4 +17,5 @@ export class DbSeedDialogComponent {
     seedDb( ymlFileName: string) {
         this.adminsService.seedDb(ymlFileName);
     }
+
 }

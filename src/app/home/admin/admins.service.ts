@@ -9,6 +9,7 @@ import { User } from '../shared/user.model';
 export class AdminsService {
     static END_POINT = '/admins';
     static DB = '/db';
+    static ARTICLES_WITHOUT_CODE = '/articles-without-code';
     static STATE = '/state';
     static USERS = '/users';
 
@@ -32,6 +33,14 @@ export class AdminsService {
             () => this.httpService.logout()
         );
     }
+
+    resetDb(): void {
+        this.httpService.authToken().successful().delete(
+            AdminsService.END_POINT + AdminsService.DB + AdminsService.ARTICLES_WITHOUT_CODE).subscribe(
+                () => { }
+            );
+    }
+
 
     readProfile(): Observable<User> {
         return this.httpService.authToken().get(AdminsService.END_POINT + AdminsService.USERS + '/' + this.httpService.getMobile());

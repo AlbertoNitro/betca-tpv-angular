@@ -46,7 +46,7 @@ export class ArticlesFamilyViewComponent {
   find(family: Family) {
     if (family.familyType === FamilyType.ARTICLE) {
       this.articlesFamilyService.findArticle(family.id).subscribe(
-        article => this.shoppingCartService.add(family.id).subscribe(
+        article => this.shoppingCartService.add(article.code).subscribe(
           () => true
         )
       );

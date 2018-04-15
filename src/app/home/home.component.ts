@@ -99,6 +99,15 @@ export class HomeComponent {
       });
   }
 
+  resetDb() {
+    this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.adminsService.resetDb();
+        }
+      });
+  }
+
   closeCashier() {
     this.dialog.open(CashierCloseDialogComponent).afterClosed().subscribe(
       () => this.home()

@@ -71,6 +71,7 @@
 <mat-menu #settings="matMenu">
   <button mat-menu-item (click)="seedDb()">Seed Database</button>
   <button mat-menu-item (click)="deleteDb()">Delete Database</button>
+  <button mat-menu-item (click)="resetDb()">Reset Database</button>
 </mat-menu>
 <mat-menu #cashiers="matMenu">
   <button *ngIf="!cahierClosed" mat-menu-item (click)="closeCashier()">
