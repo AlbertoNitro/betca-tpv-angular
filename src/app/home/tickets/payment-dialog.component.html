@@ -1,13 +1,6 @@
-<h2 mat-dialog-title>
-    Reserva: {{reserve | currency:'EUR':'symbol'}}
-    <mat-checkbox [(ngModel)]="returnedReserve" [disabled]="reserve<=0">
-        <span> Devolver</span>
-    </mat-checkbox>
-</h2>
-<h2 mat-dialog-title>
-    Abonar ahora: {{payable | currency:'EUR':'symbol'}}</h2>
-<h2 mat-dialog-title>
-    Pendiente de abonar: {{unpaid | currency:'EUR':'symbol'}}</h2>
+<h2 *ngIf="reserve&&reserve>0" mat-dialog-title> Reserva: {{reserve | currency:'EUR':'symbol'}}</h2>
+<h2 *ngIf="payable&&payable>0" mat-dialog-title> Abonar ahora: {{payable | currency:'EUR':'symbol'}}</h2>
+<h2 *ngIf="unpaid&&unpaid>0" mat-dialog-title> Pendiente de abonar: {{unpaid | currency:'EUR':'symbol'}}</h2>
 <mat-dialog-content>
     <mat-form-field>
         <input matInput type="number" placeholder="Card" [(ngModel)]="ticketCreation.card" />

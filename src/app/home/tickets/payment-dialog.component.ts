@@ -11,8 +11,6 @@ import { TicketCreation } from '../shared/ticket-creation.model';
     }`]
 })
 export class PaymentDialogComponent {
-    returnedReserve = false;
-
     reserve: number;
     payable: number;
     unpaid: number;
@@ -32,26 +30,18 @@ export class PaymentDialogComponent {
         return ((value === undefined || value === null) ? 0 : value);
     }
 
-    private totalPayable(): number {
-        if (this.returnedReserve) {
-            return this.payable - this.reserve;
-        } else {
-            return this.payable;
-        }
-    }
-
     fillCard() {
         if (this.ticketCreation.card > 0) {
             this.ticketCreation.card = 0;
         } else {
-            this.ticketCreation.card = this.totalPayable();
+            this.ticketCreation.card = this.payable;
         }
     }
 
     fillCash() {
         this.ticketCreation.cash = this.format(this.ticketCreation.cash);
         if (this.paid() < this.payable) {
-            this.ticketCreation.cash = this.totalPayable() - this.ticketCreation.card - this.ticketCreation.voucher;
+            this.ticketCreation.cash = this.payable - this.ticketCreation.card - this.ticketCreation.voucher;
         } else if (this.ticketCreation.cash < 30) {
             this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
         } else if (this.ticketCreation.cash < 70) {
@@ -69,11 +59,11 @@ export class PaymentDialogComponent {
     }
 
     isValid(): boolean {
-        return (this.paid() >= this.payable - this.reserve);
+        return (this.paid() >= this.payable);
     }
 
     returnCash(): number {
-        return this.paid() - this.totalPayable();
+        return this.paid() - this.payable;
     }
 
     private formatValues() {
@@ -101,9 +91,6 @@ export class PaymentDialogComponent {
         }
         if (this.ticketCreation.cash > 0) {
             this.ticketCreation.note += ' Abonado en efectivo: ' + Math.round(this.ticketCreation.cash * 100) / 100 + '€.';
-        }
-        if (this.returnedReserve) {
-            this.ticketCreation.note += ' Devuelta fianza: ' + Math.round(this.reserve * 100) / 100 + '€.';
         }
         if (returned > 0) {
             this.ticketCreation.note += ' Devuelto: ' + returned + '€.';

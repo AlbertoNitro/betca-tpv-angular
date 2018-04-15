@@ -23,7 +23,7 @@ export class EditTicketDialogComponent {
   displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
 
-  reserva: number;
+  reserva: number = null;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
     private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
@@ -32,7 +32,9 @@ export class EditTicketDialogComponent {
     this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
     this.ticket = data.ticket;
     this.invoice = data.invoice;
-    this.reserva = this.totalNotCommited() - this.ticket.debt;
+    if (this.ticket.debt > 0) {
+      this.reserva = this.totalNotCommited() - this.ticket.debt;
+    }
   }
 
   private total(): number {
@@ -99,29 +101,34 @@ export class EditTicketDialogComponent {
           this.updateTicket();
         }
       );
-    } else {
-      if ((this.totalNotCommited() - this.ticket.debt) < this.reserva) {
-        const advised = this.ticket.debt - (this.totalNotCommited() - this.reserva);
-        this.dialog.open(PaymentDialogComponent, {
-          data: {
-            reserve: this.reserva,
-            payable: advised,
-            unpaid: this.totalNotCommited(),
-          }
-        }).afterClosed().subscribe(
-          ticketCreation => {
-            if (ticketCreation) {
-              this.ticket.debt -= (ticketCreation.cash + ticketCreation.card + ticketCreation.voucher);
-              this.ticket.note = ticketCreation.note;
-              this.updateTicket();
-            }
-          }
-        );
+    } else if (this.ticket.debt > 0) {
+      let data: any;
+      const advised = this.ticket.debt - (this.totalNotCommited() - this.reserva);
+      if (advised >= this.ticket.debt) {
+        data = { payable: this.ticket.debt };
       } else {
-        this.updateTicket();
+        data = {
+          reserve: this.reserva,
+          payable: advised,
+          unpaid: this.totalNotCommited(),
+        };
       }
+      this.dialog.open(PaymentDialogComponent, {
+        data: data
+      }).afterClosed().subscribe(
+        ticketCreation => {
+          if (ticketCreation) {
+            this.ticket.debt -= (ticketCreation.cash + ticketCreation.card + ticketCreation.voucher);
+            this.ticket.note = ticketCreation.note;
+            this.updateTicket();
+          }
+        }
+      );
+    } else {
+      this.updateTicket();
     }
   }
+
 
   updateTicket() {
     this.ticketService.updateTicket(this.ticket).subscribe(
