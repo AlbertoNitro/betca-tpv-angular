@@ -10,6 +10,8 @@ import { TokensService } from '../../core/tokens.service';
 export class UserService {
     static END_POINT = '/users';
 
+    static SEARCH = '/search';
+
     constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
     }
 
@@ -38,6 +40,24 @@ export class UserService {
     readAll(): Observable<User[]> {
         return this.httpService.authToken().get(UserService.END_POINT);
     }
+
+    find(user: User): Observable<User[]> {
+        let httpservice = this.httpService.authToken();
+        if (user.mobile) {
+            httpservice = httpservice.param('mobile', '' + user.mobile);
+        }
+        if (user.username) {
+            httpservice = httpservice.param('username', user.username);
+        }
+        if (user.dni) {
+            httpservice = httpservice.param('dni', user.dni);
+        }
+        if (user.address) {
+            httpservice = httpservice.param('address', user.address);
+        }
+        return httpservice.get(UserService.END_POINT + UserService.SEARCH);
+    }
+
 
     private successful() {
         this.snackBar.open('Successful', '', {

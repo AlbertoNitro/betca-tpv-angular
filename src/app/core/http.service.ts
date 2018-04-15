@@ -45,13 +45,6 @@ export class HttpService {
         this.responseType = ResponseContentType.Text;
     }
 
-    synchronizeAuthorized(endPoint: string): Observable<any> {
-        return this.authToken().get(endPoint).map(
-            token => token,
-            error => this.logout()
-        );
-    }
-
     getRoles(): Array<Role> {
         if (this.token !== undefined) {
             return this.token.roles;

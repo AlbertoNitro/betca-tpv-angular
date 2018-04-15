@@ -8,24 +8,28 @@ import { UserChangingPasswordDialogComponent } from './user-changing-password-di
 @Component({
     templateUrl: `users.component.html`
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent {
     static URL = 'customers';
+
+    user: User;
 
     title = 'Customers management';
     columns = ['mobile', 'username'];
     data: User[];
 
     constructor(private dialog: MatDialog, private userService: UserService) {
+        this.user = { mobile: null, username: null };
+        this.data = null;
     }
 
-    ngOnInit(): void {
-        this.synchronize();
-    }
-
-    synchronize() {
-        this.userService.readAll().subscribe(
+    filter() {
+        this.userService.find(this.user).subscribe(
             data => this.data = data
         );
+    }
+
+    resetFilter() {
+        this.user = { mobile: null, username: null };
     }
 
     edit(user: User) {
@@ -35,7 +39,7 @@ export class UsersComponent implements OnInit {
                 dialogRef.componentInstance.user = data;
                 dialogRef.componentInstance.edit = true;
                 dialogRef.afterClosed().subscribe(
-                    result => this.synchronize()
+                    result => this.filter()
                 );
             }
         );
@@ -47,7 +51,7 @@ export class UsersComponent implements OnInit {
                 this.dialog.open(UserChangingPasswordDialogComponent, {
                     data: { user: data }
                 }).afterClosed().subscribe(
-                    result => this.synchronize()
+                    result => this.filter()
                 );
             }
         );
@@ -57,7 +61,7 @@ export class UsersComponent implements OnInit {
         const dialogRef = this.dialog.open(UserCreationEditDialogComponent);
         dialogRef.componentInstance.edit = false;
         dialogRef.afterClosed().subscribe(
-            result => this.synchronize()
+            result => this.filter()
         );
     }
 
