@@ -3,5 +3,6 @@ export interface OrderBase {
     description: string;
     providerCompany: string;
     openingDate?: Date;
-    openingDateFormat?: string;
+    closingDate?: Date;
+    dateFormat?: string;
 }

@@ -4,6 +4,8 @@ import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
 import { Article } from '../shared/article.model';
 import { ArticleService } from '../shared/article.service';
 import { ArticleCreationEditDialogComponent } from './article-creation-edit-dialog.component';
+import { Provider } from '../shared/provider.model';
+import { ProviderService } from '../shared/provider.service';
 
 @Component({
   selector: 'app-articles',
@@ -13,13 +15,20 @@ import { ArticleCreationEditDialogComponent } from './article-creation-edit-dial
 export class ArticlesComponent {
   static URL = 'articles';
 
+  article: Article;
+  providers: Provider[];
+
   title = 'Articles management';
   columns = ['code', 'description'];
   data: Article[];
 
   onlyIncomplete = true;
 
-  constructor(private dialog: MatDialog, private articleService: ArticleService) {
+  constructor(private dialog: MatDialog, private articleService: ArticleService, private providerService: ProviderService) {
+    this.resetFilter();
+    this.providerService.readAll().subscribe(
+      data => this.providers = data
+    );
     this.synchronize();
   }
 
@@ -29,10 +38,28 @@ export class ArticlesComponent {
         articles => this.data = articles
       );
     } else {
-      this.articleService.readAll().subscribe(
-        articles => this.data = articles
-      );
+      this.data = null;
     }
+  }
+
+  trim(str: string) {
+    if (str) {
+      return str.trim();
+    } else {
+      return null;
+    }
+  }
+
+  filter() {
+    this.article.description = this.trim(this.article.description);
+    this.article.reference = this.trim(this.article.reference);
+    this.articleService.readAdvancedSearch(this.article).subscribe(
+      data => this.data = data
+    );
+  }
+
+  resetFilter() {
+    this.article = { code: null, reference: null, description: null, provider: null };
   }
 
   create() {

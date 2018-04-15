@@ -13,7 +13,7 @@ import { Order } from './order.model';
 export class OrdersComponent {
     static URL = 'orders';
 
-    columns = ['description', 'providerCompany', 'openingDateFormat'];
+    columns = ['description', 'providerCompany', 'dateFormat'];
     data: OrderBase[];
 
     constructor(public dialog: MatDialog, private orderService: OrderService, private providerService: ProviderService) {
@@ -25,7 +25,8 @@ export class OrdersComponent {
             ordersBase => {
                 this.data = ordersBase;
                 this.data.forEach(element =>
-                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10)
+                    element['dateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10) + ' - ' +
+                    (element['closingDate'] ? new Date(element['closingDate']).toISOString().substring(0, 10) : '')
                 );
             }
         );
@@ -58,6 +59,7 @@ export class OrdersComponent {
                         orderCopy.closingDate = null;
                         this.create(orderCopy, false);
                     }
+                    this.synchronize();
                 }
             )
         );
@@ -68,4 +70,5 @@ export class OrdersComponent {
             () => this.synchronize()
         );
     }
+
 }

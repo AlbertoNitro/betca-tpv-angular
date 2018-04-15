@@ -1,8 +1,27 @@
 <mat-card>
     <mat-card-subtitle>Filter</mat-card-subtitle>
     <mat-card-content>
-        <mat-checkbox [(ngModel)]="onlyIncomplete" (change)="synchronize()">Only Incomplete</mat-checkbox>
+        <mat-checkbox [(ngModel)]="onlyIncomplete" (change)="synchronize()">Only Incomplete </mat-checkbox>
+        <span *ngIf="!onlyIncomplete">
+            <mat-form-field>
+                <input matInput placeholder="Reference" [(ngModel)]="article.reference">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Description" [(ngModel)]="article.description">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Provider" [(ngModel)]="article.provider">
+                    <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button mat-mini-fab color="primary" (click)="filter()">
+                <mat-icon>search</mat-icon>
+            </button>
+            <button mat-mini-fab color="primary" (click)="resetFilter()">
+                <mat-icon>close</mat-icon>
+            </button>
+        </span>
     </mat-card-content>
 </mat-card>
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data" 
-    (create)="create()" (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data" (create)="create()"
+    (edit)="edit($event)"></app-crud>

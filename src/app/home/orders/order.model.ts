@@ -3,6 +3,5 @@ import { OrderLine } from './order-line.model';
 
 export interface Order extends OrderBase {
     providerId?: string;
-    closingDate?: Date;
     ordersLine: OrderLine[];
 }
