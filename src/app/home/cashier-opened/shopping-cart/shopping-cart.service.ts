@@ -75,6 +75,16 @@ export class ShoppingCartService {
         return Math.round(total * 100) / 100;
     }
 
+    uncommitArticlesExist(): boolean {
+        for (const shopping of this.shoppingCart) {
+            if (!shopping.committed) {
+                return true;
+            }
+        }
+        return false;
+     }
+
+
     private synchronizeAll() {
         this.shoppingCartSubject.next(this.shoppingCart);
         this.synchronizeCartTotal();

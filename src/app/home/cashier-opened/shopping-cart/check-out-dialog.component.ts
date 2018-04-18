@@ -44,6 +44,18 @@ export class CheckOutDialogComponent {
         }
     }
 
+    uncommited() {
+        return this.shoppingCartService.uncommitArticlesExist();
+    }
+
+    totalCommited() {
+        return this.shoppingCartService.getTotalCommited();
+    }
+
+    warning(): boolean {
+        return (!this.ticketCreation.userMobile) && this.shoppingCartService.uncommitArticlesExist();
+    }
+
     private formatNumber(value: number): number {
         return ((value === undefined || value === null) ? 0 : value);
     }
