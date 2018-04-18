@@ -6,16 +6,16 @@
     <app-date format="medium"></app-date>
     <button mat-button (click)="powerOff()">
       <mat-icon color="warn">power_settings_new</mat-icon>
-      <span>Power-off</span>
+      <span>Apagar Servidor</span>
     </button>
     <button mat-button (click)="logout()">
       <span>{{username}}</span>
       <mat-icon>person</mat-icon>
-      <span>Logout</span>
+      <span>Salir</span>
     </button>
     <button mat-button (click)="profile()">
       <mat-icon>account_box</mat-icon>
-      <span>Profile</span>
+      <span>Perfil</span>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>more_vert</mat-icon>
@@ -33,19 +33,19 @@
   </button>
   <button mat-menu-item [matMenuTriggerFor]="cashiers">
     <mat-icon>account_balance</mat-icon>
-    <span>Cashiers</span>
+    <span>Cierres de Caja</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="receipts">
     <mat-icon>receipt</mat-icon>
-    <span>Receipts</span>
+    <span>Recibos</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="products">
     <mat-icon>line_style</mat-icon>
-    <span>Products</span>
+    <span>Productos</span>
   </button>
   <button mat-menu-item (click)="customers()">
     <mat-icon>account_circle</mat-icon>
-    <span>Customers</span>
+    <span>Clientes</span>
   </button>
   <button mat-menu-item (click)="statistics()">
     <mat-icon>assessment</mat-icon>
@@ -53,19 +53,19 @@
   </button>
   <button mat-menu-item (click)="statistics2()">
     <mat-icon>assessment</mat-icon>
-    <span>Statistics2</span>
+    <span>Estadísticas</span>
   </button>
   <button mat-menu-item (click)="schedule()">
     <mat-icon>schedule</mat-icon>
-    <span>Schedule</span>
+    <span>Ajenda</span>
   </button>
   <button mat-menu-item (click)="articleTracking()">
     <mat-icon>search</mat-icon>
-    <span>Art. Tracking</span>
+    <span>Seguimiento de entregas</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="offers">
     <mat-icon>thumb_up</mat-icon>
-    <span>Offers</span>
+    <span>Ofertas</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
@@ -76,19 +76,19 @@
 <mat-menu #cashiers="matMenu">
   <button *ngIf="!cahierClosed" mat-menu-item (click)="closeCashier()">
     <mat-icon>lock_outline</mat-icon>
-    <span>Close Cashier</span>
+    <span>Cerrar Caja</span>
   </button>
   <button *ngIf="cahierClosed" mat-menu-item (click)="openCashier()">
     <mat-icon>lock_open</mat-icon>
-    <span>Open Cashier</span>
+    <span>Abrir Caja</span>
   </button>
   <button *ngIf="!cashierClosed" mat-menu-item (click)="cashMovement()">
     <mat-icon>account_balance_wallet</mat-icon>
-    <span>Cashier Movement</span>
+    <span>Movimiento de efectivo en Caja</span>
   </button>
   <button mat-menu-item (click)="cashierClosure()">
     <mat-icon>account_balance</mat-icon>
-    <span>Cashiers</span>
+    <span>Histórico de Cierres de Caja</span>
   </button>
 </mat-menu>
 <mat-menu #receipts="matMenu">
@@ -98,41 +98,41 @@
   </button>
   <button mat-menu-item (click)="invoices()">
     <mat-icon>receipt</mat-icon>
-    <span>Invoices</span>
+    <span>Facturas</span>
   </button>
   <button mat-menu-item (click)="budgets()">
     <mat-icon>description</mat-icon>
-    <span>Budgets</span>
+    <span>Presupuestos</span>
   </button>
   <button mat-menu-item (click)="vouchers()">
     <mat-icon>local_offer</mat-icon>
-    <span>Vouchers</span>
+    <span>Vales</span>
   </button>
 </mat-menu>
 <mat-menu #products="matMenu">
   <button mat-menu-item (click)="article()">
     <mat-icon>view_list</mat-icon>
-    <span>Articles</span>
+    <span>Artículos</span>
   </button>
   <button mat-menu-item (click)="articlesFamily()">
     <mat-icon>view_quilt</mat-icon>
-    <span>ArticlesFamily</span>
+    <span>Familia de Artículos</span>
   </button>
   <button mat-menu-item (click)="providers()">
     <mat-icon>local_shipping</mat-icon>
-    <span>Providers</span>
+    <span>Proveedores</span>
   </button>
   <button mat-menu-item *ngIf="tokensService.isAdmin()||tokensService.isManager()" (click)="Orders()">
     <mat-icon>storage</mat-icon>
-    <span>Orders</span>
+    <span>Pedidos</span>
   </button>
   <button mat-menu-item (click)="stockAlerts()">
     <mat-icon>notifications</mat-icon>
-    <span>Stock alerts</span>
+    <span>Alertas de Stock</span>
   </button>
 </mat-menu>
 <mat-menu #offers="matMenu">
-  <button mat-menu-item (click)="searchOffer()">Search Offer</button>
-  <button mat-menu-item (click)="OffersManagment()">Managment Offer</button>
+  <button mat-menu-item (click)="searchOffer()">Buscar Oferta</button>
+  <button mat-menu-item (click)="OffersManagment()">Gestor de Ofertas</button>
 </mat-menu>
 <router-outlet></router-outlet>

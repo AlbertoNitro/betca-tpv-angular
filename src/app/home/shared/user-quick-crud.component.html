@@ -1,5 +1,5 @@
 <mat-form-field>
-    <input matInput type="number" placeholder="Mobile" [(ngModel)]="viewMobile" [disabled]="existUser()" />
+    <input matInput type="number" placeholder="Móvil" [(ngModel)]="viewMobile" [disabled]="existUser()" />
     <button mat-button matSuffix mat-icon-button (click)="findMobile()" *ngIf="!isMobileSynchronized()">
         <mat-icon color="warn">search</mat-icon>
     </button>
