@@ -29,7 +29,7 @@
   </button>
   <button mat-menu-item (click)="home()">
     <mat-icon>home</mat-icon>
-    <span>Home</span>
+    <span>Principal</span>
   </button>
   <button mat-menu-item [matMenuTriggerFor]="cashiers">
     <mat-icon>account_balance</mat-icon>
@@ -49,23 +49,11 @@
   </button>
   <button mat-menu-item (click)="statistics()">
     <mat-icon>assessment</mat-icon>
-    <span>Statistics</span>
+    <span>Estadísticas 1</span>
   </button>
   <button mat-menu-item (click)="statistics2()">
     <mat-icon>assessment</mat-icon>
-    <span>Estadísticas</span>
-  </button>
-  <button mat-menu-item (click)="schedule()">
-    <mat-icon>schedule</mat-icon>
-    <span>Ajenda</span>
-  </button>
-  <button mat-menu-item (click)="articleTracking()">
-    <mat-icon>search</mat-icon>
-    <span>Seguimiento de entregas</span>
-  </button>
-  <button mat-menu-item [matMenuTriggerFor]="offers">
-    <mat-icon>thumb_up</mat-icon>
-    <span>Ofertas</span>
+    <span>Estadísticas 2</span>
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
@@ -125,10 +113,6 @@
   <button mat-menu-item *ngIf="tokensService.isAdmin()||tokensService.isManager()" (click)="Orders()">
     <mat-icon>storage</mat-icon>
     <span>Pedidos</span>
-  </button>
-  <button mat-menu-item (click)="stockAlerts()">
-    <mat-icon>notifications</mat-icon>
-    <span>Alertas de Stock</span>
   </button>
 </mat-menu>
 <mat-menu #offers="matMenu">
