@@ -18,6 +18,16 @@ export class CashierClosuresComponent {
     finalDateInput: Date = new Date();
 
     constructor(private dialog: MatDialog, private cashierService: CashierService) {
+        const initialDate = new Date();
+        initialDate.setDate(initialDate.getDate() - 10);
+        this.cashierService.findBetweenDates(initialDate, new Date()).subscribe(
+            (cashierClosureClosedList: ClosedCashier[]) => {
+                this.data = cashierClosureClosedList;
+                this.data.forEach(element =>
+                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10)
+                );
+            }
+        );
     }
 
     findCashierCreationDatesBetween() {

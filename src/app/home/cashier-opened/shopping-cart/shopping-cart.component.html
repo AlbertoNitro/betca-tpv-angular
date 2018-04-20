@@ -19,7 +19,7 @@
             <ng-container matColumnDef="amount">
                 <mat-header-cell *matHeaderCellDef fxFlex="20%"> Nº </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="20%">
-                    <button mat-icon-button color="accent" (click)="decreaseAmount(item)" [disabled]="item.amount===1">
+                    <button mat-icon-button color="accent" (click)="decreaseAmount(item)">
                         <mat-icon>remove_circle_outline</mat-icon>
                     </button>
                     {{item.amount}}
@@ -77,7 +77,7 @@
                 </button>
             </mat-form-field>
         </div>
-        <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="total()===0">
+        <button mat-raised-button color="accent" (click)="checkOut()">
             <mat-icon mat-icon-button>credit_card</mat-icon> Pagar
             <mat-icon>euro_symbol</mat-icon>
         </button>

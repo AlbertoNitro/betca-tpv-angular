@@ -75,14 +75,24 @@ export class ShoppingCartService {
         return Math.round(total * 100) / 100;
     }
 
+    getReturned(): number {
+        let total = 0;
+        for (const shopping of this.shoppingCart) {
+            if (shopping.total < 0) {
+                total += shopping.total;
+            }
+        }
+        return Math.round(-total * 100) / 100;
+    }
+
     uncommitArticlesExist(): boolean {
         for (const shopping of this.shoppingCart) {
-            if (!shopping.committed) {
+            if (!shopping.committed && shopping.amount > 0) {
                 return true;
             }
         }
         return false;
-     }
+    }
 
 
     private synchronizeAll() {

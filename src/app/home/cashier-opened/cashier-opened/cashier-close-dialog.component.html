@@ -1,10 +1,10 @@
 <h3 mat-dialog-title>Cierre de Caja</h3>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="number" placeholder="Pagado con Vales" value="{{cashierClosure.totalVoucher}}" readonly />
+        <input matInput type="number" placeholder="Total vales" value="{{cashierClosure.totalVoucher}}" readonly />
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="number" placeholder="Pagado con Tarjeta (€ {{cashierClosure.totalCard}})" [(ngModel)]="cashierClosure.salesCard"
+        <input matInput type="number" placeholder="Pagado con Tarjeta" [(ngModel)]="cashierClosure.salesCard"
             required cdkFocusInitial/>
     </mat-form-field>
     <mat-form-field>

@@ -7,6 +7,7 @@ import { ReservationCreation } from '../../shared/reservation-creation.model';
 import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../../shared/user.service';
 import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
+import { VoucherService } from '../../shared/voucher.service';
 
 @Component({
     templateUrl: 'check-out-dialog.component.html',
@@ -29,10 +30,15 @@ export class CheckOutDialogComponent {
     ticketCreation: TicketCreation;
 
     constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, public shoppingCartService: ShoppingCartService,
-        private userService: UserService) {
+        private userService: UserService, private voucheService: VoucherService) {
 
         this.total = data.total;
         this.ticketCreation = data.ticketCreation;
+
+        if (this.shoppingCartService.getReturned() > 0) {
+            this.ticketCreation.voucher = this.shoppingCartService.getReturned();
+            this.total = this.total + this.ticketCreation.voucher;
+        }
     }
 
     updateUser(user: User) {
@@ -66,7 +72,7 @@ export class CheckOutDialogComponent {
         this.ticketCreation.voucher = this.formatNumber(this.ticketCreation.voucher);
     }
 
-    returnedCash(): number {
+    returnedAmount(): number {
         return Math.round(
             (0 + this.formatNumber(this.ticketCreation.cash)
                 + this.formatNumber(this.ticketCreation.card)
@@ -75,9 +81,17 @@ export class CheckOutDialogComponent {
         ) / 100;
     }
 
+    returnedCash(): number {
+        if (this.ticketCreation.cash >= this.returnedAmount()) {
+            return this.returnedAmount();
+        } else {
+            return this.ticketCreation.cash;
+        }
+    }
+
     fillCard() {
-        if (this.returnedCash() < 0) {
-            this.ticketCreation.card = -this.returnedCash();
+        if (this.returnedAmount() < 0) {
+            this.ticketCreation.card = -this.returnedAmount();
         } else {
             this.ticketCreation.card = this.total;
             this.ticketCreation.cash = 0;
@@ -86,8 +100,8 @@ export class CheckOutDialogComponent {
 
     fillCash() {
         this.ticketCreation.cash = this.formatNumber(this.ticketCreation.cash);
-        if (this.returnedCash() < 0 && this.ticketCreation.cash === 0) {
-            this.ticketCreation.cash = -this.returnedCash();
+        if (this.returnedAmount() < 0 && this.ticketCreation.cash === 0) {
+            this.ticketCreation.cash = -this.returnedAmount();
         } else if (this.ticketCreation.cash < 20) {
             this.ticketCreation.cash = (Math.round(this.ticketCreation.cash / 5) + 1) * 5;
         } else if (this.ticketCreation.cash < 50) {
@@ -105,15 +119,23 @@ export class CheckOutDialogComponent {
     }
 
     invalidCheckOut(): boolean {
-        return (this.total + this.returnedCash()) < this.shoppingCartService.getTotalCommited();
+        return (this.total + this.returnedAmount()) < this.shoppingCartService.getTotalCommited();
     }
 
     checkOut() {
-        const returned = this.returnedCash();
+        const returned = this.returnedAmount();
+        const cash = this.ticketCreation.cash;
+        let voucher = 0;
         this.formatValues();
         if (returned > 0) {
             this.ticketCreation.cash -= returned;
         }
+
+        if (this.ticketCreation.cash < 0) {
+            voucher = -this.ticketCreation.cash;
+            this.ticketCreation.cash = 0;
+        }
+
         this.ticketCreation.note = '';
         if (this.ticketCreation.card > 0) {
             this.ticketCreation.note += ' Abonado con Tarjeta: ' + Math.round(this.ticketCreation.card * 100) / 100 + '.';
@@ -122,30 +144,40 @@ export class CheckOutDialogComponent {
             this.ticketCreation.note += ' Abonado con vale: ' + Math.round(this.ticketCreation.voucher * 100) / 100 + '.';
         }
         if (this.ticketCreation.cash > 0) {
-            this.ticketCreation.note += ' Abonado en efectivo: ' + Math.round(this.ticketCreation.cash * 100) / 100 + '.';
+            this.ticketCreation.note += ' Abonado en efectivo: ' + Math.round(cash * 100) / 100 + '.';
         }
         if (returned > 0) {
-            this.ticketCreation.note += ' Devuelto: ' + returned + '.';
+            this.ticketCreation.note += ' Devuelto: ' + Math.round(returned * 100) / 100 + '.';
         }
         this.shoppingCartService.checkOut(this.ticketCreation).subscribe(
             () => {
-                if (this.requestedInvoice) {
-                    this.shoppingCartService.createInvoice(this.ticketCreation.userMobile).subscribe(
-                        () => this.dialog.closeAll()
+                if (voucher > 0) {
+                    this.voucheService.create({ value: voucher }).subscribe(
+                        () => this.createInvoice()
                     );
                 } else {
-                    this.dialog.closeAll();
+                    this.createInvoice();
                 }
             }
         );
     }
 
+    createInvoice() {
+        if (this.requestedInvoice) {
+            this.shoppingCartService.createInvoice(this.ticketCreation.userMobile).subscribe(
+                () => this.dialog.closeAll()
+            );
+        } else {
+            this.dialog.closeAll();
+        }
+    }
+
     invalidInvoice(): boolean {
-        return !this.user || !this.user.dni || !this.user.address || this.returnedCash() < 0;
+        return !this.user || !this.user.dni || !this.user.address || this.returnedAmount() < 0;
     }
 
     invalidReservation(): boolean {
-        return (this.total + this.returnedCash()) < this.shoppingCartService.getTotalCommited();
+        return (this.total + this.returnedAmount()) < this.shoppingCartService.getTotalCommited();
     }
 
 }

@@ -40,7 +40,7 @@ import { ArticlesTrackingComponent } from './articles-tracking/articles-tracking
 export class HomeComponent {
   static URL = 'home';
 
-  cahierClosed: boolean;
+  cashierClosed: boolean;
   username: string;
 
   constructor(private dialog: MatDialog, private tokensService: TokensService,
@@ -56,7 +56,7 @@ export class HomeComponent {
   home() {
     this.cashierService.last().subscribe(
       cashierLast => {
-        this.cahierClosed = cashierLast.closed;
+        this.cashierClosed = cashierLast.closed;
         if (cashierLast.closed) {
           this.router.navigate([HomeComponent.URL, CashierClosedComponent.URL]);
         } else {

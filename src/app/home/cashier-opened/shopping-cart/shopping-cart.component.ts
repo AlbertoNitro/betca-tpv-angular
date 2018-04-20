@@ -39,13 +39,18 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
     incrementAmount(shopping: Shopping) {
         shopping.amount++;
+        if (shopping.amount === 0) {
+            shopping.amount++;
+        }
         shopping.updateTotal();
         this.shoppingCartService.synchronizeCartTotal();
     }
 
     decreaseAmount(shopping: Shopping) {
-        if (shopping.amount > 1) {
+        shopping.amount--;
+        if (shopping.amount === 0) {
             shopping.amount--;
+            shopping.committed = false;
         }
         shopping.updateTotal();
         this.shoppingCartService.synchronizeCartTotal();
@@ -83,11 +88,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
     updateTotal(shopping: Shopping, event: any): void {
         shopping.total = Number(event.target.value);
+        if (shopping.total > (shopping.retailPrice * shopping.amount)) {
+            shopping.total = shopping.retailPrice * shopping.amount;
+        }
         if (shopping.total < 0) {
             shopping.total = 0;
-        }
-        if (shopping.total > (shopping.retailPrice * shopping.amount)) {
-            shopping.total = shopping.retailPrice;
         }
         shopping.updateDiscount();
         this.shoppingCartService.synchronizeCartTotal();
