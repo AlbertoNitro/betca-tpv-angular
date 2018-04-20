@@ -38,7 +38,7 @@
     <ng-container matColumnDef="committed">
       <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
       <mat-cell *matCellDef="let shopping">
-        <mat-checkbox [checked]="shopping.committed" (change)="changeCommitted(shopping)" [disabled]="shopping.committed"></mat-checkbox>
+        <mat-checkbox [checked]="shopping.committed" (change)="changeCommitted(shopping)" [disabled]="shopping.committed||shopping.amount<0"></mat-checkbox>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

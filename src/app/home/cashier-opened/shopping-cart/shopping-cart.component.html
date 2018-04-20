@@ -48,7 +48,7 @@
                     </button>
                 </mat-header-cell>
                 <mat-cell *matCellDef="let item" fxFlex="15%">
-                    <mat-checkbox [checked]="item.committed" (change)="changeCommitted(item)"></mat-checkbox>
+                    <mat-checkbox [checked]="item.committed" [disabled]="item.amount<0"(change)="changeCommitted(item)"></mat-checkbox>
                     <button mat-button matSuffix mat-icon-button (click)="delete(item)">
                         <mat-icon color="warn">close</mat-icon>
                     </button>
