@@ -8,6 +8,7 @@ import { NumProductSoldPerMonth } from './numProductSoldPerMonth.model';
 import { HttpService } from '../../core/http.service';
 import { NumProductSold } from './numProductSold.model';
 import { IncomeComparasion } from './IncomeComparasion.model';
+import { TicketTracking } from '../tickets/ticket-tracking.model';
 
 @Injectable()
 export class TicketService {
@@ -15,6 +16,10 @@ export class TicketService {
   static SEARCH_DATE = '/search/date';
   static SEARCH_MOBILE = '/search/mobile';
   static SEARCH_MOBILE_LAST = '/search/mobile/last';
+  static SEARCH_ORDER_ID = '/search/order-id';
+  static SEARCH_TICKETS_NOT_COMMITED = '/search/tickets-not-commited';
+  static SEARCH_FAMILY_ID = '/search/family-id';
+
   static NUM_PRODUCTS_SOLD = '/numProductsSold';
   static HISTORICAL_PRODUCTS = '/historicalProducts';
   static COMPARISION_INCOME = '/comparisionIncome';
@@ -88,6 +93,17 @@ export class TicketService {
       .get(TicketService.END_POINT + TicketService.COMPARISION_INCOME);
   }
 
+  findByOrderId(orderId: string): Observable<TicketTracking[]> {
+    return this.httpService.authToken().param('orderId', orderId).get(TicketService.END_POINT + TicketService.SEARCH_ORDER_ID);
+  }
 
+  findByAllTickets(): Observable<TicketTracking[]> {
+    return this.httpService.authToken().get(TicketService.END_POINT + TicketService.SEARCH_TICKETS_NOT_COMMITED);
+
+  }
+
+  findByFamilyId(familyId: string): Observable<TicketTracking[]> {
+    return this.httpService.authToken().param('familyId', familyId).get(TicketService.END_POINT + TicketService.SEARCH_FAMILY_ID);
+  }
 
 }

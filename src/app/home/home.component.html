@@ -81,8 +81,12 @@
 </mat-menu>
 <mat-menu #receipts="matMenu">
   <button mat-menu-item (click)="tickets()">
-    <mat-icon>euro_symbol</mat-icon>
+    <mat-icon>toc</mat-icon>
     <span>Tickets</span>
+  </button>
+  <button mat-menu-item (click)="ticketTracking()">
+    <mat-icon>playlist_add_check</mat-icon>
+    <span>Ticket tracking</span>
   </button>
   <button mat-menu-item (click)="invoices()">
     <mat-icon>receipt</mat-icon>

@@ -13,7 +13,7 @@ import { Order } from './order.model';
 export class OrdersComponent {
     static URL = 'orders';
 
-    columns = ['description', 'providerCompany', 'dateFormat'];
+    columns = ['id', 'description', 'providerCompany', 'dateFormat'];
     data: OrderBase[];
 
     constructor(public dialog: MatDialog, private orderService: OrderService, private providerService: ProviderService) {

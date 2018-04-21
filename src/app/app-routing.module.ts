@@ -54,6 +54,7 @@ import { ArticlesTrackingComponent } from './home/articles-tracking/articles-tra
 import { OrderCreationEditDialogComponent } from './home/orders/order-creation-edit-dialog.component';
 import { PaymentComponent } from './home/shared/payment.component';
 import { PaymentDialogComponent } from './home/tickets/payment-dialog.component';
+import { TicketTrackingComponent } from './home/tickets/ticket-tracking.component';
 
 
 const appRoutes: Routes = [
@@ -78,6 +79,7 @@ const appRoutes: Routes = [
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
+      { path: TicketTrackingComponent.URL, component: TicketTrackingComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
       { path: ArticlesTrackingComponent.URL, component: ArticlesTrackingComponent },
@@ -112,6 +114,7 @@ export class AppRoutingModule {
     Statistics2Component,
     StockAlertComponent,
     TicketsComponent,
+    TicketTrackingComponent,
     UserQuickCrudComponent,
     UsersComponent,
     VouchersComponent,

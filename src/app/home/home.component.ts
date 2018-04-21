@@ -32,6 +32,7 @@ import { UserService } from './shared/user.service';
 import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
 import { ArticlesFamilyComponent } from './articles/articles-family.component';
 import { ArticlesTrackingComponent } from './articles-tracking/articles-tracking.component';
+import { TicketTrackingComponent } from './tickets/ticket-tracking.component';
 
 @Component({
   styles: [`mat-toolbar {justify-content: space-between;}`],
@@ -142,6 +143,10 @@ export class HomeComponent {
 
   tickets() {
     this.router.navigate([HomeComponent.URL, TicketsComponent.URL]);
+  }
+
+  ticketTracking() {
+    this.router.navigate([HomeComponent.URL, TicketTrackingComponent.URL]);
   }
 
   invoices() {

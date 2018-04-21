@@ -1,0 +1,37 @@
+<mat-card>
+    <mat-card-subtitle>Filter</mat-card-subtitle>
+    <mat-card-content>
+        <mat-form-field>
+            <mat-select placeholder="Order" [value]="orderId.value" #orderId cdkFocusInitial>
+                <mat-option *ngFor="let order of orders" [value]="order.id">{{order.description}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="findByOrderId(orderId.value)" [disabled]="!orderId.value">
+            <mat-icon>search</mat-icon>
+        </button>
+        <mat-form-field>
+            <mat-select placeholder="Family" [value]="familyId.value" #familyId (change)="nav(familyId.value)">
+                <mat-option *ngFor="let family of families" [value]="family.id">{{family.reference}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Subfamily" [value]="subfamilyId.value" #subfamilyId [disabled]="!familyId.value">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let family of subfamilies" [value]="family.id">{{family.reference}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="findByFamilyId(familyId.value,subfamilyId.value)" [disabled]="!familyId.value">
+            <mat-icon>search</mat-icon>
+        </button>
+        <mat-form-field>
+            <input matInput type="text" placeholder="All Tickets" readonly/>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="findByAllTickets()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </mat-card-content>
+
+</mat-card>
+
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [createAction]="false" [readAction]="false" [data]="data"
+    (edit)="edit($event)"></app-crud>
