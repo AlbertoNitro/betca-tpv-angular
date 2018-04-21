@@ -1,6 +1,18 @@
 <mat-card>
     <mat-card-subtitle>Filter</mat-card-subtitle>
     <mat-card-content>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Current Month" readonly/>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="currentMonth()">
+            <mat-icon>search</mat-icon>
+        </button>
+        <mat-form-field>
+            <input matInput type="text" placeholder="Current Year" readonly/>
+        </mat-form-field>
+        <button mat-mini-fab color="primary" (click)="currentYear()">
+            <mat-icon>search</mat-icon>
+        </button>
         <mat-form-field class="date">
             <input [(ngModel)]="initialDateInput" matInput [matDatepicker]="initialDate" placeholder="Choose a initial date">
             <mat-datepicker-toggle matSuffix [for]="initialDate"></mat-datepicker-toggle>
@@ -16,5 +28,5 @@
         </button>
     </mat-card-content>
 </mat-card>
-<app-crud [title]="title" [columns]="columns" [createAction]="false" [readAction]="false" [deleteAction]="false" [editAction]="false" [data]="data"
-    (read)="read($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [createAction]="false" [readAction]="false" [deleteAction]="false" [editAction]="false"
+    [data]="data" (read)="read($event)"></app-crud>

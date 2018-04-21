@@ -20,7 +20,11 @@ export class CashierClosuresComponent {
     constructor(private dialog: MatDialog, private cashierService: CashierService) {
         const initialDate = new Date();
         initialDate.setDate(initialDate.getDate() - 10);
-        this.cashierService.findBetweenDates(initialDate, new Date()).subscribe(
+        this.syncronized(initialDate, new Date());
+    }
+
+    syncronized(initial: Date, final: Date) {
+        this.cashierService.findBetweenDates(initial, final).subscribe(
             (cashierClosureClosedList: ClosedCashier[]) => {
                 this.data = cashierClosureClosedList;
                 this.data.forEach(element =>
@@ -31,15 +35,21 @@ export class CashierClosuresComponent {
     }
 
     findCashierCreationDatesBetween() {
-        this.cashierService.findBetweenDates(this.initialDateInput, this.finalDateInput).subscribe(
-            (cashierClosureClosedList: ClosedCashier[]) => {
-                this.data = cashierClosureClosedList;
-                this.data.forEach(element =>
-                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10)
-                );
-            }
-        );
+        this.syncronized(this.initialDateInput, this.finalDateInput);
     }
 
+
+    currentMonth() {
+        const initial = new Date();
+        initial.setDate(1);
+        this.syncronized(initial, new Date());
+    }
+
+    currentYear() {
+        const initial = new Date();
+        initial.setDate(1);
+        initial.setMonth(0);
+        this.syncronized(initial, new Date());
+    }
 
 }
