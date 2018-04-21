@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { Voucher } from './voucher.model';
 import { HttpService } from '../../core/http.service';
-import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class VoucherService {
@@ -10,7 +10,7 @@ export class VoucherService {
 
     static VALID = '/valid';
 
-    constructor(private httpService: HttpService, private snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService) {
     }
 
     create(voucher: Voucher): Observable<any> {

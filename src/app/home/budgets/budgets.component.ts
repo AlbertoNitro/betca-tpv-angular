@@ -1,10 +1,11 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+
 import { Budget } from '../shared/budget.model';
 import { BudgetService } from '../shared/budget.service';
 
 @Component({
-    templateUrl: `budgets.component.html`
+    templateUrl: 'budgets.component.html'
 })
 export class BudgetsComponent implements OnInit {
     static URL = 'budgets';

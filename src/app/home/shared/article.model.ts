@@ -1,5 +1,3 @@
-import { Provider } from './provider.model';
-
 export interface Article {
     code: string;
     reference?: string;

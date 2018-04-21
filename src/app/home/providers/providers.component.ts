@@ -1,11 +1,12 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
+
 import { Provider } from '../shared/provider.model';
 import { ProviderService } from '../shared/provider.service';
+import { ProviderCreationEditDialogComponent } from './provider-creation-edit-dialog.component';
 
 @Component({
-    templateUrl: `providers.component.html`
+    templateUrl: 'providers.component.html'
 })
 export class ProvidersComponent implements OnInit {
     static URL = 'providers';

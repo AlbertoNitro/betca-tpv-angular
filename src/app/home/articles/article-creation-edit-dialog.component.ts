@@ -3,16 +3,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Article } from '../shared/article.model';
 import { Provider } from '../shared/provider.model';
-
 import { ArticleService } from '../shared/article.service';
 import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: 'article-creation-edit-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styleUrls: ['articles.component.css']
 })
 export class ArticleCreationEditDialogComponent implements OnInit {
 

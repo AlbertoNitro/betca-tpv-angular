@@ -4,16 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Shopping } from '../../shared/shopping.model';
-import { ArticleService } from '../../shared/article.service';
-import { BudgetService } from '../../shared/budget.service';
-import { InvoiceService } from '../../shared/invoice.service';
-import { TicketService } from '../../shared/ticket.service';
 import { TicketCreation } from '../../shared/ticket-creation.model';
 import { Budget } from '../../shared/budget.model';
 import { Article } from '../../shared/article.model';
 import { InvoiceCreation } from '../../shared/invoice-creation.model';
-import { ReservationCreation } from '../../shared/reservation-creation.model';
-import { ReservationService } from '../../shared/reservation.service';
+import { ArticleService } from '../../shared/article.service';
+import { BudgetService } from '../../shared/budget.service';
+import { InvoiceService } from '../../shared/invoice.service';
+import { TicketService } from '../../shared/ticket.service';
 
 @Injectable()
 export class ShoppingCartService {
@@ -31,7 +29,7 @@ export class ShoppingCartService {
     private _lastArticle: Article;
 
     constructor(private articleService: ArticleService, private ticketService: TicketService,
-        private budgetService: BudgetService, private invoiceService: InvoiceService, private reservationService: ReservationService) {
+        private budgetService: BudgetService, private invoiceService: InvoiceService) {
         for (let i = 0; i < ShoppingCartService.SHOPPING_CART_NUM; i++) {
             this.shoppingCartList.push(new Array());
         }
@@ -146,13 +144,6 @@ export class ShoppingCartService {
     checkOut(ticketCreation: TicketCreation): Observable<any> {
         ticketCreation.shoppingCart = this.shoppingCart;
         return this.ticketService.create(ticketCreation).map(
-            () => this.reset()
-        );
-    }
-
-    reservation(ticketCreation: TicketCreation): Observable<any> {
-        ticketCreation.shoppingCart = this.shoppingCart;
-        return this.reservationService.create(ticketCreation).map(
             () => this.reset()
         );
     }

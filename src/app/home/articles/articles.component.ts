@@ -2,14 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
 
 import { Article } from '../shared/article.model';
-import { ArticleService } from '../shared/article.service';
-import { ArticleCreationEditDialogComponent } from './article-creation-edit-dialog.component';
 import { Provider } from '../shared/provider.model';
+import { ArticleService } from '../shared/article.service';
 import { ProviderService } from '../shared/provider.service';
+import { ArticleCreationEditDialogComponent } from './article-creation-edit-dialog.component';
 
 @Component({
   selector: 'app-articles',
-  templateUrl: './articles.component.html'
+  templateUrl: 'articles.component.html'
 })
 
 export class ArticlesComponent {

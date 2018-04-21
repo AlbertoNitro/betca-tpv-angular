@@ -1,17 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { CashierMovement } from '../../shared/cashier-movement.model';
-import { CashierMovementService } from './cashier-movement.service';
 import { MatDialog, MatDialogRef } from '@angular/material';
+
+import { CashierMovement } from '../../shared/cashier-movement.model';
 import { CashierService } from '../../shared/cashier.service';
+import { CashierMovementService } from './cashier-movement.service';
 
 @Component({
     templateUrl: 'cashier-movement-dialog.component.html',
-    styles: [`
-      .mat-dialog-content{
-         display: flex;
-         flex-direction: column;
-      }`
-    ]
+    styleUrls: ['cashier-opened.component.css']
 })
 export class CashierMovementDialogComponent {
     static URL = 'cashier-movements';

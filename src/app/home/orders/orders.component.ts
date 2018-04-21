@@ -3,12 +3,11 @@ import { MatDialog } from '@angular/material';
 
 import { OrderBase } from './order-base.model';
 import { OrderService } from './orders.service';
-import { ProviderService } from '../shared/provider.service';
 import { OrderCreationEditDialogComponent } from './order-creation-edit-dialog.component';
 import { Order } from './order.model';
 
 @Component({
-    templateUrl: `orders.component.html`
+    templateUrl: 'orders.component.html'
 })
 export class OrdersComponent {
     static URL = 'orders';
@@ -16,7 +15,7 @@ export class OrdersComponent {
     columns = ['id', 'description', 'providerCompany', 'dateFormat'];
     data: OrderBase[];
 
-    constructor(public dialog: MatDialog, private orderService: OrderService, private providerService: ProviderService) {
+    constructor(public dialog: MatDialog, private orderService: OrderService) {
         this.synchronize();
     }
 

@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { TicketTracking } from './ticket-tracking.model';
 import { MatDialog } from '@angular/material';
-import { TicketService } from '../shared/ticket.service';
-import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
-import { Order } from '../orders/order.model';
-import { OrderService } from '../orders/orders.service';
-import { OrderBase } from '../orders/order-base.model';
+
 import { Family } from '../cashier-opened/articles-family/family.model';
+import { OrderBase } from '../orders/order-base.model';
+import { Order } from '../orders/order.model';
+import { TicketTracking } from './ticket-tracking.model';
+import { TicketService } from '../shared/ticket.service';
+import { OrderService } from '../orders/orders.service';
 import { ArticlesFamilyService } from '../shared/articles-family.service';
+import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
 
 @Component({
     selector: 'app-tickets',
-    templateUrl: './ticket-tracking.component.html'
+    templateUrl: 'ticket-tracking.component.html'
 })
 export class TicketTrackingComponent {
     static URL = 'ticket-tracking';

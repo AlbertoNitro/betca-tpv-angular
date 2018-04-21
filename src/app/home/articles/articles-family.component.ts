@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
-import { Family } from '../cashier-opened/articles-family/family.model';
 import { MatDialog, MatSnackBar } from '@angular/material';
+
+import { Family } from '../cashier-opened/articles-family/family.model';
+import { FamilyType } from '../cashier-opened/articles-family/family-type.model';
 import { ArticlesFamilyService } from '../shared/articles-family.service';
 import { FamilyAdditionDialogComponent } from './family-addition-dialog.component';
 import { FamilyCreationDialogComponent } from './family-creation-dialog.component';
-import { FamilyType } from '../cashier-opened/articles-family/family-type.model';
 
 @Component({
-    templateUrl: './articles-family.component.html'
+    templateUrl: 'articles-family.component.html'
 })
 
 export class ArticlesFamilyComponent {

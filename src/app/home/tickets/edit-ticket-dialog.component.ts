@@ -1,21 +1,20 @@
 import { Component, Inject } from '@angular/core';
-import { MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
 
 import { Shopping } from '../shared/shopping.model';
 import { Ticket } from '../shared/ticket.model';
+import { Invoice } from '../shared/invoice.model';
+import { User } from '../shared/user.model';
 import { TicketService } from '../shared/ticket.service';
 import { VoucherService } from '../shared/voucher.service';
 import { InvoiceService } from '../shared/invoice.service';
-import { Invoice } from '../shared/invoice.model';
 import { UserService } from '../shared/user.service';
-import { User } from '../shared/user.model';
 import { PaymentDialogComponent } from './payment-dialog.component';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
-  templateUrl: './edit-ticket-dialog.component.html',
-  styleUrls: ['./edit-ticket-dialog.component.css']
+  templateUrl: 'edit-ticket-dialog.component.html',
+  styleUrls: ['edit-ticket-dialog.component.css']
 })
 export class EditTicketDialogComponent {
   ticket: Ticket;

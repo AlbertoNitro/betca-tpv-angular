@@ -1,3 +1,9 @@
-.container {
+.container-cashier-opened {
   width: 50%;
 }
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+

@@ -9,10 +9,7 @@ import { MatSnackBar } from '@angular/material';
 
 @Component({
     templateUrl: 'article-quick-creation-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styleUrls: ['shopping-cart.component.css']
 })
 export class ArticleQuickCreationDialogComponent {
 

@@ -1,17 +1,14 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
-import { ArticlesFamilyService } from '../shared/articles-family.service';
+
 import { Family } from '../cashier-opened/articles-family/family.model';
-import { FamilyCreationDialogComponent } from './family-creation-dialog.component';
 import { FamilyType } from '../cashier-opened/articles-family/family-type.model';
+import { ArticlesFamilyService } from '../shared/articles-family.service';
+import { FamilyCreationDialogComponent } from './family-creation-dialog.component';
 
 @Component({
     templateUrl: 'family-addition-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }
-    `]
+    styleUrls: ['articles.component.css']
 })
 export class FamilyAdditionDialogComponent {
 

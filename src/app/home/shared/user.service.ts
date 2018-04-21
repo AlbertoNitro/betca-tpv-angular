@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { User } from './user.model';
 import { HttpService } from '../../core/http.service';
-import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
+
+
 import { TokensService } from '../../core/tokens.service';
 
 @Injectable()
@@ -12,7 +13,7 @@ export class UserService {
 
     static SEARCH = '/search';
 
-    constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService) {
     }
 
     read(mobile: number): Observable<User> {
@@ -20,18 +21,16 @@ export class UserService {
     }
 
     create(user: User): Observable<boolean> {
-        return this.httpService.authToken().post(UserService.END_POINT, user).map(
+        return this.httpService.authToken().successful().post(UserService.END_POINT, user).map(
             data => {
-                this.successful();
                 return data;
             }
         );
     }
 
     put(user: User): Observable<boolean> {
-        return this.httpService.authToken().put(UserService.END_POINT + '/' + user.mobile, user).map(
+        return this.httpService.authToken().successful().put(UserService.END_POINT + '/' + user.mobile, user).map(
             data => {
-                this.successful();
                 return data;
             }
         );
@@ -56,13 +55,6 @@ export class UserService {
             httpservice = httpservice.param('address', user.address);
         }
         return httpservice.get(UserService.END_POINT + UserService.SEARCH);
-    }
-
-
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
     }
 
     loggedInUsername(): Observable<User> {

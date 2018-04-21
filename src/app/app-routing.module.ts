@@ -27,7 +27,6 @@ import { VoucherCreationDialogComponent } from './home/vouchers/voucher-creation
 import { ArticlesComponent } from './home/articles/articles.component';
 import { Statistics2Component } from './home/statistics2/statistics2.component';
 import { VoucherConsumeDialogComponent } from './home/cashier-opened/shopping-cart/voucher-consume-dialog.component';
-import { ScheduleComponent } from './home/schedule/schedule.component';
 import { OfferSearchDialogComponent } from './home/offers/offer-search-dialog.component';
 import { OfferCreateEditDialogComponent } from './home/offers/offer-create-edit-dialog.component';
 import { ArticleCreationEditDialogComponent } from './home/articles/article-creation-edit-dialog.component';
@@ -40,7 +39,6 @@ import { ViewInvoiceDialogComponent } from './home/invoices/view-invoice-dialog.
 import { InvoiceCreationDialogComponent } from './home/invoices/invoice-creation-dialog.component';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
 import { UserQuickCreationEditDialogComponent } from './home/shared/user-quick-creation-edit-dialog.component';
-import { ScheduleCreationEditDialogComponent } from './home/schedule/schedule-creation-edit-dialog.component';
 import { CashierClosuresComponent } from './home/cashier-closures/cashier-closures.component';
 import { ArticlesFamilySizesDialogComponent } from './home/cashier-opened/articles-family/articles-family-sizes-dialog.component';
 import { ArticlesFamilyComponent } from './home/articles/articles-family.component';
@@ -50,7 +48,6 @@ import { FamilyCreationDialogComponent } from './home/articles/family-creation-d
 import { HistoricChartComponent } from './home/statistics2/historicChart.component';
 import { PercentageChartComponent } from './home/statistics2/percentageChart.component';
 import { IncomeComparisonChartComponent } from './home/statistics2/incomeComparisonChart.component';
-import { ArticlesTrackingComponent } from './home/articles-tracking/articles-tracking.component';
 import { OrderCreationEditDialogComponent } from './home/orders/order-creation-edit-dialog.component';
 import { PaymentComponent } from './home/shared/payment.component';
 import { PaymentDialogComponent } from './home/tickets/payment-dialog.component';
@@ -74,7 +71,6 @@ const appRoutes: Routes = [
       { path: OrdersComponent.URL, component: OrdersComponent },
       { path: OffersComponent.URL, component: OffersComponent },
       { path: ProvidersComponent.URL, component: ProvidersComponent },
-      { path: ScheduleComponent.URL, component: ScheduleComponent },
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
@@ -82,7 +78,6 @@ const appRoutes: Routes = [
       { path: TicketTrackingComponent.URL, component: TicketTrackingComponent },
       { path: UsersComponent.URL, component: UsersComponent },
       { path: VouchersComponent.URL, component: VouchersComponent },
-      { path: ArticlesTrackingComponent.URL, component: ArticlesTrackingComponent },
     ]
   }
 ];
@@ -108,7 +103,6 @@ export class AppRoutingModule {
     OffersComponent,
     PaymentComponent,
     ProvidersComponent,
-    ScheduleComponent,
     ShoppingCartComponent,
     StatisticsComponent,
     Statistics2Component,
@@ -128,7 +122,6 @@ export class AppRoutingModule {
     ArticleCreationEditDialogComponent,
     ArticlesFamilySizesDialogComponent,
     ArticleQuickCreationDialogComponent,
-    ArticlesTrackingComponent,
     CancelYesDialogComponent,
     CashierCloseDialogComponent,
     CashierMovementDialogComponent,
@@ -143,7 +136,6 @@ export class AppRoutingModule {
     OrderCreationEditDialogComponent,
     PaymentDialogComponent,
     ProviderCreationEditDialogComponent,
-    ScheduleCreationEditDialogComponent,
     UserChangingPasswordDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationEditDialogComponent,

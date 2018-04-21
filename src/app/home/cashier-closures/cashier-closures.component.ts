@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material';
+
 import { ClosedCashier } from '../shared/closed-cashier.model';
 import { CashierService } from '../shared/cashier.service';
-
 
 @Component({
     templateUrl: `cashier-closures.component.html`
@@ -17,7 +16,7 @@ export class CashierClosuresComponent {
     initialDateInput: Date = undefined;
     finalDateInput: Date = new Date();
 
-    constructor(private dialog: MatDialog, private cashierService: CashierService) {
+    constructor(private cashierService: CashierService) {
         const initialDate = new Date();
         initialDate.setDate(initialDate.getDate() - 10);
         this.syncronized(initialDate, new Date());

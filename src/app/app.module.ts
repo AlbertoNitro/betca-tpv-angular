@@ -4,23 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import {
-  MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
-  MatCardModule, MatCheckboxModule, MatChipsModule,
-  MatDatepickerModule, MatDialogModule, MatExpansionModule,
-  MatGridListModule, MatIconModule, MatInputModule,
-  MatListModule, MatMenuModule, MatNativeDateModule,
-  MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule,
-  MatRadioModule, MatRippleModule, MatSelectModule,
-  MatSidenavModule, MatSliderModule, MatSlideToggleModule,
-  MatSnackBarModule, MatSortModule, MatTableModule,
-  MatTabsModule, MatToolbarModule, MatTooltipModule,
-  MatStepperModule,
-} from '@angular/material';
+
 import { CdkTableModule } from '@angular/cdk/table';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppRoutingModule } from './app-routing.module';
+import { AppMaterialModule } from './app-material.module';
 import { CoreModule } from './core/core.module';
 
 import { AdminsService } from './home/admin/admins.service';
@@ -37,8 +26,6 @@ import { UserService } from './home/shared/user.service';
 import { VoucherService } from './home/shared/voucher.service';
 import { OrderService } from '../app/home/orders/orders.service';
 import { OfferService } from './home/shared/offer.service';
-import { ReservationService } from './home/shared/reservation.service';
-
 import { AppComponent } from './app.component';
 import { ArticlesComponent } from './home/articles/articles.component';
 import { ChartsModule } from 'ng2-charts';
@@ -46,9 +33,9 @@ import { ArticlesFamilyViewComponent } from './home/cashier-opened/articles-fami
 import { InvoiceService } from './home/shared/invoice.service';
 import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
-import { SchedulerService } from './home/shared/scheduler.service';
 
 import { ArticleTrackingService } from './home/shared/articleTracking.service';
+
 
 @NgModule({
   imports: [
@@ -56,37 +43,7 @@ import { ArticleTrackingService } from './home/shared/articleTracking.service';
     HttpModule,
     ReactiveFormsModule,
 
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatStepperModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule,
-    MatRadioModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
+    AppMaterialModule,
 
     CdkTableModule,
     FlexLayoutModule,
@@ -109,6 +66,7 @@ import { ArticleTrackingService } from './home/shared/articleTracking.service';
     AdminsService,
     ArticleService,
     ArticlesFamilyService,
+    ArticleTrackingService,
     BudgetService,
     CashierService,
     CashierMovementService,
@@ -116,13 +74,10 @@ import { ArticleTrackingService } from './home/shared/articleTracking.service';
     OrderService,
     OfferService,
     ProviderService,
-    SchedulerService,
     ShoppingCartService,
     TicketService,
     UserService,
     VoucherService,
-    ArticleTrackingService,
-    ReservationService,
   ]
 })
 export class AppModule {

@@ -3,8 +3,8 @@ import { MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar } fro
 
 import { Ticket } from '../shared/ticket.model';
 import { TicketService } from '../shared/ticket.service';
-import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
 import { InvoiceService } from '../shared/invoice.service';
+import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
 
 @Component({
   selector: 'app-tickets',

@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { Offer } from './offer.model';
 import { HttpService } from '../../core/http.service';
-import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class OfferService {
     static END_POINT = '/offers';
 
-    constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService) {
     }
 
     readObservable(code: string): Observable<Offer> {
@@ -42,11 +42,5 @@ export class OfferService {
 
     readAll(): Observable<Offer[]> {
         return this.httpService.authToken().get(OfferService.END_POINT);
-    }
-
-    private successful() {
-        this.snackBar.open('Successful', '', {
-            duration: 2000
-        });
     }
 }

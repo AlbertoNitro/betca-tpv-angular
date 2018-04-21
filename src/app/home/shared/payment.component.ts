@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { MatDialog } from '@angular/material';
+
 import { VoucherConsumeDialogComponent } from '../cashier-opened/shopping-cart/voucher-consume-dialog.component';
 
 @Component({

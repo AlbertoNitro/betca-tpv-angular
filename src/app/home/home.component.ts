@@ -1,10 +1,14 @@
 import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { MatDialog } from '@angular/material';
+
+import { User } from './shared/user.model';
 
 import { CashierService } from './shared/cashier.service';
 import { TokensService } from '../core/tokens.service';
+import { UserService } from './shared/user.service';
+
 import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
 import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
 import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
@@ -21,22 +25,21 @@ import { ProvidersComponent } from './providers/providers.component';
 import { TicketsComponent } from './tickets/tickets.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { Statistics2Component } from './statistics2/statistics2.component';
-import { ScheduleComponent } from './schedule/schedule.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
 import { OffersComponent } from './offers/offers.component';
 import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
 import { InvoicesComponent } from './invoices/invoices.component';
-import { User } from './shared/user.model';
-import { UserService } from './shared/user.service';
+
+
 import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
 import { ArticlesFamilyComponent } from './articles/articles-family.component';
-import { ArticlesTrackingComponent } from './articles-tracking/articles-tracking.component';
 import { TicketTrackingComponent } from './tickets/ticket-tracking.component';
 
 @Component({
-  styles: [`mat-toolbar {justify-content: space-between;}`],
-  templateUrl: `home.component.html`
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.css'],
+
 })
 export class HomeComponent {
   static URL = 'home';
@@ -173,10 +176,6 @@ export class HomeComponent {
     this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
   }
 
-  schedule() {
-    this.router.navigate([HomeComponent.URL, ScheduleComponent.URL]);
-  }
-
   searchOffer() {
     this.dialog.open(OfferSearchDialogComponent);
   }
@@ -191,10 +190,6 @@ export class HomeComponent {
 
   Orders() {
     this.router.navigate([HomeComponent.URL, OrdersComponent.URL]);
-  }
-
-  articleTracking() {
-    this.router.navigate([HomeComponent.URL, ArticlesTrackingComponent.URL]);
   }
 
 }

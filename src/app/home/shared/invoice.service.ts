@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../core/http.service';
 import { Observable } from 'rxjs/Observable';
-import { URLSearchParams, RequestOptions } from '@angular/http';
+
 import { Invoice } from './invoice.model';
 import { InvoiceCreation } from './invoice-creation.model';
+import { HttpService } from '../../core/http.service';
 
 @Injectable()
 export class InvoiceService {

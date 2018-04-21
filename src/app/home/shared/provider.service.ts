@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 import { Provider } from './provider.model';
 import { HttpService } from '../../core/http.service';
-import { Observable } from 'rxjs/Observable';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class ProviderService {
@@ -11,7 +10,7 @@ export class ProviderService {
 
     static ACTIVES = '/actives';
 
-    constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService) {
     }
 
     read(id: string): Observable<Provider> {

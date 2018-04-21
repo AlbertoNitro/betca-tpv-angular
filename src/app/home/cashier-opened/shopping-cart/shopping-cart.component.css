@@ -18,3 +18,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}

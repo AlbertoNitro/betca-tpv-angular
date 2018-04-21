@@ -7,7 +7,7 @@ import { ViewInvoiceDialogComponent } from './view-invoice-dialog.component';
 import { InvoiceCreationDialogComponent } from './invoice-creation-dialog.component';
 
 @Component({
-    templateUrl: `invoices.component.html`
+    templateUrl: 'invoices.component.html'
 })
 export class InvoicesComponent {
     static URL = 'invoices';

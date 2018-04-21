@@ -1,14 +1,12 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 
 @Component({
     templateUrl: 'user-creation-edit-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styleUrls: ['users.component.css']
 })
 export class UserCreationEditDialogComponent implements OnInit {
     edit: boolean;

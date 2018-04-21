@@ -7,14 +7,7 @@ import { InvoiceService } from '../shared/invoice.service';
 
 @Component({
     templateUrl: './invoice-creation-dialog.component.html',
-    styles: [`
-    .mat-cell {
-        overflow: visible;
-      }
-      .mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styleUrls: ['invoices.component.css']
 })
 export class InvoiceCreationDialogComponent {
 

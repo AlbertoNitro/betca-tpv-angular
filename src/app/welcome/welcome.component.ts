@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
+import { TokensService } from '../core/tokens.service';
 import { LoginDialogComponent } from '../core/login-dialog.component';
 import { HomeComponent } from '../home/home.component';
-import { TokensService } from '../core/tokens.service';
-import { Router } from '@angular/router';
 
 @Component({
-  styles: [`mat-toolbar {justify-content: space-between;}`],
-  templateUrl: `welcome.component.html`
+  templateUrl: 'welcome.component.html',
+  styleUrls: ['welcome.component.css'],
 })
 export class WelcomeComponent {
   static URL = 'welcome';

@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { URLSearchParams, RequestOptions } from '@angular/http';
+
 import { CashierLast } from './cashier-last.model';
 import { CashierClosing } from './cashier-closing.model';
-import { HttpService } from '../../core/http.service';
-import { ArticleService } from './article.service';
 import { CashierMovement } from './cashier-movement.model';
 import { ClosedCashier } from './closed-cashier.model';
+import { HttpService } from '../../core/http.service';
 
 @Injectable()
 export class CashierService {

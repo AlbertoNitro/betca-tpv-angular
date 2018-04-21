@@ -1,5 +1,6 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
+
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
 import { UserCreationEditDialogComponent } from './user-creation-edit-dialog.component';

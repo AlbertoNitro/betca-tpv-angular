@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { Budget } from './budget.model';
 import { HttpService } from '../../core/http.service';
 
-
 @Injectable()
 export class BudgetService {
     static END_POINT = '/budgets';

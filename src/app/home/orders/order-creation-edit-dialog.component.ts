@@ -3,20 +3,16 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatSnackBar, MatDial
 
 import { Article } from '../shared/article.model';
 import { Provider } from '../shared/provider.model';
-
+import { Order } from './order.model';
+import { OrderLine } from './order-line.model';
 import { ArticleService } from '../shared/article.service';
 import { ProviderService } from '../shared/provider.service';
-import { Order } from './order.model';
 import { OrderService } from './orders.service';
-import { OrderLine } from './order-line.model';
 import { AdvancedSearchComponent } from '../cashier-opened/advanced-search/advanced-search.component';
 
 @Component({
     templateUrl: 'order-creation-edit-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styles: ['orders.component.css']
 })
 export class OrderCreationEditDialogComponent {
 

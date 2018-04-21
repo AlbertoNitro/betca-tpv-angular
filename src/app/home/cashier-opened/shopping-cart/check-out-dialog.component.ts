@@ -3,22 +3,14 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 
 import { TicketCreation } from '../../shared/ticket-creation.model';
 import { User } from '../../shared/user.model';
-import { ReservationCreation } from '../../shared/reservation-creation.model';
-import { ShoppingCartService } from './shopping-cart.service';
 import { UserService } from '../../shared/user.service';
-import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
 import { VoucherService } from '../../shared/voucher.service';
+import { ShoppingCartService } from './shopping-cart.service';
+import { VoucherConsumeDialogComponent } from './voucher-consume-dialog.component';
 
 @Component({
     templateUrl: 'check-out-dialog.component.html',
-    styles: [`
-    .mat-cell {
-        overflow: visible;
-      }
-      .mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styleUrls: ['shopping-cart.component.css']
 })
 export class CheckOutDialogComponent {
 

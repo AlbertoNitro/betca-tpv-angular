@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Provider } from '../shared/provider.model';
@@ -6,10 +6,7 @@ import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: 'provider-creation-edit-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styles: ['providers.component.css']
 })
 export class ProviderCreationEditDialogComponent implements OnInit {
     edit: boolean;

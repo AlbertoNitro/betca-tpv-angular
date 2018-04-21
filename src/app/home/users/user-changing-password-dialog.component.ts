@@ -1,13 +1,13 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-import { AbstractControl } from '@angular/forms';
 import { AdminsService } from '../admin/admins.service';
 
 @Component({
-  templateUrl: './user-changing-password-dialog.component.html',
-  styleUrls: ['./user-changing-password-dialog.component.css']
+  templateUrl: 'user-changing-password-dialog.component.html',
+  styleUrls: ['users.component.css']
 })
 export class UserChangingPasswordDialogComponent {
 

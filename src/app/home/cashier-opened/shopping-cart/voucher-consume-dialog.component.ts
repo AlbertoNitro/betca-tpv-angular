@@ -5,10 +5,7 @@ import { VoucherService } from '../../shared/voucher.service';
 
 @Component({
     templateUrl: 'voucher-consume-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    styleUrls: ['shopping-cart.component.css']
 })
 export class VoucherConsumeDialogComponent {
     id: string;

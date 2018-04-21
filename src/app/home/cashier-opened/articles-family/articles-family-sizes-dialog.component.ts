@@ -6,8 +6,8 @@ import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
 import { ArticlesFamilyService } from '../../shared/articles-family.service';
 
 @Component({
-    templateUrl: './articles-family-sizes-dialog.component.html',
-    styleUrls: ['./articles-family-sizes-dialog.component.css']
+    templateUrl: 'articles-family-sizes-dialog.component.html',
+    styleUrls: ['articles-family-sizes-dialog.component.css']
 
 })
 export class ArticlesFamilySizesDialogComponent {

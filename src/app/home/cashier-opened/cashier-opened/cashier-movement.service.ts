@@ -3,13 +3,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { CashierMovement } from '../../shared/cashier-movement.model';
 import { HttpService } from '../../../core/http.service';
-import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class CashierMovementService {
     static END_POINT = '/cashier-movements';
 
-    constructor(private httpService: HttpService, public snackBar: MatSnackBar) {
+    constructor(private httpService: HttpService) {
     }
 
     public create(cashMovement: CashierMovement): Observable<any> {

@@ -1,14 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+
 import { VoucherConsumeDialogComponent } from '../cashier-opened/shopping-cart/voucher-consume-dialog.component';
 import { TicketCreation } from '../shared/ticket-creation.model';
 
 @Component({
-    templateUrl: './payment-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+    templateUrl: 'payment-dialog.component.html',
+    styleUrls: ['tickets.component.css']
 })
 export class PaymentDialogComponent {
     reserve: number;

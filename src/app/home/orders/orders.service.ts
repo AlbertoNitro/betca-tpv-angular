@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import { MatSnackBar } from '@angular/material';
 
-import { HttpService } from '../../core/http.service';
 import { OrderBase } from './order-base.model';
 import { Order } from './order.model';
-
+import { HttpService } from '../../core/http.service';
 
 @Injectable()
 export class OrderService {

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input} from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 
 import { Provider } from '../../shared/provider.model';
@@ -66,6 +66,5 @@ export class AdvancedSearchComponent {
   onAdd(item) {
     this.add.emit(item);
   }
-
 
 }
