@@ -19,7 +19,7 @@ export class ArticlesComponent {
   providers: Provider[];
 
   title = 'Articles management';
-  columns = ['code', 'description'];
+  columns = ['code', 'description', 'stock'];
   data: Article[];
 
   onlyIncomplete = true;
@@ -44,7 +44,7 @@ export class ArticlesComponent {
 
   trim(str: string) {
     if (str) {
-      return str.trim();
+      return str;
     } else {
       return null;
     }
