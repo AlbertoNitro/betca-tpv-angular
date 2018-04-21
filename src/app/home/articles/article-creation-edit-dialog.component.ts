@@ -39,10 +39,16 @@ export class ArticleCreationEditDialogComponent implements OnInit {
     }
 
     isActionCompleted() {
-        return this.article.code && this.article.description && this.article.retailPrice && this.article.provider;
+        return this.article.description && this.article.retailPrice && this.article.provider;
     }
 
     create(): void {
+        if (!this.article.code) {
+            this.article.code = null;
+        } else {
+            this.article.code = this.article.code.trim();
+            this.article.code = (this.article.code.length === 0) ? null : this.article.code;
+        }
         this.articleService.create(this.article).subscribe(
             data => this.dialogRef.close()
         );

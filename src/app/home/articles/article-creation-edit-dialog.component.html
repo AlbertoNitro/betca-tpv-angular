@@ -2,8 +2,7 @@
 <h2 mat-dialog-title *ngIf="editable">Edit Article</h2>
 <mat-dialog-content>
     <mat-form-field>
-        <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" required [disabled]="editable" />
-        <mat-error>Field required</mat-error>
+        <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" [disabled]="editable" />
     </mat-form-field>
     <mat-form-field>
         <mat-select placeholder="Provider" [(ngModel)]="article.provider" (change)="updateDescription()" required cdkFocusInitial>

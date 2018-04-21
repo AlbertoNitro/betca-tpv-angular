@@ -52,6 +52,8 @@ import { OrderCreationEditDialogComponent } from './home/orders/order-creation-e
 import { PaymentComponent } from './home/shared/payment.component';
 import { PaymentDialogComponent } from './home/tickets/payment-dialog.component';
 import { TicketTrackingComponent } from './home/tickets/ticket-tracking.component';
+import { TagCreationEditDialogComponent } from './home/articles/tag-creation-edit-dialog.component';
+import { TagsComponent } from './home/articles/tags.component';
 
 
 const appRoutes: Routes = [
@@ -74,6 +76,7 @@ const appRoutes: Routes = [
       { path: StatisticsComponent.URL, component: StatisticsComponent },
       { path: Statistics2Component.URL, component: Statistics2Component },
       { path: StockAlertComponent.URL, component: StockAlertComponent },
+      { path: TagsComponent.URL, component: TagsComponent },
       { path: TicketsComponent.URL, component: TicketsComponent },
       { path: TicketTrackingComponent.URL, component: TicketTrackingComponent },
       { path: UsersComponent.URL, component: UsersComponent },
@@ -107,6 +110,7 @@ export class AppRoutingModule {
     StatisticsComponent,
     Statistics2Component,
     StockAlertComponent,
+    TagsComponent,
     TicketsComponent,
     TicketTrackingComponent,
     UserQuickCrudComponent,
@@ -136,6 +140,7 @@ export class AppRoutingModule {
     OrderCreationEditDialogComponent,
     PaymentDialogComponent,
     ProviderCreationEditDialogComponent,
+    TagCreationEditDialogComponent,
     UserChangingPasswordDialogComponent,
     UserCreationEditDialogComponent,
     UserQuickCreationEditDialogComponent,

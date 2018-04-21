@@ -35,6 +35,7 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
 import { ArticlesFamilyComponent } from './articles/articles-family.component';
 import { TicketTrackingComponent } from './tickets/ticket-tracking.component';
+import { TagsComponent } from './articles/tags.component';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -166,6 +167,10 @@ export class HomeComponent {
 
   providers() {
     this.router.navigate([HomeComponent.URL, ProvidersComponent.URL]);
+  }
+
+  tags() {
+    this.router.navigate([HomeComponent.URL, TagsComponent.URL]);
   }
 
   statistics2() {

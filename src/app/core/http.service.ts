@@ -34,6 +34,7 @@ export class HttpService {
 
     private successfulNotification = undefined;
 
+    instant: boolean;
 
     constructor(private http: Http, private snackBar: MatSnackBar, private router: Router) {
         this.resetOptions();
@@ -97,7 +98,12 @@ export class HttpService {
         return this;
     }
 
-    pdf(): HttpService {
+    pdf(instant?: boolean): HttpService {
+        if (instant === null || instant === undefined) {
+            this.instant = true;
+        } else {
+            this.instant = instant;
+        }
         this.responseType = ResponseContentType.Blob;
         this.headers.append('Accept', 'application/pdf');
         return this;
@@ -173,13 +179,16 @@ export class HttpService {
         if (contentType) {
             if (contentType.indexOf('application/pdf') !== -1) {
                 const blob = new Blob([response.blob()], { type: 'application/pdf' });
-                // window.open(window.URL.createObjectURL(blob)).print();
-                const iFrame = document.createElement('iframe');
-                iFrame.src = URL.createObjectURL(blob);
-                iFrame.style.visibility = 'hidden';
-                document.body.appendChild(iFrame);
-                iFrame.contentWindow.focus();
-                iFrame.contentWindow.print();
+                if (this.instant) {
+                    const iFrame = document.createElement('iframe');
+                    iFrame.src = URL.createObjectURL(blob);
+                    iFrame.style.visibility = 'hidden';
+                    document.body.appendChild(iFrame);
+                    iFrame.contentWindow.focus();
+                    iFrame.contentWindow.print();
+                } else {
+                    window.open(window.URL.createObjectURL(blob));
+                }
             } else if (contentType.indexOf('application/json') !== -1) {
                 return response.json();
             }

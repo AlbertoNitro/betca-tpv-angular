@@ -35,6 +35,7 @@ import { ProviderService } from './home/shared/provider.service';
 import { UserQuickCrudComponent } from './home/shared/user-quick-crud.component';
 
 import { ArticleTrackingService } from './home/shared/articleTracking.service';
+import { TagsService } from './home/articles/tags.sevice';
 
 
 @NgModule({
@@ -75,6 +76,7 @@ import { ArticleTrackingService } from './home/shared/articleTracking.service';
     OfferService,
     ProviderService,
     ShoppingCartService,
+    TagsService,
     TicketService,
     UserService,
     VoucherService,
