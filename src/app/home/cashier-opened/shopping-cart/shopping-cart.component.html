@@ -77,7 +77,7 @@
                 </button>
             </mat-form-field>
         </div>
-        <button mat-raised-button color="accent" (click)="checkOut()">
+        <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckout()">
             <mat-icon mat-icon-button>credit_card</mat-icon> Pagar
             <mat-icon>euro_symbol</mat-icon>
         </button>

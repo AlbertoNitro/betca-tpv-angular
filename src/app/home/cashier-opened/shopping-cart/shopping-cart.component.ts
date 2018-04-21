@@ -129,6 +129,10 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         );
     }
 
+    invalidCheckout(): boolean {
+        return this.shoppingCartService.isEmpty();
+    }
+
     checkOut() {
         this.dialog.open(CheckOutDialogComponent, {
             data: {
