@@ -10,6 +10,7 @@ import { VoucherService } from '../shared/voucher.service';
 import { InvoiceService } from '../shared/invoice.service';
 import { UserService } from '../shared/user.service';
 import { PaymentDialogComponent } from './payment-dialog.component';
+import { TicketCreation } from '../shared/ticket-creation.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -17,8 +18,12 @@ import { PaymentDialogComponent } from './payment-dialog.component';
   styleUrls: ['edit-ticket-dialog.component.css']
 })
 export class EditTicketDialogComponent {
-  ticket: Ticket;
-  invoice: Invoice;
+  debt: number;
+  ticketId: string;
+  ticketCreationDate: Date;
+  invoiceId: string;
+  ticketCreation: TicketCreation;
+
   displayedColumns = ['ind', 'description', 'retailPrice', 'amount', 'discount', 'total', 'committed'];
   dataSource: MatTableDataSource<Shopping>;
 
@@ -28,23 +33,29 @@ export class EditTicketDialogComponent {
     private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
     private userService: UserService) {
 
-    this.dataSource = new MatTableDataSource<Shopping>(data.ticket.shoppingList);
-    this.ticket = data.ticket;
-    this.invoice = data.invoice;
-    if (this.ticket.debt > 0) {
-      this.reserva = this.totalNotCommited() - this.ticket.debt;
+    this.ticketCreation = {
+      userMobile: (data.ticket.user) ? data.ticket.user.mobile : null, card: 0, cash: 0, voucher: 0,
+      note: data.ticket.note,
+      shoppingCart: data.ticket.shoppingList
+    };
+    this.dataSource = new MatTableDataSource<Shopping>(this.ticketCreation.shoppingCart);
+    this.debt = data.ticket.debt;
+    this.ticketId = data.ticket.id;
+    this.invoiceId = data.invoice;
+    if (this.debt > 0) {
+      this.reserva = this.totalNotCommited() - this.debt;
     }
   }
 
   private total(): number {
     let total = 0;
-    this.ticket.shoppingList.forEach(element => total += element.total);
+    this.ticketCreation.shoppingCart.forEach(element => total += element.total);
     return total;
   }
 
   private totalNotCommited(): number {
     let notCommitValue = 0;
-    this.ticket.shoppingList.forEach(element => {
+    this.ticketCreation.shoppingCart.forEach(element => {
       if (!element.committed) {
         notCommitValue += element.total;
       }
@@ -67,49 +78,40 @@ export class EditTicketDialogComponent {
       shopping.committed = true;
     }
     shopping.total = this.updateTotal(shopping);
-    this.ticket.debt -= totalOld - shopping.total;
+    this.debt -= totalOld - shopping.total;
   }
 
   changeCommitted(shopping: Shopping) {
     shopping.committed = !shopping.committed;
   }
 
-  invoiceId() {
-    if (this.invoice) {
-      return this.invoice.id;
-    }
-  }
-
-  mobile(): number {
-    if (this.ticket.user) {
-      return this.ticket.user.mobile;
+  updateMobile(user: User) {
+    if (user) {
+      this.ticketCreation.userMobile = user.mobile;
     } else {
-      return null;
+      this.ticketCreation.userMobile = null;
     }
-  }
-
-  updateUser(user: User) {
-    this.ticket.user = user;
   }
 
   acceptTicket() {
-    if (this.ticket.debt < 0) {
-      this.voucheService.create({ value: -this.ticket.debt }).subscribe(
+    if (this.debt < 0) {
+      this.voucheService.create({ value: -this.debt }).subscribe(
         () => {
-          this.ticket.debt = 0;
+          this.debt = 0;
           this.updateTicket();
         }
       );
-    } else if (this.ticket.debt > 0) {
+    } else if (this.debt > 0) {
       let data: any;
-      const advised = this.ticket.debt - (this.totalNotCommited() - this.reserva);
-      if (advised >= this.ticket.debt) {
-        data = { payable: this.ticket.debt };
+      const advised = this.debt - (this.totalNotCommited() - this.reserva);
+      if (advised >= this.debt) {
+        data = { payable: this.debt, ticketCreation: this.ticketCreation };
       } else {
         data = {
           reserve: this.reserva,
           payable: advised,
           unpaid: this.totalNotCommited(),
+          ticketCreation: this.ticketCreation
         };
       }
       this.dialog.open(PaymentDialogComponent, {
@@ -117,8 +119,7 @@ export class EditTicketDialogComponent {
       }).afterClosed().subscribe(
         ticketCreation => {
           if (ticketCreation) {
-            this.ticket.debt -= (ticketCreation.cash + ticketCreation.card + ticketCreation.voucher);
-            this.ticket.note = ticketCreation.note;
+            this.ticketCreation = ticketCreation;
             this.updateTicket();
           }
         }
@@ -130,7 +131,7 @@ export class EditTicketDialogComponent {
 
 
   updateTicket() {
-    this.ticketService.updateTicket(this.ticket).subscribe(
+    this.ticketService.updateTicket(this.ticketId, this.ticketCreation).subscribe(
       () => this.dialogRef.close()
     );
   }

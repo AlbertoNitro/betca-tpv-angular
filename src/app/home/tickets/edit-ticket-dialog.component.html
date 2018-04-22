@@ -1,11 +1,11 @@
 <h2 mat-dialog-title color="primary">
-  <span class="mat-raised-button mat-primary">Debt: {{ticket.debt | currency:'EUR':'symbol'}} </span>
-  <span class="mat-raised-button">Ticket: {{ticket.id}} </span>
-  <span class="mat-raised-button">{{ticket.creationDate | date: 'medium'}} </span>
-  <span class="mat-raised-button" *ngIf="invoice">Invoice: {{invoiceId()}} </span>
+  <span class="mat-raised-button mat-primary">Debt: {{debt | currency:'EUR':'symbol'}} </span>
+  <span class="mat-raised-button">Ticket: {{ticketId}} </span>
+  <span class="mat-raised-button">{{ticketCreationDate | date: 'medium'}} </span>
+  <span class="mat-raised-button" *ngIf="invoiceId">Invoice: {{invoiceId}} </span>
 </h2>
 <mat-dialog-content>
-  <app-user-quick-crud [mobile]="mobile()" (change)="updateUser($event)"></app-user-quick-crud>
+  <app-user-quick-crud [mobile]="ticketCreation.userMobile" (change)="updateMobile($event)"></app-user-quick-crud>
   <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
     <ng-container matColumnDef="ind">
       <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
@@ -49,6 +49,6 @@
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button color="accent" (click)="acceptTicket()">
-    <mat-icon>check_circle</mat-icon> Ticket
+    <mat-icon>check_circle</mat-icon> Actualizar Ticket
   </button>
 </mat-dialog-actions>

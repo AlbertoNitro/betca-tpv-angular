@@ -56,11 +56,12 @@ export class TicketsComponent {
           });
         } else {
           this.ticketService.readOne(ticketId.id).subscribe(
-            ticket =>
+            ticket => {
               this.dialog.open(EditTicketDialogComponent, {
                 width: '900px',
                 data: { ticket: ticket, invoice: null }
-              })
+              });
+            }
           );
         }
       }

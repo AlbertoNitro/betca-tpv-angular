@@ -4,7 +4,7 @@
         <input matInput type="number" placeholder="Total Vales" value="{{cashierClosure.totalVoucher}}" readonly />
     </mat-form-field>
     <mat-form-field>
-        <input matInput type="number" placeholder="Pagado con Tarjeta" [(ngModel)]="cashierClosure.salesCard"
+        <input matInput type="number" placeholder="Pagado con Tarjeta (€ {{cashierClosure.totalCard}})" [(ngModel)]="cashierClosure.salesCard"
             required cdkFocusInitial/>
     </mat-form-field>
     <mat-form-field>

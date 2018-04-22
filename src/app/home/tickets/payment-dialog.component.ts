@@ -21,7 +21,7 @@ export class PaymentDialogComponent {
         this.reserve = Math.round(data.reserve * 100) / 100;
         this.payable = Math.round(data.payable * 100) / 100;
         this.unpaid = Math.round(data.unpaid * 100) / 100;
-        this.ticketCreation = { card: 0, cash: 0, voucher: 0, note: '', shoppingCart: null };
+        this.ticketCreation = data.ticketCreation;
     }
 
     private format(value: number): number {
@@ -80,7 +80,7 @@ export class PaymentDialogComponent {
         if (returned > 0) {
             this.ticketCreation.cash -= returned;
         }
-        this.ticketCreation.note = '';
+        this.ticketCreation.note += ' --> ';
         if (this.ticketCreation.card > 0) {
             this.ticketCreation.note += ' Abonado con Tarjeta: ' + Math.round(this.ticketCreation.card * 100) / 100 + '€.';
         }

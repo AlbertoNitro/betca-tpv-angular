@@ -57,8 +57,8 @@ export class TicketService {
     return this.findBetweenDates(new Date(), new Date());
   }
 
-  updateTicket(ticket: Ticket): Observable<any> {
-    return this.httpService.authToken().pdf().put(TicketService.END_POINT + '/' + ticket.id, ticket);
+  updateTicket(ticketId: string, ticketCreation: TicketCreation): Observable<any> {
+    return this.httpService.authToken().pdf().put(TicketService.END_POINT + '/' + ticketId, ticketCreation);
   }
 
   readNumProductSoldPerMonthsBetweenDates(dateStart: Date, dateEnd: Date): Observable<NumProductSoldPerMonth[]> {
