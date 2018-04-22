@@ -50,7 +50,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         shopping.amount--;
         if (shopping.amount === 0) {
             shopping.amount--;
-            shopping.committed = false;
+            shopping.committed = true;
         }
         shopping.updateTotal();
         this.shoppingCartService.synchronizeCartTotal();

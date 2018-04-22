@@ -26,11 +26,6 @@ export class CheckOutDialogComponent {
 
         this.total = data.total;
         this.ticketCreation = data.ticketCreation;
-
-        if (this.shoppingCartService.getReturned() > 0) {
-            this.ticketCreation.voucher = this.shoppingCartService.getReturned();
-            this.total = this.total + this.ticketCreation.voucher;
-        }
     }
 
     updateUser(user: User) {
