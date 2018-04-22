@@ -97,7 +97,7 @@ export class EditTicketDialogComponent {
     if (this.debt < 0) {
       this.voucheService.create({ value: -this.debt }).subscribe(
         () => {
-          this.ticketCreation.note += ' --> Generado vale: ' + this.debt;
+          this.ticketCreation.note += ' --> Devolución, generado vale: ' + (-this.debt);
           this.debt = 0;
           this.updateTicket();
         }
