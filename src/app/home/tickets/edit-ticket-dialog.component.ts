@@ -41,7 +41,9 @@ export class EditTicketDialogComponent {
     this.dataSource = new MatTableDataSource<Shopping>(this.ticketCreation.shoppingCart);
     this.debt = data.ticket.debt;
     this.ticketId = data.ticket.id;
-    this.invoiceId = data.invoice.id;
+    if (data.invoice) {
+      this.invoiceId = data.invoice.id;
+    }
     if (this.debt > 0) {
       this.reserva = this.totalNotCommited() - this.debt;
     }
