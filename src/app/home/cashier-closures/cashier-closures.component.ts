@@ -10,7 +10,9 @@ export class CashierClosuresComponent {
     static URL = 'cashier-closures';
 
     title = 'Cashier Closures management';
-    columns = ['openingDateFormat', 'initialCash', 'salesCash', 'salesCard', 'deposit', 'withdrawal', 'comment'];
+    columns = ['openingDateFormat', 'initialCash',
+        'usedVouchers', 'salesCard', 'salesCash', 'salesTotal',
+        'deposit', 'withdrawal', 'finalCash', 'comment'];
     data: ClosedCashier[];
 
     initialDateInput: Date = undefined;
@@ -26,8 +28,10 @@ export class CashierClosuresComponent {
         this.cashierService.findBetweenDates(initial, final).subscribe(
             (cashierClosureClosedList: ClosedCashier[]) => {
                 this.data = cashierClosureClosedList;
-                this.data.forEach(element =>
-                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10)
+                this.data.forEach(element => {
+                    element['openingDateFormat'] = new Date(element['openingDate']).toISOString().substring(0, 10);
+                    element['salesTotal'] = element['usedVouchers'] + element['salesCard'] + element['salesCash'];
+                }
                 );
             }
         );
