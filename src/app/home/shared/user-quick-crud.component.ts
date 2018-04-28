@@ -15,7 +15,7 @@ export class UserQuickCrudComponent {
     viewMobile: number;
     user: User;
 
-    @Output() change = new EventEmitter<any>();
+    @Output() found = new EventEmitter<User>();
 
 
     constructor(private dialog: MatDialog, private userService: UserService) {
@@ -49,7 +49,7 @@ export class UserQuickCrudComponent {
         this.userService.read(this.mobile).subscribe(
             user => {
                 this.user = user;
-                this.change.emit(user);
+                this.found.emit(user);
             },
             error => this.createUser()
         );
@@ -73,7 +73,7 @@ export class UserQuickCrudComponent {
     deleteMobile() {
         this.mobile = undefined;
         this.user = null;
-        this.change.emit(null);
+        this.found.emit(null);
     }
 
     editMobile() {

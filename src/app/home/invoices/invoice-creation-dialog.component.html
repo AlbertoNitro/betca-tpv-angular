@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Create Invoice</h2>
 <mat-dialog-content>
-    <app-user-quick-crud (change)="updateUser($event)"></app-user-quick-crud>
+    <app-user-quick-crud (found)="updateUser($event)"></app-user-quick-crud>
     <mat-form-field>
         <input matInput type="text" placeholder="Ticket Id" [(ngModel)]="ticketId" [disabled]="ticketIdSynchronized" />
         <button mat-button matSuffix mat-icon-button (click)="findTicket()" *ngIf="ticketId && !ticketIdSynchronized">
