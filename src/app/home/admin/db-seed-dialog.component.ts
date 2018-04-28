@@ -1,21 +1,17 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { AdminsService } from './admins.service';
-import { MatDialogRef } from '@angular/material';
+import {AdminsService} from './admins.service';
 
 @Component({
-    templateUrl: 'db-seed-dialog.component.html',
-    styles: [`.mat-dialog-content {
-        display: flex;
-        flex-direction: column;
-    }`]
+  templateUrl: 'db-seed-dialog.component.html',
+  styleUrls: ['admin.component.css']
 })
 export class DbSeedDialogComponent {
-    constructor(private adminsService: AdminsService) {
-    }
+  constructor(private adminsService: AdminsService) {
+  }
 
-    seedDb( ymlFileName: string) {
-        this.adminsService.seedDb(ymlFileName);
-    }
+  seedDb(ymlFileName: string) {
+    this.adminsService.seedDb(ymlFileName);
+  }
 
 }
