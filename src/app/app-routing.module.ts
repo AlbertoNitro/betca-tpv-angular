@@ -18,7 +18,6 @@ import {CashierMovementDialogComponent} from './home/cashier-opened/cashier-open
 import {CheckOutDialogComponent} from './home/cashier-opened/shopping-cart/check-out-dialog.component';
 import {ArticleQuickCreationDialogComponent} from './home/cashier-opened/shopping-cart/article-quick-creation-dialog.component';
 import {StatisticsComponent} from './home/statistics/statistics.component';
-import {StockAlertComponent} from './home/stock-alert/stock-alert.component';
 import {TicketsComponent} from './home/tickets/tickets.component';
 import {UsersComponent} from './home/users/users.component';
 import {UserCreationEditDialogComponent} from './home/users/user-creation-edit-dialog.component';
@@ -75,7 +74,6 @@ const appRoutes: Routes = [
       {path: ProvidersComponent.URL, component: ProvidersComponent},
       {path: StatisticsComponent.URL, component: StatisticsComponent},
       {path: Statistics2Component.URL, component: Statistics2Component},
-      {path: StockAlertComponent.URL, component: StockAlertComponent},
       {path: TagsComponent.URL, component: TagsComponent},
       {path: TicketsComponent.URL, component: TicketsComponent},
       {path: TicketTrackingComponent.URL, component: TicketTrackingComponent},
@@ -109,7 +107,6 @@ export class AppRoutingModule {
     ShoppingCartComponent,
     StatisticsComponent,
     Statistics2Component,
-    StockAlertComponent,
     TagsComponent,
     TicketsComponent,
     TicketTrackingComponent,
