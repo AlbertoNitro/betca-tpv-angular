@@ -2,7 +2,8 @@
 <mat-dialog-content>
   <mat-list>
     <mat-list-item>{{invoice.id}}</mat-list-item>
-    <mat-list-item>BI: {{invoice.baseTax}} €, IVA: {{invoice.tax}}€, Total: {{invoice.baseTax+invoice.tax}}€</mat-list-item>
+    <mat-list-item>BI: {{invoice.baseTax}} €, IVA: {{invoice.tax}}€, Total: {{invoice.baseTax+invoice.tax}}€
+    </mat-list-item>
     <mat-list-item> {{invoice.creationDate | date: 'medium'}}</mat-list-item>
     <mat-divider></mat-divider>
     <h3 mat-subheader>User</h3>
@@ -17,5 +18,5 @@
   </mat-list>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button mat-dialog-close>Close</button>
 </mat-dialog-actions>
