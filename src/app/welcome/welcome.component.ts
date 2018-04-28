@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material';
 
-import { TokensService } from '../core/tokens.service';
-import { LoginDialogComponent } from '../core/login-dialog.component';
-import { HomeComponent } from '../home/home.component';
+import {TokensService} from '../core/tokens.service';
+import {LoginDialogComponent} from '../core/login-dialog.component';
+import {HomeComponent} from '../home/home.component';
 
 @Component({
   templateUrl: 'welcome.component.html',
@@ -12,7 +12,6 @@ import { HomeComponent } from '../home/home.component';
 })
 export class WelcomeComponent {
   static URL = 'welcome';
-  codeValue = '';
 
   constructor(public dialog: MatDialog, private tokensService: TokensService, private router: Router) {
   }
