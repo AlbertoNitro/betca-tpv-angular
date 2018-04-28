@@ -1,27 +1,30 @@
-<h3 mat-dialog-title>Cierre de Caja</h3>
+<h3 mat-dialog-title>Cierre de Caja (total ventas: {{cashierClosure.salesTotal | currency:'EUR':'symbol'}})</h3>
 <mat-dialog-content>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Total Vales" value="{{cashierClosure.totalVoucher}}" readonly />
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Pagado con Tarjeta (€ {{cashierClosure.totalCard}})" [(ngModel)]="cashierClosure.salesCard"
-            required cdkFocusInitial/>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Efectivo en Caja (€ {{cashierClosure.totalCash}})" [(ngModel)]="cashierClosure.finalCash"
-            required />
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Comentario" [(ngModel)]="cashierClosure.comment" required />
-    </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Total Vales" value="{{cashierClosure.totalVoucher}}" readonly/>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Pagado con Tarjeta (€ {{cashierClosure.totalCard}})"
+           [(ngModel)]="cashierClosure.salesCard"
+           required cdkFocusInitial/>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Efectivo en Caja (€ {{cashierClosure.totalCash}})"
+           [(ngModel)]="cashierClosure.finalCash"
+           required/>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Comentario" [(ngModel)]="cashierClosure.comment" required/>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="accent" (click)="close()" [disabled]="invalid()">
-        <mat-icon>lock_outline</mat-icon> Cerrar Caja
-    </button>
-    <button mat-raised-button color="primary" (click)="cashMovement()">
-        <mat-icon>account_balance_wallet</mat-icon>
-        <span>Movimiento de efectivo en caja</span>
-    </button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="accent" (click)="close()" [disabled]="invalid()">
+    <mat-icon>lock_outline</mat-icon>
+    Cerrar Caja
+  </button>
+  <button mat-raised-button color="primary" (click)="cashMovement()">
+    <mat-icon>account_balance_wallet</mat-icon>
+    <span>Movimiento de efectivo en caja</span>
+  </button>
 </mat-dialog-actions>

@@ -1,23 +1,24 @@
 <h3 mat-dialog-title>Movimiento de efectivo de caja</h3>
 <mat-dialog-content>
-    <br />
-    <mat-radio-group class="radio-buttons-column" [(ngModel)]="selectedOperation">
-        <mat-radio-button value="add">Meter efectivo en caja</mat-radio-button>
-        <mat-radio-button value="subtract">Sacar efectivo de caja</mat-radio-button>
-    </mat-radio-group>
-    <br />
-    <mat-form-field>
-        <input matTooltip="> 0" matInput type="number" placeholder="Cantidad" [(ngModel)]="cashierMovement.value" />
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Comentario" [(ngModel)]="cashierMovement.comment" />
-    </mat-form-field>
+  <br/>
+  <mat-radio-group class="radio-buttons-column" [(ngModel)]="selectedOperation">
+    <mat-radio-button value="add">Meter efectivo en caja</mat-radio-button>
+    <mat-radio-button value="subtract">Sacar efectivo de caja</mat-radio-button>
+  </mat-radio-group>
+  <br/>
+  <mat-form-field>
+    <input matTooltip="> 0" matInput type="number" placeholder="Cantidad" [(ngModel)]="cashierMovement.value"/>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Comentario" [(ngModel)]="cashierMovement.comment"/>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button color="accent" (click)="createMovement()" [disabled]="isInvalid()">
-        <mat-icon>account_balance_wallet</mat-icon>
-        <mat-icon *ngIf="selectedOperation==='add'">add</mat-icon>
-        <mat-icon *ngIf="selectedOperation==='subtract'">remove</mat-icon> Mover efectivo
-    </button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="accent" (click)="createMovement()" [disabled]="isInvalid()">
+    <mat-icon>account_balance_wallet</mat-icon>
+    <mat-icon *ngIf="selectedOperation==='add'">add</mat-icon>
+    <mat-icon *ngIf="selectedOperation==='subtract'">remove</mat-icon>
+    Mover efectivo
+  </button>
 </mat-dialog-actions>
