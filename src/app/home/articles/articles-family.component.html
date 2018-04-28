@@ -1,4 +1,7 @@
-<h3><button mat-raised-button (click)="root()">Root</button>{{breadcrumbs}}</h3>
-<app-crud [title]="title" [columns]="columns" [data]="data" 
-   (create)="add()" (edit)="edit($event)" (read)="read($event)" (delete)="delete($event)">
+<h3>
+  <button mat-raised-button (click)="root()">Root</button>
+  {{breadcrumbs}}
+</h3>
+<app-crud [title]="title" [columns]="columns" [data]="data"
+          (create)="add()" (edit)="edit($event)" (read)="read($event)" (delete)="delete($event)">
 </app-crud>

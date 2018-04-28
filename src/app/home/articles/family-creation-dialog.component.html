@@ -1,29 +1,31 @@
 <h2 mat-dialog-title *ngIf="!editable">Creation Family</h2>
 <h2 mat-dialog-title *ngIf="editable">Edit Family</h2>
 <mat-dialog-content>
-    <mat-form-field>
-        <mat-select [(ngModel)]="family.familyType" [disabled]="editable">
-            <mat-option *ngFor="let option of familyTypeKeys" [value]="option">{{option}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field *ngIf="family.familyType==='ARTICLE'" >
-        <input matInput type="text" placeholder="Article Id" [(ngModel)]="family.articleId" [disabled]="articleIdSynchronized" />
-        <button mat-button matSuffix mat-icon-button (click)="findArticle()" *ngIf="family.articleId && !articleIdSynchronized">
-            <mat-icon *ngIf="!articleIdSynchronized" color="warn">search</mat-icon>
-        </button>
-        <button mat-button matSuffix mat-icon-button *ngIf="articleIdSynchronized" (click)="deleteArticle()">
-            <mat-icon color="warn">close</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-form-field  *ngIf="family.familyType==='ARTICLES' || family.familyType==='SIZES'">
-        <input matInput type="text" placeholder="Reference" [(ngModel)]="family.reference">
-    </mat-form-field>
-    <mat-form-field  *ngIf="family.familyType==='ARTICLES' || family.familyType==='SIZES'">
-        <input matInput type="text" placeholder="Description" [(ngModel)]="family.description">
-    </mat-form-field>
+  <mat-form-field>
+    <mat-select [(ngModel)]="family.familyType" [disabled]="editable">
+      <mat-option *ngFor="let option of familyTypeKeys" [value]="option">{{option}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field *ngIf="family.familyType==='ARTICLE'">
+    <input matInput type="text" placeholder="Article Id" [(ngModel)]="family.articleId"
+           [disabled]="articleIdSynchronized"/>
+    <button mat-button matSuffix mat-icon-button (click)="findArticle()"
+            *ngIf="family.articleId && !articleIdSynchronized">
+      <mat-icon *ngIf="!articleIdSynchronized" color="warn">search</mat-icon>
+    </button>
+    <button mat-button matSuffix mat-icon-button *ngIf="articleIdSynchronized" (click)="deleteArticle()">
+      <mat-icon color="warn">close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field *ngIf="family.familyType==='ARTICLES' || family.familyType==='SIZES'">
+    <input matInput type="text" placeholder="Reference" [(ngModel)]="family.reference">
+  </mat-form-field>
+  <mat-form-field *ngIf="family.familyType==='ARTICLES' || family.familyType==='SIZES'">
+    <input matInput type="text" placeholder="Description" [(ngModel)]="family.description">
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
-    <button mat-raised-button *ngIf="!editable" (click)="create()" [disabled]="!isValidCreate()">Create</button>
-    <button mat-raised-button *ngIf="editable" (click)="save()" [disabled]="!isValidCreate()">Save</button>
+  <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
+  <button mat-raised-button *ngIf="!editable" (click)="create()" [disabled]="!isValidCreate()">Create</button>
+  <button mat-raised-button *ngIf="editable" (click)="save()" [disabled]="!isValidCreate()">Save</button>
 </mat-dialog-actions>

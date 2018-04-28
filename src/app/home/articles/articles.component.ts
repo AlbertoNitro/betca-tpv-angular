@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatDialog, MatSort } from '@angular/material';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material';
 
-import { Article } from '../shared/article.model';
-import { Provider } from '../shared/provider.model';
-import { ArticleService } from '../shared/article.service';
-import { ProviderService } from '../shared/provider.service';
-import { ArticleCreationEditDialogComponent } from './article-creation-edit-dialog.component';
+import {Article} from '../shared/article.model';
+import {Provider} from '../shared/provider.model';
+import {ArticleService} from '../shared/article.service';
+import {ProviderService} from '../shared/provider.service';
+import {ArticleCreationEditDialogComponent} from './article-creation-edit-dialog.component';
 
 @Component({
   selector: 'app-articles',
@@ -59,12 +59,12 @@ export class ArticlesComponent {
   }
 
   resetFilter() {
-    this.article = { code: null, reference: null, description: null, provider: null };
+    this.article = {code: null, reference: null, description: null, provider: null};
   }
 
   create() {
     this.dialog.open(ArticleCreationEditDialogComponent).afterClosed().subscribe(
-      result => this.synchronize()
+      () => this.synchronize()
     );
   }
 
@@ -73,9 +73,9 @@ export class ArticlesComponent {
       data => {
         this.dialog.open(ArticleCreationEditDialogComponent, {
           width: '500px',
-          data: { article: data, editable: true }
+          data: {article: data, editable: true}
         }).afterClosed().subscribe(
-          result => this.synchronize()
+          () => this.synchronize()
         );
       }
     );

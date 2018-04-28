@@ -1,49 +1,52 @@
 <h2 mat-dialog-title *ngIf="!edit">New Tag</h2>
 <h2 mat-dialog-title *ngIf="edit">Edit Tag</h2>
 <mat-dialog-content>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Description" required [(ngModel)]="tag.description" />
-        <mat-error>Field required</mat-error>
-    </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Description" required [(ngModel)]="tag.description"/>
+    <mat-error>Field required</mat-error>
+  </mat-form-field>
 
-    <app-advanced-search (add)="add($event)"></app-advanced-search>
+  <app-advanced-search (add)="add($event)"></app-advanced-search>
 
-    <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
-        <ng-container matColumnDef="i">
-            <mat-header-cell *matHeaderCellDef fxFlex="5%">#</mat-header-cell>
-            <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="code">
-            <mat-header-cell *matHeaderCellDef fxFlex="35%">
-                <mat-form-field>
-                    <input matInput placeholder="Code" #code >
-                    <button mat-button matSuffix mat-icon-button (click)="findArticle(code.value); code.value=''" *ngIf="code.value">
-                        <mat-icon color="warn">search</mat-icon>
-                    </button>
-                </mat-form-field>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let item" fxFlex="35%">
-                <input matInput type="text" [value]="item.code" />
-            </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef fxFlex="40%">Description</mat-header-cell>
-            <mat-cell *matCellDef="let item" fxFlex="40%"> {{item.description}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef fxFlex="15%"></mat-header-cell>
-            <mat-cell *matCellDef="let item" fxFlex="15%">
-                <button mat-button matSuffix mat-icon-button (click)="onDelete(item)" >
-                    <mat-icon color="warn">close</mat-icon>
-                </button>
-            </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
-    </mat-table>
+  <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
+    <ng-container matColumnDef="i">
+      <mat-header-cell *matHeaderCellDef fxFlex="5%">#</mat-header-cell>
+      <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="code">
+      <mat-header-cell *matHeaderCellDef fxFlex="35%">
+        <mat-form-field>
+          <input matInput placeholder="Code" #code>
+          <button mat-button matSuffix mat-icon-button (click)="findArticle(code.value); code.value=''"
+                  *ngIf="code.value">
+            <mat-icon color="warn">search</mat-icon>
+          </button>
+        </mat-form-field>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let item" fxFlex="35%">
+        <input matInput type="text" [value]="item.code"/>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef fxFlex="40%">Description</mat-header-cell>
+      <mat-cell *matCellDef="let item" fxFlex="40%"> {{item.description}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef fxFlex="15%"></mat-header-cell>
+      <mat-cell *matCellDef="let item" fxFlex="15%">
+        <button mat-button matSuffix mat-icon-button (click)="onDelete(item)">
+          <mat-icon color="warn">close</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
-    <button mat-raised-button color="accent" *ngIf="!edit" (click)="create()" [disabled]="!isActionCompleted()">Create</button>    
-    <button mat-raised-button color="accent" *ngIf="edit" (click)="update()" [disabled]="!isActionCompleted()">Update</button>
+  <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
+  <button mat-raised-button color="accent" *ngIf="!edit" (click)="create()" [disabled]="!isActionCompleted()">Create
+  </button>
+  <button mat-raised-button color="accent" *ngIf="edit" (click)="update()" [disabled]="!isActionCompleted()">Update
+  </button>
 </mat-dialog-actions>

@@ -1,36 +1,38 @@
 <h2 mat-dialog-title *ngIf="!editable">New Article</h2>
 <h2 mat-dialog-title *ngIf="editable">Edit Article</h2>
 <mat-dialog-content>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" [disabled]="editable" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-select placeholder="Provider" [(ngModel)]="article.provider" (change)="updateDescription()" required cdkFocusInitial>
-            <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Description" required [(ngModel)]="article.description" (blur)="updateReference()"
-        />
-        <mat-error>Field required</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Reference" [(ngModel)]="article.reference">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="stock" [(ngModel)]="article.stock">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Retail Price" required [(ngModel)]="article.retailPrice">
-        <mat-error>Field required</mat-error>
-    </mat-form-field>
-    <mat-checkbox tabindex="-1" [(ngModel)]="article.discontinued" *ngIf="editable">Discontinued</mat-checkbox>
-    <div *ngIf="editable">
-        Registration Date: {{article.registrationDate | date: 'medium'}}
-    </div>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Code" [(ngModel)]="article.code" [disabled]="editable"/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Provider" [(ngModel)]="article.provider" (change)="updateDescription()" required
+                cdkFocusInitial>
+      <mat-option *ngFor="let provider of providers" [value]="provider.id">{{provider.company}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Description" required [(ngModel)]="article.description"
+           (blur)="updateReference()"
+    />
+    <mat-error>Field required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Reference" [(ngModel)]="article.reference">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="stock" [(ngModel)]="article.stock">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Retail Price" required [(ngModel)]="article.retailPrice">
+    <mat-error>Field required</mat-error>
+  </mat-form-field>
+  <mat-checkbox tabindex="-1" [(ngModel)]="article.discontinued" *ngIf="editable">Discontinued</mat-checkbox>
+  <div *ngIf="editable">
+    Registration Date: {{article.registrationDate | date: 'medium'}}
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
-    <button mat-raised-button *ngIf="editable" (click)="save()" [disabled]="!isActionCompleted()">Save</button>
-    <button mat-raised-button *ngIf="!editable" (click)="create()" [disabled]="!isActionCompleted()">Create</button>
+  <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
+  <button mat-raised-button *ngIf="editable" (click)="save()" [disabled]="!isActionCompleted()">Save</button>
+  <button mat-raised-button *ngIf="!editable" (click)="create()" [disabled]="!isActionCompleted()">Create</button>
 </mat-dialog-actions>
