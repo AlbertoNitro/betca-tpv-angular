@@ -1,8 +1,9 @@
 <mat-card>
-    <mat-card-subtitle>Filter</mat-card-subtitle>
-    <mat-card-content>
-        <mat-checkbox [(ngModel)]="validVoucher" (change)="synchronize()">Valid Voucher</mat-checkbox>
-    </mat-card-content>
+  <mat-card-subtitle>Filter</mat-card-subtitle>
+  <mat-card-content>
+    <mat-checkbox [(ngModel)]="validVoucher" (change)="synchronize()">Valid Voucher</mat-checkbox>
+  </mat-card-content>
 </mat-card>
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data" (create)="create()"
-    (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data"
+          (create)="create()" (edit)="edit($event)">
+</app-crud>

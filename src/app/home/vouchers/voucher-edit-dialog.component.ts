@@ -1,27 +1,23 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {Component} from '@angular/core';
+import {MatDialogRef} from '@angular/material';
 
-import { Voucher } from '../shared/voucher.model';
-import { VoucherService } from '../shared/voucher.service';
+import {Voucher} from '../shared/voucher.model';
+import {VoucherService} from '../shared/voucher.service';
 
 @Component({
-    templateUrl: 'voucher-edit-dialog.component.html',
-    styleUrls: ['vouchers.component.css']
+  templateUrl: 'voucher-edit-dialog.component.html',
+  styleUrls: ['vouchers.component.css']
 })
 export class VoucherEditDialogComponent {
-    voucher: Voucher;
+  voucher: Voucher;
 
-    constructor(private dialogRef: MatDialogRef<VoucherEditDialogComponent>,
-        private voucherService: VoucherService) {
-    }
+  constructor(private dialogRef: MatDialogRef<VoucherEditDialogComponent>,
+              private voucherService: VoucherService) {
+  }
 
-    nonValidValue(): boolean {
-        return this.voucher.value === undefined || this.voucher.value <= 0 || this.voucher.value.toString.length <= 0;
-    }
-
-    consume(): void {
-        this.voucherService.consume(this.voucher.id).subscribe(
-            () => this.dialogRef.close()
-        );
-    }
+  consume(): void {
+    this.voucherService.consume(this.voucher.id).subscribe(
+      () => this.dialogRef.close()
+    );
+  }
 }

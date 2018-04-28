@@ -1,11 +1,11 @@
 <h2 mat-dialog-title>New Voucher</h2>
 <mat-dialog-content>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Value" [(ngModel)]="voucher.value" [disabled]="edit" cdkFocusInitial required/>
-        <mat-error>Field required</mat-error>
-    </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Value" [(ngModel)]="voucher.value" cdkFocusInitial required/>
+    <mat-error>Field required</mat-error>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button (click)="create()" [disabled]="nonValidValue()">Create</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="create()" [disabled]="nonValidValue()">Create</button>
 </mat-dialog-actions>
