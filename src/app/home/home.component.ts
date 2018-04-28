@@ -1,41 +1,37 @@
-import { Component, OnDestroy, ViewChild, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {Router} from '@angular/router';
 
-import { User } from './shared/user.model';
+import {CashierService} from './shared/cashier.service';
+import {TokensService} from '../core/tokens.service';
+import {UserService} from './shared/user.service';
 
-import { CashierService } from './shared/cashier.service';
-import { TokensService } from '../core/tokens.service';
-import { UserService } from './shared/user.service';
-
-import { DbSeedDialogComponent } from './admin/db-seed-dialog.component';
-import { CancelYesDialogComponent } from '../core/cancel-yes-dialog.component';
-import { CashierClosedComponent } from './cashier-closed/cashier-closed.component';
-import { CashierOpenedComponent } from './cashier-opened/cashier-opened/cashier-opened.component';
-import { AdminsService } from './admin/admins.service';
-import { BudgetsComponent } from './budgets/budgets.component';
-import { CashierCloseDialogComponent } from './cashier-opened/cashier-opened/cashier-close-dialog.component';
-import { CashierMovementDialogComponent } from './cashier-opened/cashier-opened/cashier-movement-dialog.component';
-import { UsersComponent } from './users/users.component';
-import { VouchersComponent } from './vouchers/vouchers.component';
-import { StatisticsComponent } from './statistics/statistics.component';
-import { StockAlertComponent } from './stock-alert/stock-alert.component';
-import { ProvidersComponent } from './providers/providers.component';
-import { TicketsComponent } from './tickets/tickets.component';
-import { ArticlesComponent } from './articles/articles.component';
-import { Statistics2Component } from './statistics2/statistics2.component';
-import { OrdersComponent } from './orders/orders.component';
-import { OfferSearchDialogComponent } from './offers/offer-search-dialog.component';
-import { OffersComponent } from './offers/offers.component';
-import { UserChangingPasswordDialogComponent } from './users/user-changing-password-dialog.component';
-import { InvoicesComponent } from './invoices/invoices.component';
+import {DbSeedDialogComponent} from './admin/db-seed-dialog.component';
+import {CancelYesDialogComponent} from '../core/cancel-yes-dialog.component';
+import {CashierClosedComponent} from './cashier-closed/cashier-closed.component';
+import {CashierOpenedComponent} from './cashier-opened/cashier-opened/cashier-opened.component';
+import {AdminsService} from './admin/admins.service';
+import {BudgetsComponent} from './budgets/budgets.component';
+import {CashierCloseDialogComponent} from './cashier-opened/cashier-opened/cashier-close-dialog.component';
+import {CashierMovementDialogComponent} from './cashier-opened/cashier-opened/cashier-movement-dialog.component';
+import {UsersComponent} from './users/users.component';
+import {VouchersComponent} from './vouchers/vouchers.component';
+import {StatisticsComponent} from './statistics/statistics.component';
+import {ProvidersComponent} from './providers/providers.component';
+import {TicketsComponent} from './tickets/tickets.component';
+import {ArticlesComponent} from './articles/articles.component';
+import {Statistics2Component} from './statistics2/statistics2.component';
+import {OrdersComponent} from './orders/orders.component';
+import {OfferSearchDialogComponent} from './offers/offer-search-dialog.component';
+import {OffersComponent} from './offers/offers.component';
+import {UserChangingPasswordDialogComponent} from './users/user-changing-password-dialog.component';
+import {InvoicesComponent} from './invoices/invoices.component';
 
 
-import { CashierClosuresComponent } from './cashier-closures/cashier-closures.component';
-import { ArticlesFamilyComponent } from './articles/articles-family.component';
-import { TicketTrackingComponent } from './tickets/ticket-tracking.component';
-import { TagsComponent } from './articles/tags.component';
+import {CashierClosuresComponent} from './cashier-closures/cashier-closures.component';
+import {ArticlesFamilyComponent} from './articles/articles-family.component';
+import {TicketTrackingComponent} from './tickets/ticket-tracking.component';
+import {TagsComponent} from './articles/tags.component';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -48,9 +44,9 @@ export class HomeComponent {
   cashierClosed: boolean;
   username: string;
 
-  constructor(private dialog: MatDialog, private tokensService: TokensService,
-    private cashierService: CashierService, private router: Router,
-    private adminsService: AdminsService, private userService: UserService) {
+  constructor(private dialog: MatDialog, public tokensService: TokensService,
+              private cashierService: CashierService, private router: Router,
+              private adminsService: AdminsService, private userService: UserService) {
 
     this.home();
     this.userService.loggedInUsername().subscribe(
@@ -75,7 +71,7 @@ export class HomeComponent {
     this.adminsService.readProfile().subscribe(
       user => {
         this.dialog.open(UserChangingPasswordDialogComponent, {
-          data: { user: user }
+          data: {user: user}
         });
       }
     );
@@ -177,15 +173,11 @@ export class HomeComponent {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
   }
 
-  stockAlerts() {
-    this.router.navigate([HomeComponent.URL, StockAlertComponent.URL]);
-  }
-
   searchOffer() {
     this.dialog.open(OfferSearchDialogComponent);
   }
 
-  OffersManagment() {
+  OffersManagement() {
     this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 

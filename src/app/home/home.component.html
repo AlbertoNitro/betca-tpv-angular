@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <img src="../../assets/img/miw.png" />
+  <img src="../../assets/img/miw.png"/>
   <span>TPV</span>
   <span class="toolbar-spacer"></span>
   <span>
@@ -22,7 +22,7 @@
     </button>
   </span>
 </mat-toolbar>
-<mat-menu x-position="before" #menu="matMenu">
+<mat-menu xPosition="before" #menu="matMenu">
   <button *ngIf="tokensService.isAdmin()" mat-menu-item [matMenuTriggerFor]="settings">
     <mat-icon>settings</mat-icon>
     <span>Admin</span>
@@ -125,6 +125,6 @@
 </mat-menu>
 <mat-menu #offers="matMenu">
   <button mat-menu-item (click)="searchOffer()">Buscar Oferta</button>
-  <button mat-menu-item (click)="OffersManagment()">Gestor de Ofertas</button>
+  <button mat-menu-item (click)="OffersManagement()">Gestor de Ofertas</button>
 </mat-menu>
 <router-outlet></router-outlet>
