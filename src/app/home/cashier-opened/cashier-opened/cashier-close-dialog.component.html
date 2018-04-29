@@ -1,15 +1,15 @@
-<h3 mat-dialog-title>Cierre de Caja (total ventas: {{cashierClosure.salesTotal | currency:'EUR':'symbol'}})</h3>
+<h3 mat-dialog-title>Cierre de Caja (total ventas: € {{cashierClosing.salesTotal}})</h3>
 <mat-dialog-content>
   <mat-form-field>
-    <input matInput type="number" placeholder="Total Vales" value="{{cashierClosure.totalVoucher}}" readonly/>
+    <input matInput type="number" placeholder="Total Vales" [value]="cashierClosing.totalVoucher" readonly/>
   </mat-form-field>
   <mat-form-field>
-    <input matInput type="number" placeholder="Pagado con Tarjeta (€ {{cashierClosure.totalCard}})"
+    <input matInput type="number" placeholder="Pagado con Tarjeta (€ {{cashierClosing.totalCard}})"
            [(ngModel)]="cashierClosure.salesCard"
            required cdkFocusInitial/>
   </mat-form-field>
   <mat-form-field>
-    <input matInput type="number" placeholder="Efectivo en Caja (€ {{cashierClosure.totalCash}})"
+    <input matInput type="number" placeholder="Efectivo en Caja (€ {{cashierClosing.totalCash}})"
            [(ngModel)]="cashierClosure.finalCash"
            required/>
   </mat-form-field>
