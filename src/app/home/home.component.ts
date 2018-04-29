@@ -22,8 +22,6 @@ import {TicketsComponent} from './tickets/tickets.component';
 import {ArticlesComponent} from './articles/articles.component';
 import {Statistics2Component} from './statistics2/statistics2.component';
 import {OrdersComponent} from './orders/orders.component';
-import {OfferSearchDialogComponent} from './offers/offer-search-dialog.component';
-import {OffersComponent} from './offers/offers.component';
 import {UserChangingPasswordDialogComponent} from './users/user-changing-password-dialog.component';
 import {InvoicesComponent} from './invoices/invoices.component';
 
@@ -171,14 +169,6 @@ export class HomeComponent {
 
   statistics2() {
     this.router.navigate([HomeComponent.URL, Statistics2Component.URL]);
-  }
-
-  searchOffer() {
-    this.dialog.open(OfferSearchDialogComponent);
-  }
-
-  OffersManagement() {
-    this.router.navigate([HomeComponent.URL, OffersComponent.URL]);
   }
 
   budgets() {

@@ -26,11 +26,8 @@ import {VoucherCreationDialogComponent} from './home/vouchers/voucher-creation-d
 import {ArticlesComponent} from './home/articles/articles.component';
 import {Statistics2Component} from './home/statistics2/statistics2.component';
 import {VoucherConsumeDialogComponent} from './home/cashier-opened/shopping-cart/voucher-consume-dialog.component';
-import {OfferSearchDialogComponent} from './home/offers/offer-search-dialog.component';
-import {OfferCreateEditDialogComponent} from './home/offers/offer-create-edit-dialog.component';
 import {ArticleCreationEditDialogComponent} from './home/articles/article-creation-edit-dialog.component';
 import {OrdersComponent} from './home/orders/orders.component';
-import {OffersComponent} from './home/offers/offers.component';
 import {UserChangingPasswordDialogComponent} from './home/users/user-changing-password-dialog.component';
 import {VoucherEditDialogComponent} from './home/vouchers/voucher-edit-dialog.component';
 import {InvoicesComponent} from './home/invoices/invoices.component';
@@ -70,7 +67,6 @@ const appRoutes: Routes = [
       {path: CashierOpenedComponent.URL, component: CashierOpenedComponent},
       {path: InvoicesComponent.URL, component: InvoicesComponent},
       {path: OrdersComponent.URL, component: OrdersComponent},
-      {path: OffersComponent.URL, component: OffersComponent},
       {path: ProvidersComponent.URL, component: ProvidersComponent},
       {path: StatisticsComponent.URL, component: StatisticsComponent},
       {path: Statistics2Component.URL, component: Statistics2Component},
@@ -101,7 +97,6 @@ export class AppRoutingModule {
     HomeComponent,
     InvoicesComponent,
     OrdersComponent,
-    OffersComponent,
     PaymentComponent,
     ProvidersComponent,
     ShoppingCartComponent,
@@ -132,8 +127,6 @@ export class AppRoutingModule {
     FamilyAdditionDialogComponent,
     FamilyCreationDialogComponent,
     InvoiceCreationDialogComponent,
-    OfferCreateEditDialogComponent,
-    OfferSearchDialogComponent,
     OrderCreationEditDialogComponent,
     PaymentDialogComponent,
     ProviderCreationEditDialogComponent,

@@ -22,7 +22,6 @@ import {TicketService} from './home/shared/ticket.service';
 import {UserService} from './home/shared/user.service';
 import {VoucherService} from './home/shared/voucher.service';
 import {OrderService} from './home/orders/orders.service';
-import {OfferService} from './home/shared/offer.service';
 import {AppComponent} from './app.component';
 import {ChartsModule} from 'ng2-charts';
 import {InvoiceService} from './home/shared/invoice.service';
@@ -64,7 +63,6 @@ import {TagsService} from './home/articles/tags.sevice';
     CashierMovementService,
     InvoiceService,
     OrderService,
-    OfferService,
     ProviderService,
     ShoppingCartService,
     TagsService,
