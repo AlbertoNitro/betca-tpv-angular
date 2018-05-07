@@ -3,7 +3,7 @@
 <mat-dialog-content>
   <mat-form-field>
     <input matInput type="text" placeholder="Description" required [(ngModel)]="order.description"
-           [disabled]="order.closingDate"
+           [disabled]="order.closingDate" (change)="change()"
     />
     <mat-error>Field required</mat-error>
   </mat-form-field>
@@ -48,7 +48,7 @@
       <mat-header-cell *matHeaderCellDef fxFlex="10%"> Required Amount</mat-header-cell>
       <mat-cell *matCellDef="let item" fxFlex="10%">
         <input matInput type="number" step="1" min="1" [(ngModel)]="item.requiredAmount"
-               [disabled]="order.closingDate"/>
+               [disabled]="order.closingDate" (change)="change()"/>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="finalAmount">
@@ -78,10 +78,10 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close tabindex="-1">Cancel</button>
-  <button mat-raised-button color="primary" *ngIf="edit&&!order.closingDate" (click)="update()"
+  <button mat-raised-button color="primary" *ngIf="edit&&modified&&!order.closingDate" (click)="update()"
           [disabled]="!isActionCompleted()">Update
   </button>
-  <button mat-raised-button color="accent" *ngIf="edit&&!order.closingDate" (click)="orderEntry()"
+  <button mat-raised-button color="accent" *ngIf="edit&&!modified&&!order.closingDate" (click)="orderEntry()"
           [disabled]="!isActionCompleted()&&order.closingDate">Order Entry
   </button>
   <button mat-raised-button color="primary" *ngIf="edit" (click)="createCopy()" [disabled]="!isActionCompleted()">Create

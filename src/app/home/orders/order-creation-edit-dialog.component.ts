@@ -16,6 +16,7 @@ import {OrderService} from './orders.service';
 export class OrderCreationEditDialogComponent {
 
   edit: boolean;
+  modified: boolean;
   order: Order;
   providers: Provider[];
 
@@ -31,6 +32,7 @@ export class OrderCreationEditDialogComponent {
 
     this.order = data.order;
     this.edit = data.edit;
+    this.modified = false;
     this.providerService.readAll().subscribe(
       (providers: Provider[]) => this.providers = providers
     );
@@ -54,6 +56,10 @@ export class OrderCreationEditDialogComponent {
     this.orderService.create(this.order).subscribe(
       () => this.dialogRef.close()
     );
+  }
+
+  change() {
+    this.modified = true;
   }
 
   update(): void {
@@ -92,6 +98,7 @@ export class OrderCreationEditDialogComponent {
   }
 
   add(article: Article) {
+    this.change();
     this.order.ordersLine.push(
       {
         articleId: article.code, articleDescription: article.description, stock: article.stock,
@@ -101,6 +108,7 @@ export class OrderCreationEditDialogComponent {
   }
 
   onDelete(orderLine: OrderLine) {
+    this.change();
     const index = this.order.ordersLine.indexOf(orderLine);
     if (index > -1) {
       this.order.ordersLine.splice(index, 1);

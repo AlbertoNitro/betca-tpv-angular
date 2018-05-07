@@ -6,7 +6,7 @@ import { ProviderService } from '../shared/provider.service';
 
 @Component({
     templateUrl: 'provider-creation-edit-dialog.component.html',
-    styles: ['providers.component.css']
+    styleUrls: ['providers.component.css']
 })
 export class ProviderCreationEditDialogComponent implements OnInit {
     edit: boolean;
