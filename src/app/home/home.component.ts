@@ -66,7 +66,7 @@ export class HomeComponent {
   }
 
   profile() {
-    this.adminsService.readProfile().subscribe(
+    this.userService.readProfile().subscribe(
       user => {
         this.dialog.open(UserChangingPasswordDialogComponent, {
           data: {user: user}

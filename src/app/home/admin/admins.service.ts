@@ -10,7 +10,6 @@ export class AdminsService {
   static DB = '/db';
   static ARTICLES_WITHOUT_CODE = '/articles-without-code';
   static STATE = '/state';
-  static USERS = '/users';
 
   constructor(private httpService: HttpService) {
   }
@@ -42,16 +41,6 @@ export class AdminsService {
       () => {
       }
     );
-  }
-
-
-  readProfile(): Observable<User> {
-    return this.httpService.authToken().get(AdminsService.END_POINT + AdminsService.USERS + '/' + this.httpService.getMobile());
-  }
-
-  updateProfile(user: User) {
-    return this.httpService.authToken().successful().put(
-      AdminsService.END_POINT + AdminsService.USERS + '/' + this.httpService.getMobile(), user);
   }
 
 }

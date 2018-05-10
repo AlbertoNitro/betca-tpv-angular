@@ -1,9 +1,8 @@
-import { Component, Input, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { User } from '../shared/user.model';
 import { UserService } from '../shared/user.service';
-import { AdminsService } from '../admin/admins.service';
 
 @Component({
   templateUrl: 'user-changing-password-dialog.component.html',
@@ -15,7 +14,7 @@ export class UserChangingPasswordDialogComponent {
   confirmPassword: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, public dialogRef: MatDialogRef<UserChangingPasswordDialogComponent>,
-    private adminsService: AdminsService) {
+              private userService: UserService) {
 
     this.user = data.user;
     this.user.password = null;
@@ -26,8 +25,8 @@ export class UserChangingPasswordDialogComponent {
   }
 
   save(): void {
-    this.adminsService.updateProfile(this.user).subscribe(
-      data => this.dialogRef.close()
+    this.userService.updateProfile(this.user).subscribe(
+      () => this.dialogRef.close()
     );
   }
 }
