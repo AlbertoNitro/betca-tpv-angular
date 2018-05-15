@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,7 +24,7 @@ import { CrudComponent } from './crud.component';
     imports: [
         BrowserAnimationsModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         MatButtonModule,
         MatCardModule,
         MatDialogModule,

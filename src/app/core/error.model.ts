@@ -1,6 +1,5 @@
 export interface Error {
-    httpError: number;
-    exception: string;
+    error: string;
     message: string;
     path: string;
 }
