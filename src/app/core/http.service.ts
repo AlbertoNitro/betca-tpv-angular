@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Router} from '@angular/router';
 
 import {Observable} from 'rxjs/Observable';
@@ -32,11 +32,7 @@ export class HttpService {
   }
 
   getRoles(): Array<Role> {
-    if (this.token !== undefined) {
-      return this.token.roles;
-    } else {
-      return undefined;
-    }
+    return (this.token) ? this.token.roles : undefined;
   }
 
   getMobile(): number {
@@ -50,7 +46,7 @@ export class HttpService {
   }
 
   login(mobile: number, password: string, endPoint: string): Observable<any> {
-    return  this.authBasic(mobile, password).post(endPoint).map(
+    return this.authBasic(mobile, password).post(endPoint).map(
       token => {
         this.token = token;
         this.mobile = mobile;
@@ -60,12 +56,12 @@ export class HttpService {
   }
 
   param(key: string, value: string): HttpService {
-    this.params = this.params.append(key, value);
+    this.params = this.params.append(key, value); // This class is immutable
     return this;
   }
 
   header(key: string, value: string): HttpService {
-    this.headers = this.headers.append(key, value);
+    this.headers = this.headers.append(key, value); // This class is immutable
     return this;
   }
 
@@ -74,30 +70,19 @@ export class HttpService {
   }
 
   authToken(): HttpService {
-    let tokenValue = '';
-    if (this.token !== undefined) {
-      tokenValue = this.token.token;
-    }
+    const tokenValue = (this.token === undefined) ? '' : this.token.token;
     return this.header('Authorization', 'Basic ' + btoa(tokenValue + ':' + ''));
   }
 
-  pdf(printDirectly?: boolean): HttpService {
-    if (printDirectly === null || printDirectly === undefined) {
-      this.printDirectly = true;
-    } else {
-      this.printDirectly = printDirectly;
-    }
+  pdf(printDirectly = true): HttpService {
+    this.printDirectly = printDirectly;
     this.responseType = 'blob';
     this.header('Accept', 'application/pdf');
     return this;
   }
 
-  successful(notification?: String): HttpService {
-    if (notification) {
-      this.successfulNotification = notification;
-    } else {
-      this.successfulNotification = 'Successful';
-    }
+  successful(notification = 'Successful'): HttpService {
+    this.successfulNotification = notification;
     return this;
   }
 
@@ -182,8 +167,6 @@ export class HttpService {
       } else if (contentType.indexOf('application/json') !== -1) {
         return response.body; // with 'text': JSON.parse(response.body);
       }
-    } else if (response.text()) {
-      return response.text();
     } else {
       return response;
     }
