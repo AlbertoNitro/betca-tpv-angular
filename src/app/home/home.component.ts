@@ -75,7 +75,6 @@ export class HomeComponent {
     );
   }
 
-
   logout() {
     this.tokensService.logout();
   }
