@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 
 import {HttpService} from '../../core/http.service';
-import {User} from '../shared/user.model';
 
 @Injectable()
 export class AdminsService {

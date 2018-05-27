@@ -1,4 +1,4 @@
 export interface InvoiceCreation {
-    mobile: number;
-    ticketId: string;
+  mobile: number;
+  ticketId: string;
 }

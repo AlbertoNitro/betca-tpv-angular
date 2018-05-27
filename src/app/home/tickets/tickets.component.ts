@@ -1,10 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatPaginator, MatDialog, MatSort, MatTableDataSource, MatSnackBar } from '@angular/material';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material';
 
-import { Ticket } from '../shared/ticket.model';
-import { TicketService } from '../shared/ticket.service';
-import { InvoiceService } from '../shared/invoice.service';
-import { EditTicketDialogComponent } from './edit-ticket-dialog.component';
+import {Ticket} from '../shared/ticket.model';
+import {TicketService} from '../shared/ticket.service';
+import {InvoiceService} from '../shared/invoice.service';
+import {EditTicketDialogComponent} from './edit-ticket-dialog.component';
 
 @Component({
   selector: 'app-tickets',
@@ -25,7 +25,7 @@ export class TicketsComponent {
   }
 
   findTicket(ticketId: string) {
-    this.edit({ id: ticketId });
+    this.edit({id: ticketId});
   }
 
   findByMobile(mobile: string) {
@@ -52,14 +52,14 @@ export class TicketsComponent {
         if (invoice.id) {
           this.dialog.open(EditTicketDialogComponent, {
             width: '900px',
-            data: { ticket: invoice.ticket, invoice: invoice }
+            data: {ticket: invoice.ticket, invoice: invoice}
           });
         } else {
           this.ticketService.readOne(ticketId.id).subscribe(
             ticket => {
               this.dialog.open(EditTicketDialogComponent, {
                 width: '900px',
-                data: { ticket: ticket, invoice: null }
+                data: {ticket: ticket, invoice: null}
               });
             }
           );

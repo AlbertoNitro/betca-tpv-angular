@@ -1,12 +1,13 @@
 <div fxLayoutAlign="space-around center">
-	<mat-card>
-		<mat-card-title>
-			<mat-icon>account_balance</mat-icon>
-			<mat-icon>lock_outline</mat-icon> Caja Cerrada
-		</mat-card-title>
-		<mat-card-content>
-			<h3> La Caja fue cerrada: {{cashierLast.closureDate | date: 'medium'}} </h3>
-			<h3> Efectivo inicial en caja: {{cashierLast.finalCash | number:'1.0-2'}} €</h3>
-		</mat-card-content>
-	</mat-card>
+  <mat-card>
+    <mat-card-title>
+      <mat-icon>account_balance</mat-icon>
+      <mat-icon>lock_outline</mat-icon>
+      Caja Cerrada
+    </mat-card-title>
+    <mat-card-content>
+      <h3> La Caja fue cerrada: {{cashierLast.closureDate | date: 'medium'}} </h3>
+      <h3> Efectivo inicial en caja: {{cashierLast.finalCash | number:'1.0-2'}} €</h3>
+    </mat-card-content>
+  </mat-card>
 </div>

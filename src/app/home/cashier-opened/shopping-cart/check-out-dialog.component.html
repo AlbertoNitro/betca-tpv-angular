@@ -1,36 +1,38 @@
 <h2 mat-dialog-title>Total Compra: {{total | currency:'EUR':'symbol'}}
-    <span *ngIf="uncommited()"> - Total Entregado: {{totalCommited() | currency:'EUR':'symbol'}}</span>
+  <span *ngIf="uncommited()"> - Total Entregado: {{totalCommited() | currency:'EUR':'symbol'}}</span>
 </h2>
 <mat-dialog-content>
     <span *ngIf="warning()">
         <mat-icon color="warn">report_problem</mat-icon> Existen artículos pendientes de entrega y no se ha registrado el teléfono</span>
-    <app-user-quick-crud (found)="updateUser($event)"></app-user-quick-crud>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Tarjeta" [(ngModel)]="ticketCreation.card" />
-        <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="fillCard()">
-            <mat-icon color="warn">credit_card</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Efectivo" [(ngModel)]="ticketCreation.cash" cdkFocusInitial />
-        <button mat-button matSuffix mat-icon-button (click)="fillCash()">
-            <mat-icon color="warn">euro_symbol</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Vales" [disabled]="true" [(ngModel)]="ticketCreation.voucher" />
-        <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="consumeVoucher()">
-            <mat-icon color="warn">local_offer</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-checkbox [(ngModel)]="requestedInvoice" [disabled]="invalidInvoice()">
-        <span> Generar Factura ({{ticketCreation.userMobile}})</span>
-    </mat-checkbox>
-    <div class="mat-raised-button mat-primary" *ngIf="!invalidCheckOut()&&returnedCash()>0"> Dinero a devolver: {{returnedCash() | currency:'EUR':'symbol'}}</div>
+  <app-user-quick-crud (found)="updateUser($event)"></app-user-quick-crud>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Tarjeta" [(ngModel)]="ticketCreation.card"/>
+    <button mat-button matSuffix mat-icon-button aria-label="Card" (click)="fillCard()">
+      <mat-icon color="warn">credit_card</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Efectivo" [(ngModel)]="ticketCreation.cash" cdkFocusInitial/>
+    <button mat-button matSuffix mat-icon-button (click)="fillCash()">
+      <mat-icon color="warn">euro_symbol</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Vales" [disabled]="true" [(ngModel)]="ticketCreation.voucher"/>
+    <button mat-button matSuffix mat-icon-button aria-label="Voucher" (click)="consumeVoucher()">
+      <mat-icon color="warn">local_offer</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="requestedInvoice" [disabled]="invalidInvoice()">
+    <span> Generar Factura ({{ticketCreation.userMobile}})</span>
+  </mat-checkbox>
+  <div class="mat-raised-button mat-primary" *ngIf="!invalidCheckOut()&&returnedCash()>0"> Dinero a devolver:
+    {{returnedCash() | currency:'EUR':'symbol'}}
+  </div>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
-    <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Pagar
-        <span class="mat-suffix" *ngIf="invalidCheckOut()">( => {{totalCommited()}})</span>
-    </button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>Cancel</button>
+  <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckOut()">Pagar
+    <span class="mat-suffix" *ngIf="invalidCheckOut()">( => {{totalCommited()}})</span>
+  </button>
 </mat-dialog-actions>

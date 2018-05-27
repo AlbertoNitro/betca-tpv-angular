@@ -1,5 +1,5 @@
 export interface CashierLast {
-    closed: boolean;
-    closureDate?: Date;
-    finalCash?: number;
+  closed: boolean;
+  closureDate?: Date;
+  finalCash?: number;
 }

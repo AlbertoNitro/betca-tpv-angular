@@ -1,19 +1,17 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { forEach } from '@angular/router/src/utils/collection';
-import { BaseChartDirective } from 'ng2-charts';
+import {Component, OnInit} from '@angular/core';
 
 
 @Component({
-    templateUrl: `statistics2.component.html`,
-    styleUrls: [`statistics2.component.css`],
-    providers: []
+  templateUrl: `statistics2.component.html`,
+  styleUrls: [`statistics2.component.css`],
+  providers: []
 })
 export class Statistics2Component implements OnInit {
-    static URL = 'statistics2';
+  static URL = 'statistics2';
 
-    constructor() {
-    }
+  constructor() {
+  }
 
-    ngOnInit(): void {
-    }
+  ngOnInit(): void {
+  }
 }

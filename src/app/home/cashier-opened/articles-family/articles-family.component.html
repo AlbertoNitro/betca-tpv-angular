@@ -11,7 +11,9 @@
           <span class="mat-mini-fab family-stock" *ngIf="family.stock||family.stock===0">{{family.stock}}</span>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button [color]="color(family)" class="family-button" (click)="find(family)">{{family.reference}}</button>
+          <button mat-raised-button [color]="color(family)" class="family-button" (click)="find(family)">
+            {{family.reference}}
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>

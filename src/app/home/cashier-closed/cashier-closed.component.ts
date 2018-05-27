@@ -1,20 +1,20 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { CashierLast } from '../shared/cashier-last.model';
-import { CashierService } from '../shared/cashier.service';
+import {CashierLast} from '../shared/cashier-last.model';
+import {CashierService} from '../shared/cashier.service';
 
 @Component({
-    templateUrl: 'cashier-closed.component.html'
+  templateUrl: 'cashier-closed.component.html'
 })
 export class CashierClosedComponent {
-    static URL = 'cashier-closed';
+  static URL = 'cashier-closed';
 
-    cashierLast: CashierLast = { closed: undefined };
+  cashierLast: CashierLast = {closed: undefined};
 
-    constructor(private cashierService: CashierService) {
-        this.cashierService.last().subscribe(
-            cashierLast => this.cashierLast = cashierLast
-        );
-    }
+  constructor(private cashierService: CashierService) {
+    this.cashierService.last().subscribe(
+      cashierLast => this.cashierLast = cashierLast
+    );
+  }
 
 }

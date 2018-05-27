@@ -1,16 +1,16 @@
 <h3 mat-dialog-title>Entrar</h3>
 <mat-dialog-content>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Móvil" [(ngModel)]="mobile" />
-        <button mat-button *ngIf="mobile" matSuffix mat-icon-button aria-label="Clear" (click)="mobile=''">
-            <mat-icon>close</mat-icon>
-        </button>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="password" placeholder="Clave" [(ngModel)]="password" />
-    </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Móvil" [(ngModel)]="mobile"/>
+    <button mat-button *ngIf="mobile" matSuffix mat-icon-button aria-label="Clear" (click)="mobile=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="password" placeholder="Clave" [(ngModel)]="password"/>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-button mat-dialog-close>Cancel</button>
-    <button mat-button [mat-dialog-close]="this" cdkFocusInitial>Entrar</button>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="this" cdkFocusInitial>Entrar</button>
 </mat-dialog-actions>

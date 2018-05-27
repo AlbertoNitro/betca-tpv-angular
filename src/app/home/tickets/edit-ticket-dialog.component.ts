@@ -1,16 +1,14 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatTableDataSource, MatDialogRef, MatDialog } from '@angular/material';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource} from '@angular/material';
 
-import { Shopping } from '../shared/shopping.model';
-import { Ticket } from '../shared/ticket.model';
-import { Invoice } from '../shared/invoice.model';
-import { User } from '../shared/user.model';
-import { TicketService } from '../shared/ticket.service';
-import { VoucherService } from '../shared/voucher.service';
-import { InvoiceService } from '../shared/invoice.service';
-import { UserService } from '../shared/user.service';
-import { PaymentDialogComponent } from './payment-dialog.component';
-import { TicketCreation } from '../shared/ticket-creation.model';
+import {Shopping} from '../shared/shopping.model';
+import {User} from '../shared/user.model';
+import {TicketService} from '../shared/ticket.service';
+import {VoucherService} from '../shared/voucher.service';
+import {InvoiceService} from '../shared/invoice.service';
+import {UserService} from '../shared/user.service';
+import {PaymentDialogComponent} from './payment-dialog.component';
+import {TicketCreation} from '../shared/ticket-creation.model';
 
 @Component({
   selector: 'app-edit-ticket-dialog',
@@ -30,8 +28,8 @@ export class EditTicketDialogComponent {
   reserva: number = null;
 
   constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialog: MatDialog, private dialogRef: MatDialogRef<EditTicketDialogComponent>,
-    private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
-    private userService: UserService) {
+              private ticketService: TicketService, private voucheService: VoucherService, private invoiceService: InvoiceService,
+              private userService: UserService) {
 
     this.ticketCreation = {
       userMobile: (data.ticket.user) ? data.ticket.user.mobile : null, card: 0, cash: 0, voucher: 0,
@@ -97,7 +95,7 @@ export class EditTicketDialogComponent {
 
   acceptTicket() {
     if (this.debt < 0) {
-      this.voucheService.create({ value: -this.debt }).subscribe(
+      this.voucheService.create({value: -this.debt}).subscribe(
         () => {
           this.ticketCreation.note += ' --> Devolución, generado vale: ' + (-this.debt) + '. ';
           this.debt = 0;
@@ -108,7 +106,7 @@ export class EditTicketDialogComponent {
       let data: any;
       const advised = this.debt - (this.totalNotCommited() - this.reserva);
       if (advised >= this.debt) {
-        data = { payable: this.debt, ticketCreation: this.ticketCreation };
+        data = {payable: this.debt, ticketCreation: this.ticketCreation};
       } else {
         data = {
           reserve: this.reserva,

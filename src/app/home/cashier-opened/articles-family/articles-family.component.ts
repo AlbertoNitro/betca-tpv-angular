@@ -1,16 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatDialog } from '@angular/material';
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-
-import { Article } from '../../shared/article.model';
-import { Shopping } from '../../shared/shopping.model';
-import { FamilyType } from './family-type.model';
-import { Family } from './family.model';
-import { ArticleService } from '../../shared/article.service';
-import { ArticlesFamilyService } from '../../shared/articles-family.service';
-import { ShoppingCartService } from '../../cashier-opened/shopping-cart/shopping-cart.service';
-import { ArticlesFamilySizesDialogComponent } from './articles-family-sizes-dialog.component';
+import {Component} from '@angular/core';
+import {MatDialog} from '@angular/material';
+import {FamilyType} from './family-type.model';
+import {Family} from './family.model';
+import {ArticlesFamilyService} from '../../shared/articles-family.service';
+import {ShoppingCartService} from '../../cashier-opened/shopping-cart/shopping-cart.service';
+import {ArticlesFamilySizesDialogComponent} from './articles-family-sizes-dialog.component';
 
 @Component({
   selector: 'app-articles-family',
@@ -23,7 +17,7 @@ export class ArticlesFamilyViewComponent {
   families: Family[];
 
   constructor(private dialog: MatDialog, private shoppingCartService: ShoppingCartService,
-    private articlesFamilyService: ArticlesFamilyService) {
+              private articlesFamilyService: ArticlesFamilyService) {
 
     this.nav('root');
   }
@@ -57,7 +51,7 @@ export class ArticlesFamilyViewComponent {
           } else if (family.familyType === FamilyType.SIZES) {
             this.dialog.open(ArticlesFamilySizesDialogComponent, {
               width: '455px',
-              data: { families: families, title: family.description }
+              data: {families: families, title: family.description}
             });
           }
         }

@@ -1,3 +1,3 @@
 export interface StockAlert {
-    name: string;
+  name: string;
 }

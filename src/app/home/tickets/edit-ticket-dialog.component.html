@@ -8,19 +8,19 @@
   <app-user-quick-crud [mobile]="ticketCreation.userMobile" (found)="updateMobile($event)"></app-user-quick-crud>
   <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
     <ng-container matColumnDef="ind">
-      <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
-      <mat-cell *matCellDef="let i = index"> {{i+1}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> #</mat-header-cell>
+      <mat-cell *matCellDef="let i = index"> {{i+1}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="description">
-      <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.description}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Description</mat-header-cell>
+      <mat-cell *matCellDef="let shopping"> {{shopping.description}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="retailPrice">
-      <mat-header-cell *matHeaderCellDef> Price </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.retailPrice}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+      <mat-cell *matCellDef="let shopping"> {{shopping.retailPrice}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="amount">
-      <mat-header-cell *matHeaderCellDef> Nº </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Nº</mat-header-cell>
       <mat-cell *matCellDef="let shopping"> {{shopping.amount}}
         <button mat-icon-button color="accent" (click)="decreaseAmount(shopping)" [disabled]="shopping.amount<=0">
           <mat-icon>remove_circle_outline</mat-icon>
@@ -28,17 +28,18 @@
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="discount">
-      <mat-header-cell *matHeaderCellDef> % </mat-header-cell>
-      <mat-cell *matCellDef="let shopping"> {{shopping.discount}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> %</mat-header-cell>
+      <mat-cell *matCellDef="let shopping"> {{shopping.discount}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="total">
-      <mat-header-cell *matHeaderCellDef> Total </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Total</mat-header-cell>
       <mat-cell *matCellDef="let shopping">{{shopping.total}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="committed">
-      <mat-header-cell *matHeaderCellDef> Committed </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Committed</mat-header-cell>
       <mat-cell *matCellDef="let shopping">
-        <mat-checkbox [checked]="shopping.committed" (change)="changeCommitted(shopping)" [disabled]="shopping.committed||shopping.amount<0"></mat-checkbox>
+        <mat-checkbox [checked]="shopping.committed" (change)="changeCommitted(shopping)"
+                      [disabled]="shopping.committed||shopping.amount<0"></mat-checkbox>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -49,6 +50,7 @@
 <mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
   <button mat-raised-button color="accent" (click)="acceptTicket()">
-    <mat-icon>check_circle</mat-icon> Actualizar Ticket
+    <mat-icon>check_circle</mat-icon>
+    Actualizar Ticket
   </button>
 </mat-dialog-actions>

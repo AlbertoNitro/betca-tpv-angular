@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import { Ticket } from './ticket.model';
-import { Shopping } from './shopping.model';
-import { NumProductSold } from './numProductSold.model';
-import { HttpService } from '../../core/http.service';
+import {Ticket} from './ticket.model';
+import {HttpService} from '../../core/http.service';
 
 @Injectable()
 export class ArticleTrackingService {
@@ -21,9 +19,9 @@ export class ArticleTrackingService {
 
   findIdArticleNotCommited(id: string, committed: string): Observable<Ticket> {
     return this.httpService.authToken()
-    .param('id', id)
-    .param('committed', committed)
-    .get(ArticleTrackingService.END_POINT + ArticleTrackingService.SEARCH_BY_ID_COMMIT);
+      .param('id', id)
+      .param('committed', committed)
+      .get(ArticleTrackingService.END_POINT + ArticleTrackingService.SEARCH_BY_ID_COMMIT);
   }
 
 }

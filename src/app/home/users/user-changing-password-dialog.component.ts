@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
-import { User } from '../shared/user.model';
-import { UserService } from '../shared/user.service';
+import {User} from '../shared/user.model';
+import {UserService} from '../shared/user.service';
 
 @Component({
   templateUrl: 'user-changing-password-dialog.component.html',

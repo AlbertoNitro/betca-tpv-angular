@@ -1,11 +1,9 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import { Family } from '../cashier-opened/articles-family/family.model';
-import { FamilyType } from '../cashier-opened/articles-family/family-type.model';
-import { Article } from './article.model';
-import { HttpService } from '../../core/http.service';
-import { ArticleService } from './article.service';
+import {Family} from '../cashier-opened/articles-family/family.model';
+import {Article} from './article.model';
+import {HttpService} from '../../core/http.service';
 
 
 @Injectable()

@@ -1,6 +1,6 @@
-import { Shopping } from './shopping.model';
+import {Shopping} from './shopping.model';
 
 export interface Budget {
-    id?: string;
-    shoppingCart?: Shopping[];
+  id?: string;
+  shoppingCart?: Shopping[];
 }

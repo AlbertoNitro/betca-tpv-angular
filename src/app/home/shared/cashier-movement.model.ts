@@ -1,5 +1,5 @@
 export interface CashierMovement {
-    value: number;
-    comment: string;
-    authorMobile?: number;
+  value: number;
+  comment: string;
+  authorMobile?: number;
 }

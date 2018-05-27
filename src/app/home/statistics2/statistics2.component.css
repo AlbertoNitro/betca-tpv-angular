@@ -1,12 +1,12 @@
-.container{
-    margin:1rem;
+.container {
+  margin: 1rem;
 }
 
-.refreshBtnContainer{
-    align-items: center;
-    display: flex;
+.refreshBtnContainer {
+  align-items: center;
+  display: flex;
 }
 
-mat-card-content{
-    height: 22rem;
+mat-card-content {
+  height: 22rem;
 }

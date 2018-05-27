@@ -1,27 +1,27 @@
 <h2 mat-dialog-title>Customer manager</h2>
 <mat-dialog-content>
-    <mat-form-field>
-        <input matInput type="number" placeholder="Mobile" [value]="user.mobile" [disabled]="true"/>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Username" required cdkFocusInitial [(ngModel)]="user.username" />
-        <mat-icon matSuffix color="warn" *ngIf="!user.username">receipt</mat-icon>
-        <mat-error>Field required</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-            <input matInput type="text" placeholder="DNI" [(ngModel)]="user.dni">
-            <mat-icon matSuffix color="warn" *ngIf="!user.dni">receipt</mat-icon>
-        </mat-form-field>
-    <mat-form-field>
-        <input matInput type="text" placeholder="Address" [(ngModel)]="user.address">
-        <mat-icon matSuffix color="warn" *ngIf="!user.address">receipt</mat-icon>
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="email" placeholder="Email" [(ngModel)]="user.email">
-        <mat-icon matSuffix color="warn" *ngIf="!user.email">assignment</mat-icon>
-    </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Mobile" [value]="user.mobile" [disabled]="true"/>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Username" required cdkFocusInitial [(ngModel)]="user.username"/>
+    <mat-icon matSuffix color="warn" *ngIf="!user.username">receipt</mat-icon>
+    <mat-error>Field required</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="DNI" [(ngModel)]="user.dni">
+    <mat-icon matSuffix color="warn" *ngIf="!user.dni">receipt</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" placeholder="Address" [(ngModel)]="user.address">
+    <mat-icon matSuffix color="warn" *ngIf="!user.address">receipt</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="email" placeholder="Email" [(ngModel)]="user.email">
+    <mat-icon matSuffix color="warn" *ngIf="!user.email">assignment</mat-icon>
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>Cancel</button>
-    <button mat-raised-button (click)="submit()" [disabled]="!user.username">Submit</button>
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button (click)="submit()" [disabled]="!user.username">Submit</button>
 </mat-dialog-actions>

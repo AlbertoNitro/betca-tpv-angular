@@ -1,25 +1,26 @@
 <mat-card>
-    <mat-card-subtitle>Filter</mat-card-subtitle>
-    <mat-card-content>
-        <mat-form-field>
-            <input matInput placeholder="Mobile" [(ngModel)]="user.mobile">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Username" [(ngModel)]="user.username">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Dni" [(ngModel)]="user.dni">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput placeholder="Address" [(ngModel)]="user.address">
-        </mat-form-field>
-        <button mat-mini-fab color="primary" (click)="filter()">
-            <mat-icon>search</mat-icon>
-        </button>
-        <button mat-mini-fab color="primary" (click)="resetFilter()">
-            <mat-icon>close</mat-icon>
-        </button>
-    </mat-card-content>
+  <mat-card-subtitle>Filter</mat-card-subtitle>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput placeholder="Mobile" [(ngModel)]="user.mobile">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Username" [(ngModel)]="user.username">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Dni" [(ngModel)]="user.dni">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Address" [(ngModel)]="user.address">
+    </mat-form-field>
+    <button mat-mini-fab color="primary" (click)="filter()">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" (click)="resetFilter()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-content>
 </mat-card>
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data" (create)="create()"
-    (edit)="edit($event)" (password)=editPassword($event)></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [readAction]="false" [data]="data"
+          (create)="create()"
+          (edit)="edit($event)" (password)=editPassword($event)></app-crud>

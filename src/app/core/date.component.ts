@@ -1,9 +1,9 @@
-import { Component, Attribute, NgZone } from '@angular/core';
+import {Attribute, Component, NgZone} from '@angular/core';
 
 @Component({
-    selector: 'app-date',
-    template: `<a>{{date | date: format}}</a>`,
-    styles: [`
+  selector: 'app-date',
+  template: `<a>{{date | date: format}}</a>`,
+  styles: [`
         a {
             padding-left: 10px;
             padding-right: 10px;
@@ -18,19 +18,19 @@ import { Component, Attribute, NgZone } from '@angular/core';
 })
 export class DateComponent {
 
-    public date: Date;
-    public format: string;
+  public date: Date;
+  public format: string;
 
-    constructor( @Attribute('format') format: string, private ngZone: NgZone) {
-        this.format = format;
-        this.date = new Date();
-        this.ngZone.runOutsideAngular(() => {
-            setInterval(() => {
-                this.ngZone.run(() => {
-                    this.date = new Date();
-                });
-            }, 1000);
+  constructor(@Attribute('format') format: string, private ngZone: NgZone) {
+    this.format = format;
+    this.date = new Date();
+    this.ngZone.runOutsideAngular(() => {
+      setInterval(() => {
+        this.ngZone.run(() => {
+          this.date = new Date();
         });
-    }
+      }, 1000);
+    });
+  }
 
 }

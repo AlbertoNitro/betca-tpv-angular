@@ -8,7 +8,7 @@
       <mat-icon>search</mat-icon>
     </button>
     <mat-form-field>
-      <input matInput type="text" placeholder="Mobile" #mobile />
+      <input matInput type="text" placeholder="Mobile" #mobile/>
     </mat-form-field>
     <button mat-mini-fab color="primary" (click)="findByMobile(mobile.value)" [disabled]="mobile.value===''">
       <mat-icon>search</mat-icon>
@@ -29,11 +29,13 @@
       <mat-datepicker-toggle matSuffix [for]="finalDate"></mat-datepicker-toggle>
       <mat-datepicker #finalDate></mat-datepicker>
     </mat-form-field>
-    <button mat-mini-fab color="primary" (click)="findTicketsCreationDatesBetween()" [disabled]="!initialDateInput || !finalDateInput">
+    <button mat-mini-fab color="primary" (click)="findTicketsCreationDatesBetween()"
+            [disabled]="!initialDateInput || !finalDateInput">
       <mat-icon>search</mat-icon>
     </button>
   </mat-card-content>
 </mat-card>
 
-<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [createAction]="false" [readAction]="false" [data]="data"
-  (edit)="edit($event)"></app-crud>
+<app-crud [title]="title" [columns]="columns" [deleteAction]="false" [createAction]="false" [readAction]="false"
+          [data]="data"
+          (edit)="edit($event)"></app-crud>

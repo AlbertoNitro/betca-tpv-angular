@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Observable';
 
-import { TicketTracking } from '../tickets/ticket-tracking.model';
-import { Ticket } from './ticket.model';
-import { TicketCreation } from './ticket-creation.model';
-import { NumProductSoldPerMonth } from './numProductSoldPerMonth.model';
-import { NumProductSold } from './numProductSold.model';
-import { IncomeComparasion } from './IncomeComparasion.model';
-import { HttpService } from '../../core/http.service';
+import {TicketTracking} from '../tickets/ticket-tracking.model';
+import {Ticket} from './ticket.model';
+import {TicketCreation} from './ticket-creation.model';
+import {NumProductSoldPerMonth} from './numProductSoldPerMonth.model';
+import {NumProductSold} from './numProductSold.model';
+import {IncomeComparasion} from './IncomeComparasion.model';
+import {HttpService} from '../../core/http.service';
 
 @Injectable()
 export class TicketService {

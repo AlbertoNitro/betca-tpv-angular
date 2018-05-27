@@ -1,11 +1,11 @@
-import { Component, Output, EventEmitter, Input} from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {MatTableDataSource} from '@angular/material';
 
-import { Provider } from '../../shared/provider.model';
-import { Article } from '../../shared/article.model';
-import { ArticleService } from '../../shared/article.service';
-import { ShoppingCartService } from '../shopping-cart/shopping-cart.service';
-import { ProviderService } from '../../shared/provider.service';
+import {Provider} from '../../shared/provider.model';
+import {Article} from '../../shared/article.model';
+import {ArticleService} from '../../shared/article.service';
+import {ShoppingCartService} from '../shopping-cart/shopping-cart.service';
+import {ProviderService} from '../../shared/provider.service';
 
 @Component({
   selector: 'app-advanced-search',
@@ -30,7 +30,7 @@ export class AdvancedSearchComponent {
   @Output() add = new EventEmitter<any>();
 
   constructor(private articleService: ArticleService, private shoppingCartService: ShoppingCartService,
-    private providerService: ProviderService) {
+              private providerService: ProviderService) {
 
     this.providerService.readAll().subscribe(
       data => this.providers = data
@@ -51,7 +51,7 @@ export class AdvancedSearchComponent {
   }
 
   reset() {
-    this.article = { code: null, reference: null, description: null, provider: this._initialProvider };
+    this.article = {code: null, reference: null, description: null, provider: this._initialProvider};
     this.dataSource = undefined;
   }
 

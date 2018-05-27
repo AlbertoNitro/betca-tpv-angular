@@ -1,88 +1,95 @@
 <mat-card>
-    <mat-card-title>
-        <mat-icon color="primary">shopping_cart</mat-icon> Carrito de la Compra {{total() | currency:'EUR':'symbol'}}
-    </mat-card-title>
-    <mat-card-content>
-        <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef fxFlex="5%">{{indexShoppingCart()}} # </mat-header-cell>
-                <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="description">
-                <mat-header-cell *matHeaderCellDef fxFlex="28%"> Description </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="28%"> {{item.description}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="retailPrice">
-                <mat-header-cell *matHeaderCellDef fxFlex="11%"> Price </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="11%"> {{priceLabel(item)}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="amount">
-                <mat-header-cell *matHeaderCellDef fxFlex="20%"> Nº </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="20%">
-                    <button mat-icon-button color="accent" (click)="decreaseAmount(item)">
-                        <mat-icon>remove_circle_outline</mat-icon>
-                    </button>
-                    {{item.amount}}
-                    <button mat-icon-button color="accent" (click)="incrementAmount(item)">
-                        <mat-icon>add_circle_outline</mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="discount">
-                <mat-header-cell *matHeaderCellDef fxFlex="12%"> % </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="12%">
-                    <input matInput type="number" [value]="discountLabel(item)" (blur)="updateDiscount(item, $event)" [disabled]="item.code==='1'"
-                    />
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="total">
-                <mat-header-cell *matHeaderCellDef fxFlex="12%"> Total </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="12%">
-                    <input matInput type="number" [value]="item.total" (blur)="updateTotal(item, $event)" [disabled]="item.code==='1'" />
-                </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="actions">
-                <mat-header-cell *matHeaderCellDef fxFlex="15%">
-                    <button mat-button matSuffix mat-icon-button (click)="exchange()">
-                        <mat-icon color="primary">autorenew</mat-icon>
-                    </button>
-                </mat-header-cell>
-                <mat-cell *matCellDef="let item" fxFlex="15%">
-                    <mat-checkbox [checked]="item.committed" [disabled]="item.amount<0"(change)="changeCommitted(item)"></mat-checkbox>
-                    <button mat-button matSuffix mat-icon-button (click)="delete(item)">
-                        <mat-icon color="warn">close</mat-icon>
-                    </button>
-                </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
-        </mat-table>
-    </mat-card-content>
+  <mat-card-title>
+    <mat-icon color="primary">shopping_cart</mat-icon>
+    Carrito de la Compra {{total() | currency:'EUR':'symbol'}}
+  </mat-card-title>
+  <mat-card-content>
+    <mat-table class="mat-elevation-z8" #table [dataSource]="dataSource">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef fxFlex="5%">{{indexShoppingCart()}} #</mat-header-cell>
+        <mat-cell *matCellDef="let i = index" fxFlex="5%"> {{i+1}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef fxFlex="28%"> Description</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="28%"> {{item.description}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="retailPrice">
+        <mat-header-cell *matHeaderCellDef fxFlex="11%"> Price</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="11%"> {{priceLabel(item)}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef fxFlex="20%"> Nº</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="20%">
+          <button mat-icon-button color="accent" (click)="decreaseAmount(item)">
+            <mat-icon>remove_circle_outline</mat-icon>
+          </button>
+          {{item.amount}}
+          <button mat-icon-button color="accent" (click)="incrementAmount(item)">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="discount">
+        <mat-header-cell *matHeaderCellDef fxFlex="12%"> %</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="12%">
+          <input matInput type="number" [value]="discountLabel(item)" (blur)="updateDiscount(item, $event)"
+                 [disabled]="item.code==='1'"
+          />
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="total">
+        <mat-header-cell *matHeaderCellDef fxFlex="12%"> Total</mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="12%">
+          <input matInput type="number" [value]="item.total" (blur)="updateTotal(item, $event)"
+                 [disabled]="item.code==='1'"/>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef fxFlex="15%">
+          <button mat-button matSuffix mat-icon-button (click)="exchange()">
+            <mat-icon color="primary">autorenew</mat-icon>
+          </button>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let item" fxFlex="15%">
+          <mat-checkbox [checked]="item.committed" [disabled]="item.amount<0"
+                        (change)="changeCommitted(item)"></mat-checkbox>
+          <button mat-button matSuffix mat-icon-button (click)="delete(item)">
+            <mat-icon color="warn">close</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let item; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </mat-card-content>
 </mat-card>
 <mat-card>
-    <mat-card-content>
-        <div class="container">
-            <form>
-                <mat-form-field>
-                    <input matInput placeholder="Producto por Código" type="text" #code cdkFocusInitial>
-                </mat-form-field>
-                <button type="submit" mat-mini-fab color="primary" (click)="add(code.value); code.value=''" [disabled]="code.value === ''">
-                    <mat-icon>search</mat-icon>
-                </button>
-            </form>
-            <mat-form-field>
-                <input matInput [placeholder]="stockLabel()" type="number" [value]="stockValue()" #stock>
-                <button mat-button matSuffix mat-icon-button (click)="updateStock(stock.value)" *ngIf="stockValue()!=null">
-                    <mat-icon color="warn">edit</mat-icon>
-                </button>
-            </mat-form-field>
-        </div>
-        <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckout()">
-            <mat-icon mat-icon-button>credit_card</mat-icon> Pagar
-            <mat-icon>euro_symbol</mat-icon>
+  <mat-card-content>
+    <div class="container">
+      <form>
+        <mat-form-field>
+          <input matInput placeholder="Producto por Código" type="text" #code cdkFocusInitial>
+        </mat-form-field>
+        <button type="submit" mat-mini-fab color="primary" (click)="add(code.value); code.value=''"
+                [disabled]="code.value === ''">
+          <mat-icon>search</mat-icon>
         </button>
-        <button mat-raised-button color="primary" (click)="createBudget()" [disabled]="total()===0">
-            <mat-icon>description</mat-icon> Presupuesto
+      </form>
+      <mat-form-field>
+        <input matInput [placeholder]="stockLabel()" type="number" [value]="stockValue()" #stock>
+        <button mat-button matSuffix mat-icon-button (click)="updateStock(stock.value)" *ngIf="stockValue()!=null">
+          <mat-icon color="warn">edit</mat-icon>
         </button>
-    </mat-card-content>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="accent" (click)="checkOut()" [disabled]="invalidCheckout()">
+      <mat-icon mat-icon-button>credit_card</mat-icon>
+      Pagar
+      <mat-icon>euro_symbol</mat-icon>
+    </button>
+    <button mat-raised-button color="primary" (click)="createBudget()" [disabled]="total()===0">
+      <mat-icon>description</mat-icon>
+      Presupuesto
+    </button>
+  </mat-card-content>
 </mat-card>
