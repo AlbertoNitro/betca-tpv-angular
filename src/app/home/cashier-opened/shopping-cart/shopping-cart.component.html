@@ -15,7 +15,9 @@
       </ng-container>
       <ng-container matColumnDef="retailPrice">
         <mat-header-cell *matHeaderCellDef fxFlex="11%"> Price</mat-header-cell>
-        <mat-cell *matCellDef="let item" fxFlex="11%"> {{priceLabel(item)}}</mat-cell>
+        <mat-cell *matCellDef="let item" fxFlex="11%">
+          <input matInput type="number" [value]="priceLabel(item)" readonly/>
+        </mat-cell>
       </ng-container>
       <ng-container matColumnDef="amount">
         <mat-header-cell *matHeaderCellDef fxFlex="20%"> Nº</mat-header-cell>
