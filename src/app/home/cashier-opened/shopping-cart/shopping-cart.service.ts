@@ -112,8 +112,8 @@ export class ShoppingCartService {
     }
 
     add(code: string): Observable<Article> {
-        const price = code;
-        if (code.split('.')[0].length < 3) {
+        const price: number = Number(code.replace(',', '.'));
+        if (!Number.isNaN(price) && code.length <= 5) {
             code = '1';
         }
         return this.articleService.readOne(code).map(
@@ -123,7 +123,7 @@ export class ShoppingCartService {
                     shopping.committed = false;
                 }
                 if (article.code === '1') {
-                    shopping.total = Number(price);
+                    shopping.total = price;
                     shopping.updateDiscount();
                 }
                 this.shoppingCart.push(shopping);
