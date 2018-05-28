@@ -6,6 +6,7 @@ import {FamilyType} from '../cashier-opened/articles-family/family-type.model';
 import {ArticlesFamilyService} from '../shared/articles-family.service';
 import {FamilyAdditionDialogComponent} from './family-addition-dialog.component';
 import {FamilyCreationDialogComponent} from './family-creation-dialog.component';
+import {CancelYesDialogComponent} from '../../core/cancel-yes-dialog.component';
 
 @Component({
   templateUrl: 'articles-family.component.html'
@@ -51,8 +52,14 @@ export class ArticlesFamilyComponent {
   }
 
   delete(family: Family) {
-    this.articlesFamilyService.delete(this.family.id, family.id).subscribe(
-      () => this.synchronize()
+    this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
+      result => {
+        if (result) {
+          this.articlesFamilyService.delete(this.family.id, family.id).subscribe(
+            () => this.synchronize()
+          );
+        }
+      }
     );
   }
 
