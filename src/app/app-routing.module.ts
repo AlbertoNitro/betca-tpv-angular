@@ -40,7 +40,7 @@ import {ArticlesFamilySizesDialogComponent} from './home/cashier-opened/articles
 import {ArticlesFamilyComponent} from './home/articles/articles-family.component';
 import {ArticlesFamilyViewComponent} from './home/cashier-opened/articles-family/articles-family.component';
 import {FamilyAdditionDialogComponent} from './home/articles/family-addition-dialog.component';
-import {FamilyCreationDialogComponent} from './home/articles/family-creation-dialog.component';
+import {FamilyCreationEditDialogComponent} from './home/articles/family-creation-edit-dialog.component';
 import {HistoricChartComponent} from './home/statistics2/historicChart.component';
 import {PercentageChartComponent} from './home/statistics2/percentageChart.component';
 import {IncomeComparisonChartComponent} from './home/statistics2/incomeComparisonChart.component';
@@ -125,7 +125,7 @@ export class AppRoutingModule {
     DbSeedDialogComponent,
     EditTicketDialogComponent,
     FamilyAdditionDialogComponent,
-    FamilyCreationDialogComponent,
+    FamilyCreationEditDialogComponent,
     InvoiceCreationDialogComponent,
     OrderCreationEditDialogComponent,
     PaymentDialogComponent,

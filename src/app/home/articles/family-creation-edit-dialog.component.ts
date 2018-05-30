@@ -7,24 +7,24 @@ import {ArticlesFamilyService} from '../shared/articles-family.service';
 import {ArticleService} from '../shared/article.service';
 
 @Component({
-  templateUrl: 'family-creation-dialog.component.html',
+  templateUrl: 'family-creation-edit-dialog.component.html',
   styleUrls: ['articles.component.css']
 })
-export class FamilyCreationDialogComponent {
+export class FamilyCreationEditDialogComponent {
 
   familyTypeKeys = Object.keys(FamilyType);
   family: Family;
   articleIdSynchronized = false;
   editable: boolean;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<FamilyCreationDialogComponent>,
+  constructor(@Inject(MAT_DIALOG_DATA) data: any, private dialogRef: MatDialogRef<FamilyCreationEditDialogComponent>,
               private articlesFamilyService: ArticlesFamilyService, private articleService: ArticleService) {
 
     this.family = {description: undefined};
     this.editable = false;
     if (data) {
-      if (data.edit) {
-        this.editable = data.edit;
+      if (data.editable) {
+        this.editable = data.editable;
       }
       if (data.family) {
         this.family = data.family;

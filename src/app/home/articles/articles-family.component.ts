@@ -5,7 +5,7 @@ import {Family} from '../cashier-opened/articles-family/family.model';
 import {FamilyType} from '../cashier-opened/articles-family/family-type.model';
 import {ArticlesFamilyService} from '../shared/articles-family.service';
 import {FamilyAdditionDialogComponent} from './family-addition-dialog.component';
-import {FamilyCreationDialogComponent} from './family-creation-dialog.component';
+import {FamilyCreationEditDialogComponent} from './family-creation-edit-dialog.component';
 import {CancelYesDialogComponent} from '../../core/cancel-yes-dialog.component';
 
 @Component({
@@ -76,7 +76,7 @@ export class ArticlesFamilyComponent {
   }
 
   edit(family: Family) {
-    this.dialog.open(FamilyCreationDialogComponent, {
+    this.dialog.open(FamilyCreationEditDialogComponent, {
       data: {
         editable: true,
         family: family

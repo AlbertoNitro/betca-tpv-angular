@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Family} from '../cashier-opened/articles-family/family.model';
 import {FamilyType} from '../cashier-opened/articles-family/family-type.model';
 import {ArticlesFamilyService} from '../shared/articles-family.service';
-import {FamilyCreationDialogComponent} from './family-creation-dialog.component';
+import {FamilyCreationEditDialogComponent} from './family-creation-edit-dialog.component';
 
 @Component({
   templateUrl: 'family-addition-dialog.component.html',
@@ -42,7 +42,7 @@ export class FamilyAdditionDialogComponent {
   }
 
   create() {
-    this.dialog.open(FamilyCreationDialogComponent).afterClosed().subscribe(
+    this.dialog.open(FamilyCreationEditDialogComponent).afterClosed().subscribe(
       () => this.synchronized()
     );
   }
