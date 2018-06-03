@@ -57,9 +57,7 @@
   </button>
 </mat-menu>
 <mat-menu #settings="matMenu">
-  <button mat-menu-item (click)="seedDb()">Seed Database</button>
   <button mat-menu-item (click)="deleteDb()">Delete Database</button>
-  <button mat-menu-item (click)="resetDb()">Reset Database</button>
 </mat-menu>
 <mat-menu #cashiers="matMenu">
   <button *ngIf="!cashierClosed" mat-menu-item (click)="closeCashier()">
@@ -109,6 +107,10 @@
   <button mat-menu-item (click)="articlesFamily()">
     <mat-icon>view_quilt</mat-icon>
     <span>Familia de Artículos</span>
+  </button>
+  <button mat-menu-item (click)="createFamilySizes()">
+    <mat-icon>view_module</mat-icon>
+    <span>Crear Familia con Tallas</span>
   </button>
   <button mat-menu-item (click)="providers()">
     <mat-icon>local_shipping</mat-icon>

@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Family} from '../cashier-opened/articles-family/family.model';
 import {Article} from './article.model';
 import {HttpService} from '../../core/http.service';
+import {AdminsService} from '../admin/admins.service';
 
 
 @Injectable()
@@ -51,4 +52,12 @@ export class ArticlesFamilyService {
   }
 
 
+  createFamilySizes(file: File) {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    this.httpService.authToken().successful().post(ArticlesFamilyService.END_POINT  + AdminsService.DB, formData).subscribe(
+      () => {
+      }
+    );
+  }
 }

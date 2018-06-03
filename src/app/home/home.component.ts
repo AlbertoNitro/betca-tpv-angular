@@ -6,7 +6,6 @@ import {CashierService} from './shared/cashier.service';
 import {TokensService} from '../core/tokens.service';
 import {UserService} from './shared/user.service';
 
-import {DbSeedDialogComponent} from './admin/db-seed-dialog.component';
 import {CancelYesDialogComponent} from '../core/cancel-yes-dialog.component';
 import {CashierClosedComponent} from './cashier-closed/cashier-closed.component';
 import {CashierOpenedComponent} from './cashier-opened/cashier-opened/cashier-opened.component';
@@ -30,6 +29,7 @@ import {CashierClosuresComponent} from './cashier-closures/cashier-closures.comp
 import {ArticlesFamilyComponent} from './articles/articles-family.component';
 import {TicketTrackingComponent} from './tickets/ticket-tracking.component';
 import {TagsComponent} from './articles/tags.component';
+import {FamilySizesCreationDialogComponent} from './articles/family-sizes-creation-dialog.component';
 
 @Component({
   templateUrl: 'home.component.html',
@@ -84,24 +84,11 @@ export class HomeComponent {
     this.logout();
   }
 
-  seedDb() {
-    this.dialog.open(DbSeedDialogComponent);
-  }
-
   deleteDb() {
     this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
       result => {
         if (result) {
           this.adminsService.deleteDb();
-        }
-      });
-  }
-
-  resetDb() {
-    this.dialog.open(CancelYesDialogComponent).afterClosed().subscribe(
-      result => {
-        if (result) {
-          this.adminsService.resetDb();
         }
       });
   }
@@ -156,6 +143,10 @@ export class HomeComponent {
 
   articlesFamily() {
     this.router.navigate([HomeComponent.URL, ArticlesFamilyComponent.URL]);
+  }
+
+  createFamilySizes() {
+    this.dialog.open(FamilySizesCreationDialogComponent);
   }
 
   providers() {

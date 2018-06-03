@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {CancelYesDialogComponent} from './core/cancel-yes-dialog.component';
-import {DbSeedDialogComponent} from './home/admin/db-seed-dialog.component';
 import {HomeComponent} from './home/home.component';
 import {WelcomeComponent} from './welcome/welcome.component';
 import {AdvancedSearchComponent} from './home/cashier-opened/advanced-search/advanced-search.component';
@@ -50,6 +49,7 @@ import {PaymentDialogComponent} from './home/tickets/payment-dialog.component';
 import {TicketTrackingComponent} from './home/tickets/ticket-tracking.component';
 import {TagCreationEditDialogComponent} from './home/articles/tag-creation-edit-dialog.component';
 import {TagsComponent} from './home/articles/tags.component';
+import {FamilySizesCreationDialogComponent} from './home/articles/family-sizes-creation-dialog.component';
 
 
 const appRoutes: Routes = [
@@ -122,10 +122,10 @@ export class AppRoutingModule {
     CashierCloseDialogComponent,
     CashierMovementDialogComponent,
     CheckOutDialogComponent,
-    DbSeedDialogComponent,
     EditTicketDialogComponent,
     FamilyAdditionDialogComponent,
     FamilyCreationEditDialogComponent,
+    FamilySizesCreationDialogComponent,
     InvoiceCreationDialogComponent,
     OrderCreationEditDialogComponent,
     PaymentDialogComponent,
